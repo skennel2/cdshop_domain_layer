@@ -1,5 +1,6 @@
 package org.almansa.app.domain;
 
+// TODO JPA 매핑 어노테이션 작성
 public class SongInAlbum {
 	
 	private Album album;
