@@ -80,11 +80,11 @@ public class Album{
 		this.releaseDate = releaseDate;
 	}
 
-	public List<Song> getNumbers() {
+	public List<Song> getSongs() {
 		return songs;
 	}
 
-	public void setNumbers(List<Song> songs) {
+	public void setSongs(List<Song> songs) {
 		this.songs = songs;
 	}
 	
