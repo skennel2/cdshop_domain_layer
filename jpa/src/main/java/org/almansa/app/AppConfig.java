@@ -2,7 +2,6 @@ package org.almansa.app;
 
 import java.util.Properties;
 
-import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
 import org.almansa.app.service.MessageProvider;
@@ -32,7 +31,7 @@ public class AppConfig{
     public DataSource dataSource() throws ClassNotFoundException {        
         DriverManagerDataSource  dataSource = new DriverManagerDataSource (); 
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:~/test6");        
+        dataSource.setUrl("jdbc:h2:~/test7");        
         dataSource.setUsername("sa");
         
         return dataSource;

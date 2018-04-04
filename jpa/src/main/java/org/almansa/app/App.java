@@ -1,7 +1,11 @@
 package org.almansa.app;
 
-import org.almansa.app.domain.Student;
-import org.almansa.app.repository.StudentRepository;
+import java.util.Iterator;
+import java.util.List;
+
+import org.almansa.app.domain.Artist;
+import org.almansa.app.domain.Song;
+import org.almansa.app.repository.TestRepository;
 import org.almansa.app.service.MessageProvider;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -15,14 +19,19 @@ public class App {
         
         System.out.println(provider.getMessage());
         
-        StudentRepository repo = context.getBean(StudentRepository.class);
-        Student student = new Student();
-        student.setName("Nys");
+        TestRepository repo = context.getBean(TestRepository.class);
+    
+        repo.test();
+        Song song = repo.getSong(new Long(8));
         
-        repo.save(student);
+        List<Artist> list = song.getArtists();
         
-        Student student2 = repo.getById(new Long(1));
-        System.out.println(student2.toString());
+        for (Artist artist : list) {
+        	System.out.println(artist.toString());
+		}
+        
+        System.out.println("-------------------------");
+        System.out.println(song.toString());
         
         context.close();
     }
