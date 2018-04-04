@@ -5,6 +5,8 @@ import java.util.Properties;
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
+import org.almansa.app.service.MessageProvider;
+import org.almansa.app.service.MessageProviderImpl;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

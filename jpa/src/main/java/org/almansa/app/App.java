@@ -1,5 +1,8 @@
 package org.almansa.app;
 
+import org.almansa.app.domain.Student;
+import org.almansa.app.repository.StudentRepository;
+import org.almansa.app.service.MessageProvider;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class App {

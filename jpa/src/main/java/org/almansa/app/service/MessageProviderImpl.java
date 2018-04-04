@@ -1,4 +1,4 @@
-package org.almansa.app;
+package org.almansa.app.service;
 
 public class MessageProviderImpl implements MessageProvider{
 

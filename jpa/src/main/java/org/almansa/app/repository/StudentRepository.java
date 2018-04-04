@@ -1,9 +1,10 @@
-package org.almansa.app;
+package org.almansa.app.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.almansa.app.domain.Student;
 import org.springframework.stereotype.Repository;
 
 @Repository
