@@ -1,6 +1,7 @@
 package org.almansa.app.repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,6 +9,8 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.almansa.app.domain.AgencyCompany;
+import org.almansa.app.domain.Album;
+import org.almansa.app.domain.AlbumType;
 import org.almansa.app.domain.Artist;
 import org.almansa.app.domain.Producer;
 import org.almansa.app.domain.Song;
@@ -22,11 +25,12 @@ public class TestRepository {
 	
 	public void test() {
 		AgencyCompany company = new AgencyCompany();
-		company.changeName("just musik");
+		company.changeName("just musick");
 		em.persist(company);
 		
 		Producer producer = new Producer();
 		producer.setName("nochang");
+		producer.setAgencyCompany(company);
 		em.persist(producer);
 		
 		Producer producer2 = new Producer();
@@ -63,6 +67,17 @@ public class TestRepository {
 		list.add(artist3);
 		song2.setArtists(list);
 		em.persist(song2);
+		
+		Album album = new Album();
+		album.setAlbumArtist(artist);
+		album.setName("upgrade3");
+		List<Song> list2 =  new ArrayList<Song>();
+		list2.add(song);
+		list2.add(song2);		
+		album.setNumbers(list2);
+		album.setReleaseDate(new Date());
+		album.setAlbumType(AlbumType.LP);
+		em.persist(album);	
 	}
 	
 	public Song getSong(Long id) {

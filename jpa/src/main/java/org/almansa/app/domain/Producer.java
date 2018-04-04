@@ -4,6 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.springframework.lang.NonNull;
 
 @Entity
 public class Producer{
@@ -12,13 +16,19 @@ public class Producer{
 	@GeneratedValue
 	private Long id;
 	
+	@NonNull
 	@Column(name="producer_name")
 	private String name;
 
-	public Producer(Long id, String name) {
+	@ManyToOne()
+	@JoinColumn(name="agency_company_id")
+	private AgencyCompany agencyCompany;
+	
+	public Producer(Long id, String name, AgencyCompany agencyCompany) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.agencyCompany = agencyCompany;
 	}
 
 	public Producer() {
@@ -40,10 +50,18 @@ public class Producer{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public AgencyCompany getAgencyCompany() {
+		return agencyCompany;
+	}
+
+	public void setAgencyCompany(AgencyCompany agencyCompany) {
+		this.agencyCompany = agencyCompany;
+	}
 
 	@Override
 	public String toString() {
-		return "Producer [id=" + id + ", name=" + name + "]";
+		return "Producer [id=" + id + ", name=" + name + ", agencyCompany=" + agencyCompany + "]";
 	}
 
 	@Override

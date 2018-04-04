@@ -3,18 +3,27 @@ package org.almansa.app.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.lang.NonNull;
 
-//@Entity
+/**
+ * @author skenn
+ *
+ */
+@Entity
 public class Album{
 	
 	@javax.persistence.Id
@@ -25,18 +34,20 @@ public class Album{
 	@Column(name="artist_name")
 	private String name;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "album_artist_id")
 	private Artist albumArtist;
 	
 	@Temporal(TemporalType.DATE)
 	private Date releaseDate;
 	
-	@OneToMany(mappedBy="")
-	private List<Song> numbers;
-	
-	private List<Genre> genres;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) //FIXME 이경우는 곡에 대한 순서가 표현이 안된다. '앨범안의 곡'개념으로 다시 모델링한 클래스가 필요해보인다. 
+	@JoinTable
+	private List<Song> songs;
 
+	@Enumerated(EnumType.STRING)
+	private AlbumType albumType;
+	
 	public Long getId() {
 		return Id;
 	}
@@ -70,18 +81,49 @@ public class Album{
 	}
 
 	public List<Song> getNumbers() {
-		return numbers;
+		return songs;
 	}
 
-	public void setNumbers(List<Song> numbers) {
-		this.numbers = numbers;
+	public void setNumbers(List<Song> songs) {
+		this.songs = songs;
+	}
+	
+	public AlbumType getAlbumType() {
+		return albumType;
 	}
 
-	public List<Genre> getGenres() {
-		return genres;
+	public void setAlbumType(AlbumType albumType) {
+		this.albumType = albumType;
 	}
 
-	public void setGenres(List<Genre> genres) {
-		this.genres = genres;
+	@Override
+	public String toString() {
+		return "Album [Id=" + Id + ", name=" + name + ", albumArtist=" + albumArtist + ", releaseDate=" + releaseDate
+				+ ", songs=" + songs + ", albumType=" + albumType + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Album other = (Album) obj;
+		if (Id == null) {
+			if (other.Id != null)
+				return false;
+		} else if (!Id.equals(other.Id))
+			return false;
+		return true;
 	}
 }
