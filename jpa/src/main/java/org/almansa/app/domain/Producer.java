@@ -31,10 +31,8 @@ public class Producer{
 		this.lable = lable;
 	}
 
-	public Producer() {
-		super();
-	}
-
+	public Producer() {} //for jpa
+			
 	public Long getId() {
 		return id;
 	}
