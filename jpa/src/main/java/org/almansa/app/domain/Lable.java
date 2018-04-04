@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import org.springframework.lang.NonNull;
 
 @Entity
-public class AgencyCompany {
+public class Lable {
 	@Id
 	@GeneratedValue
 	private Long Id;
@@ -17,13 +17,13 @@ public class AgencyCompany {
 	@Column(name="agency_company_name")
 	private String name;
 
-	public AgencyCompany(Long id, String name) {
+	public Lable(Long id, String name) {
 		super();
 		Id = id;
 		this.name = name;
 	}
 
-	public AgencyCompany() {
+	public Lable() {
 		super();
 	}
 

@@ -21,7 +21,7 @@ public class Artist {
 
 	@ManyToOne
 	@JoinColumn(name="agency_company_id")
-	private AgencyCompany agencyCompany;
+	private Lable lable;
 	
 	public Long getId() {
 		return id;
@@ -39,19 +39,19 @@ public class Artist {
 		this.name = name;
 	}
 	
-	public AgencyCompany getAgencyCompany() {
-		return agencyCompany;
+	public Lable getLable() {
+		return lable;
 	}
 
-	public void changeAgencyCompany(AgencyCompany agencyCompany) {
-		this.agencyCompany = agencyCompany;
+	public void changeLable(Lable lable) {
+		this.lable = lable;
 	}
 
-	public Artist(Long id, String name, AgencyCompany agencyCompany) {
+	public Artist(Long id, String name, Lable lable) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.agencyCompany = agencyCompany;
+		this.lable = lable;
 	}	
 	
 	public Artist() {
@@ -60,7 +60,7 @@ public class Artist {
 
 	@Override
 	public String toString() {
-		return "Artist [id=" + id + ", name=" + name + ", agencyCompany=" + agencyCompany + "]";
+		return "Artist [id=" + id + ", name=" + name + ", agencyCompany=" + lable + "]";
 	}
 
 	@Override

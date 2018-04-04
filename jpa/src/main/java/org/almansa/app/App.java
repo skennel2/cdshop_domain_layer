@@ -21,7 +21,7 @@ public class App {
         TestRepository repo = context.getBean(TestRepository.class);
     
         repo.test();
-        Song song = repo.getSong(new Long(8));
+        Song song = repo.getSong(new Long(9));
         
         List<Artist> list = song.getArtists();
         

@@ -1,67 +1,74 @@
 package org.almansa.app.domain;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import org.springframework.lang.NonNull;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-public class Producer{
+public class CategoryTag implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-	@NonNull
-	@Column(name="producer_name")
+	@Column(name="category_name")
 	private String name;
-
-	@ManyToOne()
-	@JoinColumn(name="agency_company_id")
-	private Lable lable;
 	
-	public Producer(Long id, String name, Lable lable) {
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creationDate;
+	
+	public CategoryTag() {
+		super();
+	}
+
+	public CategoryTag(String name) {
+		super();
+		this.name = name;
+		this.creationDate = new Date();
+	}
+	
+	public CategoryTag(Long id, String name, Date creationDate) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.lable = lable;
-	}
-
-	public Producer() {
-		super();
-	}
-
+		this.creationDate = creationDate;
+	}	
+	
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", creationDate=" + creationDate + "]";
+	}	
+	
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}
 	
-	public Lable getLable() {
-		return lable;
+	public Date getCreationDate() {
+		return creationDate;
 	}
-
-	public void setLable(Lable lable) {
-		this.lable = lable;
-	}
-
-	@Override
-	public String toString() {
-		return "Producer [id=" + id + ", name=" + name + ", lable=" + lable + "]";
+	
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	@Override
@@ -80,7 +87,7 @@ public class Producer{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Producer other = (Producer) obj;
+		CategoryTag other = (CategoryTag) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
