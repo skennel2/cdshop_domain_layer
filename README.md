@@ -1,3 +1,7 @@
-# jpa_app
+# cd_shop
 
-Spring, JPA, H2 데이터베이스 기반
+사용기술
+Spring, JPA, H2
+
+방법론
+Object Oriented, Java Config, Annotation Driven
