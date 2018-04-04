@@ -43,11 +43,11 @@ public class Album{
 	private Date releaseDate;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //FIXME 이경우는 곡에 대한 순서가 표현이 안된다. '앨범안의 곡'개념으로 다시 모델링한 클래스가 필요해보인다. 
-	@JoinTable
+	@JoinTable(name="ALBUM_SONGS")
 	private List<Song> songs = new ArrayList<Song>();
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable
+	@JoinTable(name="ALBUM_CATEGORY_TAGS")
 	private List<CategoryTag> tags = new ArrayList<CategoryTag>();
 	
 	@Enumerated(EnumType.STRING)
