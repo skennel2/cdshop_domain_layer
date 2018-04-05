@@ -45,12 +45,12 @@ public class TestRepository {
 		em.persist(jm);
 		
 		Producer nochang = new Producer();
-		nochang.setName("nochang");
+		nochang.changeName("nochang");
 		nochang.setLable(jm);
 		em.persist(nochang);
 		
 		Producer chachamalon = new Producer();
-		chachamalon.setName("chachamalon");
+		chachamalon.changeName("chachamalon");
 		em.persist(chachamalon);		
 		
 		Artist swings = new Artist();
@@ -106,6 +106,5 @@ public class TestRepository {
 	
 	public Song getSong(Long id) {
 		return em.find(Song.class, id);
-	}
-	
+	}	
 }

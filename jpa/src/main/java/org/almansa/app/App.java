@@ -5,7 +5,6 @@ import java.util.List;
 import org.almansa.app.domain.Artist;
 import org.almansa.app.domain.Song;
 import org.almansa.app.repository.TestRepository;
-import org.almansa.app.service.MessageProvider;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class App {
@@ -14,14 +13,10 @@ public class App {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         context.scan("org.almansa.app");
 
-        MessageProvider provider = context.getBean(MessageProvider.class);
-        
-        System.out.println(provider.getMessage());
-        
         TestRepository repo = context.getBean(TestRepository.class);
     
         repo.test();
-        Song song = repo.getSong(new Long(9));
+        Song song = repo.getSong(new Long(11));
         
         List<Artist> list = song.getArtists();
         

@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
@@ -25,11 +24,7 @@ import org.springframework.lang.NonNull;
  *
  */
 @Entity
-public class Album{
-	
-	@javax.persistence.Id
-	@GeneratedValue
-	private Long Id;
+public class Album extends EntityBase{
 	
 	@NonNull
 	@Column(name="artist_name")
@@ -42,7 +37,7 @@ public class Album{
 	@Temporal(TemporalType.DATE)
 	private Date releaseDate;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //FIXME ÀÌ°æ¿ì´Â °î¿¡ ´ëÇÑ ¼ø¼­°¡ Ç¥ÇöÀÌ ¾ÈµÈ´Ù. '¾Ù¹ü¾ÈÀÇ °î'°³³äÀ¸·Î ´Ù½Ã ¸ðµ¨¸µÇÑ Å¬·¡½º°¡ ÇÊ¿äÇØº¸ÀÎ´Ù. 
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //FIXME ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½î¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÈ´ï¿½. 'ï¿½Ù¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ðµ¨¸ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Øºï¿½ï¿½Î´ï¿½. 
 	@JoinTable(name="ALBUM_SONGS")
 	private List<Song> songs = new ArrayList<Song>();
 
@@ -52,14 +47,6 @@ public class Album{
 	
 	@Enumerated(EnumType.STRING)
 	private AlbumType albumType;
-	
-	public Long getId() {
-		return Id;
-	}
-
-	public void setId(Long id) {
-		Id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -115,32 +102,7 @@ public class Album{
 
 	@Override
 	public String toString() {
-		return "Album [Id=" + Id + ", name=" + name + ", albumArtist=" + albumArtist + ", releaseDate=" + releaseDate
-				+ ", songs=" + songs + ", tags=" + tags + ", albumType=" + albumType + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Album other = (Album) obj;
-		if (Id == null) {
-			if (other.Id != null)
-				return false;
-		} else if (!Id.equals(other.Id))
-			return false;
-		return true;
-	}
+		return "Album [name=" + name + ", albumArtist=" + albumArtist + ", releaseDate=" + releaseDate + ", songs="
+				+ songs + ", tags=" + tags + ", albumType=" + albumType + "]";
+	}	
 }
