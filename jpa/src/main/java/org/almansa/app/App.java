@@ -1,8 +1,11 @@
 package org.almansa.app;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.almansa.app.domain.Album;
 import org.almansa.app.domain.Lable;
+import org.almansa.app.repository.AlbumRepository;
 import org.almansa.app.repository.DummyDataMaker;
 import org.almansa.app.service.LableService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -16,7 +19,8 @@ public class App {
 	        context.scan("org.almansa.app");
 	
 	        makeDummies(context.getBean(DummyDataMaker.class));
-	        hadleLableService(context.getBean(LableService.class));
+	        handleLableService(context.getBean(LableService.class));
+	        handleAlbumRepository(context.getBean(AlbumRepository.class));
 	        
     	}catch(Exception ex) {
     		ex.printStackTrace();
@@ -25,11 +29,29 @@ public class App {
 		}        
     }
     
-    public static void makeDummies(DummyDataMaker dummyDataMaker) {
+    private static void handleAlbumRepository(AlbumRepository repo) {
+		Optional<Album> album = repo.findById(new Long(17)); //getOne(new Long(17));
+		
+		print(album.get().getName());
+		
+		if(album.isPresent()) {
+			Album albumGet = album.get();
+			
+			String artistName = albumGet.getAlbumArtist().getName();
+			String lableName  = albumGet.getAlbumArtist().getLable().getName();		
+			
+			print(lableName);
+			print(artistName);
+		}else {
+			print("null");
+		}
+	}
+
+	public static void makeDummies(DummyDataMaker dummyDataMaker) {
     	dummyDataMaker.makeDummies();
     }
     
-    public static void hadleLableService(LableService service) {
+    public static void handleLableService(LableService service) {
     	Lable lable = new Lable();
     	lable.changeName("ambition musick");
     	service.addLable(lable);

@@ -21,5 +21,13 @@ public abstract class MerchandiseBase extends EntityBase{
 	
 	public void setPrice(Money price) {
 		this.price = price;
-	}			
+	}
+	
+	public void addStock(long amount) {
+		this.amountOfStock += amount;
+	}
+	
+	public boolean isSoldOut() {
+		return amountOfStock.longValue() == 0;
+	}
 }
