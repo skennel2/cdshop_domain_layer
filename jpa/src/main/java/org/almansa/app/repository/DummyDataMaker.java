@@ -124,6 +124,13 @@ public class DummyDataMaker {
 		album.addCategory(tag1);
 		album.addCategory(tag2);
 		em.persist(album);	
+		
+		Album album2 = new Album();
+		album2.setAlbumArtist(swings);
+		album2.setName("shit is real single");		
+		album2.setReleaseDate(new Date());
+		album2.setAlbumType(AlbumType.Single);
+		em.persist(album2);			
 	}
 	
 	public Song getSong(Long id) {

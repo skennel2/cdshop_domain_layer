@@ -14,10 +14,6 @@ import javax.persistence.TemporalType;
 
 import org.springframework.lang.NonNull;
 
-/**
- * @author skennel
- *
- */
 @Entity
 @Table(name="PERSON")
 @Inheritance(strategy=InheritanceType.JOINED)

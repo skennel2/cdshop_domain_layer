@@ -1,6 +1,9 @@
 package org.almansa.app.domain;
 
-// TODO JPA ¸ÅÇÎ ¾î³ëÅ×ÀÌ¼Ç ÀÛ¼º
+import javax.persistence.Embeddable;
+
+// TODO JPA ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½Û¼ï¿½
+@Embeddable
 public class SongInAlbum {
 	
 	private Album album;

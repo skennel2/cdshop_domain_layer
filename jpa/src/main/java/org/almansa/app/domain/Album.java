@@ -10,12 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.lang.NonNull;
 
@@ -38,7 +40,9 @@ public class Album extends EntityBase{
 	private Date releaseDate;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //FIXME �̰��� � ���� ������ ǥ���� �ȵȴ�. '�ٹ����� ��'�������� �ٽ� �𵨸��� Ŭ������ �ʿ��غ��δ�. 
-	@JoinTable(name="ALBUM_SONGS")
+	@JoinTable(
+		name="ALBUM_SONGS"
+	)
 	private List<Song> songs = new ArrayList<Song>();
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -87,7 +91,7 @@ public class Album extends EntityBase{
 	public void setAlbumType(AlbumType albumType) {
 		this.albumType = albumType;
 	}
-	
+	  
 	public List<CategoryTag> getTags() {
 		return tags;
 	}
