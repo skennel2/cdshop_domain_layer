@@ -12,31 +12,42 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class App {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        context.scan("org.almansa.app");
-
-        DummyDataMaker repo = context.getBean(DummyDataMaker.class);
+    	AnnotationConfigApplicationContext context = null;
+    	try {
+	        context = new AnnotationConfigApplicationContext(AppConfig.class);	        
+	        context.scan("org.almansa.app");
+	
+	        makeDummies(context.getBean(DummyDataMaker.class));
+	        hadleLableService(context.getBean(LableService.class));
+	        
+    	}catch(Exception ex) {
+    		ex.printStackTrace();
+    	}finally {
+    		context.close();	
+		}        
+    }
     
-        repo.makeDummies();
-        Song song = repo.getSong(new Long(15));
-        
-        List<PersonBase> list = song.getArtists();
-        
-        for (PersonBase artist : list) {
-        	System.out.println(artist.toString());
-		}
-        
-        System.out.println(song.toString());
-        
-        hadleLableService(context.getBean(LableService.class));
-        
-        context.close();
+    public static void makeDummies(DummyDataMaker dummyDataMaker) {
+    	dummyDataMaker.makeDummies();
     }
     
     public static void hadleLableService(LableService service) {
     	Lable lable = new Lable();
-    	lable.changeName("ambition musick");
+    	lable.changeName("ambition musick");    	     
     	
     	service.addLable(lable);
+    	
+    	List<Lable> lables = service.getByName("ambition musick");
+    	
+        for (Lable item : lables) {
+        	print(item.toString());
+		}
+        
+    }
+    
+    public static void print(String str) {
+    	System.out.println("App:");
+    	System.out.print("\t");
+    	System.out.println(str);
     }
 }
