@@ -34,8 +34,8 @@ public class App {
     public static void hadleLableService(LableService service) {
     	Lable lable = new Lable();
     	lable.changeName("ambition musick");    	     
-    	
-    	service.addLable(lable);
+
+    	service.addLable(lable);    	
     	
     	List<Lable> lables = service.getByName("ambition musick");
     	
@@ -47,7 +47,7 @@ public class App {
     
     public static void print(String str) {
     	System.out.println("App:");
-    	System.out.print("\t");
+    	System.out.print("\t");    	
     	System.out.println(str);
     }
 }
