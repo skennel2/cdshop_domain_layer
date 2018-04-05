@@ -1,6 +1,6 @@
 package org.almansa.app.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import org.springframework.lang.NonNull;

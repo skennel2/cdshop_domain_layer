@@ -13,18 +13,19 @@ import org.almansa.app.domain.AlbumType;
 import org.almansa.app.domain.Artist;
 import org.almansa.app.domain.CategoryTag;
 import org.almansa.app.domain.Lable;
+import org.almansa.app.domain.PersonBase;
 import org.almansa.app.domain.Producer;
 import org.almansa.app.domain.Song;
 import org.springframework.stereotype.Repository;
 
 @Transactional
 @Repository
-public class TestRepository {
+public class DummyDataMaker {
 
 	@PersistenceContext
 	private EntityManager em;
 	
-	public void test() {
+	public void makeDummies() {
 		CategoryTag tag1 = new CategoryTag();
 		tag1.setName("HipHop");
 		tag1.setCreationDate(new Date());
@@ -44,13 +45,22 @@ public class TestRepository {
 		jm.changeName("just musick");
 		em.persist(jm);
 		
+		Lable illionaire = new Lable();
+		illionaire.changeName("Illionaire");
+		em.persist(illionaire);		
+		
+		Lable aomg = new Lable();
+		aomg.changeName("AOMG");
+		em.persist(aomg);				
+		
 		Producer nochang = new Producer();
 		nochang.changeName("nochang");
 		nochang.setLable(jm);
 		em.persist(nochang);
 		
 		Producer chachamalon = new Producer();
-		chachamalon.changeName("chachamalon");
+		chachamalon.changeName("cha cha malon");
+		chachamalon.setLable(aomg);
 		em.persist(chachamalon);		
 		
 		Artist swings = new Artist();
@@ -60,13 +70,25 @@ public class TestRepository {
 		
 		Artist theQ = new Artist();
 		theQ.changeName("the quiett");
-		theQ.changeLable(null);
+		theQ.changeLable(illionaire);
+		theQ.setBornDate(1996, 1, 3);		
 		em.persist(theQ);	
+		
+		Artist jayPark = new Artist();
+		jayPark.changeName("jay park");
+		jayPark.changeLable(aomg);
+		jayPark.setBornDate(1988, 3, 4);
+		em.persist(jayPark);			
 
 		Artist kidMilli = new Artist();
-		kidMilli.changeName("kidmilli");
+		kidMilli.changeName("kid milli");
 		kidMilli.changeLable(null);
 		em.persist(kidMilli);	
+		
+		Artist dok2 = new Artist();
+		dok2.changeName("dok2");
+		dok2.changeLable(illionaire);
+		em.persist(dok2);			
 		
 		Song song = new Song();
 		song.setName("holy");
@@ -78,7 +100,7 @@ public class TestRepository {
 		song2.setName("shit is real");
 		song2.setOwnerArtist(swings);
 		song2.setProducer(chachamalon); 
-		List<Artist> list =  new ArrayList<Artist>();
+		List<PersonBase> list =  new ArrayList<PersonBase>();
 		list.add(theQ);
 		list.add(kidMilli);
 		song2.setArtists(list);

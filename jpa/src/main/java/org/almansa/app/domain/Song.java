@@ -26,7 +26,7 @@ public class Song extends EntityBase{
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable
-	private List<Artist> artists; // many to many 의 관게는  @JoinTable을 이용해 별로의 테이블로 관리되게 설정한다.
+	private List<PersonBase> artists; // many to many 의 관게는  @JoinTable을 이용해 별로의 테이블로 관리되게 설정한다.
 	
 	@ManyToOne
 	@JoinColumn(name="producer_id")
@@ -56,11 +56,11 @@ public class Song extends EntityBase{
 		this.producer = producer;
 	}
 	
-	public List<Artist> getArtists() {
+	public List<PersonBase> getArtists() {
 		return artists;
 	}
 
-	public void setArtists(List<Artist> artists) {
+	public void setArtists(List<PersonBase> artists) {
 		this.artists = artists;
 	}
 
