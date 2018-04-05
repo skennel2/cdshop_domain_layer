@@ -2,13 +2,12 @@ package org.almansa.app;
 
 import java.util.Properties;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.almansa.app.service.MessageProvider;
-import org.almansa.app.service.MessageProviderImpl;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -18,29 +17,24 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configurable
-@ComponentScan("org.almansa.app")
 @EnableTransactionManagement
+@EnableJpaRepositories(basePackages="org.almansa.app.repository")
 public class AppConfig{
-    
-    @Bean
-    public MessageProvider messageProvider() {
-        return new MessageProviderImpl();
-    }
     
     @Bean
     public DataSource dataSource() throws ClassNotFoundException {        
         DriverManagerDataSource  dataSource = new DriverManagerDataSource (); 
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:~/test7");        
+        dataSource.setUrl("jdbc:h2:~/test8");        
         dataSource.setUsername("sa");
         
         return dataSource;
-    }
+    }   
     
     @Bean
-    public JpaTransactionManager jpaTransactionManager() throws ClassNotFoundException {  
+    public JpaTransactionManager transactionManager(EntityManagerFactory emf) throws ClassNotFoundException {  // 이름에 주의할것. Named Bean 이라서 빈생성 에러 날수있음 
         JpaTransactionManager jtm = new JpaTransactionManager();
-        jtm.setEntityManagerFactory(localContainerEntityManagerFactoryBean().getObject());
+        jtm.setEntityManagerFactory(entityManagerFactory().getObject());
         
         return jtm;
     }
@@ -51,7 +45,7 @@ public class AppConfig{
     }
     
     @Bean 
-    public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean() throws ClassNotFoundException {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws ClassNotFoundException { // 이름에 주의할것. Named Bean 이라서 빈생성 에러 날수있음 
         LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
         entityManager.setDataSource(dataSource());
         entityManager.setPackagesToScan("org.almansa.app");
@@ -62,6 +56,7 @@ public class AppConfig{
         
         return entityManager;
     }   
+    
     
     private Properties additionalProperties() {
         Properties properties = new Properties();

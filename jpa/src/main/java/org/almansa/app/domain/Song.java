@@ -66,7 +66,8 @@ public class Song extends EntityBase{
 
 	@Override
 	public String toString() {
-		return "Song [name=" + name + ", ownerArtist=" + ownerArtist + ", artists=" + artists + ", producer=" + producer
-				+ "]";
+		
+		
+		return super.toString() +  " Song [name=" + name + ", ownerArtist=" + ownerArtist + ", artists=" + artists + ", producer=" + producer + "]";
 	}
 }

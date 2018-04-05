@@ -23,6 +23,6 @@ public class Producer extends PersonBase{
 
 	@Override
 	public String toString() {
-		return "Producer [lable=" + lable + "]";
+		return super.toString() +  " Producer [lable=" + lable + "]";
 	}		
 }
