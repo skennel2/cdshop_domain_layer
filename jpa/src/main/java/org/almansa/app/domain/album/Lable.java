@@ -14,9 +14,12 @@ import org.springframework.lang.NonNull;
 public class Lable extends EntityBase {
 
     @NonNull
-    @Column(name = "agency_company_name")
+    @Column(name = "lable_name")
     private String name;
 
+    @Column(name="ceo_name")
+    private String ceoName;
+    
     public String getName() {
         return name;
     }
@@ -25,8 +28,16 @@ public class Lable extends EntityBase {
         this.name = name;
     }
 
+    public String getCeoName() {
+        return ceoName;
+    }
+
+    public void setCeoName(String ceoName) {
+        this.ceoName = ceoName;
+    }
+
     @Override
     public String toString() {
-        return "Lable [name=" + name + "]";
+        return "Lable [name=" + name + ", ceoName=" + ceoName + "]";
     }
 }
