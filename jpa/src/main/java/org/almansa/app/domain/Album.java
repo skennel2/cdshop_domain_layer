@@ -19,10 +19,6 @@ import javax.persistence.TemporalType;
 
 import org.springframework.lang.NonNull;
 
-/**
- * @author skenn
- *
- */
 @Entity
 public class Album extends EntityBase{
 	

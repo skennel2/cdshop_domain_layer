@@ -30,7 +30,7 @@ public class App {
     }
     
     private static void handleAlbumRepository(AlbumRepository repo) {
-		Optional<Album> album = repo.findById(new Long(17)); //getOne(new Long(17));
+		Optional<Album> album = repo.findById(new Long(17));
 		
 		print(album.get().getName());
 		

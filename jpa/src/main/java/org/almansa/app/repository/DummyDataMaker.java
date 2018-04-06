@@ -1,5 +1,6 @@
 package org.almansa.app.repository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,8 @@ import org.almansa.app.domain.Lable;
 import org.almansa.app.domain.PersonBase;
 import org.almansa.app.domain.Producer;
 import org.almansa.app.domain.Song;
+import org.almansa.app.domain.merchandise.AlbumMerchandise;
+import org.almansa.app.domain.value.Money;
 import org.springframework.stereotype.Repository;
 
 @Transactional
@@ -130,7 +133,13 @@ public class DummyDataMaker {
 		album2.setName("shit is real single");		
 		album2.setReleaseDate(new Date());
 		album2.setAlbumType(AlbumType.Single);
-		em.persist(album2);			
+		em.persist(album2);		
+		
+		AlbumMerchandise am1 = new AlbumMerchandise();
+		am1.setAlbum(album);
+		am1.setPrice(new Money(new BigDecimal("12000")));
+		am1.setAmountOfStock(new Long(500));
+		em.persist(am1);
 	}
 	
 	public Song getSong(Long id) {
