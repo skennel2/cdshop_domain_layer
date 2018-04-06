@@ -1,17 +1,25 @@
 package org.almansa.app.domain.album;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-// TODO JPA ���� ������̼� �ۼ�
 @Embeddable
 public class SongInAlbum {
 	
+	@ManyToOne
+	@JoinColumn(name="album_id")
 	private Album album;
 	
+	@ManyToOne
+	@JoinColumn(name="song_id")
 	private Song song;
 	
+	@Column(name = "no", nullable=false, unique=true)
 	private int no;
 	
+	@Column(name="is_single")
 	private boolean isSingle;
 	
 	public SongInAlbum() {

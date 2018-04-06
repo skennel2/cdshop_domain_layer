@@ -1,5 +1,6 @@
 package org.almansa.app.domain.order;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -13,9 +14,10 @@ import javax.persistence.TemporalType;
 
 import org.almansa.app.domain.EntityBase;
 import org.almansa.app.domain.user.User;
+import org.almansa.app.domain.value.Money;
 
 @Entity
-public class OrderSheet extends EntityBase {
+public class PurchaseOrder extends EntityBase {
 
 	@ManyToOne
 	@JoinColumn(name = "oderer_user_id")
@@ -29,8 +31,18 @@ public class OrderSheet extends EntityBase {
 		name="order_line",
 		joinColumns=@JoinColumn(name="order_id")
 	)
-	private List<OrderLine> OrderLines;
+	private List<PurchaseOrderLine> OrderLines;
 
+	public Money calculateTotalPrice() {
+		Money money = new Money(0);
+		
+		for (PurchaseOrderLine orderLine : OrderLines) {
+			money = money.add(orderLine.calculateTotalPrice());
+		}
+		
+		return money;
+	}
+	
 	public User getOrderer() {
 		return orderer;
 	}
@@ -47,11 +59,11 @@ public class OrderSheet extends EntityBase {
 		this.orderDate = orderDate;
 	}
 
-	public List<OrderLine> getOrderLines() {
+	public List<PurchaseOrderLine> getOrderLines() {
 		return OrderLines;
 	}
 
-	public void setOrderLines(List<OrderLine> orderLines) {
+	public void setOrderLines(List<PurchaseOrderLine> orderLines) {
 		OrderLines = orderLines;
 	}	
 }

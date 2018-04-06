@@ -15,6 +15,7 @@ import org.almansa.app.domain.album.AlbumType;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Song;
+import org.almansa.app.domain.album.SongInAlbum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -67,14 +68,14 @@ public class PersistenceTest {
 		song2.setOwnerArtist(theQ);
 		em.persist(song2);				
 		
-		List<Song> songList = new ArrayList<Song>();
-		songList.add(song1);
-		songList.add(song2);
-		
 		Album album = new Album();
 		album.setAlbumArtist(theQ);
 		album.setAlbumType(AlbumType.LP);
 		album.setName("Q Train");
+		
+		List<SongInAlbum> songList = new ArrayList<SongInAlbum>();
+		songList.add(new SongInAlbum(album, song1, 1, false));
+		songList.add(new SongInAlbum(album, song2, 1, false));	
 		album.setSongs(songList);
 		em.persist(album);
 
@@ -89,7 +90,7 @@ public class PersistenceTest {
 		Lable lableGet = artistGet.getLable();
 		assertEquals("Illionaire", lableGet.getName());
 		
-		List<Song> songs = album.getSongs();
+		List<SongInAlbum> songs = album.getSongs();
 		assertEquals(2, songs.size());		
 	}
 }

@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,12 +36,19 @@ public class Album extends EntityBase{
 	@Temporal(TemporalType.DATE)
 	private Date releaseDate;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //FIXME �̰��� � ���� ������ ǥ���� �ȵȴ�. '�ٹ����� ��'�������� �ٽ� �𵨸��� Ŭ������ �ʿ��غ��δ�. 
-	@JoinTable(
-		name="ALBUM_SONGS"
-	)
-	private List<Song> songs = new ArrayList<Song>();
+	//@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //FIXME �̰��� � ���� ������ ǥ���� �ȵȴ�. '�ٹ����� ��'�������� �ٽ� �𵨸��� Ŭ������ �ʿ��غ��δ�. 
+	//@JoinTable(
+	//	name="ALBUM_SONGS"
+	//)
+	//private List<Song> songs = new ArrayList<Song>();
 
+	@ElementCollection
+	@CollectionTable(
+		name="song_in_album",
+		joinColumns=@JoinColumn(name="song_in_album_id")
+	)
+	private List<SongInAlbum> songs = new ArrayList<SongInAlbum>();
+	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name="ALBUM_CATEGORY_TAGS")
 	private List<CategoryTag> tags = new ArrayList<CategoryTag>();
@@ -71,11 +80,19 @@ public class Album extends EntityBase{
 		this.releaseDate = releaseDate;
 	}
 
-	public List<Song> getSongs() {
+	//public List<Song> getSongs() {
+	//	return songs;
+	//}
+
+	//public void setSongs(List<Song> songs) {
+	//	this.songs = songs;
+	//}	
+
+	public List<SongInAlbum> getSongs() {
 		return songs;
 	}
 
-	public void setSongs(List<Song> songs) {
+	public void setSongs(List<SongInAlbum> songs) {
 		this.songs = songs;
 	}
 	

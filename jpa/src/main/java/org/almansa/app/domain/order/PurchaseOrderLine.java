@@ -6,9 +6,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.almansa.app.domain.merchandise.MerchandiseBase;
+import org.almansa.app.domain.value.Money;
 
 @Embeddable
-public class OrderLine{
+public class PurchaseOrderLine{
 	
 	@ManyToOne
 	@JoinColumn(name="merchandise_id")
@@ -21,6 +22,12 @@ public class OrderLine{
 		return merchandise;
 	}
 
+	public Money calculateTotalPrice(){
+		Long amount = merchandise.getPrice().getAmount().longValue() * quantity;
+		
+		return new Money(amount);
+	}
+	
 	public void setMerchandise(MerchandiseBase merchandise) {
 		this.merchandise = merchandise;
 	}

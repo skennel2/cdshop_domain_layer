@@ -34,7 +34,11 @@ public class Money implements Immutable{
 	protected Money() {
 		super();	
 	}
- 
+
+	public Money add(Money add) {
+		return new Money(this.amount.add(add.amount));
+	}
+	
 	public BigDecimal getAmount() {
 		return amount;
 	}

@@ -17,9 +17,10 @@ import org.almansa.app.domain.album.CategoryTag;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Producer;
 import org.almansa.app.domain.album.Song;
+import org.almansa.app.domain.album.SongInAlbum;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
-import org.almansa.app.domain.order.OrderLine;
-import org.almansa.app.domain.order.OrderSheet;
+import org.almansa.app.domain.order.PurchaseOrderLine;
+import org.almansa.app.domain.order.PurchaseOrder;
 import org.almansa.app.domain.user.User;
 import org.almansa.app.domain.value.Money;
 import org.almansa.app.util.DateUtil;
@@ -122,10 +123,10 @@ public class DummyDataMaker {
 		Album album = new Album();
 		album.setAlbumArtist(swings);
 		album.setName("upgrade3");
-		List<Song> list2 =  new ArrayList<Song>();
-		list2.add(song);
-		list2.add(song2);		
-		album.setSongs(list2);
+		List<SongInAlbum> songList = new ArrayList<SongInAlbum>();
+		songList.add(new SongInAlbum(album, song, 1, false));
+		songList.add(new SongInAlbum(album, song2, 2, false));		
+		album.setSongs(songList);
 		album.setReleaseDate(new Date());
 		album.setAlbumType(AlbumType.LP);
 		album.addCategory(tag1);
@@ -155,16 +156,16 @@ public class DummyDataMaker {
 		user.setName("skennel");
 		em.persist(user);
 		
-		OrderSheet order = new OrderSheet();
+		PurchaseOrder order = new PurchaseOrder();
 		order.setOrderDate(DateUtil.toDate(2018, 11, 2));
 		order.setOrderer(user);
-		List<OrderLine> orderLines = new ArrayList<OrderLine>();
+		List<PurchaseOrderLine> orderLines = new ArrayList<PurchaseOrderLine>();
 		
-		OrderLine orderLine1 = new OrderLine();
+		PurchaseOrderLine orderLine1 = new PurchaseOrderLine();
 		orderLine1.setMerchandise(am1);
 		orderLine1.setQuantity(2);
 		orderLines.add(orderLine1);
-		OrderLine orderLine2 = new OrderLine();
+		PurchaseOrderLine orderLine2 = new PurchaseOrderLine();
 		orderLine2.setMerchandise(am2);
 		orderLine2.setQuantity(1);
 		orderLines.add(orderLine2);
