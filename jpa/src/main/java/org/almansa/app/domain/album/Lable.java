@@ -17,9 +17,9 @@ public class Lable extends EntityBase {
     @Column(name = "lable_name")
     private String name;
 
-    @Column(name="ceo_name")
+    @Column(name = "ceo_name")
     private String ceoName;
-    
+
     public String getName() {
         return name;
     }

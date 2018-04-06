@@ -2,40 +2,22 @@ package org.almansa.app.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.almansa.app.domain.album.Lable;
-import org.almansa.app.repository.LableRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
-public class LableService {
+public interface LableService {
 
-    @Autowired
-    private LableRepository lableRepo;
+    void addLable(Lable lable);
 
-    public void addLable(Lable lable) {
-        if (lable == null) {
-            throw new IllegalArgumentException("lable is null");
-        }
+    void addLable(String lableName);
 
-        lableRepo.save(lable);
-    }
+    List<Lable> getByName(String name);
 
-    public void addLable(String lableName) {
-        if (lableName == null) {
-            throw new IllegalArgumentException("lableName is null");
-        }
+    List<Lable> getByCeoName(String ceoName);
 
-        Lable lable = new Lable();
-        lable.changeName(lableName);
+    Lable getById(Long id);
 
-        lableRepo.save(lable);
-    }
+    void delete(Long id);
 
-    public List<Lable> getByName(String name) {
-        return lableRepo.findByName(name);
-    }
 }

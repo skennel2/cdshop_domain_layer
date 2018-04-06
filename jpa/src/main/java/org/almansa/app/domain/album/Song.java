@@ -31,8 +31,8 @@ public class Song extends EntityBase {
     private List<PersonBase> artists;
 
     @ManyToOne
-    @JoinColumn(name = "producer_id")
-    private Producer producer;
+    @JoinColumn(name = "main_producer_id")
+    private Producer mainProducer;
 
     public String getName() {
         return name;
@@ -50,12 +50,12 @@ public class Song extends EntityBase {
         this.ownerArtist = ownerArtist;
     }
 
-    public Producer getProducer() {
-        return producer;
+    public Producer getMainProducer() {
+        return mainProducer;
     }
 
-    public void setProducer(Producer producer) {
-        this.producer = producer;
+    public void setMainProducer(Producer producer) {
+        this.mainProducer = producer;
     }
 
     public List<PersonBase> getArtists() {
@@ -69,6 +69,6 @@ public class Song extends EntityBase {
     @Override
     public String toString() {
         return super.toString() + " Song [name=" + name + ", ownerArtist=" + ownerArtist + ", artists=" + artists
-                + ", producer=" + producer + "]";
+                + ", producer=" + mainProducer + "]";
     }
 }

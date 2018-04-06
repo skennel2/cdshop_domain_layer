@@ -19,7 +19,7 @@ public class Producer extends PersonBase {
 
     @Enumerated(EnumType.STRING)
     public ProducerRole role;
-    
+
     public Lable getLable() {
         return lable;
     }
@@ -27,7 +27,15 @@ public class Producer extends PersonBase {
     public void setLable(Lable lable) {
         this.lable = lable;
     }
-    
+
+    public ProducerRole getRole() {
+        return role;
+    }
+
+    public void setRole(ProducerRole role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return super.toString() + " Producer [lable=" + lable + "]";
