@@ -2,10 +2,11 @@ package org.almansa.app.domain.dto;
 
 import java.util.Date;
 
+import org.almansa.app.domain.Immutable;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
 import org.almansa.app.domain.value.Money;
 
-public class AlbumMerchandiseDetailViewModel {
+public class AlbumMerchandiseDetailViewModel implements Immutable{
 	private Long merchandiseId;	
 	private String albumName;	
 	private String albumArtistName;	

@@ -18,7 +18,11 @@ import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Producer;
 import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
+import org.almansa.app.domain.order.OrderLine;
+import org.almansa.app.domain.order.OrderSheet;
+import org.almansa.app.domain.user.User;
 import org.almansa.app.domain.value.Money;
+import org.almansa.app.util.DateUtil;
 import org.springframework.stereotype.Repository;
 
 @Transactional
@@ -146,6 +150,28 @@ public class DummyDataMaker {
 		am2.setPrice(new Money(new BigDecimal("17500")));
 		am2.setAmountOfStock(new Long(500));
 		em.persist(am2);		
+		
+		User user = new User();
+		user.setName("skennel");
+		em.persist(user);
+		
+		OrderSheet order = new OrderSheet();
+		order.setOrderDate(DateUtil.toDate(2018, 11, 2));
+		order.setOrderer(user);
+		List<OrderLine> orderLines = new ArrayList<OrderLine>();
+		
+		OrderLine orderLine1 = new OrderLine();
+		orderLine1.setMerchandise(am1);
+		orderLine1.setQuantity(2);
+		orderLines.add(orderLine1);
+		OrderLine orderLine2 = new OrderLine();
+		orderLine2.setMerchandise(am2);
+		orderLine2.setQuantity(1);
+		orderLines.add(orderLine2);
+		
+		order.setOrderLines(orderLines);
+		em.persist(order);
+		
 	}
 	
 	public Song getSong(Long id) {

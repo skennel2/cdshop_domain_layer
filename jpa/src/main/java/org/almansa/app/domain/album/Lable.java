@@ -28,5 +28,5 @@ public class Lable extends EntityBase{
 	@Override
 	public String toString() {
 		return "Lable [name=" + name + "]";
-	}		
+	}
 }
