@@ -37,17 +37,14 @@ public class DummyDataMaker {
         CategoryTag tag1 = new CategoryTag();
         tag1.setName("HipHop");
         tag1.setCreationDate(new Date());
-        em.persist(tag1);
 
         CategoryTag tag2 = new CategoryTag();
         tag2.setName("Show me the Money");
         tag2.setCreationDate(new Date());
-        em.persist(tag2);
 
         CategoryTag tag3 = new CategoryTag();
         tag3.setName("album of the year");
         tag3.setCreationDate(new Date());
-        em.persist(tag3);
 
         Lable jm = new Lable();
         jm.changeName("just musick");

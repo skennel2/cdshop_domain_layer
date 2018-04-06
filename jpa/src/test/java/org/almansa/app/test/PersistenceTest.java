@@ -1,12 +1,15 @@
 package org.almansa.app.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.almansa.app.AppConfig;
@@ -16,6 +19,12 @@ import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.album.SongInAlbum;
+import org.almansa.app.domain.merchandise.AlbumMerchandise;
+import org.almansa.app.domain.merchandise.MerchandiseBase;
+import org.almansa.app.domain.order.PurchaseOrder;
+import org.almansa.app.domain.user.User;
+import org.almansa.app.domain.value.Money;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -29,24 +38,8 @@ public class PersistenceTest {
     @PersistenceContext
     private EntityManager em;
 
-    @Test
-    public void persistAndFindTest() {
-        Album album = new Album();
-        album.setName("illmatic");
-        album.setAlbumType(AlbumType.LP);
-
-        em.persist(album);
-        em.flush();
-
-        Album albumFind = em.find(Album.class, album.getId());
-
-        boolean isEquals = album.equals(albumFind);
-        assertEquals(true, isEquals);
-        assertEquals("illmatic", albumFind.getName());
-    }
-
-    @Test
-    public void persistAndFindAndRelationTest() {
+    @Before
+    public void makeDummies() {
         Lable illionaire = new Lable();
         illionaire.changeName("Illionaire");
         em.persist(illionaire);
@@ -74,22 +67,76 @@ public class PersistenceTest {
 
         List<SongInAlbum> songList = new ArrayList<SongInAlbum>();
         songList.add(new SongInAlbum(album, song1, 1, false));
-        songList.add(new SongInAlbum(album, song2, 1, false));
+        songList.add(new SongInAlbum(album, song2, 2, false));
         album.setSongs(songList);
         em.persist(album);
 
+        Album album2 = new Album();
+        album2.setAlbumArtist(theQ);
+        album2.setAlbumType(AlbumType.LP);
+        album2.setName("Millionaire Poetry");
+        em.persist(album2);
+
+        em.flush();
+    }
+
+    @Test
+    public void persistAndFindTest() {
+        Album album = new Album();
+        album.setName("illmatic");
+        album.setAlbumType(AlbumType.LP);
+
+        em.persist(album);
         em.flush();
 
         Album albumFind = em.find(Album.class, album.getId());
-        assertEquals(true, album.equals(albumFind));
 
-        Artist artistGet = albumFind.getAlbumArtist();
-        assertEquals("the quiett", artistGet.getName());
+        boolean isEquals = album.equals(albumFind);
+        assertEquals(true, isEquals);
+        assertEquals("illmatic", albumFind.getName());
+    }
 
-        Lable lableGet = artistGet.getLable();
-        assertEquals("Illionaire", lableGet.getName());
+    @Test
+    public void OrderPersistAndDomainTest() {
+        TypedQuery<Album> q = em.createQuery("SELECT A FROM Album A WHERE A.name = :name", Album.class);
+        q.setParameter("name", "Q Train");
 
-        List<SongInAlbum> songs = album.getSongs();
-        assertEquals(2, songs.size());
+        Album album = q.getSingleResult();
+        AlbumMerchandise albumMd1 = new AlbumMerchandise();
+        albumMd1.setAlbum(album);
+        albumMd1.setAmountOfStock(new Long(200));
+        albumMd1.setPrice(new Money(25000));
+        em.persist(albumMd1);
+
+        q.setParameter("name", "Millionaire Poetry");
+
+        Album album2 = q.getSingleResult();
+        AlbumMerchandise albumMd2 = new AlbumMerchandise();
+        albumMd2.setAlbum(album2);
+        albumMd2.setAmountOfStock(new Long(200));
+        albumMd2.setPrice(new Money(10000));
+        em.persist(albumMd2);
+
+        User user = new User();
+        user.setName("skennel");
+        em.persist(user);
+
+        if (album != null) {
+            PurchaseOrder newOrder = new PurchaseOrder();
+            newOrder.addOrderLine(albumMd1, 10);
+            newOrder.setOrderer(user);
+            newOrder.setOrderDate(new Date());
+            em.persist(newOrder);
+
+            assertEquals(newOrder.calculateTotalPrice(), new Money(250000));
+
+            newOrder.addOrderLine(albumMd2, 5);
+            newOrder.setOrderer(user);
+            newOrder.setOrderDate(new Date());
+
+            assertEquals(newOrder.calculateTotalPrice(), new Money(300000));
+        } else {
+            fail("album not found");
+        }
     }
 }

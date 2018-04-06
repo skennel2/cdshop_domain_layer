@@ -3,6 +3,7 @@ package org.almansa.app.domain.album;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -10,9 +11,9 @@ import javax.persistence.TemporalType;
 
 import org.almansa.app.domain.EntityBase;
 
-@Entity
+@Embeddable
 @Table(name = "CATEGORY_TAG")
-public class CategoryTag extends EntityBase {
+public class CategoryTag {// extends EntityBase {
 
     @Column(name = "category_name")
     private String name;

@@ -26,7 +26,7 @@ import org.springframework.lang.NonNull;
 public class Album extends EntityBase {
 
     @NonNull
-    @Column(name = "artist_name")
+    @Column(name = "album_name")
     private String name;
 
     @ManyToOne
@@ -40,8 +40,10 @@ public class Album extends EntityBase {
     @CollectionTable(name = "song_in_album", joinColumns = @JoinColumn(name = "song_in_album_id"))
     private List<SongInAlbum> songs = new ArrayList<SongInAlbum>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "ALBUM_CATEGORY_TAGS")
+    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // @JoinTable(name = "ALBUM_CATEGORY_TAGS")
+    @ElementCollection
+    @CollectionTable(name = "album_tag", joinColumns = @JoinColumn(name = "album_tag_id"))
     private List<CategoryTag> tags = new ArrayList<CategoryTag>();
 
     @Enumerated(EnumType.STRING)

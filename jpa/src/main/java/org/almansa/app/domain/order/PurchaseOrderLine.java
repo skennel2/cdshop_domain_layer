@@ -39,4 +39,9 @@ public class PurchaseOrderLine {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "PurchaseOrderLine [merchandise=" + merchandise + ", quantity=" + quantity + "]";
+    }
 }
