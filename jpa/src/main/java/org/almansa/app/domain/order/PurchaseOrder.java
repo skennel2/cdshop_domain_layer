@@ -19,48 +19,48 @@ import org.almansa.app.domain.value.Money;
 @Entity
 public class PurchaseOrder extends EntityBase {
 
-	@ManyToOne
-	@JoinColumn(name = "oderer_user_id")
-	private User orderer;
+    @ManyToOne
+    @JoinColumn(name = "oderer_user_id")
+    private User orderer;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date orderDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date orderDate;
 
-	@ElementCollection
-	@CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "order_id"))
-	private List<PurchaseOrderLine> OrderLines;
+    @ElementCollection
+    @CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "order_id"))
+    private List<PurchaseOrderLine> OrderLines;
 
-	public Money calculateTotalPrice() {
-		Money money = new Money(0);
+    public Money calculateTotalPrice() {
+        Money money = new Money(0);
 
-		for (PurchaseOrderLine orderLine : OrderLines) {
-			money = money.add(orderLine.calculateTotalPrice());
-		}
+        for (PurchaseOrderLine orderLine : OrderLines) {
+            money = money.add(orderLine.calculateTotalPrice());
+        }
 
-		return money;
-	}
+        return money;
+    }
 
-	public User getOrderer() {
-		return orderer;
-	}
+    public User getOrderer() {
+        return orderer;
+    }
 
-	public void setOrderer(User orderer) {
-		this.orderer = orderer;
-	}
+    public void setOrderer(User orderer) {
+        this.orderer = orderer;
+    }
 
-	public Date getOrderDate() {
-		return orderDate;
-	}
+    public Date getOrderDate() {
+        return orderDate;
+    }
 
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
-	}
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
 
-	public List<PurchaseOrderLine> getOrderLines() {
-		return OrderLines;
-	}
+    public List<PurchaseOrderLine> getOrderLines() {
+        return OrderLines;
+    }
 
-	public void setOrderLines(List<PurchaseOrderLine> orderLines) {
-		OrderLines = orderLines;
-	}
+    public void setOrderLines(List<PurchaseOrderLine> orderLines) {
+        OrderLines = orderLines;
+    }
 }

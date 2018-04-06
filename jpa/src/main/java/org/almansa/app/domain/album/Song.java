@@ -18,57 +18,57 @@ import org.springframework.lang.NonNull;
 @Entity
 public class Song extends EntityBase {
 
-	@NonNull
-	@Column(name = "song_name")
-	private String name;
+    @NonNull
+    @Column(name = "song_name")
+    private String name;
 
-	@ManyToOne
-	@JoinColumn(name = "owner_artist_id")
-	private Artist ownerArtist;
+    @ManyToOne
+    @JoinColumn(name = "owner_artist_id")
+    private Artist ownerArtist;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable
-	private List<PersonBase> artists;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable
+    private List<PersonBase> artists;
 
-	@ManyToOne
-	@JoinColumn(name = "producer_id")
-	private Producer producer;
+    @ManyToOne
+    @JoinColumn(name = "producer_id")
+    private Producer producer;
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Artist getOwnerArtist() {
-		return ownerArtist;
-	}
+    public Artist getOwnerArtist() {
+        return ownerArtist;
+    }
 
-	public void setOwnerArtist(Artist ownerArtist) {
-		this.ownerArtist = ownerArtist;
-	}
+    public void setOwnerArtist(Artist ownerArtist) {
+        this.ownerArtist = ownerArtist;
+    }
 
-	public Producer getProducer() {
-		return producer;
-	}
+    public Producer getProducer() {
+        return producer;
+    }
 
-	public void setProducer(Producer producer) {
-		this.producer = producer;
-	}
+    public void setProducer(Producer producer) {
+        this.producer = producer;
+    }
 
-	public List<PersonBase> getArtists() {
-		return artists;
-	}
+    public List<PersonBase> getArtists() {
+        return artists;
+    }
 
-	public void setArtists(List<PersonBase> artists) {
-		this.artists = artists;
-	}
+    public void setArtists(List<PersonBase> artists) {
+        this.artists = artists;
+    }
 
-	@Override
-	public String toString() {
-		return super.toString() + " Song [name=" + name + ", ownerArtist=" + ownerArtist + ", artists=" + artists
-				+ ", producer=" + producer + "]";
-	}
+    @Override
+    public String toString() {
+        return super.toString() + " Song [name=" + name + ", ownerArtist=" + ownerArtist + ", artists=" + artists
+                + ", producer=" + producer + "]";
+    }
 }

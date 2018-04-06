@@ -26,70 +26,70 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @Transactional
 public class PersistenceTest {
 
-	@PersistenceContext
-	private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-	@Test
-	public void persistAndFindTest() {
-		Album album = new Album();
-		album.setName("illmatic");
-		album.setAlbumType(AlbumType.LP);
+    @Test
+    public void persistAndFindTest() {
+        Album album = new Album();
+        album.setName("illmatic");
+        album.setAlbumType(AlbumType.LP);
 
-		em.persist(album);
-		em.flush();
+        em.persist(album);
+        em.flush();
 
-		Album albumFind = em.find(Album.class, album.getId());
+        Album albumFind = em.find(Album.class, album.getId());
 
-		boolean isEquals = album.equals(albumFind);
-		assertEquals(true, isEquals);
-		assertEquals("illmatic", albumFind.getName());
-	}
+        boolean isEquals = album.equals(albumFind);
+        assertEquals(true, isEquals);
+        assertEquals("illmatic", albumFind.getName());
+    }
 
-	@Test
-	public void persistAndFindAndRelationTest() {
-		Lable illionaire = new Lable();
-		illionaire.changeName("Illionaire");
-		em.persist(illionaire);
+    @Test
+    public void persistAndFindAndRelationTest() {
+        Lable illionaire = new Lable();
+        illionaire.changeName("Illionaire");
+        em.persist(illionaire);
 
-		Artist theQ = new Artist();
-		theQ.changeName("the quiett");
-		theQ.changeLable(illionaire);
-		theQ.setBornDate(1996, 1, 3);
-		em.persist(theQ);
+        Artist theQ = new Artist();
+        theQ.changeName("the quiett");
+        theQ.changeLable(illionaire);
+        theQ.setBornDate(1996, 1, 3);
+        em.persist(theQ);
 
-		Song song1 = new Song();
-		song1.setName("song1");
-		song1.setOwnerArtist(theQ);
-		em.persist(song1);
+        Song song1 = new Song();
+        song1.setName("song1");
+        song1.setOwnerArtist(theQ);
+        em.persist(song1);
 
-		Song song2 = new Song();
-		song2.setName("song2");
-		song2.setOwnerArtist(theQ);
-		em.persist(song2);
+        Song song2 = new Song();
+        song2.setName("song2");
+        song2.setOwnerArtist(theQ);
+        em.persist(song2);
 
-		Album album = new Album();
-		album.setAlbumArtist(theQ);
-		album.setAlbumType(AlbumType.LP);
-		album.setName("Q Train");
+        Album album = new Album();
+        album.setAlbumArtist(theQ);
+        album.setAlbumType(AlbumType.LP);
+        album.setName("Q Train");
 
-		List<SongInAlbum> songList = new ArrayList<SongInAlbum>();
-		songList.add(new SongInAlbum(album, song1, 1, false));
-		songList.add(new SongInAlbum(album, song2, 1, false));
-		album.setSongs(songList);
-		em.persist(album);
+        List<SongInAlbum> songList = new ArrayList<SongInAlbum>();
+        songList.add(new SongInAlbum(album, song1, 1, false));
+        songList.add(new SongInAlbum(album, song2, 1, false));
+        album.setSongs(songList);
+        em.persist(album);
 
-		em.flush();
+        em.flush();
 
-		Album albumFind = em.find(Album.class, album.getId());
-		assertEquals(true, album.equals(albumFind));
+        Album albumFind = em.find(Album.class, album.getId());
+        assertEquals(true, album.equals(albumFind));
 
-		Artist artistGet = albumFind.getAlbumArtist();
-		assertEquals("the quiett", artistGet.getName());
+        Artist artistGet = albumFind.getAlbumArtist();
+        assertEquals("the quiett", artistGet.getName());
 
-		Lable lableGet = artistGet.getLable();
-		assertEquals("Illionaire", lableGet.getName());
+        Lable lableGet = artistGet.getLable();
+        assertEquals("Illionaire", lableGet.getName());
 
-		List<SongInAlbum> songs = album.getSongs();
-		assertEquals(2, songs.size());
-	}
+        List<SongInAlbum> songs = album.getSongs();
+        assertEquals(2, songs.size());
+    }
 }
