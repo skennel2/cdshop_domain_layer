@@ -1,7 +1,7 @@
 # cd_shop
 
 사용기술
-Spring, JPA, H2
+Spring, Spring Data, JPA Hibernate, H2
 
 방법론
-Object Oriented, Java Config, Annotation Driven
+Object Oriented, POJO, Java Config, Annotation Driven
