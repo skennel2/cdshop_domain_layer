@@ -24,7 +24,7 @@ public class Money {
 	protected Money() {
 		super();	
 	}
-
+ 
 	public BigDecimal getAmount() {
 		return amount;
 	}
