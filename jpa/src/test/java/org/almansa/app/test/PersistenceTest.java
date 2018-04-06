@@ -10,11 +10,11 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.almansa.app.AppConfig;
-import org.almansa.app.domain.Album;
-import org.almansa.app.domain.AlbumType;
-import org.almansa.app.domain.Artist;
-import org.almansa.app.domain.Lable;
-import org.almansa.app.domain.Song;
+import org.almansa.app.domain.album.Album;
+import org.almansa.app.domain.album.AlbumType;
+import org.almansa.app.domain.album.Artist;
+import org.almansa.app.domain.album.Lable;
+import org.almansa.app.domain.album.Song;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

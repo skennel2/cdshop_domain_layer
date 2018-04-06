@@ -1,28 +1,30 @@
-package org.almansa.app.domain;
+package org.almansa.app.domain.album;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity
-@DiscriminatorValue(value="Artist")
-public class Artist extends PersonBase{
+import org.almansa.app.domain.PersonBase;
 
-	@ManyToOne
+@Entity
+@DiscriminatorValue(value="Producer")
+public class Producer extends PersonBase{
+	
+	@ManyToOne()
 	@JoinColumn(name="agency_company_id")
 	private Lable lable;
-
+	
 	public Lable getLable() {
 		return lable;
 	}
 
-	public void changeLable(Lable lable) {
+	public void setLable(Lable lable) {
 		this.lable = lable;
 	}
 
 	@Override
 	public String toString() {
-		return "Artist [lable=" + lable + "]";
-	}
+		return super.toString() +  " Producer [lable=" + lable + "]";
+	}		
 }

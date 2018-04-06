@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.almansa.app.domain.Album;
+import org.almansa.app.domain.album.Album;
 
 @Entity
 @Table(name="ALBUM_MERCHANDISE")

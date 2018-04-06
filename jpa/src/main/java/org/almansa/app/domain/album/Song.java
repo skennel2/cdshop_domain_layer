@@ -1,4 +1,4 @@
-package org.almansa.app.domain;
+package org.almansa.app.domain.album;
 
 import java.util.List;
 
@@ -11,6 +11,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.almansa.app.domain.EntityBase;
+import org.almansa.app.domain.PersonBase;
 import org.springframework.lang.NonNull;
 
 @Entity

@@ -1,4 +1,4 @@
-package org.almansa.app.domain;
+package org.almansa.app.domain.album;
 
 import javax.persistence.Embeddable;
 

@@ -1,4 +1,4 @@
-package org.almansa.app.domain;
+package org.almansa.app.domain.album;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.almansa.app.domain.EntityBase;
 import org.springframework.lang.NonNull;
 
 @Entity

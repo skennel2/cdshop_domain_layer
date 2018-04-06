@@ -3,8 +3,8 @@ package org.almansa.app;
 import java.util.List;
 import java.util.Optional;
 
-import org.almansa.app.domain.Album;
-import org.almansa.app.domain.Lable;
+import org.almansa.app.domain.album.Album;
+import org.almansa.app.domain.album.Lable;
 import org.almansa.app.repository.AlbumRepository;
 import org.almansa.app.repository.DummyDataMaker;
 import org.almansa.app.service.LableService;

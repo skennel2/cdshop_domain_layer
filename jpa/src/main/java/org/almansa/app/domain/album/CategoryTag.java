@@ -1,4 +1,4 @@
-package org.almansa.app.domain;
+package org.almansa.app.domain.album;
 
 import java.util.Date;
 
@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.almansa.app.domain.EntityBase;
 
 @Entity
 @Table(name="CATEGORY_TAG")
