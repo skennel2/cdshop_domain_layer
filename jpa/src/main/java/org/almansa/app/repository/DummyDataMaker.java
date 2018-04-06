@@ -140,6 +140,12 @@ public class DummyDataMaker {
 		am1.setPrice(new Money(new BigDecimal("12000")));
 		am1.setAmountOfStock(new Long(500));
 		em.persist(am1);
+		
+		AlbumMerchandise am2 = new AlbumMerchandise();
+		am2.setAlbum(album2);
+		am2.setPrice(new Money(new BigDecimal("17500")));
+		am2.setAmountOfStock(new Long(500));
+		em.persist(am2);		
 	}
 	
 	public Song getSong(Long id) {
