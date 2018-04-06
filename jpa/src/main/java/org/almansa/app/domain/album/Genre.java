@@ -7,10 +7,10 @@ import org.almansa.app.domain.EntityBase;
 import org.springframework.lang.NonNull;
 
 @Entity
-public class Genre extends EntityBase{
-	
-	@NonNull		
-	@Column(name="genre_name")
+public class Genre extends EntityBase {
+
+	@NonNull
+	@Column(name = "genre_name")
 	private String name;
 
 	public String getName() {
@@ -24,5 +24,5 @@ public class Genre extends EntityBase{
 	@Override
 	public String toString() {
 		return "Genre [name=" + name + "]";
-	}		
+	}
 }

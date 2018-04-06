@@ -6,8 +6,8 @@ import java.util.GregorianCalendar;
 
 public abstract class DateUtil {
 	/**
-	 * Based on GregorianCalendar
-	 * Month Start With 1 Not 0
+	 * Based on GregorianCalendar Month Start With 1 Not 0
+	 * 
 	 * @param year
 	 * @param month
 	 * @param date
@@ -16,7 +16,7 @@ public abstract class DateUtil {
 	public static Date toDate(int year, int month, int date) {
 		Calendar cal = new GregorianCalendar();
 		cal.set(year, month + 1, date);
-		
+
 		return cal.getTime();
 	}
 }

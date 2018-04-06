@@ -9,25 +9,25 @@ import org.almansa.app.domain.merchandise.MerchandiseBase;
 import org.almansa.app.domain.value.Money;
 
 @Embeddable
-public class PurchaseOrderLine{
-	
+public class PurchaseOrderLine {
+
 	@ManyToOne
-	@JoinColumn(name="merchandise_id")
-	private MerchandiseBase merchandise; 
-	
-	@Column(name="product_quantity")
+	@JoinColumn(name = "merchandise_id")
+	private MerchandiseBase merchandise;
+
+	@Column(name = "product_quantity")
 	private int quantity;
 
 	public MerchandiseBase getMerchandise() {
 		return merchandise;
 	}
 
-	public Money calculateTotalPrice(){
+	public Money calculateTotalPrice() {
 		Long amount = merchandise.getPrice().getAmount().longValue() * quantity;
-		
+
 		return new Money(amount);
 	}
-	
+
 	public void setMerchandise(MerchandiseBase merchandise) {
 		this.merchandise = merchandise;
 	}

@@ -15,18 +15,18 @@ import javax.persistence.TemporalType;
 import org.springframework.lang.NonNull;
 
 @Entity
-@Table(name="PERSON")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Table(name = "PERSON")
+@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
-public abstract class PersonBase extends EntityBase{
+public abstract class PersonBase extends EntityBase {
 	@NonNull
-	@Column(name="artist_name")
+	@Column(name = "artist_name")
 	private String name;
-	
+
 	@Temporal(TemporalType.DATE)
-	@Column(name="born_date")
+	@Column(name = "born_date")
 	private Date bornDate;
-	
+
 	public String getName() {
 		return name;
 	}
@@ -34,7 +34,7 @@ public abstract class PersonBase extends EntityBase{
 	public void changeName(String name) {
 		this.name = name;
 	}
-	
+
 	public Date getBornDate() {
 		return bornDate;
 	}
@@ -46,12 +46,12 @@ public abstract class PersonBase extends EntityBase{
 	public void setBornDate(int year, int month, int date) {
 		Calendar cal = Calendar.getInstance();
 		cal.set(year, month + 1, date);
-		
+
 		this.bornDate = cal.getTime();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "PersonBase [name=" + name + ", bornDate=" + bornDate + "]";
-	}	
+	}
 }

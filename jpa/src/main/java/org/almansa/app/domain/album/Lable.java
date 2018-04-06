@@ -11,10 +11,10 @@ import org.springframework.lang.NonNull;
  *
  */
 @Entity
-public class Lable extends EntityBase{
+public class Lable extends EntityBase {
 
 	@NonNull
-	@Column(name="agency_company_name")
+	@Column(name = "agency_company_name")
 	private String name;
 
 	public String getName() {

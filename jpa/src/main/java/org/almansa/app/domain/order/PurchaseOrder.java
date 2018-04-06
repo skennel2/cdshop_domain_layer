@@ -22,27 +22,24 @@ public class PurchaseOrder extends EntityBase {
 	@ManyToOne
 	@JoinColumn(name = "oderer_user_id")
 	private User orderer;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date orderDate;
 
 	@ElementCollection
-	@CollectionTable(
-		name="order_line",
-		joinColumns=@JoinColumn(name="order_id")
-	)
+	@CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "order_id"))
 	private List<PurchaseOrderLine> OrderLines;
 
 	public Money calculateTotalPrice() {
 		Money money = new Money(0);
-		
+
 		for (PurchaseOrderLine orderLine : OrderLines) {
 			money = money.add(orderLine.calculateTotalPrice());
 		}
-		
+
 		return money;
 	}
-	
+
 	public User getOrderer() {
 		return orderer;
 	}
@@ -65,5 +62,5 @@ public class PurchaseOrder extends EntityBase {
 
 	public void setOrderLines(List<PurchaseOrderLine> orderLines) {
 		OrderLines = orderLines;
-	}	
+	}
 }

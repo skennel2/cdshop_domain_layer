@@ -11,27 +11,27 @@ import javax.persistence.TemporalType;
 import org.almansa.app.domain.EntityBase;
 
 @Entity
-@Table(name="CATEGORY_TAG")
-public class CategoryTag extends EntityBase{
+@Table(name = "CATEGORY_TAG")
+public class CategoryTag extends EntityBase {
 
-	@Column(name="category_name")
+	@Column(name = "category_name")
 	private String name;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationDate;
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public Date getCreationDate() {
 		return creationDate;
 	}
-	
+
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}

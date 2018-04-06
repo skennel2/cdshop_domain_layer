@@ -16,22 +16,22 @@ import org.almansa.app.domain.PersonBase;
 import org.springframework.lang.NonNull;
 
 @Entity
-public class Song extends EntityBase{
+public class Song extends EntityBase {
 
 	@NonNull
-	@Column(name="song_name")
+	@Column(name = "song_name")
 	private String name;
-	
+
 	@ManyToOne
-	@JoinColumn(name="owner_artist_id")
+	@JoinColumn(name = "owner_artist_id")
 	private Artist ownerArtist;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable
-	private List<PersonBase> artists; // many to many 의 관게는  @JoinTable을 이용해 별로의 테이블로 관리되게 설정한다.
-	
+	private List<PersonBase> artists;
+
 	@ManyToOne
-	@JoinColumn(name="producer_id")
+	@JoinColumn(name = "producer_id")
 	private Producer producer;
 
 	public String getName() {
@@ -57,7 +57,7 @@ public class Song extends EntityBase{
 	public void setProducer(Producer producer) {
 		this.producer = producer;
 	}
-	
+
 	public List<PersonBase> getArtists() {
 		return artists;
 	}
@@ -68,6 +68,7 @@ public class Song extends EntityBase{
 
 	@Override
 	public String toString() {
-		return super.toString() +  " Song [name=" + name + ", ownerArtist=" + ownerArtist + ", artists=" + artists + ", producer=" + producer + "]";
+		return super.toString() + " Song [name=" + name + ", ownerArtist=" + ownerArtist + ", artists=" + artists
+				+ ", producer=" + producer + "]";
 	}
 }

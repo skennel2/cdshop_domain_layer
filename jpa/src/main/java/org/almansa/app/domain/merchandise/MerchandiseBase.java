@@ -12,39 +12,39 @@ import javax.persistence.Table;
 import org.almansa.app.domain.EntityBase;
 import org.almansa.app.domain.value.Money;
 
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
 @Entity
-@Table(name="Merchandise")
-public abstract class MerchandiseBase extends EntityBase{
-	
-	@Column(name="amount_of_stock")
+@Table(name = "Merchandise")
+public abstract class MerchandiseBase extends EntityBase {
+
+	@Column(name = "amount_of_stock")
 	private Long amountOfStock = Long.valueOf(0);
-	
+
 	@Embedded
-	@AttributeOverride(name="amount", column=@Column(name="price"))
+	@AttributeOverride(name = "amount", column = @Column(name = "price"))
 	private Money price;
-	
+
 	public Long getAmountOfStock() {
 		return amountOfStock;
 	}
-	
+
 	public void setAmountOfStock(Long amountOfStock) {
 		this.amountOfStock = amountOfStock;
 	}
-	
+
 	public Money getPrice() {
 		return price;
 	}
-	
+
 	public void setPrice(Money price) {
 		this.price = price;
 	}
-	
+
 	public void addStock(long amount) {
 		this.amountOfStock += amount;
-	}	
-	
+	}
+
 	public boolean isSoldOut() {
 		return amountOfStock.longValue() == 0;
 	}

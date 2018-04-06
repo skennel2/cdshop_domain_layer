@@ -18,53 +18,52 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configurable
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages="org.almansa.app.repository")
-public class AppConfig{
-    
-    @Bean
-    public DataSource dataSource() throws ClassNotFoundException {        
-        DriverManagerDataSource  dataSource = new DriverManagerDataSource (); 
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:~/test14");        
-        dataSource.setUsername("sa");
-        
-        return dataSource;
-    }   
-    
-    @Bean
-    public JpaTransactionManager transactionManager(EntityManagerFactory emf) throws ClassNotFoundException {  // 이름에 주의할것. Named Bean 이라서 빈생성 에러 날수있음 
-        JpaTransactionManager jtm = new JpaTransactionManager();
-        jtm.setEntityManagerFactory(entityManagerFactory().getObject());
-        
-        return jtm;
-    }
-    
-    @Bean 
-    public PersistenceAnnotationBeanPostProcessor persistenceAnnotationBeanPostProcessor() {
-        return new PersistenceAnnotationBeanPostProcessor();
-    }
-    
-    @Bean 
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws ClassNotFoundException { // 이름에 주의할것. Named Bean 이라서 빈생성 에러 날수있음 
-        LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
-        entityManager.setDataSource(dataSource());
-        entityManager.setPackagesToScan("org.almansa.app");
-        
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        entityManager.setJpaVendorAdapter(vendorAdapter);
-        entityManager.setJpaProperties(additionalProperties());
-        
-        return entityManager;
-    }   
-    
-    
-    private Properties additionalProperties() {
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-        properties.setProperty("hibernate.show_sql", "true");
-        properties.setProperty("hibernate.format_sql", "true");
-        properties.setProperty("hibernate.id.new_generator_mappings", "true");
-        return properties;
-     }    
+@EnableJpaRepositories(basePackages = "org.almansa.app.repository")
+public class AppConfig {
+
+	@Bean
+	public DataSource dataSource() throws ClassNotFoundException {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("org.h2.Driver");
+		dataSource.setUrl("jdbc:h2:~/test14");
+		dataSource.setUsername("sa");
+
+		return dataSource;
+	}
+
+	@Bean
+	public JpaTransactionManager transactionManager(EntityManagerFactory emf) throws ClassNotFoundException {
+		JpaTransactionManager jtm = new JpaTransactionManager();
+		jtm.setEntityManagerFactory(entityManagerFactory().getObject());
+
+		return jtm;
+	}
+
+	@Bean
+	public PersistenceAnnotationBeanPostProcessor persistenceAnnotationBeanPostProcessor() {
+		return new PersistenceAnnotationBeanPostProcessor();
+	}
+
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws ClassNotFoundException {
+		LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
+		entityManager.setDataSource(dataSource());
+		entityManager.setPackagesToScan("org.almansa.app");
+
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		entityManager.setJpaVendorAdapter(vendorAdapter);
+		entityManager.setJpaProperties(additionalProperties());
+
+		return entityManager;
+	}
+
+	private Properties additionalProperties() {
+		Properties properties = new Properties();
+		properties.setProperty("hibernate.hbm2ddl.auto", "create");
+		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+		properties.setProperty("hibernate.show_sql", "true");
+		properties.setProperty("hibernate.format_sql", "true");
+		properties.setProperty("hibernate.id.new_generator_mappings", "true");
+		return properties;
+	}
 }

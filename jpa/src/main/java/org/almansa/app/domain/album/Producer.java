@@ -8,13 +8,13 @@ import javax.persistence.ManyToOne;
 import org.almansa.app.domain.PersonBase;
 
 @Entity
-@DiscriminatorValue(value="Producer")
-public class Producer extends PersonBase{
-	
+@DiscriminatorValue(value = "Producer")
+public class Producer extends PersonBase {
+
 	@ManyToOne()
-	@JoinColumn(name="agency_company_id")
+	@JoinColumn(name = "agency_company_id")
 	private Lable lable;
-	
+
 	public Lable getLable() {
 		return lable;
 	}
@@ -25,6 +25,6 @@ public class Producer extends PersonBase{
 
 	@Override
 	public String toString() {
-		return super.toString() +  " Producer [lable=" + lable + "]";
-	}		
+		return super.toString() + " Producer [lable=" + lable + "]";
+	}
 }

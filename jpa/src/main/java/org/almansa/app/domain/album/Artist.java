@@ -8,11 +8,11 @@ import javax.persistence.ManyToOne;
 import org.almansa.app.domain.PersonBase;
 
 @Entity
-@DiscriminatorValue(value="Artist")
-public class Artist extends PersonBase{
+@DiscriminatorValue(value = "Artist")
+public class Artist extends PersonBase {
 
 	@ManyToOne
-	@JoinColumn(name="agency_company_id")
+	@JoinColumn(name = "agency_company_id")
 	private Lable lable;
 
 	public Lable getLable() {

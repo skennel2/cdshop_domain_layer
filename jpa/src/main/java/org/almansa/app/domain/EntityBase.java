@@ -5,8 +5,8 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class EntityBase implements Entity<Long>{
-	
+public abstract class EntityBase implements Entity<Long> {
+
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -18,11 +18,11 @@ public abstract class EntityBase implements Entity<Long>{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public boolean isNew() {
 		return id == null;
 	}
-		
+
 	@Override
 	public String toString() {
 		return "EntityBase [id=" + id + "]";
@@ -51,5 +51,5 @@ public abstract class EntityBase implements Entity<Long>{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
 }

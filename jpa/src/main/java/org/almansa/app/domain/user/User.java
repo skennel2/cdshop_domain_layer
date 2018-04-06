@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import org.almansa.app.domain.EntityBase;
 
 @Entity
-public class User extends EntityBase{
+public class User extends EntityBase {
 	@Column
 	private String name;
 
@@ -16,5 +16,5 @@ public class User extends EntityBase{
 
 	public void setName(String name) {
 		this.name = name;
-	}		
+	}
 }

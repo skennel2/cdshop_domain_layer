@@ -7,25 +7,25 @@ import javax.persistence.ManyToOne;
 
 @Embeddable
 public class SongInAlbum {
-	
+
 	@ManyToOne
-	@JoinColumn(name="album_id")
+	@JoinColumn(name = "album_id")
 	private Album album;
-	
+
 	@ManyToOne
-	@JoinColumn(name="song_id")
+	@JoinColumn(name = "song_id")
 	private Song song;
-	
-	@Column(name = "no", nullable=false, unique=true)
+
+	@Column(name = "no", nullable = false, unique = true)
 	private int no;
-	
-	@Column(name="is_single")
+
+	@Column(name = "is_single")
 	private boolean isSingle;
-	
+
 	public SongInAlbum() {
 		super();
 	}
-	
+
 	public SongInAlbum(Album album, Song song, int no, boolean isSingle) {
 		super();
 		this.album = album;

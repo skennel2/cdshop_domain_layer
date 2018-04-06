@@ -8,10 +8,10 @@ import javax.persistence.Table;
 import org.almansa.app.domain.album.Album;
 
 @Entity
-@Table(name="ALBUM_MERCHANDISE")
-@DiscriminatorValue(value="Album")
-public class AlbumMerchandise extends MerchandiseBase{
-	
+@Table(name = "ALBUM_MERCHANDISE")
+@DiscriminatorValue(value = "Album")
+public class AlbumMerchandise extends MerchandiseBase {
+
 	@OneToOne
 	private Album album;
 
@@ -21,5 +21,5 @@ public class AlbumMerchandise extends MerchandiseBase{
 
 	public void setAlbum(Album album) {
 		this.album = album;
-	}				
+	}
 }

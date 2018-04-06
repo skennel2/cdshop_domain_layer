@@ -9,24 +9,24 @@ import javax.persistence.TemporalType;
 import org.almansa.app.domain.Immutable;
 
 @Embeddable
-public class Period implements Immutable{
-	
+public class Period implements Immutable {
+
 	@Temporal(TemporalType.DATE)
 	private Date fromDate;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date toDate;
-		
-	public Period(Date fromDate, Date toDate) {		
+
+	public Period(Date fromDate, Date toDate) {
 		super();
-		
-		if(toDate.before(this.fromDate)){
+
+		if (toDate.before(this.fromDate)) {
 			throw new IllegalArgumentException("toDate");
-		}		
+		}
 		this.fromDate = fromDate;
 		this.toDate = toDate;
 	}
-	
+
 	/**
 	 * for jpa
 	 */
@@ -40,13 +40,13 @@ public class Period implements Immutable{
 
 	public Date getToDate() {
 		return toDate;
-	}		
-	
+	}
+
 	public boolean isIn(Date date) {
-		if(date.after(fromDate) && date.before(toDate)) {
+		if (date.after(fromDate) && date.before(toDate)) {
 			return true;
 		}
-		
+
 		return false;
-	}	
+	}
 }

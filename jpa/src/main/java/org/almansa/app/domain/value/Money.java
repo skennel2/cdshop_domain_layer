@@ -8,37 +8,37 @@ import javax.persistence.Embeddable;
 import org.almansa.app.domain.Immutable;
 
 @Embeddable
-public class Money implements Immutable{
-	
-	@Column(name="amount_of_money")
+public class Money implements Immutable {
+
+	@Column(name = "amount_of_money")
 	private BigDecimal amount;
 
 	public Money(BigDecimal amount) {
 		super();
 		this.amount = amount;
 	}
-	
+
 	public Money(String amount) {
 		super();
 		this.amount = new BigDecimal(amount);
-	}	
-	
+	}
+
 	public Money(long amount) {
 		super();
 		this.amount = new BigDecimal(amount);
-	}	
-	
+	}
+
 	/**
 	 * for jpa
 	 */
 	protected Money() {
-		super();	
+		super();
 	}
 
 	public Money add(Money add) {
 		return new Money(this.amount.add(add.amount));
 	}
-	
+
 	public BigDecimal getAmount() {
 		return amount;
 	}
@@ -68,5 +68,4 @@ public class Money implements Immutable{
 		return true;
 	}
 
-	
 }
