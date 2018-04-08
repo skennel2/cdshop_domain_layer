@@ -19,10 +19,9 @@ import org.springframework.lang.NonNull;
 @Table(name = "PERSON")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
+@AttributeOverride(column = @Column(name = "artist_name"), name = "name")
 public abstract class PersonBase extends NamedEntitiyBase {
-    @NonNull
-    @Column
-    @AttributeOverride(column = @Column(name = "artist_name"), name = "name")
+      
     private String name;
 
     @Temporal(TemporalType.DATE)
@@ -46,6 +45,6 @@ public abstract class PersonBase extends NamedEntitiyBase {
 
     @Override
     public String toString() {
-        return "PersonBase [name=" + name + ", bornDate=" + bornDate + "]";
+        return "PersonBase [bornDate=" + bornDate + "]";
     }
 }

@@ -1,8 +1,10 @@
 package org.almansa.app.domain;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
 
+//@Entity
 @MappedSuperclass
 public abstract class NamedEntitiyBase extends EntityBase implements INamed {
     @Column(name = "name")
