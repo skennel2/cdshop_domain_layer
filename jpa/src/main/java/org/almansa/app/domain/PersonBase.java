@@ -21,9 +21,7 @@ import org.springframework.lang.NonNull;
 @DiscriminatorColumn
 @AttributeOverride(column = @Column(name = "artist_name"), name = "name")
 public abstract class PersonBase extends NamedEntitiyBase {
-      
-    private String name;
-
+	
     @Temporal(TemporalType.DATE)
     @Column(name = "born_date")
     private Date bornDate;
