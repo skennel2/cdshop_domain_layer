@@ -4,29 +4,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.AttributeOverride;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.almansa.app.domain.EntityBase;
+import org.almansa.app.domain.NamedEntitiyBase;
 import org.springframework.lang.NonNull;
 
 @Entity
-public class Album extends EntityBase {
+public class Album extends NamedEntitiyBase {
 
     @NonNull
-    @Column(name = "album_name")
+    @AttributeOverride(column=@Column(name="album_name"), name="name")
     private String name;
 
     @ManyToOne
@@ -46,14 +43,6 @@ public class Album extends EntityBase {
 
     @Enumerated(EnumType.STRING)
     private AlbumType albumType;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Artist getAlbumArtist() {
         return albumArtist;

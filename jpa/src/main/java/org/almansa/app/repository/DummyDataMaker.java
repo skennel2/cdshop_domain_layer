@@ -16,12 +16,11 @@ import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.CategoryTag;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Producer;
-import org.almansa.app.domain.album.ProducerRole;
 import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.album.SongInAlbum;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
-import org.almansa.app.domain.order.PurchaseOrderLine;
 import org.almansa.app.domain.order.PurchaseOrder;
+import org.almansa.app.domain.order.PurchaseOrderLine;
 import org.almansa.app.domain.user.User;
 import org.almansa.app.domain.value.Money;
 import org.almansa.app.util.DateUtil;
@@ -60,39 +59,39 @@ public class DummyDataMaker {
         em.persist(aomg);
 
         Producer nochang = new Producer();
-        nochang.changeName("nochang");
+        nochang.setName("nochang");
         nochang.setLable(jm);
         em.persist(nochang);
 
         Producer chachamalon = new Producer();
-        chachamalon.changeName("cha cha malon");
+        chachamalon.setName("cha cha malon");
         chachamalon.setLable(aomg);
         em.persist(chachamalon);
 
         Artist swings = new Artist();
-        swings.changeName("swings");
+        swings.setName("swings");
         swings.changeLable(jm);
         em.persist(swings);
 
         Artist theQ = new Artist();
-        theQ.changeName("the quiett");
+        theQ.setName("the quiett");
         theQ.changeLable(illionaire);
         theQ.setBornDate(1996, 1, 3);
         em.persist(theQ);
 
         Artist jayPark = new Artist();
-        jayPark.changeName("jay park");
+        jayPark.setName("jay park");
         jayPark.changeLable(aomg);
         jayPark.setBornDate(1988, 3, 4);
         em.persist(jayPark);
 
         Artist kidMilli = new Artist();
-        kidMilli.changeName("kid milli");
+        kidMilli.setName("kid milli");
         kidMilli.changeLable(null);
         em.persist(kidMilli);
 
         Artist dok2 = new Artist();
-        dok2.changeName("dok2");
+        dok2.setName("dok2");
         dok2.changeLable(illionaire);
         em.persist(dok2);
 

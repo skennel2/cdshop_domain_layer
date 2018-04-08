@@ -20,7 +20,6 @@ import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.album.SongInAlbum;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
-import org.almansa.app.domain.merchandise.MerchandiseBase;
 import org.almansa.app.domain.order.PurchaseOrder;
 import org.almansa.app.domain.user.User;
 import org.almansa.app.domain.value.Money;
@@ -45,7 +44,7 @@ public class PersistenceTest {
         em.persist(illionaire);
 
         Artist theQ = new Artist();
-        theQ.changeName("the quiett");
+        theQ.setName("the quiett");
         theQ.changeLable(illionaire);
         theQ.setBornDate(1996, 1, 3);
         em.persist(theQ);

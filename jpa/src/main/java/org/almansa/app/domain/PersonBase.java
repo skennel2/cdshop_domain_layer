@@ -3,6 +3,7 @@ package org.almansa.app.domain;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -18,22 +19,15 @@ import org.springframework.lang.NonNull;
 @Table(name = "PERSON")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
-public abstract class PersonBase extends EntityBase {
+public abstract class PersonBase extends NamedEntitiyBase {
     @NonNull
-    @Column(name = "artist_name")
+    @Column
+    @AttributeOverride(column = @Column(name = "artist_name"), name = "name")
     private String name;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "born_date")
     private Date bornDate;
-
-    public String getName() {
-        return name;
-    }
-
-    public void changeName(String name) {
-        this.name = name;
-    }
 
     public Date getBornDate() {
         return bornDate;
