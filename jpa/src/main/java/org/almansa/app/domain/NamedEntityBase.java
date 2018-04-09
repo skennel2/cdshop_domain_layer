@@ -1,7 +1,6 @@
 package org.almansa.app.domain;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass

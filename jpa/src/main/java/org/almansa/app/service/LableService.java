@@ -3,9 +3,7 @@ package org.almansa.app.service;
 import java.util.List;
 
 import org.almansa.app.domain.album.Lable;
-import org.springframework.stereotype.Service;
 
-@Service
 public interface LableService {
 
 	void addLable(Lable lable);

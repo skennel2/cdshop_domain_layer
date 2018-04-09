@@ -1,9 +1,16 @@
 package org.almansa.app.domain;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.lang.NonNull;
 
 @MappedSuperclass
@@ -14,6 +21,11 @@ public abstract class EntityBase implements Entity<Long> {
 	@NonNull
 	private Long id;
 
+	@CreatedDate
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "creation_date")
+	private Date creationDate;
+
 	public Long getId() {
 		return id;
 	}
@@ -22,8 +34,21 @@ public abstract class EntityBase implements Entity<Long> {
 		this.id = id;
 	}
 
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
 	public boolean isNew() {
 		return id == null;
+	}
+
+	@PrePersist
+	void onCreate() {
+		this.setCreationDate(new Date());
 	}
 
 	@Override

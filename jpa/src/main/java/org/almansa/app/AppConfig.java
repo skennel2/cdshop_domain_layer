@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -17,6 +18,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configurable
+@ComponentScan(basePackages = { "com.almansa.app", "com.almansa.app.service" })
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "org.almansa.app.repository")
 public class AppConfig {
@@ -25,7 +27,7 @@ public class AppConfig {
 	public DataSource dataSource() throws ClassNotFoundException {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUrl("jdbc:h2:~/test2");
+		dataSource.setUrl("jdbc:h2:~/test6");
 		dataSource.setUsername("sa");
 
 		return dataSource;

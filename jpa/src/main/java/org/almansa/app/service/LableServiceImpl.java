@@ -7,10 +7,12 @@ import javax.transaction.Transactional;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.repository.LableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
 @Transactional
+@Service
+@Component
 public class LableServiceImpl implements LableService {
 
 	@Autowired

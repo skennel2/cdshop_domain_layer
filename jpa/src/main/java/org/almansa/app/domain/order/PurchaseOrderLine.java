@@ -4,11 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.almansa.app.domain.merchandise.MerchandiseBase;
 import org.almansa.app.domain.value.Money;
 
 @Embeddable
+@Table(name = "PUCHASE_ORDER_LINE")
 public class PurchaseOrderLine {
 
 	@ManyToOne

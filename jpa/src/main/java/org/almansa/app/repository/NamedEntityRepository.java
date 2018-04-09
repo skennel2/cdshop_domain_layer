@@ -1,11 +1,10 @@
 package org.almansa.app.repository;
 
-import java.util.List;
-
 import org.almansa.app.domain.NamedEntityBase;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 
-// public interface NamedEntityRepository <T extends NamedEntitiyBase, ID>
-// extends JpaRepository<T, ID> {
-// List<T> findByName(String name);
-// }
+@NoRepositoryBean
+public interface NamedEntityRepository<T extends NamedEntityBase, ID> extends JpaRepository<T, ID> {
+	T findByName(String name);
+}

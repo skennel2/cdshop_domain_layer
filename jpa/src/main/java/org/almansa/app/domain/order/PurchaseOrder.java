@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 
 import org.almansa.app.domain.EntityBase;
 import org.almansa.app.domain.merchandise.MerchandiseBase;
-import org.almansa.app.domain.user.User;
+import org.almansa.app.domain.user.ApplicationUser;
 import org.almansa.app.domain.value.Money;
 import org.springframework.lang.NonNull;
 
@@ -25,8 +25,8 @@ public class PurchaseOrder extends EntityBase {
 
 	@ManyToOne
 	@NonNull
-	@JoinColumn(name = "oderer_user_id")
-	private User orderer;
+	@JoinColumn(name = "odered_user_id")
+	private ApplicationUser orderer;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date orderDate;
@@ -57,11 +57,11 @@ public class PurchaseOrder extends EntityBase {
 		this.orderLines.add(orderLine);
 	}
 
-	public User getOrderer() {
+	public ApplicationUser getOrderer() {
 		return orderer;
 	}
 
-	public void setOrderer(User orderer) {
+	public void setOrderer(ApplicationUser orderer) {
 		this.orderer = orderer;
 	}
 

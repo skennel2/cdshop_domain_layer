@@ -21,7 +21,7 @@ import org.almansa.app.domain.album.SongInAlbum;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
 import org.almansa.app.domain.order.PurchaseOrder;
 import org.almansa.app.domain.order.PurchaseOrderLine;
-import org.almansa.app.domain.user.User;
+import org.almansa.app.domain.user.ApplicationUser;
 import org.almansa.app.domain.value.Money;
 import org.almansa.app.util.DateUtil;
 import org.springframework.stereotype.Repository;
@@ -149,7 +149,7 @@ public class DummyDataMaker {
 		am2.setAmountOfStock(new Long(500));
 		em.persist(am2);
 
-		User user = new User();
+		ApplicationUser user = new ApplicationUser();
 		user.setName("skennel");
 		em.persist(user);
 

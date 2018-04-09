@@ -45,6 +45,14 @@ public abstract class MerchandiseBase extends EntityBase {
 		this.amountOfStock += amount;
 	}
 
+	public void removeStock(long amount) {
+		if ((amountOfStock - amount) < 0) {
+			throw new IllegalArgumentException("stock is lack");
+		}
+
+		this.amountOfStock -= amount;
+	}
+
 	public boolean isSoldOut() {
 		return amountOfStock.longValue() == 0;
 	}

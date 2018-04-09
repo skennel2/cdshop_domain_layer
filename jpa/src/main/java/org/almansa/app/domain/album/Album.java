@@ -17,7 +17,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.almansa.app.domain.NamedEntityBase;
-import org.springframework.lang.NonNull;
 
 @Entity
 @AttributeOverride(column = @Column(name = "album_name"), name = "name")

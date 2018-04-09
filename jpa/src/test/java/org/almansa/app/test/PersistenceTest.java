@@ -21,7 +21,7 @@ import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.album.SongInAlbum;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
 import org.almansa.app.domain.order.PurchaseOrder;
-import org.almansa.app.domain.user.User;
+import org.almansa.app.domain.user.ApplicationUser;
 import org.almansa.app.domain.value.Money;
 import org.junit.Before;
 import org.junit.Test;
@@ -116,7 +116,7 @@ public class PersistenceTest {
 		albumMd2.setPrice(new Money(10000));
 		em.persist(albumMd2);
 
-		User user = new User();
+		ApplicationUser user = new ApplicationUser();
 		user.setName("skennel");
 		em.persist(user);
 

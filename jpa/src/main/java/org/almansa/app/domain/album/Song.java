@@ -12,7 +12,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.almansa.app.domain.EntityBase;
 import org.almansa.app.domain.NamedEntityBase;
 import org.almansa.app.domain.PersonBase;
 

@@ -4,9 +4,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import org.almansa.app.domain.EntityBase;
 import org.almansa.app.domain.NamedEntityBase;
-import org.springframework.lang.NonNull;
 
 /**
  * @author skennel
