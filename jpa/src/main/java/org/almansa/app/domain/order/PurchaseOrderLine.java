@@ -9,8 +9,9 @@ import javax.persistence.Table;
 import org.almansa.app.domain.merchandise.MerchandiseBase;
 import org.almansa.app.domain.value.Money;
 
+//TODO 참조무결성
 @Embeddable
-@Table(name = "PUCHASE_ORDER_LINE")
+@Table(name = "PUCHASE_ORDER_LINE") 
 public class PurchaseOrderLine {
 
     @ManyToOne

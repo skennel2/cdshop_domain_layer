@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -35,6 +36,9 @@ public class PurchaseOrder extends EntityBase {
     @CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "order_id"))
     private List<PurchaseOrderLine> orderLines = new ArrayList<PurchaseOrderLine>();
 
+    @Enumerated
+    private OrderState orderState = OrderState.Ordered;
+    
     public Money calculateTotalPrice() {
         Money money = new Money(0);
 
@@ -55,6 +59,21 @@ public class PurchaseOrder extends EntityBase {
 
     public void addOrderLine(PurchaseOrderLine orderLine) {
         this.orderLines.add(orderLine);
+    }
+    
+    //TODO OrderState
+    public void orderCancel() {
+        if(orderState == OrderState.Paid ){
+            
+        }
+    }
+    
+    public OrderState getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(OrderState orderState) {
+        this.orderState = orderState;
     }
 
     public ApplicationUser getOrderer() {
