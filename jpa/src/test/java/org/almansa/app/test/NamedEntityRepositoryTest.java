@@ -13,6 +13,7 @@ import org.almansa.app.service.LableService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -25,25 +26,25 @@ public class NamedEntityRepositoryTest {
 	@PersistenceContext
 	private EntityManager em;
 
-	// @Autowired
-	NamedEntityRepository<Lable, Long> repo;
+	//@Autowired
+	//NamedEntityRepository<Lable, Long> repo;
 
 	@Autowired
 	private LableService lableService;
 
-	// @Test
-	public void namedEntityRepositoryTest() {
-		Lable lable = new Lable();
-		lable.setCeoName("na yun su");
-		lable.setName("almansa");
-
-		em.persist(lable);
-		em.flush();
-
-		Lable find = repo.findByName("almansa");
-
-		assertEquals("almansa", find.getName());
-	}
+//	@Test
+//	public void namedEntityRepositoryTest() {
+//		Lable lable = new Lable();
+//		lable.setCeoName("na yun su");
+//		lable.setName("almansa");
+//
+//		em.persist(lable);
+//		em.flush();
+//
+//		Lable find = repo.findByName("almansa");
+//
+//		assertEquals("almansa", find.getName());
+//	}
 
 	@Test
 	public void lableServiceTest() {
