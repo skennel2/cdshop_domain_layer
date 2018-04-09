@@ -1,8 +1,15 @@
 package org.almansa.app.repository;
 
-import org.almansa.app.domain.merchandise.AlbumMerchandise;
-import org.springframework.data.jpa.repository.JpaRepository;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
-public interface AlbumMerchandiseRepository extends JpaRepository<AlbumMerchandise, Long> {
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Transactional
+public class AlbumMerchandiseRepository {
+    @PersistenceContext
+    private EntityManager em;
 
 }

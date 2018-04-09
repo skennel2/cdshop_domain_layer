@@ -19,18 +19,18 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 @Transactional
 public class NamedEntityRepositoryTest {
 
-	@PersistenceContext
-	private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-	@Autowired
-	private LableService lableService;
+    @Autowired
+    private LableService lableService;
 
-	@Test
-	public void lableServiceTest() {
-		Lable lable = new Lable();
-		lable.setCeoName("na yun su");
-		lable.setName("almansa");
+    @Test
+    public void lableServiceTest() {
+        Lable lable = new Lable();
+        lable.setCeoName("na yun su");
+        lable.setName("almansa");
 
-		lableService.addLable(lable);
-	}
+        lableService.addLable(lable);
+    }
 }

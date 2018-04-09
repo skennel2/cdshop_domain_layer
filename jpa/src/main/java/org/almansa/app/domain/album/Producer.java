@@ -13,31 +13,31 @@ import org.almansa.app.domain.PersonBase;
 @DiscriminatorValue(value = "Producer")
 public class Producer extends PersonBase {
 
-	@ManyToOne()
-	@JoinColumn(name = "agency_company_id")
-	private Lable lable;
+    @ManyToOne()
+    @JoinColumn(name = "agency_company_id")
+    private Lable lable;
 
-	@Enumerated(EnumType.STRING)
-	public ProducerRole role;
+    @Enumerated(EnumType.STRING)
+    public ProducerRole role;
 
-	public Lable getLable() {
-		return lable;
-	}
+    public Lable getLable() {
+        return lable;
+    }
 
-	public void setLable(Lable lable) {
-		this.lable = lable;
-	}
+    public void setLable(Lable lable) {
+        this.lable = lable;
+    }
 
-	public ProducerRole getRole() {
-		return role;
-	}
+    public ProducerRole getRole() {
+        return role;
+    }
 
-	public void setRole(ProducerRole role) {
-		this.role = role;
-	}
+    public void setRole(ProducerRole role) {
+        this.role = role;
+    }
 
-	@Override
-	public String toString() {
-		return super.toString() + " Producer [lable=" + lable + "]";
-	}
+    @Override
+    public String toString() {
+        return super.toString() + " Producer [lable=" + lable + "]";
+    }
 }

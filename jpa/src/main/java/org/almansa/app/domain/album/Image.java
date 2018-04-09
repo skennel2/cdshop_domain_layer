@@ -10,25 +10,25 @@ import org.almansa.app.domain.EntityBase;
 @Table(name = "IMAGE")
 public class Image extends EntityBase {
 
-	@Column
-	private String accessPath;
+    @Column
+    private String accessPath;
 
-	@Column
-	private String description;
+    @Column
+    private String description;
 
-	public String getAccessPath() {
-		return accessPath;
-	}
+    public String getAccessPath() {
+        return accessPath;
+    }
 
-	public void setAccessPath(String accessPath) {
-		this.accessPath = accessPath;
-	}
+    public void setAccessPath(String accessPath) {
+        this.accessPath = accessPath;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

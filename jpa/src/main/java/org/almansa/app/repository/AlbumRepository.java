@@ -6,5 +6,5 @@ import org.almansa.app.domain.album.Album;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AlbumRepository extends JpaRepository<Album, Long> {
-	List<Album> findByName(String name);
+    List<Album> findByName(String name);
 }

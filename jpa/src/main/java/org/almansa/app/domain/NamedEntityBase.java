@@ -5,20 +5,20 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class NamedEntityBase extends EntityBase implements INamed {
-	@Column(name = "name", length = 50, nullable = false)
-	private String name;
+    @Column(name = "name", length = 50, nullable = false)
+    private String name;
 
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Override
-	public String toString() {
-		return "NamedEntitiyBase [name=" + name + "]";
-	}
+    @Override
+    public String toString() {
+        return "NamedEntitiyBase [name=" + name + "]";
+    }
 }

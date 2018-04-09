@@ -13,37 +13,37 @@ import org.almansa.app.domain.value.Money;
 @Table(name = "PUCHASE_ORDER_LINE")
 public class PurchaseOrderLine {
 
-	@ManyToOne
-	@JoinColumn(name = "merchandise_id")
-	private MerchandiseBase merchandise;
+    @ManyToOne
+    @JoinColumn(name = "merchandise_id")
+    private MerchandiseBase merchandise;
 
-	@Column(name = "product_quantity")
-	private int quantity;
+    @Column(name = "product_quantity")
+    private int quantity;
 
-	public MerchandiseBase getMerchandise() {
-		return merchandise;
-	}
+    public MerchandiseBase getMerchandise() {
+        return merchandise;
+    }
 
-	public Money calculateTotalPrice() {
-		Long amount = merchandise.getPrice().getAmount().longValue() * quantity;
+    public Money calculateTotalPrice() {
+        Long amount = merchandise.getPrice().getAmount().longValue() * quantity;
 
-		return new Money(amount);
-	}
+        return new Money(amount);
+    }
 
-	public void setMerchandise(MerchandiseBase merchandise) {
-		this.merchandise = merchandise;
-	}
+    public void setMerchandise(MerchandiseBase merchandise) {
+        this.merchandise = merchandise;
+    }
 
-	public int getQuantity() {
-		return quantity;
-	}
+    public int getQuantity() {
+        return quantity;
+    }
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-	@Override
-	public String toString() {
-		return "PurchaseOrderLine [merchandise=" + merchandise + ", quantity=" + quantity + "]";
-	}
+    @Override
+    public String toString() {
+        return "PurchaseOrderLine [merchandise=" + merchandise + ", quantity=" + quantity + "]";
+    }
 }

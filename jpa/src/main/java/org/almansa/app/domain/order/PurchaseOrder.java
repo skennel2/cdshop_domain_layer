@@ -23,66 +23,66 @@ import org.springframework.lang.NonNull;
 @Table(name = "PURCHASE_ORDER")
 public class PurchaseOrder extends EntityBase {
 
-	@ManyToOne
-	@NonNull
-	@JoinColumn(name = "odered_user_id")
-	private ApplicationUser orderer;
+    @ManyToOne
+    @NonNull
+    @JoinColumn(name = "odered_user_id")
+    private ApplicationUser orderer;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date orderDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date orderDate;
 
-	@ElementCollection
-	@CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "order_id"))
-	private List<PurchaseOrderLine> orderLines = new ArrayList<PurchaseOrderLine>();
+    @ElementCollection
+    @CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "order_id"))
+    private List<PurchaseOrderLine> orderLines = new ArrayList<PurchaseOrderLine>();
 
-	public Money calculateTotalPrice() {
-		Money money = new Money(0);
+    public Money calculateTotalPrice() {
+        Money money = new Money(0);
 
-		for (PurchaseOrderLine orderLine : orderLines) {
-			money = money.add(orderLine.calculateTotalPrice());
-		}
+        for (PurchaseOrderLine orderLine : orderLines) {
+            money = money.add(orderLine.calculateTotalPrice());
+        }
 
-		return money;
-	}
+        return money;
+    }
 
-	public void addOrderLine(MerchandiseBase merchandise, int quantity) {
-		PurchaseOrderLine orderLine = new PurchaseOrderLine();
-		orderLine.setMerchandise(merchandise);
-		orderLine.setQuantity(quantity);
+    public void addOrderLine(MerchandiseBase merchandise, int quantity) {
+        PurchaseOrderLine orderLine = new PurchaseOrderLine();
+        orderLine.setMerchandise(merchandise);
+        orderLine.setQuantity(quantity);
 
-		addOrderLine(orderLine);
-	}
+        addOrderLine(orderLine);
+    }
 
-	public void addOrderLine(PurchaseOrderLine orderLine) {
-		this.orderLines.add(orderLine);
-	}
+    public void addOrderLine(PurchaseOrderLine orderLine) {
+        this.orderLines.add(orderLine);
+    }
 
-	public ApplicationUser getOrderer() {
-		return orderer;
-	}
+    public ApplicationUser getOrderer() {
+        return orderer;
+    }
 
-	public void setOrderer(ApplicationUser orderer) {
-		this.orderer = orderer;
-	}
+    public void setOrderer(ApplicationUser orderer) {
+        this.orderer = orderer;
+    }
 
-	public Date getOrderDate() {
-		return orderDate;
-	}
+    public Date getOrderDate() {
+        return orderDate;
+    }
 
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
-	}
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
 
-	public List<PurchaseOrderLine> getOrderLines() {
-		return orderLines;
-	}
+    public List<PurchaseOrderLine> getOrderLines() {
+        return orderLines;
+    }
 
-	public void setOrderLines(List<PurchaseOrderLine> orderLines) {
-		this.orderLines = orderLines;
-	}
+    public void setOrderLines(List<PurchaseOrderLine> orderLines) {
+        this.orderLines = orderLines;
+    }
 
-	@Override
-	public String toString() {
-		return "PurchaseOrder [orderer=" + orderer + ", orderDate=" + orderDate + ", OrderLines=" + orderLines + "]";
-	}
+    @Override
+    public String toString() {
+        return "PurchaseOrder [orderer=" + orderer + ", orderDate=" + orderDate + ", OrderLines=" + orderLines + "]";
+    }
 }

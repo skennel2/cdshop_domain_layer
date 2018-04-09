@@ -14,19 +14,19 @@ import org.almansa.app.domain.NamedEntityBase;
 @AttributeOverride(name = "name", column = @Column(name = "lable_name"))
 public class Lable extends NamedEntityBase {
 
-	@Column(name = "ceo_name")
-	private String ceoName;
+    @Column(name = "ceo_name")
+    private String ceoName;
 
-	public String getCeoName() {
-		return ceoName;
-	}
+    public String getCeoName() {
+        return ceoName;
+    }
 
-	public void setCeoName(String ceoName) {
-		this.ceoName = ceoName;
-	}
+    public void setCeoName(String ceoName) {
+        this.ceoName = ceoName;
+    }
 
-	@Override
-	public String toString() {
-		return "Lable [ceoName=" + ceoName + "]";
-	}
+    @Override
+    public String toString() {
+        return "Lable [ceoName=" + ceoName + "]";
+    }
 }

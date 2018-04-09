@@ -22,71 +22,71 @@ import org.almansa.app.domain.NamedEntityBase;
 @AttributeOverride(column = @Column(name = "album_name"), name = "name")
 public class Album extends NamedEntityBase {
 
-	@ManyToOne
-	@JoinColumn(name = "album_artist_id")
-	private Artist albumArtist;
+    @ManyToOne
+    @JoinColumn(name = "album_artist_id")
+    private Artist albumArtist;
 
-	@Temporal(TemporalType.DATE)
-	private Date releaseDate;
+    @Temporal(TemporalType.DATE)
+    private Date releaseDate;
 
-	@ElementCollection
-	@CollectionTable(name = "song_in_album", joinColumns = @JoinColumn(name = "song_in_album_id"))
-	private List<SongInAlbum> songs = new ArrayList<SongInAlbum>();
+    @ElementCollection
+    @CollectionTable(name = "song_in_album", joinColumns = @JoinColumn(name = "song_in_album_id"))
+    private List<SongInAlbum> songs = new ArrayList<SongInAlbum>();
 
-	@ElementCollection
-	@CollectionTable(name = "album_tag", joinColumns = @JoinColumn(name = "album_tag_id"))
-	private List<CategoryTag> tags = new ArrayList<CategoryTag>();
+    @ElementCollection
+    @CollectionTable(name = "album_tag", joinColumns = @JoinColumn(name = "album_tag_id"))
+    private List<CategoryTag> tags = new ArrayList<CategoryTag>();
 
-	@Enumerated(EnumType.STRING)
-	private AlbumType albumType;
+    @Enumerated(EnumType.STRING)
+    private AlbumType albumType;
 
-	public Artist getAlbumArtist() {
-		return albumArtist;
-	}
+    public Artist getAlbumArtist() {
+        return albumArtist;
+    }
 
-	public void setAlbumArtist(Artist albumArtist) {
-		this.albumArtist = albumArtist;
-	}
+    public void setAlbumArtist(Artist albumArtist) {
+        this.albumArtist = albumArtist;
+    }
 
-	public Date getReleaseDate() {
-		return releaseDate;
-	}
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
 
-	public void setReleaseDate(Date releaseDate) {
-		this.releaseDate = releaseDate;
-	}
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
 
-	public List<SongInAlbum> getSongs() {
-		return songs;
-	}
+    public List<SongInAlbum> getSongs() {
+        return songs;
+    }
 
-	public void setSongs(List<SongInAlbum> songs) {
-		this.songs = songs;
-	}
+    public void setSongs(List<SongInAlbum> songs) {
+        this.songs = songs;
+    }
 
-	public AlbumType getAlbumType() {
-		return albumType;
-	}
+    public AlbumType getAlbumType() {
+        return albumType;
+    }
 
-	public void setAlbumType(AlbumType albumType) {
-		this.albumType = albumType;
-	}
+    public void setAlbumType(AlbumType albumType) {
+        this.albumType = albumType;
+    }
 
-	public List<CategoryTag> getTags() {
-		return tags;
-	}
+    public List<CategoryTag> getTags() {
+        return tags;
+    }
 
-	public void setTags(List<CategoryTag> tags) {
-		this.tags = tags;
-	}
+    public void setTags(List<CategoryTag> tags) {
+        this.tags = tags;
+    }
 
-	public void addCategory(CategoryTag tag) {
-		tags.add(tag);
-	}
+    public void addCategory(CategoryTag tag) {
+        tags.add(tag);
+    }
 
-	@Override
-	public String toString() {
-		return "Album [albumArtist=" + albumArtist + ", releaseDate=" + releaseDate + ", songs=" + songs + ", tags="
-				+ tags + ", albumType=" + albumType + "]";
-	}
+    @Override
+    public String toString() {
+        return "Album [albumArtist=" + albumArtist + ", releaseDate=" + releaseDate + ", songs=" + songs + ", tags="
+                + tags + ", albumType=" + albumType + "]";
+    }
 }

@@ -18,42 +18,42 @@ import org.almansa.app.domain.value.Money;
 @Table(name = "Merchandise")
 public abstract class MerchandiseBase extends EntityBase {
 
-	@Column(name = "amount_of_stock")
-	private Long amountOfStock = Long.valueOf(0);
+    @Column(name = "amount_of_stock")
+    private Long amountOfStock = Long.valueOf(0);
 
-	@Embedded
-	@AttributeOverride(name = "amount", column = @Column(name = "price"))
-	private Money price;
+    @Embedded
+    @AttributeOverride(name = "amount", column = @Column(name = "price"))
+    private Money price;
 
-	public Long getAmountOfStock() {
-		return amountOfStock;
-	}
+    public Long getAmountOfStock() {
+        return amountOfStock;
+    }
 
-	public void setAmountOfStock(Long amountOfStock) {
-		this.amountOfStock = amountOfStock;
-	}
+    public void setAmountOfStock(Long amountOfStock) {
+        this.amountOfStock = amountOfStock;
+    }
 
-	public Money getPrice() {
-		return price;
-	}
+    public Money getPrice() {
+        return price;
+    }
 
-	public void setPrice(Money price) {
-		this.price = price;
-	}
+    public void setPrice(Money price) {
+        this.price = price;
+    }
 
-	public void addStock(long amount) {
-		this.amountOfStock += amount;
-	}
+    public void addStock(long amount) {
+        this.amountOfStock += amount;
+    }
 
-	public void removeStock(long amount) {
-		if ((amountOfStock - amount) < 0) {
-			throw new IllegalArgumentException("stock is lack");
-		}
+    public void removeStock(long amount) {
+        if ((amountOfStock - amount) < 0) {
+            throw new IllegalArgumentException("stock is lack");
+        }
 
-		this.amountOfStock -= amount;
-	}
+        this.amountOfStock -= amount;
+    }
 
-	public boolean isSoldOut() {
-		return amountOfStock.longValue() == 0;
-	}
+    public boolean isSoldOut() {
+        return amountOfStock.longValue() == 0;
+    }
 }

@@ -20,27 +20,27 @@ import javax.persistence.TemporalType;
 @AttributeOverride(column = @Column(name = "artist_name"), name = "name") // 슈퍼클래스의 name 속성을 artist_name으로 재정의
 public abstract class PersonBase extends NamedEntityBase {
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "born_date")
-	private Date bornDate;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "born_date")
+    private Date bornDate;
 
-	public Date getBornDate() {
-		return bornDate;
-	}
+    public Date getBornDate() {
+        return bornDate;
+    }
 
-	public void setBornDate(Date bornDate) {
-		this.bornDate = bornDate;
-	}
+    public void setBornDate(Date bornDate) {
+        this.bornDate = bornDate;
+    }
 
-	public void setBornDate(int year, int month, int date) {
-		Calendar cal = Calendar.getInstance();
-		cal.set(year, month + 1, date);
+    public void setBornDate(int year, int month, int date) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month + 1, date);
 
-		this.bornDate = cal.getTime();
-	}
+        this.bornDate = cal.getTime();
+    }
 
-	@Override
-	public String toString() {
-		return "PersonBase [bornDate=" + bornDate + "]";
-	}
+    @Override
+    public String toString() {
+        return "PersonBase [bornDate=" + bornDate + "]";
+    }
 }
