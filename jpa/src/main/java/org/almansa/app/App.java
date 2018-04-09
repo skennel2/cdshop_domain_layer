@@ -4,6 +4,7 @@ import org.almansa.app.domain.album.Lable;
 import org.almansa.app.repository.DummyDataMaker;
 import org.almansa.app.service.LableService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 public class App {
 
