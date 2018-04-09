@@ -19,30 +19,30 @@ import org.springframework.lang.NonNull;
 @Table(name = "PERSON")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
-@AttributeOverride(column = @Column(name = "artist_name"), name = "name")
-public abstract class PersonBase extends NamedEntitiyBase {
-	
-    @Temporal(TemporalType.DATE)
-    @Column(name = "born_date")
-    private Date bornDate;
+@AttributeOverride(column = @Column(name = "artist_name"), name = "name") // 슈퍼클래스의 name 속성을 artist_name으로 재정의
+public abstract class PersonBase extends NamedEntityBase {
 
-    public Date getBornDate() {
-        return bornDate;
-    }
+	@Temporal(TemporalType.DATE)
+	@Column(name = "born_date")
+	private Date bornDate;
 
-    public void setBornDate(Date bornDate) {
-        this.bornDate = bornDate;
-    }
+	public Date getBornDate() {
+		return bornDate;
+	}
 
-    public void setBornDate(int year, int month, int date) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month + 1, date);
+	public void setBornDate(Date bornDate) {
+		this.bornDate = bornDate;
+	}
 
-        this.bornDate = cal.getTime();
-    }
+	public void setBornDate(int year, int month, int date) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(year, month + 1, date);
 
-    @Override
-    public String toString() {
-        return "PersonBase [bornDate=" + bornDate + "]";
-    }
+		this.bornDate = cal.getTime();
+	}
+
+	@Override
+	public String toString() {
+		return "PersonBase [bornDate=" + bornDate + "]";
+	}
 }

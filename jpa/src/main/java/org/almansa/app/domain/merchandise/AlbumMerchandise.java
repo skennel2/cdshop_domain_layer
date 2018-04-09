@@ -12,14 +12,14 @@ import org.almansa.app.domain.album.Album;
 @DiscriminatorValue(value = "Album")
 public class AlbumMerchandise extends MerchandiseBase {
 
-    @OneToOne
-    private Album album;
+	@OneToOne
+	private Album album;
 
-    public Album getAlbum() {
-        return album;
-    }
+	public Album getAlbum() {
+		return album;
+	}
 
-    public void setAlbum(Album album) {
-        this.album = album;
-    }
+	public void setAlbum(Album album) {
+		this.album = album;
+	}
 }

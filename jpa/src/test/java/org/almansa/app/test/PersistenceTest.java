@@ -34,108 +34,108 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @Transactional
 public class PersistenceTest {
 
-    @PersistenceContext
-    private EntityManager em;
+	@PersistenceContext
+	private EntityManager em;
 
-    @Before
-    public void makeDummies() {
-        Lable illionaire = new Lable();
-        illionaire.changeName("Illionaire");
-        em.persist(illionaire);
+	@Before
+	public void makeDummies() {
+		Lable illionaire = new Lable();
+		illionaire.setName("Illionaire");
+		em.persist(illionaire);
 
-        Artist theQ = new Artist();
-        theQ.setName("the quiett");
-        theQ.changeLable(illionaire);
-        theQ.setBornDate(1996, 1, 3);
-        em.persist(theQ);
+		Artist theQ = new Artist();
+		theQ.setName("the quiett");
+		theQ.changeLable(illionaire);
+		theQ.setBornDate(1996, 1, 3);
+		em.persist(theQ);
 
-        Song song1 = new Song();
-        song1.setName("song1");
-        song1.setOwnerArtist(theQ);
-        em.persist(song1);
+		Song song1 = new Song();
+		song1.setName("song1");
+		song1.setOwnerArtist(theQ);
+		em.persist(song1);
 
-        Song song2 = new Song();
-        song2.setName("song2");
-        song2.setOwnerArtist(theQ);
-        em.persist(song2);
+		Song song2 = new Song();
+		song2.setName("song2");
+		song2.setOwnerArtist(theQ);
+		em.persist(song2);
 
-        Album album = new Album();
-        album.setAlbumArtist(theQ);
-        album.setAlbumType(AlbumType.LP);
-        album.setName("Q Train");
+		Album album = new Album();
+		album.setAlbumArtist(theQ);
+		album.setAlbumType(AlbumType.LP);
+		album.setName("Q Train");
 
-        List<SongInAlbum> songList = new ArrayList<SongInAlbum>();
-        songList.add(new SongInAlbum(album, song1, 1, false));
-        songList.add(new SongInAlbum(album, song2, 2, false));
-        album.setSongs(songList);
-        em.persist(album);
+		List<SongInAlbum> songList = new ArrayList<SongInAlbum>();
+		songList.add(new SongInAlbum(album, song1, 1, false));
+		songList.add(new SongInAlbum(album, song2, 2, false));
+		album.setSongs(songList);
+		em.persist(album);
 
-        Album album2 = new Album();
-        album2.setAlbumArtist(theQ);
-        album2.setAlbumType(AlbumType.LP);
-        album2.setName("Millionaire Poetry");
-        em.persist(album2);
+		Album album2 = new Album();
+		album2.setAlbumArtist(theQ);
+		album2.setAlbumType(AlbumType.LP);
+		album2.setName("Millionaire Poetry");
+		em.persist(album2);
 
-        em.flush();
-    }
+		em.flush();
+	}
 
-    @Test
-    public void persistAndFindTest() {
-        Album album = new Album();
-        album.setName("illmatic");
-        album.setAlbumType(AlbumType.LP);
+	@Test
+	public void persistAndFindTest() {
+		Album album = new Album();
+		album.setName("illmatic");
+		album.setAlbumType(AlbumType.LP);
 
-        em.persist(album);
-        em.flush();
+		em.persist(album);
+		em.flush();
 
-        Album albumFind = em.find(Album.class, album.getId());
+		Album albumFind = em.find(Album.class, album.getId());
 
-        boolean isEquals = album.equals(albumFind);
-        assertEquals(true, isEquals);
-        assertEquals("illmatic", albumFind.getName());
-    }
+		boolean isEquals = album.equals(albumFind);
+		assertEquals(true, isEquals);
+		assertEquals("illmatic", albumFind.getName());
+	}
 
-    @Test
-    public void OrderPersistAndDomainTest() {
-        TypedQuery<Album> q = em.createQuery("SELECT A FROM Album A WHERE A.name = :name", Album.class);
-        q.setParameter("name", "Q Train");
+	@Test
+	public void OrderPersistAndDomainTest() {
+		TypedQuery<Album> q = em.createQuery("SELECT A FROM Album A WHERE A.name = :name", Album.class);
+		q.setParameter("name", "Q Train");
 
-        Album album = q.getSingleResult();
-        AlbumMerchandise albumMd1 = new AlbumMerchandise();
-        albumMd1.setAlbum(album);
-        albumMd1.setAmountOfStock(new Long(200));
-        albumMd1.setPrice(new Money(25000));
-        em.persist(albumMd1);
+		Album album = q.getSingleResult();
+		AlbumMerchandise albumMd1 = new AlbumMerchandise();
+		albumMd1.setAlbum(album);
+		albumMd1.setAmountOfStock(new Long(200));
+		albumMd1.setPrice(new Money(25000));
+		em.persist(albumMd1);
 
-        q.setParameter("name", "Millionaire Poetry");
+		q.setParameter("name", "Millionaire Poetry");
 
-        Album album2 = q.getSingleResult();
-        AlbumMerchandise albumMd2 = new AlbumMerchandise();
-        albumMd2.setAlbum(album2);
-        albumMd2.setAmountOfStock(new Long(200));
-        albumMd2.setPrice(new Money(10000));
-        em.persist(albumMd2);
+		Album album2 = q.getSingleResult();
+		AlbumMerchandise albumMd2 = new AlbumMerchandise();
+		albumMd2.setAlbum(album2);
+		albumMd2.setAmountOfStock(new Long(200));
+		albumMd2.setPrice(new Money(10000));
+		em.persist(albumMd2);
 
-        User user = new User();
-        user.setName("skennel");
-        em.persist(user);
+		User user = new User();
+		user.setName("skennel");
+		em.persist(user);
 
-        if (album != null) {
-            PurchaseOrder newOrder = new PurchaseOrder();
-            newOrder.addOrderLine(albumMd1, 10);
-            newOrder.setOrderer(user);
-            newOrder.setOrderDate(new Date());
-            em.persist(newOrder);
+		if (album != null) {
+			PurchaseOrder newOrder = new PurchaseOrder();
+			newOrder.addOrderLine(albumMd1, 10);
+			newOrder.setOrderer(user);
+			newOrder.setOrderDate(new Date());
+			em.persist(newOrder);
 
-            assertEquals(newOrder.calculateTotalPrice(), new Money(250000));
+			assertEquals(newOrder.calculateTotalPrice(), new Money(250000));
 
-            newOrder.addOrderLine(albumMd2, 5);
-            newOrder.setOrderer(user);
-            newOrder.setOrderDate(new Date());
+			newOrder.addOrderLine(albumMd2, 5);
+			newOrder.setOrderer(user);
+			newOrder.setOrderDate(new Date());
 
-            assertEquals(newOrder.calculateTotalPrice(), new Money(300000));
-        } else {
-            fail("album not found");
-        }
-    }
+			assertEquals(newOrder.calculateTotalPrice(), new Money(300000));
+		} else {
+			fail("album not found");
+		}
+	}
 }

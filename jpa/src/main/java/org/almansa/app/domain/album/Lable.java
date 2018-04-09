@@ -1,9 +1,11 @@
 package org.almansa.app.domain.album;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import org.almansa.app.domain.EntityBase;
+import org.almansa.app.domain.NamedEntityBase;
 import org.springframework.lang.NonNull;
 
 /**
@@ -11,33 +13,22 @@ import org.springframework.lang.NonNull;
  *
  */
 @Entity
-public class Lable extends EntityBase {
+@AttributeOverride(name = "name", column = @Column(name = "lable_name"))
+public class Lable extends NamedEntityBase {
 
-    @NonNull
-    @Column(name = "lable_name")
-    private String name;
+	@Column(name = "ceo_name")
+	private String ceoName;
 
-    @Column(name = "ceo_name")
-    private String ceoName;
+	public String getCeoName() {
+		return ceoName;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setCeoName(String ceoName) {
+		this.ceoName = ceoName;
+	}
 
-    public void changeName(String name) {
-        this.name = name;
-    }
-
-    public String getCeoName() {
-        return ceoName;
-    }
-
-    public void setCeoName(String ceoName) {
-        this.ceoName = ceoName;
-    }
-
-    @Override
-    public String toString() {
-        return "Lable [name=" + name + ", ceoName=" + ceoName + "]";
-    }
+	@Override
+	public String toString() {
+		return "Lable [ceoName=" + ceoName + "]";
+	}
 }

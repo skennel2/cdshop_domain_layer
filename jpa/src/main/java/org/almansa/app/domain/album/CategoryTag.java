@@ -10,32 +10,32 @@ import javax.persistence.TemporalType;
 
 @Embeddable
 @Table(name = "CATEGORY_TAG")
-public class CategoryTag {// extends EntityBase {
+public class CategoryTag {
 
-    @Column(name = "category_name")
-    private String name;
+	@Column(name = "category_name")
+	private String name;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creationDate;
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
+	public Date getCreationDate() {
+		return creationDate;
+	}
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 
-    @Override
-    public String toString() {
-        return "CategoryTag [name=" + name + ", creationDate=" + creationDate + "]";
-    }
+	@Override
+	public String toString() {
+		return "CategoryTag [name=" + name + ", creationDate=" + creationDate + "]";
+	}
 }

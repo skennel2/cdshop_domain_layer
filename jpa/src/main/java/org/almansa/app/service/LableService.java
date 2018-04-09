@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service;
 @Service
 public interface LableService {
 
-    void addLable(Lable lable);
+	void addLable(Lable lable);
 
-    void addLable(String lableName);
+	void addLable(String lableName);
 
-    List<Lable> getByName(String name);
+	List<Lable> getByName(String name);
 
-    List<Lable> getByCeoName(String ceoName);
+	List<Lable> getByCeoName(String ceoName);
 
-    Lable getById(Long id);
+	Lable getById(Long id);
 
-    void delete(Long id);
+	void delete(Long id);
 
 }

@@ -11,20 +11,20 @@ import org.almansa.app.domain.PersonBase;
 @DiscriminatorValue(value = "Artist")
 public class Artist extends PersonBase {
 
-    @ManyToOne
-    @JoinColumn(name = "agency_company_id")
-    private Lable lable;
+	@ManyToOne
+	@JoinColumn(name = "agency_company_id")
+	private Lable lable;
 
-    public Lable getLable() {
-        return lable;
-    }
+	public Lable getLable() {
+		return lable;
+	}
 
-    public void changeLable(Lable lable) {
-        this.lable = lable;
-    }
+	public void changeLable(Lable lable) {
+		this.lable = lable;
+	}
 
-    @Override
-    public String toString() {
-        return "Artist [lable=" + lable + "]";
-    }
+	@Override
+	public String toString() {
+		return "Artist [lable=" + lable + "]";
+	}
 }
