@@ -4,7 +4,6 @@ import org.almansa.app.domain.album.Lable;
 import org.almansa.app.repository.DummyDataMaker;
 import org.almansa.app.service.LableService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 
 public class App {
 
@@ -12,7 +11,6 @@ public class App {
 		AnnotationConfigApplicationContext context = null;
 		try {
 			context = new AnnotationConfigApplicationContext(AppConfig.class);
-			//context.scan("org.almansa.app.*");
 
 			makeDummies(context.getBean(DummyDataMaker.class));
 
@@ -20,7 +18,7 @@ public class App {
 			Lable lable = new Lable();
 			lable.setCeoName("na yun su");
 			lable.setName("almansa");
-			
+
 			service.addLable(lable);
 
 		} catch (Exception ex) {

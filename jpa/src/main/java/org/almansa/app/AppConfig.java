@@ -17,7 +17,6 @@ import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcesso
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
 @ComponentScan(basePackages = { "org.almansa.app" })
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "org.almansa.app.repository")
