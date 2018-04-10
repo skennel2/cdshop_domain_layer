@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @Transactional
 public class AlbumMerchandiseRepository {
     @PersistenceContext
-    private EntityManager em;   
+    private EntityManager em;
 }

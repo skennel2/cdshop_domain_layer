@@ -9,9 +9,9 @@ import javax.persistence.Table;
 import org.almansa.app.domain.merchandise.MerchandiseBase;
 import org.almansa.app.domain.value.Money;
 
-//TODO ÂüÁ¶¹«°á¼º
+//TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¼º
 @Embeddable
-@Table(name = "PUCHASE_ORDER_LINE") 
+@Table(name = "PUCHASE_ORDER_LINE")
 public class PurchaseOrderLine {
 
     @ManyToOne

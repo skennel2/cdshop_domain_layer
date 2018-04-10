@@ -86,6 +86,8 @@ public class Album extends NamedEntityBase {
 
     @Override
     public String toString() {
+        // TODO StackOverflowError Occured
+
         return "Album [albumArtist=" + albumArtist + ", releaseDate=" + releaseDate + ", songs=" + songs + ", tags="
                 + tags + ", albumType=" + albumType + "]";
     }

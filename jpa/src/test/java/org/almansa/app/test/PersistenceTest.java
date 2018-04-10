@@ -99,10 +99,10 @@ public class PersistenceTest {
     public void joinQueryTest() {
         TypedQuery<Artist> query = em.createQuery(
                 "SELECT B FROM Album A INNER JOIN A.albumArtist B WHERE B.name = :aritst_name", Artist.class);
-        
+
         query.setParameter("aritst_name", "the quiett");
         Artist artist = query.getSingleResult();
-        
+
         assertEquals("the quiett", artist.getName());
         System.out.println(artist);
     }

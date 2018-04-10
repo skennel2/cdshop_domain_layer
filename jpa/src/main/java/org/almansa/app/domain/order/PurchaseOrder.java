@@ -38,7 +38,7 @@ public class PurchaseOrder extends EntityBase {
 
     @Enumerated
     private OrderState orderState = OrderState.Ordered;
-    
+
     public Money calculateTotalPrice() {
         Money money = new Money(0);
 
@@ -60,14 +60,14 @@ public class PurchaseOrder extends EntityBase {
     public void addOrderLine(PurchaseOrderLine orderLine) {
         this.orderLines.add(orderLine);
     }
-    
-    //TODO OrderState
+
+    // TODO OrderState
     public void orderCancel() {
-        if(orderState == OrderState.Paid ){
-            
+        if (orderState == OrderState.Paid) {
+
         }
     }
-    
+
     public OrderState getOrderState() {
         return orderState;
     }
