@@ -83,6 +83,17 @@ public class Album extends NamedEntityBase {
     public void addCategory(CategoryTag tag) {
         tags.add(tag);
     }
+    
+    public void addSong(Song song, int no, boolean isSingle) {
+        for (SongInAlbum songInAlbum : songs) {
+            if(songInAlbum.getNo() == no) {
+                throw new RuntimeException(); //TODO Temp Exception, for statement looks so bad
+            }
+        }
+        
+        SongInAlbum songInAlbum = new SongInAlbum(this, song, no, isSingle);
+        this.songs.add(songInAlbum);
+    }
 
     @Override
     public String toString() {

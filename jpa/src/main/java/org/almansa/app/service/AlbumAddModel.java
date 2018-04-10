@@ -37,11 +37,11 @@ public class AlbumAddModel {
         this.releaseDate = releaseDate;
     }
 
-    public List<Long> getSongId() {
+    public List<Long> getSongIds() {
         return songIds;
     }
 
-    public void setSongId(List<Long> songIds) {
+    public void setSongIds(List<Long> songIds) {
         this.songIds = songIds;
     }
 
