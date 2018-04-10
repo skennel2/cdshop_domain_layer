@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-
 import org.almansa.app.AppConfig;
 import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.album.AlbumType;
@@ -36,7 +35,7 @@ public class PersistenceTest {
 
     @PersistenceContext
     private EntityManager em;
-
+    
     @Before
     public void makeDummies() {
         Lable illionaire = new Lable();
