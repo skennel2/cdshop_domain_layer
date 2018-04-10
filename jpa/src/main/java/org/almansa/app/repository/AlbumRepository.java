@@ -22,6 +22,7 @@ public class AlbumRepository {
     }
 
     public List<Album> findAll(AlbumSearchCriteria albumSearch){
+        //TODO album search condition Implemetaion
         String jpql = "SELECT A FROM Album A ";
         TypedQuery<Album> query = em.createQuery(jpql, Album.class);
         return query.getResultList();
