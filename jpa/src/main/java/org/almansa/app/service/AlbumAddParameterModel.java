@@ -1,5 +1,6 @@
 package org.almansa.app.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,9 +14,9 @@ public class AlbumAddParameterModel {
 
     private Date releaseDate;
 
-    private List<Long> songIds;
+    private List<SongIdAndSongNo> songIds = new ArrayList<SongIdAndSongNo>();
 
-    private List<String> tag;
+    private List<String> tag = new ArrayList<String>();
 
     private AlbumType albumType;
 
@@ -43,11 +44,11 @@ public class AlbumAddParameterModel {
         this.releaseDate = releaseDate;
     }
 
-    public List<Long> getSongIds() {
+    public List<SongIdAndSongNo> getSongIds() {
         return songIds;
     }
 
-    public void setSongIds(List<Long> songIds) {
+    public void setSongIds(List<SongIdAndSongNo> songIds) {
         this.songIds = songIds;
     }
 

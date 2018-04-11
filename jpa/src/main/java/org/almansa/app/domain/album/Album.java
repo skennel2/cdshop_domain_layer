@@ -95,12 +95,4 @@ public class Album extends NamedEntityBase {
         SongInAlbum songInAlbum = new SongInAlbum(this, song, no, isSingle);
         this.songs.add(songInAlbum);
     }
-
-    @Override
-    public String toString() {
-        // TODO StackOverflowError Occured
-
-        return "Album [albumArtist=" + albumArtist + ", releaseDate=" + releaseDate + ", songs=" + songs + ", tags="
-                + tags + ", albumType=" + albumType + "]";
-    }
 }

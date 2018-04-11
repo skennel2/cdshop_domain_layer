@@ -9,7 +9,6 @@ import javax.persistence.Table;
 import org.almansa.app.domain.merchandise.MerchandiseBase;
 import org.almansa.app.domain.value.Money;
 
-//TODO �������Ἲ
 @Embeddable
 @Table(name = "PUCHASE_ORDER_LINE")
 public class PurchaseOrderLine {

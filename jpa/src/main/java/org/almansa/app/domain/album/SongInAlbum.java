@@ -2,21 +2,22 @@ package org.almansa.app.domain.album;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Embeddable
 public class SongInAlbum {
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "album_id")
     private Album album;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "song_id")
     private Song song;
 
-    @Column(name = "no", nullable = false, unique = true)
+    @Column(name = "no", nullable = false)
     private int no;
 
     @Column(name = "is_single")

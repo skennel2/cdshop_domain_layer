@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.CategoryTag;
+import org.almansa.app.domain.album.Song;
 import org.almansa.app.repository.AlbumRepository;
 import org.almansa.app.repository.ArtistRepository;
 import org.almansa.app.repository.SongRepository;
@@ -30,30 +31,40 @@ public class AlbumService {
     }
 
     @Transactional
-    public void AddAlbum(AlbumAddParameterModel addModel) {
-        Optional<Artist> artist = this.artistRepo.findById(addModel.getArtistId());
+    public void AddAlbum(AlbumAddParameterModel addParameter) {
+        Optional<Artist> artist = this.artistRepo.findById(addParameter.getArtistId());
 
-        if (!artist.isPresent()) {
-            throw new RuntimeException(); //TODO looks bad
-        }
-
-        Album newAlbum = new Album();
-        
-        CategoryTag categoryTag = null;
-        if (addModel.getTag() != null) {
-            for (String tag : addModel.getTag()) {
-                categoryTag = new CategoryTag();
-                categoryTag.setName(tag);
-                categoryTag.setCreationDate(new Date());
-                newAlbum.addCategory(categoryTag);
+        Album newAlbum = new Album();                
+                
+        for (SongIdAndSongNo songId : addParameter.getSongIds()) {                
+            Optional<Song> albumSong = this.songRepo.findById(songId.getSongId());
+            
+            if(albumSong.isPresent()) {
+                newAlbum.addSong(albumSong.get(), songId.getNo(), false);
             }
+        }
+        
+        for (String tag : addParameter.getTag()) {
+            CategoryTag categoryTag = new CategoryTag();
+            categoryTag.setName(tag);
+            categoryTag.setCreationDate(new Date());
+            newAlbum.addCategory(categoryTag);
         }
 
         newAlbum.setAlbumArtist(artist.get());
-        newAlbum.setName(addModel.getAlbumName());
-        newAlbum.setReleaseDate(addModel.getReleaseDate());
-        newAlbum.setAlbumType(addModel.getAlbumType());
+        newAlbum.setName(addParameter.getAlbumName());
+        newAlbum.setReleaseDate(addParameter.getReleaseDate());
+        newAlbum.setAlbumType(addParameter.getAlbumType());
 
         this.albumRepo.save(newAlbum);
+    }
+    
+    @Transactional
+    public void changeAlbumName(Long albumId, String newName) {
+        Album album = albumRepo.findOne(albumId);                
+        
+        if(album != null) {
+            album.setName(newName);
+        }
     }
 }
