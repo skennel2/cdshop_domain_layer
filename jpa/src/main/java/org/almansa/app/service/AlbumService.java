@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.almansa.app.domain.album.Album;
+import org.almansa.app.domain.album.AlbumBuilder;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.CategoryTag;
 import org.almansa.app.domain.album.Song;
@@ -60,8 +61,13 @@ public class AlbumService {
     public void AddAlbum(AlbumAddParameterModel addParameter) {
         Optional<Artist> artist = this.artistRepo.findById(addParameter.getArtistId());
 
-        Album newAlbum = new Album();                
-                
+        Album newAlbum = new AlbumBuilder()
+                .albumType(addParameter.getAlbumType())
+                .artist(artist.get())
+                .releaseDate(addParameter.getReleaseDate())
+                .albumName(addParameter.getAlbumName())
+                .Build();
+
         for (SongIdAndSongNo songId : addParameter.getSongIds()) {                
             Optional<Song> albumSong = this.songRepo.findById(songId.getSongId());
             
@@ -76,10 +82,10 @@ public class AlbumService {
             newAlbum.addCategory(categoryTag);
         }
 
-        newAlbum.setName(addParameter.getAlbumName());
-        newAlbum.setAlbumArtist(artist.get());
-        newAlbum.setReleaseDate(addParameter.getReleaseDate());
-        newAlbum.setAlbumType(addParameter.getAlbumType());
+//        newAlbum.setName(addParameter.getAlbumName());
+//        newAlbum.setAlbumArtist(artist.get());
+//        newAlbum.setReleaseDate(addParameter.getReleaseDate());
+//        newAlbum.setAlbumType(addParameter.getAlbumType());
 
         this.albumRepo.save(newAlbum);
     }      

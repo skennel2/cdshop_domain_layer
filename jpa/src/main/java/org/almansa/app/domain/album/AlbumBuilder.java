@@ -1,28 +1,46 @@
 package org.almansa.app.domain.album;
 
+import java.util.Date;
+
 public class AlbumBuilder {
+
+    private String albumName;
+    
     private AlbumType albumType;
+    
     private Artist albumArtist;
     
-    public AlbumBuilder lpType() {
+    private Date releaseDate;
+    
+    public AlbumBuilder albumName(String name) {
+        this.albumName= name;
+        return this;
+    }
+    
+    public AlbumBuilder thisIsLPType() {
         albumType = AlbumType.LP;
         return this;
     }
     
-    public AlbumBuilder epType() {
+    public AlbumBuilder thisIsEPType() {
         albumType = AlbumType.EP;
         return this;
     }
     
-    public AlbumBuilder setAlbumType(AlbumType albumType) {
+    public AlbumBuilder albumType(AlbumType albumType) {
         this.albumType = albumType;
         return this;
     }   
     
-    public AlbumBuilder setArtist(Artist artist) {
+    public AlbumBuilder artist(Artist artist) {
         this.albumArtist = artist;
         return this;
     }   
+    
+    public AlbumBuilder releaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+        return this;
+    }
     
     public Album Build() {
         Album album = new Album();
