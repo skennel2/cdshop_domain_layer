@@ -33,7 +33,7 @@ public class PersistenceTest {
 
     @PersistenceContext
     private EntityManager em;
-    
+
     @Before
     public void makeDummies() {
         Lable illionaire = new Lable();
@@ -56,28 +56,20 @@ public class PersistenceTest {
         song2.setOwnerArtist(theQ);
         em.persist(song2);
 
-        Album album = new AlbumBuilder()
-                .artist(theQ)
-                .thisIsLPType()
-                .name("Q Train").Build();
+        Album album = new AlbumBuilder().artist(theQ).thisIsLPType().name("Q Train").Build();
         album.addSong(song1, 1, false);
         album.addSong(song2, 2, false);
-        
+
         em.persist(album);
 
-        Album album2 = new AlbumBuilder()
-                .artist(theQ)
-                .thisIsLPType()
-                .name("Millionaire Poetry").Build();
+        Album album2 = new AlbumBuilder().artist(theQ).thisIsLPType().name("Millionaire Poetry").Build();
         em.persist(album2);
         em.flush();
     }
 
     @Test
     public void persistAndFindTest() {
-        Album album = new AlbumBuilder()
-                .name("illmatic")
-                .thisIsLPType().Build();
+        Album album = new AlbumBuilder().name("illmatic").thisIsLPType().Build();
 
         em.persist(album);
         em.flush();

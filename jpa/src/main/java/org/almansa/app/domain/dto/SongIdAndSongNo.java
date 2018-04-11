@@ -2,12 +2,12 @@ package org.almansa.app.domain.dto;
 
 import org.almansa.app.domain.Immutable;
 
-public class SongIdAndSongNo implements Immutable{
-    
+public class SongIdAndSongNo implements Immutable {
+
     private int no;
-    
+
     private Long songId;
-        
+
     public SongIdAndSongNo(int no, Long songId) {
         super();
         this.no = no;

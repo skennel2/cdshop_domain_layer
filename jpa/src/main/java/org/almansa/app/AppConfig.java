@@ -40,7 +40,7 @@ public class AppConfig {
 
         return jtm;
     }
-    
+
     @Bean
     public PersistenceAnnotationBeanPostProcessor persistenceAnnotationBeanPostProcessor() {
         return new PersistenceAnnotationBeanPostProcessor();

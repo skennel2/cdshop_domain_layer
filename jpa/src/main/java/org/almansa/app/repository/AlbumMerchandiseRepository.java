@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Transactional
-public interface AlbumMerchandiseRepository extends JpaRepository<AlbumMerchandise, Long>{
+public interface AlbumMerchandiseRepository extends JpaRepository<AlbumMerchandise, Long> {
 }

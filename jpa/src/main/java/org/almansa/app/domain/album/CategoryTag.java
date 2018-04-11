@@ -10,7 +10,7 @@ public class CategoryTag {
 
     @Column(name = "category_name")
     private String name;
-    
+
     public String getName() {
         return name;
     }

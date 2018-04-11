@@ -5,7 +5,7 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class NamedEntityBase extends EntityBase implements INamed {
-    
+
     public NamedEntityBase(String name) {
         super();
         this.name = name;

@@ -64,22 +64,14 @@ public class AlbumServiceTest {
         song2.setOwnerArtist(theQ);
         em.persist(song2);
 
-        Album album = new AlbumBuilder()
-                .artist(theQ)
-                .thisIsLPType()
-                .name("Q Train")
-                .releaseDate(DateUtil.toDate(2017, 1, 1))
-                .Build(); 
-        
-        album.addSong(song1, 1, false); //TODO Builder 
+        Album album = new AlbumBuilder().artist(theQ).thisIsLPType().name("Q Train")
+                .releaseDate(DateUtil.toDate(2017, 1, 1)).Build();
+
+        album.addSong(song1, 1, false); // TODO Builder
         album.addSong(song2, 2, false);
         em.persist(album);
 
-        Album album2 = new AlbumBuilder()
-                .artist(theQ)
-                .thisIsLPType()
-                .name("Millionaire Poetry")
-                .Build();
+        Album album2 = new AlbumBuilder().artist(theQ).thisIsLPType().name("Millionaire Poetry").Build();
         em.persist(album2);
 
         em.flush();
@@ -97,7 +89,7 @@ public class AlbumServiceTest {
         albumAddPamareters.getSongIds().add(new SongIdAndSongNo(2, getSongByName("song2").getId()));
         albumAddPamareters.getTag().add("category1");
         albumAddPamareters.getTag().add("category2");
-        
+
         albumService.AddAlbum(albumAddPamareters);
 
         // get
@@ -122,14 +114,14 @@ public class AlbumServiceTest {
         System.out.println(vm);
         assertEquals("Q Train", vm.getAlbumName());
     }
-    
+
     @Test
     public void albumNameChangeTest() {
         Album album = getAlbumByName("Q Train");
         albumService.changeAlbumName(album.getId(), "Q Train2");
-        
+
         em.flush();
-        
+
         Album albumGet = getAlbumByName("Q Train2");
         assertEquals("Q Train2", albumGet.getName());
     }
@@ -137,20 +129,20 @@ public class AlbumServiceTest {
     @Test
     public void albumTagAddTest() {
         Album album = getAlbumByName("Q Train");
-        
-        List<String> newTags = new ArrayList<String>(); 
+
+        List<String> newTags = new ArrayList<String>();
         newTags.add("c1");
         newTags.add("c2");
         albumService.addTagToAlbum(album.getId(), newTags);
-        
+
         em.flush();
-        
+
         Album albumGet = getAlbumByName("Q Train");
         for (CategoryTag tag : albumGet.getTags()) {
             System.out.println(tag);
         }
     }
-    
+
     private Album getAlbumByName(String name) {
         TypedQuery<Album> queryForAlbum = em.createQuery("SELECT A FROM Album A WHERE A.name = :album_name",
                 Album.class);

@@ -22,22 +22,22 @@ public class AlbumBuilder {
         this.songs.add(song);
         return this;
     }
-    
+
     public AlbumBuilder addTag(CategoryTag tag) {
         this.tags.add(tag);
         return this;
     }
-    
+
     public AlbumBuilder songs(List<SongInAlbum> songs) {
-        this.songs=songs;
+        this.songs = songs;
         return this;
     }
-    
+
     public AlbumBuilder tags(List<CategoryTag> tags) {
         this.tags = tags;
         return this;
     }
-    
+
     public AlbumBuilder albumName(String name) {
         this.albumName = name;
         return this;
@@ -67,7 +67,7 @@ public class AlbumBuilder {
         this.releaseDate = releaseDate;
         return this;
     }
-    
+
     public AlbumBuilder name(String name) {
         this.albumName = name;
         return this;

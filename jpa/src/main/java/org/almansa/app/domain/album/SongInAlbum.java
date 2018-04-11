@@ -9,11 +9,11 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class SongInAlbum {
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "album_id")
     private Album album;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "song_id")
     private Song song;
 

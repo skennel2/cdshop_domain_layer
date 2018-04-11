@@ -57,18 +57,12 @@ public class AlbumRepositoryTest {
         song2.setOwnerArtist(theQ);
         em.persist(song2);
 
-        Album album = new AlbumBuilder()
-                .artist(theQ)
-                .thisIsLPType()
-                .name("Q Train").Build();
+        Album album = new AlbumBuilder().artist(theQ).thisIsLPType().name("Q Train").Build();
         album.addSong(song1, 1, false);
         album.addSong(song2, 2, false);
         em.persist(album);
 
-        Album album2 = new AlbumBuilder()
-                .artist(theQ)
-                .thisIsLPType()
-                .name("Millionaire Poetry").Build();
+        Album album2 = new AlbumBuilder().artist(theQ).thisIsLPType().name("Millionaire Poetry").Build();
         em.persist(album2);
 
         em.flush();
@@ -154,19 +148,16 @@ public class AlbumRepositoryTest {
             assertEquals(albumName, album.getName());
         }
     }
-    
+
     @Test
     public void saveTest() {
-        Album newAlbum = new AlbumBuilder()
-                .artist(null)
-                .name("newAlbum")
-                .releaseDate(DateUtil.toDate(2017, 12, 1))
-                .Build(); 
+        Album newAlbum = new AlbumBuilder().artist(null).name("newAlbum").releaseDate(DateUtil.toDate(2017, 12, 1))
+                .Build();
         albumRepo.save(newAlbum);
         em.flush();
-        
-        List<Album> list = albumRepo.findByName("newAlbum");      
+
+        List<Album> list = albumRepo.findByName("newAlbum");
         System.out.println(list.get(0).getName());
         assertEquals(1, list.size());
-    }    
+    }
 }

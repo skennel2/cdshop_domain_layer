@@ -31,55 +31,51 @@ public class AlbumService {
         this.artistRepo = artistRepo;
         this.songRepo = songRepo;
     }
-    
+
     @Transactional
     public void changeAlbumName(Long albumId, String newName) {
-        Optional<Album> album = albumRepo.findById(albumId);                
-        
-        if(album.isPresent()) {
+        Optional<Album> album = albumRepo.findById(albumId);
+
+        if (album.isPresent()) {
             album.get().changeName(newName);
         }
     }
-    
+
     @Transactional
     public void addTagToAlbum(Long albumId, List<String> newTags) {
         Optional<Album> album = albumRepo.findById(albumId);
 
-        if(album.isPresent()) {
+        if (album.isPresent()) {
             CategoryTag newTag = null;
             for (String tag : newTags) {
                 newTag = new CategoryTag();
                 newTag.setName(tag);
-                
+
                 album.get().addCategory(newTag);
             }
-        }                
+        }
     }
 
     @Transactional
     public void AddAlbum(AlbumAddParameterModel addParameter) {
         Optional<Artist> artist = this.artistRepo.findById(addParameter.getArtistId());
 
-        Album newAlbum = new AlbumBuilder()
-                .albumType(addParameter.getAlbumType())
-                .artist(artist.get())
-                .releaseDate(addParameter.getReleaseDate())
-                .albumName(addParameter.getAlbumName())
-                .Build();
+        Album newAlbum = new AlbumBuilder().albumType(addParameter.getAlbumType()).artist(artist.get())
+                .releaseDate(addParameter.getReleaseDate()).albumName(addParameter.getAlbumName()).Build();
 
-        for (SongIdAndSongNo songId : addParameter.getSongIds()) {                
+        for (SongIdAndSongNo songId : addParameter.getSongIds()) {
             Optional<Song> albumSong = this.songRepo.findById(songId.getSongId());
-            
-            if(albumSong.isPresent()) {
+
+            if (albumSong.isPresent()) {
                 newAlbum.addSong(albumSong.get(), songId.getNo(), false);
             }
         }
-        
+
         for (String tag : addParameter.getTag()) {
             CategoryTag categoryTag = new CategoryTag();
             categoryTag.setName(tag);
             newAlbum.addCategory(categoryTag);
         }
         this.albumRepo.save(newAlbum);
-    }      
+    }
 }

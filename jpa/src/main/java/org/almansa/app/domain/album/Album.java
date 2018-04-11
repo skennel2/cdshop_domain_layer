@@ -51,11 +51,11 @@ public class Album extends NamedEntityBase {
     public Album(String name, Artist albumArtist, Date releaseDate, List<SongInAlbum> songs, List<CategoryTag> tags,
             AlbumType albumType) {
         super(name);
-        if(songs == null) {
-            songs = new ArrayList<SongInAlbum>(); 
+        if (songs == null) {
+            songs = new ArrayList<SongInAlbum>();
         }
-        
-        if(tags == null) {
+
+        if (tags == null) {
             tags = new ArrayList<CategoryTag>();
         }
         this.albumArtist = albumArtist;
