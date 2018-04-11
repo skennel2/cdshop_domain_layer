@@ -17,7 +17,7 @@ import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.album.SongInAlbum;
-import org.almansa.app.service.AlbumAddModel;
+import org.almansa.app.service.AlbumAddParameterModel;
 import org.almansa.app.service.AlbumService;
 import org.junit.Before;
 import org.junit.Test;
@@ -87,7 +87,7 @@ public class AlbumServiceTest {
         queryForArtist.setParameter("aritst_name", "the quiett");
         Artist artist = queryForArtist.getSingleResult();
         
-        AlbumAddModel albumAddModel = new AlbumAddModel();
+        AlbumAddParameterModel albumAddModel = new AlbumAddParameterModel();
         albumAddModel.setAlbumName("NEW AGE");
         albumAddModel.setAlbumType(AlbumType.LP);
         albumAddModel.setArtistId(artist.getId());

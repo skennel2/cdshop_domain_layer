@@ -5,12 +5,18 @@ import java.util.List;
 
 import org.almansa.app.domain.album.AlbumType;
 
-public class AlbumAddModel {
+public class AlbumAddParameterModel {
+
     private Long artistId;
+
     private String albumName;
+
     private Date releaseDate;
+
     private List<Long> songIds;
+
     private List<String> tag;
+
     private AlbumType albumType;
 
     public Long getArtistId() {
