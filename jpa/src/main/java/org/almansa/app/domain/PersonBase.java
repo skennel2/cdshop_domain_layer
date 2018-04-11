@@ -17,8 +17,20 @@ import javax.persistence.TemporalType;
 @Table(name = "PERSON")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
-@AttributeOverride(column = @Column(name = "artist_name"), name = "name") // 슈퍼클래스의 name 속성을 artist_name으로 재정의
+@AttributeOverride(column = @Column(name = "artist_name"), name = "name")
 public abstract class PersonBase extends NamedEntityBase {
+
+    public PersonBase(String name, Date bornDate) {
+        super(name);
+        this.bornDate = bornDate;
+    }
+
+    /**
+     * for jpa
+     */
+    protected PersonBase() {
+        super(null);
+    }
 
     @Temporal(TemporalType.DATE)
     @Column(name = "born_date")

@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 
 import org.almansa.app.AppConfig;
 import org.almansa.app.domain.album.Album;
+import org.almansa.app.domain.album.AlbumBuilder;
 import org.almansa.app.domain.album.AlbumType;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.Lable;
@@ -59,31 +60,28 @@ public class PersistenceTest {
         song2.setOwnerArtist(theQ);
         em.persist(song2);
 
-        Album album = new Album();
-        album.setAlbumArtist(theQ);
-        album.setAlbumType(AlbumType.LP);
-        album.setName("Q Train");
-
-        List<SongInAlbum> songList = new ArrayList<SongInAlbum>();
-        songList.add(new SongInAlbum(album, song1, 1, false));
-        songList.add(new SongInAlbum(album, song2, 2, false));
-        album.setSongs(songList);
+        Album album = new AlbumBuilder()
+                .artist(theQ)
+                .thisIsLPType()
+                .name("Q Train").Build();
+        album.addSong(song1, 1, false);
+        album.addSong(song2, 2, false);
+        
         em.persist(album);
 
-        Album album2 = new Album();
-        album2.setAlbumArtist(theQ);
-        album2.setAlbumType(AlbumType.LP);
-        album2.setName("Millionaire Poetry");
+        Album album2 = new AlbumBuilder()
+                .artist(theQ)
+                .thisIsLPType()
+                .name("Millionaire Poetry").Build();
         em.persist(album2);
-
         em.flush();
     }
 
     @Test
     public void persistAndFindTest() {
-        Album album = new Album();
-        album.setName("illmatic");
-        album.setAlbumType(AlbumType.LP);
+        Album album = new AlbumBuilder()
+                .name("illmatic")
+                .thisIsLPType().Build();
 
         em.persist(album);
         em.flush();

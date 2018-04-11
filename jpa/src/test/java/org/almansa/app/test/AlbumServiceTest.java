@@ -65,19 +65,22 @@ public class AlbumServiceTest {
         song2.setOwnerArtist(theQ);
         em.persist(song2);
 
-        Album album = new Album();
-        album.setAlbumArtist(theQ);
-        album.setAlbumType(AlbumType.LP);
-        album.setName("Q Train");
-        album.setReleaseDate(DateUtil.toDate(2017, 1, 1));
-        album.getSongs().add(new SongInAlbum(album, song1, 1, false));
-        album.getSongs().add(new SongInAlbum(album, song2, 2, false));
+        Album album = new AlbumBuilder()
+                .artist(theQ)
+                .thisIsLPType()
+                .name("Q Train")
+                .releaseDate(DateUtil.toDate(2017, 1, 1))
+                .Build(); 
+        
+        album.addSong(song1, 1, false); //TODO Builder 
+        album.addSong(song2, 2, false);
         em.persist(album);
 
-        Album album2 = new Album();
-        album2.setAlbumArtist(theQ);
-        album2.setAlbumType(AlbumType.LP);
-        album2.setName("Millionaire Poetry");
+        Album album2 = new AlbumBuilder()
+                .artist(theQ)
+                .thisIsLPType()
+                .name("Millionaire Poetry")
+                .Build();
         em.persist(album2);
 
         em.flush();

@@ -5,6 +5,20 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class NamedEntityBase extends EntityBase implements INamed {
+    
+    public NamedEntityBase(String name) {
+        super();
+        this.name = name;
+    }
+
+    /**
+     * for jpa
+     */
+    protected NamedEntityBase() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
