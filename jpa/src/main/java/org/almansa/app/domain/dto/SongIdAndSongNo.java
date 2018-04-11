@@ -1,4 +1,4 @@
-package org.almansa.app.service;
+package org.almansa.app.domain.dto;
 
 import org.almansa.app.domain.Immutable;
 

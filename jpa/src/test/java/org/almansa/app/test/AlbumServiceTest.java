@@ -2,6 +2,9 @@ package org.almansa.app.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -9,15 +12,17 @@ import javax.transaction.Transactional;
 
 import org.almansa.app.AppConfig;
 import org.almansa.app.domain.album.Album;
+import org.almansa.app.domain.album.AlbumBuilder;
 import org.almansa.app.domain.album.AlbumType;
 import org.almansa.app.domain.album.Artist;
+import org.almansa.app.domain.album.CategoryTag;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.album.SongInAlbum;
 import org.almansa.app.domain.dto.AlbumSimpleViewModel;
+import org.almansa.app.domain.dto.SongIdAndSongNo;
 import org.almansa.app.service.AlbumAddParameterModel;
 import org.almansa.app.service.AlbumService;
-import org.almansa.app.service.SongIdAndSongNo;
 import org.almansa.app.util.DateUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -127,6 +132,23 @@ public class AlbumServiceTest {
         assertEquals("Q Train2", albumGet.getName());
     }
 
+    @Test
+    public void albumTagAddTest() {
+        Album album = getAlbumByName("Q Train");
+        
+        List<String> newTags = new ArrayList<String>(); 
+        newTags.add("c1");
+        newTags.add("c2");
+        albumService.addTagToAlbum(album.getId(), newTags);
+        
+        em.flush();
+        
+        Album albumGet = getAlbumByName("Q Train");
+        for (CategoryTag tag : albumGet.getTags()) {
+            System.out.println(tag);
+        }
+    }
+    
     private Album getAlbumByName(String name) {
         TypedQuery<Album> queryForAlbum = em.createQuery("SELECT A FROM Album A WHERE A.name = :album_name",
                 Album.class);
