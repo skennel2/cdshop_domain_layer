@@ -151,9 +151,13 @@ public class AlbumRepositoryTest {
 
     @Test
     public void saveTest() {
-        Album newAlbum = new AlbumBuilder().artist(null).name("newAlbum").releaseDate(DateUtil.toDate(2017, 12, 1))
+        Album newAlbum = new AlbumBuilder()
+                .artist(null)
+                .name("newAlbum")
+                .releaseDate(DateUtil.toDate(2017, 12, 1))
                 .Build();
         albumRepo.save(newAlbum);
+        
         em.flush();
 
         List<Album> list = albumRepo.findByName("newAlbum");

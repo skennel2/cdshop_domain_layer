@@ -16,7 +16,6 @@ public abstract class NamedEntityBase extends EntityBase implements INamed {
      */
     protected NamedEntityBase() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     @Column(name = "name", length = 50, nullable = false)

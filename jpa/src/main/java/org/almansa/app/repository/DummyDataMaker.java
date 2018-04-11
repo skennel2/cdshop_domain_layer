@@ -2,6 +2,7 @@ package org.almansa.app.repository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,6 +11,8 @@ import javax.transaction.Transactional;
 
 import org.almansa.app.domain.PersonBase;
 import org.almansa.app.domain.album.Album;
+import org.almansa.app.domain.album.AlbumBuilder;
+import org.almansa.app.domain.album.AlbumType;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.CategoryTag;
 import org.almansa.app.domain.album.Lable;
@@ -112,24 +115,24 @@ public class DummyDataMaker {
         em.persist(song3);
 
         // TODO to Builder
-        Album album = new Album();
-        // album.setAlbumArtist(swings);
-        // album.changeName("upgrade3");
-        // List<SongInAlbum> songList = new ArrayList<SongInAlbum>();
-        // songList.add(new SongInAlbum(album, song, 1, false));
-        // songList.add(new SongInAlbum(album, song2, 2, false));
-        // album.setSongs(songList);
-        // album.setReleaseDate(new Date());
-        // album.setAlbumType(AlbumType.LP);
-        // album.addCategory(tag1);
-        // album.addCategory(tag2);
+        Album album = new AlbumBuilder()
+                .artist(swings)
+                .name("upgrade3")
+                .releaseDate(new Date())
+                .thisIsLPType()
+                .Build();
+        album.addSong(song, 1, false);
+        album.addSong(song2, 2, false);
+        album.addCategory(tag1);
+        album.addCategory(tag2);
+        
         em.persist(album);
 
-        Album album2 = new Album();
-        // album2.setAlbumArtist(swings);
-        // album2.changeName("shit is real single");
-        // album2.setReleaseDate(new Date());
-        // album2.setAlbumType(AlbumType.Single);
+        Album album2 = new AlbumBuilder()
+                .artist(swings)
+                .name("shit is real single")
+                .releaseDate(new Date())
+                .albumType(AlbumType.Single).Build();
         em.persist(album2);
 
         AlbumMerchandise am1 = new AlbumMerchandise();

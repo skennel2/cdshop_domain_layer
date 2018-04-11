@@ -21,7 +21,7 @@ public class AlbumSimpleViewModel {
 
     public AlbumSimpleViewModel(Album album) {
         if (album.isNew()) {
-            throw new RuntimeException(); // TODO
+            throw new RuntimeException(); // TODO Custom Exception
         }
         this.albumId = album.getId();
         this.albumName = album.getName();

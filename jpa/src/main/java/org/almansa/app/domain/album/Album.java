@@ -92,7 +92,7 @@ public class Album extends NamedEntityBase {
     public void addSong(Song song, int no, boolean isSingle) {
         for (SongInAlbum songInAlbum : songs) {
             if (songInAlbum.getNo() == no) {
-                throw new RuntimeException(); // TODO Temp Exception, duplicated no check, for statement looks so bad
+                throw new RuntimeException(); // TODO Temp Exception, duplicated 'no' check, for statement looks so bad
             }
         }
 

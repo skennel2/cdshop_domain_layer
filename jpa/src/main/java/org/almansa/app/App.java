@@ -9,7 +9,6 @@ public class App {
         AnnotationConfigApplicationContext context = null;
         try {
             context = new AnnotationConfigApplicationContext(AppConfig.class);
-
             makeDummies(context.getBean(DummyDataMaker.class));
 
         } catch (Exception ex) {
