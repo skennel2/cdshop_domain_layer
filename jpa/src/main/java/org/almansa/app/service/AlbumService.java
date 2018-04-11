@@ -1,6 +1,5 @@
 package org.almansa.app.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,24 +34,24 @@ public class AlbumService {
     
     @Transactional
     public void changeAlbumName(Long albumId, String newName) {
-        Album album = albumRepo.findOne(albumId);                
+        Optional<Album> album = albumRepo.findById(albumId);                
         
-        if(album != null) {
-            album.setName(newName);
+        if(album.isPresent()) {
+            album.get().changeName(newName);
         }
     }
     
     @Transactional
     public void addTagToAlbum(Long albumId, List<String> newTags) {
-        Album album = albumRepo.findOne(albumId);
+        Optional<Album> album = albumRepo.findById(albumId);
 
-        if(album != null) {
+        if(album.isPresent()) {
             CategoryTag newTag = null;
             for (String tag : newTags) {
                 newTag = new CategoryTag();
                 newTag.setName(tag);
                 
-                album.addCategory(newTag);
+                album.get().addCategory(newTag);
             }
         }                
     }
@@ -81,12 +80,6 @@ public class AlbumService {
             categoryTag.setName(tag);
             newAlbum.addCategory(categoryTag);
         }
-
-//        newAlbum.setName(addParameter.getAlbumName());
-//        newAlbum.setAlbumArtist(artist.get());
-//        newAlbum.setReleaseDate(addParameter.getReleaseDate());
-//        newAlbum.setAlbumType(addParameter.getAlbumType());
-
         this.albumRepo.save(newAlbum);
     }      
 }

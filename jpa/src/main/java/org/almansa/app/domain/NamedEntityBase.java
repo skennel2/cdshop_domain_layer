@@ -27,7 +27,8 @@ public abstract class NamedEntityBase extends EntityBase implements INamed {
         return name;
     }
 
-    public void setName(String name) {
+    @Override
+    public void changeName(String name) {
         this.name = name;
     }
 

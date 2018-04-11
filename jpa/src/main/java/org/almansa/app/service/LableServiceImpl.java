@@ -34,7 +34,7 @@ public class LableServiceImpl implements LableService {
         }
 
         Lable lable = new Lable();
-        lable.setName(lableName);
+        lable.changeName(lableName);
 
         lableRepo.save(lable);
     }

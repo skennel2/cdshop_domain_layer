@@ -69,41 +69,21 @@ public class Album extends NamedEntityBase {
         return albumArtist;
     }
 
-//    public void setAlbumArtist(Artist albumArtist) {
-//        this.albumArtist = albumArtist;
-//    }
-
     public Date getReleaseDate() {
         return releaseDate;
     }
-
-//    public void setReleaseDate(Date releaseDate) {
-//        this.releaseDate = releaseDate;
-//    }
 
     public List<SongInAlbum> getSongs() {
         return songs;
     }
 
-//    public void setSongs(List<SongInAlbum> songs) {
-//        this.songs = songs;
-//    }
-
     public AlbumType getAlbumType() {
         return albumType;
     }
 
-//    public void setAlbumType(AlbumType albumType) {
-//        this.albumType = albumType;
-//    }
-
     public List<CategoryTag> getTags() {
         return tags;
     }
-//
-//    public void setTags(List<CategoryTag> tags) {
-//        this.tags = tags;
-//    }
 
     public void addCategory(CategoryTag tag) {
         tags.add(tag);

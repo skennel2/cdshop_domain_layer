@@ -18,7 +18,6 @@ import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.CategoryTag;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Song;
-import org.almansa.app.domain.album.SongInAlbum;
 import org.almansa.app.domain.dto.AlbumSimpleViewModel;
 import org.almansa.app.domain.dto.SongIdAndSongNo;
 import org.almansa.app.service.AlbumAddParameterModel;
@@ -46,22 +45,22 @@ public class AlbumServiceTest {
     @Before
     public void makeDummies() {
         Lable illionaire = new Lable();
-        illionaire.setName("Illionaire");
+        illionaire.changeName("Illionaire");
         em.persist(illionaire);
 
         Artist theQ = new Artist();
-        theQ.setName("the quiett");
+        theQ.changeName("the quiett");
         theQ.changeLable(illionaire);
         theQ.setBornDate(1996, 1, 3);
         em.persist(theQ);
 
         Song song1 = new Song();
-        song1.setName("song1");
+        song1.changeName("song1");
         song1.setOwnerArtist(theQ);
         em.persist(song1);
 
         Song song2 = new Song();
-        song2.setName("song2");
+        song2.changeName("song2");
         song2.setOwnerArtist(theQ);
         em.persist(song2);
 

@@ -3,9 +3,7 @@ package org.almansa.app.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,11 +13,9 @@ import javax.transaction.Transactional;
 import org.almansa.app.AppConfig;
 import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.album.AlbumBuilder;
-import org.almansa.app.domain.album.AlbumType;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Song;
-import org.almansa.app.domain.album.SongInAlbum;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
 import org.almansa.app.domain.order.PurchaseOrder;
 import org.almansa.app.domain.user.ApplicationUser;
@@ -41,22 +37,22 @@ public class PersistenceTest {
     @Before
     public void makeDummies() {
         Lable illionaire = new Lable();
-        illionaire.setName("Illionaire");
+        illionaire.changeName("Illionaire");
         em.persist(illionaire);
 
         Artist theQ = new Artist();
-        theQ.setName("the quiett");
+        theQ.changeName("the quiett");
         theQ.changeLable(illionaire);
         theQ.setBornDate(1996, 1, 3);
         em.persist(theQ);
 
         Song song1 = new Song();
-        song1.setName("song1");
+        song1.changeName("song1");
         song1.setOwnerArtist(theQ);
         em.persist(song1);
 
         Song song2 = new Song();
-        song2.setName("song2");
+        song2.changeName("song2");
         song2.setOwnerArtist(theQ);
         em.persist(song2);
 
@@ -127,7 +123,7 @@ public class PersistenceTest {
         em.persist(albumMd2);
 
         ApplicationUser user = new ApplicationUser();
-        user.setName("skennel");
+        user.changeName("skennel");
         em.persist(user);
 
         if (album != null) {

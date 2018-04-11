@@ -2,7 +2,6 @@ package org.almansa.app.repository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,13 +10,11 @@ import javax.transaction.Transactional;
 
 import org.almansa.app.domain.PersonBase;
 import org.almansa.app.domain.album.Album;
-import org.almansa.app.domain.album.AlbumType;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.CategoryTag;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Producer;
 import org.almansa.app.domain.album.Song;
-import org.almansa.app.domain.album.SongInAlbum;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
 import org.almansa.app.domain.order.PurchaseOrder;
 import org.almansa.app.domain.order.PurchaseOrderLine;
@@ -44,62 +41,62 @@ public class DummyDataMaker {
         tag3.setName("album of the year");
 
         Lable jm = new Lable();
-        jm.setName("just musick");
+        jm.changeName("just musick");
         em.persist(jm);
 
         Lable illionaire = new Lable();
-        illionaire.setName("Illionaire");
+        illionaire.changeName("Illionaire");
         em.persist(illionaire);
 
         Lable aomg = new Lable();
-        aomg.setName("AOMG");
+        aomg.changeName("AOMG");
         em.persist(aomg);
 
         Producer nochang = new Producer();
-        nochang.setName("nochang");
+        nochang.changeName("nochang");
         nochang.setLable(jm);
         em.persist(nochang);
 
         Producer chachamalon = new Producer();
-        chachamalon.setName("cha cha malon");
+        chachamalon.changeName("cha cha malon");
         chachamalon.setLable(aomg);
         em.persist(chachamalon);
 
         Artist swings = new Artist();
-        swings.setName("swings");
+        swings.changeName("swings");
         swings.changeLable(jm);
         em.persist(swings);
 
         Artist theQ = new Artist();
-        theQ.setName("the quiett");
+        theQ.changeName("the quiett");
         theQ.changeLable(illionaire);
         theQ.setBornDate(1996, 1, 3);
         em.persist(theQ);
 
         Artist jayPark = new Artist();
-        jayPark.setName("jay park");
+        jayPark.changeName("jay park");
         jayPark.changeLable(aomg);
         jayPark.setBornDate(1988, 3, 4);
         em.persist(jayPark);
 
         Artist kidMilli = new Artist();
-        kidMilli.setName("kid milli");
+        kidMilli.changeName("kid milli");
         kidMilli.changeLable(null);
         em.persist(kidMilli);
 
         Artist dok2 = new Artist();
-        dok2.setName("dok2");
+        dok2.changeName("dok2");
         dok2.changeLable(illionaire);
         em.persist(dok2);
 
         Song song = new Song();
-        song.setName("holy");
+        song.changeName("holy");
         song.setOwnerArtist(swings);
         song.setMainProducer(nochang);
         em.persist(song);
 
         Song song2 = new Song();
-        song2.setName("shit is real");
+        song2.changeName("shit is real");
         song2.setOwnerArtist(swings);
         song2.setMainProducer(chachamalon);
         List<PersonBase> list = new ArrayList<PersonBase>();
@@ -109,7 +106,7 @@ public class DummyDataMaker {
         em.persist(song2);
 
         Song song3 = new Song();
-        song3.setName("intro");
+        song3.changeName("intro");
         song3.setOwnerArtist(swings);
         song3.setMainProducer(chachamalon);
         em.persist(song3);
@@ -117,7 +114,7 @@ public class DummyDataMaker {
         //TODO to Builder
         Album album = new Album();
 //        album.setAlbumArtist(swings);
-//        album.setName("upgrade3");
+//        album.changeName("upgrade3");
 //        List<SongInAlbum> songList = new ArrayList<SongInAlbum>();
 //        songList.add(new SongInAlbum(album, song, 1, false));
 //        songList.add(new SongInAlbum(album, song2, 2, false));
@@ -130,7 +127,7 @@ public class DummyDataMaker {
 
         Album album2 = new Album();
 //        album2.setAlbumArtist(swings);
-//        album2.setName("shit is real single");
+//        album2.changeName("shit is real single");
 //        album2.setReleaseDate(new Date());
 //        album2.setAlbumType(AlbumType.Single);
         em.persist(album2);
@@ -148,7 +145,7 @@ public class DummyDataMaker {
         em.persist(am2);
 
         ApplicationUser user = new ApplicationUser();
-        user.setName("skennel");
+        user.changeName("skennel");
         em.persist(user);
 
         PurchaseOrder order = new PurchaseOrder();

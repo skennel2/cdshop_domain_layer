@@ -2,7 +2,6 @@ package org.almansa.app.test;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,11 +11,9 @@ import javax.transaction.Transactional;
 import org.almansa.app.AppConfig;
 import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.album.AlbumBuilder;
-import org.almansa.app.domain.album.AlbumType;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Song;
-import org.almansa.app.domain.album.SongInAlbum;
 import org.almansa.app.repository.AlbumRepository;
 import org.almansa.app.util.DateUtil;
 import org.junit.Before;
@@ -41,22 +38,22 @@ public class AlbumRepositoryTest {
     @Before
     public void makeDummies() {
         Lable illionaire = new Lable();
-        illionaire.setName("Illionaire");
+        illionaire.changeName("Illionaire");
         em.persist(illionaire);
 
         Artist theQ = new Artist();
-        theQ.setName("the quiett");
+        theQ.changeName("the quiett");
         theQ.changeLable(illionaire);
         theQ.setBornDate(1996, 1, 3);
         em.persist(theQ);
 
         Song song1 = new Song();
-        song1.setName("song1");
+        song1.changeName("song1");
         song1.setOwnerArtist(theQ);
         em.persist(song1);
 
         Song song2 = new Song();
-        song2.setName("song2");
+        song2.changeName("song2");
         song2.setOwnerArtist(theQ);
         em.persist(song2);
 
@@ -145,7 +142,7 @@ public class AlbumRepositoryTest {
         List<Album> list = albumRepo.findByName(albumName);
 
         for (Album album : list) {
-            album.setName("Millionaire Poetry2");
+            album.changeName("Millionaire Poetry2");
         }
 
         em.flush();
