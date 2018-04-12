@@ -30,45 +30,58 @@ public class Song extends NamedEntityBase {
     @CollectionTable(name = "song_writers", joinColumns = @JoinColumn(name = "song_writer_id"))
     private List<PersonAsSongWriter> artists = new ArrayList<PersonAsSongWriter>();
 
-    @ManyToOne
-    @JoinColumn(name = "main_producer_id")
-    private Producer mainProducer;
-    
-    @Column(name="lylics")
+    @Column(name = "lylics")
     private String lylics;
+
+    public Song(String name, Artist ownerArtist, List<PersonAsSongWriter> artists, String lylics) {
+        super(name);
+        this.ownerArtist = ownerArtist;
+        this.artists = artists;
+        this.lylics = lylics;
+
+        if (artists == null) {
+            this.artists = new ArrayList<PersonAsSongWriter>();
+        }
+    }
     
+    public List<PersonBase> getProcedures() {
+        List<PersonBase> result = new ArrayList<PersonBase>();
+        for (PersonAsSongWriter personAsSongWriter : artists) {
+            if (personAsSongWriter.getRole().equals(ProducerRole.MainProducer)
+                    || personAsSongWriter.getRole().equals(ProducerRole.Producer)) {
+                result.add(personAsSongWriter.getPerson());
+            }
+        }
+
+        return result;
+    }
+
     public String getDisplayName() {
-        String displayName= this.getName();
-        
+        String displayName = this.getName();
+
         for (PersonAsSongWriter person : artists) {
-            if(person.getRole().equals(ProducerRole.Featuring)) {
+            if (person.getRole().equals(ProducerRole.Featuring)) {
                 displayName += " ," + person.getPerson().getName();
             }
         }
-        
+
         return displayName;
     }
 
-    public void addArtist(PersonBase artist, ProducerRole role) {       
-        if(artist != null) {            
-            artists.add(new PersonAsSongWriter(artist, role));
-        }
-    }   
+    public void addPersonAsSongWriter(PersonAsSongWriter personAsSongWriter) {
+        this.artists.add(personAsSongWriter);
+    }
     
+    public void addPersonAsSongWriter(PersonBase person, ProducerRole role) {
+        this.artists.add(new PersonAsSongWriter(person, role));
+    }
+
     public Artist getOwnerArtist() {
         return ownerArtist;
     }
-    
+
     public void setOwnerArtist(Artist ownerArtist) {
         this.ownerArtist = ownerArtist;
-    }
-
-    public Producer getMainProducer() {
-        return mainProducer;
-    }
-
-    public void setMainProducer(Producer producer) {
-        this.mainProducer = producer;
     }
 
     public String getLylics() {
@@ -77,7 +90,13 @@ public class Song extends NamedEntityBase {
 
     @Override
     public String toString() {
-        return "Song [ownerArtist=" + ownerArtist + ", artists=" + artists + ", mainProducer=" + mainProducer
-                + ", lylics=" + lylics + "]";
-    }   
+        return "Song [ownerArtist=" + ownerArtist + ", artists=" + artists + ", lylics=" + lylics + "]";
+    }
+
+    /*
+     * for jpa
+     */
+    protected Song() {
+        super(null);
+    }
 }

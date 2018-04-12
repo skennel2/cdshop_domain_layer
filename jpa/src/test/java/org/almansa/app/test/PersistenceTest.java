@@ -46,14 +46,10 @@ public class PersistenceTest {
         theQ.setBornDate(1996, 1, 3);
         em.persist(theQ);
 
-        Song song1 = new Song();
-        song1.changeName("song1");
-        song1.setOwnerArtist(theQ);
+        Song song1 = new Song("song1", theQ, null, "");
         em.persist(song1);
 
-        Song song2 = new Song();
-        song2.changeName("song2");
-        song2.setOwnerArtist(theQ);
+        Song song2 = new Song("song2", theQ, null, "");
         em.persist(song2);
 
         Album album = new AlbumBuilder().artist(theQ).thisIsLPType().name("Q Train").Build();

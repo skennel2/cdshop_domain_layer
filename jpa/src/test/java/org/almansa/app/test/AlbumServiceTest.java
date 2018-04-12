@@ -60,15 +60,11 @@ public class AlbumServiceTest {
         swings.setBornDate(1987, 11, 12);
         em.persist(swings);
 
-        Song song1 = new Song();
-        song1.changeName("song1");
-        song1.setOwnerArtist(theQ);
-        song1.addArtist(swings, ProducerRole.Featuring);
+        Song song1 = new Song("song1", theQ, null, "");
+        song1.addPersonAsSongWriter(swings, ProducerRole.Featuring);
         em.persist(song1);
 
-        Song song2 = new Song();
-        song2.changeName("song2");
-        song2.setOwnerArtist(theQ);
+        Song song2 = new Song("song2", theQ, null, "");
         em.persist(song2);
 
         Album album = new AlbumBuilder()

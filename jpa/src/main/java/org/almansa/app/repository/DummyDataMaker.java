@@ -1,15 +1,12 @@
 package org.almansa.app.repository;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.almansa.app.domain.PersonBase;
 import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.album.AlbumBuilder;
 import org.almansa.app.domain.album.AlbumType;
@@ -92,44 +89,25 @@ public class DummyDataMaker {
         dok2.changeLable(illionaire);
         em.persist(dok2);
 
-        Song song = new Song();
-        song.changeName("holy");
-        song.setOwnerArtist(swings);
-        song.setMainProducer(nochang);
+        Song song = new Song("holy", swings, null, "");
+        song.addPersonAsSongWriter(nochang, ProducerRole.MainProducer);
         em.persist(song);
 
-        Song song2 = new Song();
-        song2.changeName("shit is real");
-        song2.setOwnerArtist(swings);
-        song2.setMainProducer(chachamalon);
-        song2.addArtist(theQ, ProducerRole.Featuring);
-        song2.addArtist(kidMilli, ProducerRole.Featuring);
+        Song song2 = new Song("shit is real", swings, null, "");
+        song2.addPersonAsSongWriter(theQ, ProducerRole.Featuring);
+        song2.addPersonAsSongWriter(kidMilli, ProducerRole.Featuring);
         em.persist(song2);
 
-        Song song3 = new Song();
-        song3.changeName("intro");
-        song3.setOwnerArtist(swings);
-        song3.setMainProducer(chachamalon);
+        Song song3 = new Song("intro", swings, null, "");
+        song3.addPersonAsSongWriter(chachamalon, ProducerRole.MainProducer);
         em.persist(song3);
 
-        // TODO to Builder
-        Album album = new AlbumBuilder()
-                .artist(swings)
-                .name("upgrade3")
-                .releaseDate(new Date())
-                .thisIsLPType()
-                .Build();
-        album.addSong(song, 1, false);
-        album.addSong(song2, 2, false);
-        album.addCategory(tag1);
-        album.addCategory(tag2);
-        
+        Album album = new AlbumBuilder().artist(swings).name("upgrade3").releaseDate(new Date()).thisIsLPType()
+                .addSong(song, 1, false).addTag(tag1).addTag(tag2).addSong(song2, 2, false).Build();
+
         em.persist(album);
 
-        Album album2 = new AlbumBuilder()
-                .artist(swings)
-                .name("shit is real single")
-                .releaseDate(new Date())
+        Album album2 = new AlbumBuilder().artist(swings).name("shit is real single").releaseDate(new Date())
                 .albumType(AlbumType.Single).Build();
         em.persist(album2);
 

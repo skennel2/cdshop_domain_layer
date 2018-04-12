@@ -9,7 +9,7 @@ import org.almansa.app.domain.PersonBase;
 
 @Embeddable
 public class PersonAsSongWriter{
-    
+     
     @ManyToOne
     private PersonBase person;
     
