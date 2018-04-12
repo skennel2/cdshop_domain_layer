@@ -23,7 +23,7 @@ import org.almansa.app.domain.NamedEntityBase;
 @AttributeOverride(column = @Column(name = "album_name"), name = "name")
 public class Album extends NamedEntityBase {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) 
     @JoinColumn(name = "album_artist_id")
     private Artist albumArtist;
 
@@ -32,37 +32,32 @@ public class Album extends NamedEntityBase {
 
     @ElementCollection
     @CollectionTable(name = "song_in_album", joinColumns = @JoinColumn(name = "song_in_album_id"))
-    private List<SongInAlbum> songs = new ArrayList<SongInAlbum>();
+    private List<SongInAlbum> songs;
 
     @ElementCollection
     @CollectionTable(name = "album_tag", joinColumns = @JoinColumn(name = "album_tag_id"))
-    private List<CategoryTag> tags = new ArrayList<CategoryTag>();
+    private List<CategoryTag> tags;
 
     @Enumerated(EnumType.STRING)
     private AlbumType albumType;
 
-    /**
-     * for jpa
-     */
-    protected Album() {
-        super(null);
-    }
-
     public Album(String name, Artist albumArtist, Date releaseDate, List<SongInAlbum> songs, List<CategoryTag> tags,
             AlbumType albumType) {
         super(name);
-        if (songs == null) {
-            songs = new ArrayList<SongInAlbum>();
-        }
 
-        if (tags == null) {
-            tags = new ArrayList<CategoryTag>();
-        }
         this.albumArtist = albumArtist;
         this.releaseDate = releaseDate;
         this.songs = songs;
         this.tags = tags;
         this.albumType = albumType;
+        
+        if (songs == null) {
+            this.songs = new ArrayList<SongInAlbum>();
+        }
+
+        if (tags == null) {
+            this.tags = new ArrayList<CategoryTag>();
+        }
     }
 
     public Artist getAlbumArtist() {
@@ -90,13 +85,36 @@ public class Album extends NamedEntityBase {
     }
 
     public void addSong(Song song, int no, boolean isSingle) {
-        for (SongInAlbum songInAlbum : songs) {
-            if (songInAlbum.getNo() == no) {
-                throw new RuntimeException(); // TODO Temp Exception, duplicated 'no' check, for statement looks so bad
-            }
+        SongInAlbum songInAlbum = new SongInAlbum(this, song, no, isSingle);
+        addSong(songInAlbum);
+    }
+    
+    public void addSong(SongInAlbum songInAlbum) {
+        if(isExistsSongNumber(songInAlbum.getNo())) {
+            throw new RuntimeException("Duplicated No"); // TODO Temp Exception,
         }
 
-        SongInAlbum songInAlbum = new SongInAlbum(this, song, no, isSingle);
+        songInAlbum.setAlbum(this);
         this.songs.add(songInAlbum);
+    }    
+    
+    public int getNumberOfContainingSongs() {
+        return songs.size();
+    }
+
+    public boolean isExistsSongNumber(int no) {
+        for (SongInAlbum songInAlbum : songs) {
+            if (songInAlbum.getNo() == no) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * for jpa
+     */
+    protected Album() {
+        super(null);
     }
 }

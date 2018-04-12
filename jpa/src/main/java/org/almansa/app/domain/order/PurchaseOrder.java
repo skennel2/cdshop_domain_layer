@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -34,10 +33,30 @@ public class PurchaseOrder extends EntityBase {
 
     @ElementCollection
     @CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "order_id"))
-    private List<PurchaseOrderLine> orderLines = new ArrayList<PurchaseOrderLine>();
+    private List<PurchaseOrderLine> orderLines;
 
-    @Enumerated
-    private OrderState orderState = OrderState.Ordered;
+    public PurchaseOrder(ApplicationUser orderer, List<PurchaseOrderLine> orderLines, Date orderDate) {
+        super();
+        this.orderer = orderer;
+        this.orderDate = orderDate;
+        this.orderLines = orderLines;
+        
+        if(orderLines == null) {
+            this.orderLines = new ArrayList<PurchaseOrderLine>();
+        }
+    }
+
+    public ApplicationUser getOrderer() {
+        return orderer;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public List<PurchaseOrderLine> getOrderLines() {
+        return orderLines;
+    }
 
     public Money calculateTotalPrice() {
         Money money = new Money(0);
@@ -61,45 +80,13 @@ public class PurchaseOrder extends EntityBase {
         this.orderLines.add(orderLine);
     }
 
-    // TODO OrderState
-    public void orderCancel() {
-        if (orderState == OrderState.Paid) {
-
-        }
+    /**
+     * for jpa
+     */
+    protected PurchaseOrder() {
+        super();
     }
-
-    public OrderState getOrderState() {
-        return orderState;
-    }
-
-    public void setOrderState(OrderState orderState) {
-        this.orderState = orderState;
-    }
-
-    public ApplicationUser getOrderer() {
-        return orderer;
-    }
-
-    public void setOrderer(ApplicationUser orderer) {
-        this.orderer = orderer;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public List<PurchaseOrderLine> getOrderLines() {
-        return orderLines;
-    }
-
-    public void setOrderLines(List<PurchaseOrderLine> orderLines) {
-        this.orderLines = orderLines;
-    }
-
+    
     @Override
     public String toString() {
         return "PurchaseOrder [orderer=" + orderer + ", orderDate=" + orderDate + ", OrderLines=" + orderLines + "]";

@@ -119,17 +119,13 @@ public class PersistenceTest {
         em.persist(user);
 
         if (album != null) {
-            PurchaseOrder newOrder = new PurchaseOrder();
+            PurchaseOrder newOrder = new PurchaseOrder(user, null, new Date());
             newOrder.addOrderLine(albumMd1, 10);
-            newOrder.setOrderer(user);
-            newOrder.setOrderDate(new Date());
             em.persist(newOrder);
 
             assertEquals(newOrder.calculateTotalPrice(), new Money(250000));
 
             newOrder.addOrderLine(albumMd2, 5);
-            newOrder.setOrderer(user);
-            newOrder.setOrderDate(new Date());
 
             assertEquals(newOrder.calculateTotalPrice(), new Money(300000));
         } else {

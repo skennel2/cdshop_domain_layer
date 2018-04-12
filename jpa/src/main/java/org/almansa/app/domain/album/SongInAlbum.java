@@ -27,6 +27,14 @@ public class SongInAlbum {
         super();
     }
 
+    public SongInAlbum(Song song, int no, boolean isSingle) {
+        super();
+        this.song = song;
+        this.no = no;
+        this.isSingle = isSingle;
+    }
+    
+    
     public SongInAlbum(Album album, Song song, int no, boolean isSingle) {
         super();
         this.album = album;

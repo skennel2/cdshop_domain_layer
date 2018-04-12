@@ -30,6 +30,9 @@ public class Song extends NamedEntityBase {
     @ManyToOne
     @JoinColumn(name = "main_producer_id")
     private Producer mainProducer;
+    
+    @Column(name="lylics")
+    private String lylics;
 
     public Artist getOwnerArtist() {
         return ownerArtist;
@@ -55,9 +58,13 @@ public class Song extends NamedEntityBase {
         this.artists = artists;
     }
 
+    public String getLylics() {
+        return lylics;
+    }
+
     @Override
     public String toString() {
-        return super.toString() + " Song [ownerArtist=" + ownerArtist + ", artists=" + artists + ", producer="
-                + mainProducer + "]";
-    }
+        return "Song [ownerArtist=" + ownerArtist + ", artists=" + artists + ", mainProducer=" + mainProducer
+                + ", lylics=" + lylics + "]";
+    }   
 }

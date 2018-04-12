@@ -64,11 +64,14 @@ public class AlbumServiceTest {
         song2.setOwnerArtist(theQ);
         em.persist(song2);
 
-        Album album = new AlbumBuilder().artist(theQ).thisIsLPType().name("Q Train")
+        Album album = new AlbumBuilder()
+                .artist(theQ)
+                .thisIsLPType()
+                .name("Q Train")
+                .addSong(song1, 1, false)
+                .addSong(song2, 2, false)
                 .releaseDate(DateUtil.toDate(2017, 1, 1)).Build();
-
-        album.addSong(song1, 1, false); // TODO Builder
-        album.addSong(song2, 2, false);
+        
         em.persist(album);
 
         Album album2 = new AlbumBuilder().artist(theQ).thisIsLPType().name("Millionaire Poetry").Build();

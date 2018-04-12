@@ -20,7 +20,6 @@ import org.almansa.app.domain.album.Producer;
 import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
 import org.almansa.app.domain.order.PurchaseOrder;
-import org.almansa.app.domain.order.PurchaseOrderLine;
 import org.almansa.app.domain.user.ApplicationUser;
 import org.almansa.app.domain.value.Money;
 import org.almansa.app.util.DateUtil;
@@ -151,21 +150,10 @@ public class DummyDataMaker {
         user.changeName("skennel");
         em.persist(user);
 
-        PurchaseOrder order = new PurchaseOrder();
-        order.setOrderDate(DateUtil.toDate(2018, 11, 2));
-        order.setOrderer(user);
-        List<PurchaseOrderLine> orderLines = new ArrayList<PurchaseOrderLine>();
+        PurchaseOrder order = new PurchaseOrder(user, null, DateUtil.toDate(2018, 11, 2));
+        order.addOrderLine(am1, 2);
+        order.addOrderLine(am2, 1);
 
-        PurchaseOrderLine orderLine1 = new PurchaseOrderLine();
-        orderLine1.setMerchandise(am1);
-        orderLine1.setQuantity(2);
-        orderLines.add(orderLine1);
-        PurchaseOrderLine orderLine2 = new PurchaseOrderLine();
-        orderLine2.setMerchandise(am2);
-        orderLine2.setQuantity(1);
-        orderLines.add(orderLine2);
-
-        order.setOrderLines(orderLines);
         em.persist(order);
 
     }
