@@ -20,9 +20,6 @@ public class AlbumSimpleViewModel {
     private int containingSongCount;
 
     public AlbumSimpleViewModel(Album album) {
-        if (album.isNew()) {
-            throw new RuntimeException(); // TODO Custom Exception
-        }
         this.albumId = album.getId();
         this.albumName = album.getName();
         this.artistName = album.getAlbumArtist().getName();

@@ -111,16 +111,10 @@ public class DummyDataMaker {
                 .albumType(AlbumType.Single).Build();
         em.persist(album2);
 
-        AlbumMerchandise am1 = new AlbumMerchandise();
-        am1.setAlbum(album);
-        am1.setPrice(new Money(new BigDecimal("12000")));
-        am1.setAmountOfStock(new Long(500));
+        AlbumMerchandise am1 = new AlbumMerchandise(new Long(500), new Money(new BigDecimal("12000")), album);
         em.persist(am1);
 
-        AlbumMerchandise am2 = new AlbumMerchandise();
-        am2.setAlbum(album2);
-        am2.setPrice(new Money(new BigDecimal("17500")));
-        am2.setAmountOfStock(new Long(500));
+        AlbumMerchandise am2 = new AlbumMerchandise(new Long(500), new Money(new BigDecimal("17500")), album2);
         em.persist(am2);
 
         ApplicationUser user = new ApplicationUser();

@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AlbumService {
+public class AlbumService extends ServiceBase {
 
     private AlbumRepository albumRepo;
     private ArtistRepository artistRepo;
@@ -76,7 +76,7 @@ public class AlbumService {
             categoryTag.setName(tag);
             newAlbum.addCategory(categoryTag);
         }
-        
+
         this.albumRepo.save(newAlbum);
     }
 }

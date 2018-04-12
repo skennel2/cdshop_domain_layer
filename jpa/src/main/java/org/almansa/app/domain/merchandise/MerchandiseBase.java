@@ -24,6 +24,12 @@ public abstract class MerchandiseBase extends EntityBase {
     @Embedded
     @AttributeOverride(name = "amount", column = @Column(name = "price"))
     private Money price;
+    
+    public MerchandiseBase(Long amountOfStock, Money price) {
+        super();
+        this.amountOfStock = amountOfStock;
+        this.price = price;
+    }
 
     public void addStock(long amount) {
         this.amountOfStock += amount;
@@ -55,5 +61,12 @@ public abstract class MerchandiseBase extends EntityBase {
 
     public void setPrice(Money price) {
         this.price = price;
+    }
+
+    /*
+     * for jpa
+     */
+    protected MerchandiseBase() {
+        super();
     }
 }

@@ -6,11 +6,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.almansa.app.domain.album.Album;
+import org.almansa.app.domain.value.Money;
 
 @Entity
 @Table(name = "ALBUM_MERCHANDISE")
 @DiscriminatorValue(value = "Album")
 public class AlbumMerchandise extends MerchandiseBase {
+
+    public AlbumMerchandise(Long amountOfStock, Money price, Album album) {
+        super(amountOfStock, price);
+        this.album = album;
+    }
 
     @OneToOne
     private Album album;
@@ -18,8 +24,11 @@ public class AlbumMerchandise extends MerchandiseBase {
     public Album getAlbum() {
         return album;
     }
-
-    public void setAlbum(Album album) {
-        this.album = album;
+    
+    /*
+     * for jpa
+     */
+    protected AlbumMerchandise() {
+        super();
     }
 }

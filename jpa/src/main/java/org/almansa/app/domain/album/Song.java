@@ -4,16 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import org.almansa.app.domain.NamedEntityBase;
 import org.almansa.app.domain.PersonBase;
@@ -31,6 +28,7 @@ public class Song extends NamedEntityBase {
     private List<PersonAsSongWriter> artists = new ArrayList<PersonAsSongWriter>();
 
     @Column(name = "lylics")
+    @Lob
     private String lylics;
 
     public Song(String name, Artist ownerArtist, List<PersonAsSongWriter> artists, String lylics) {
@@ -61,7 +59,7 @@ public class Song extends NamedEntityBase {
 
         for (PersonAsSongWriter person : artists) {
             if (person.getRole().equals(ProducerRole.Featuring)) {
-                displayName += " ," + person.getPerson().getName();
+                displayName += " ," + person.getPerson().getName(); //TODO string formatting
             }
         }
 
