@@ -95,19 +95,13 @@ public class PersistenceTest {
         q.setParameter("name", "Q Train");
 
         Album album = q.getSingleResult();
-        AlbumMerchandise albumMd1 = new AlbumMerchandise();
-        albumMd1.setAlbum(album);
-        albumMd1.setAmountOfStock(new Long(200));
-        albumMd1.setPrice(new Money(25000));
+        AlbumMerchandise albumMd1 = new AlbumMerchandise(new Long(200), new Money(25000), album);
         em.persist(albumMd1);
 
         q.setParameter("name", "Millionaire Poetry");
 
         Album album2 = q.getSingleResult();
-        AlbumMerchandise albumMd2 = new AlbumMerchandise();
-        albumMd2.setAlbum(album2);
-        albumMd2.setAmountOfStock(new Long(200));
-        albumMd2.setPrice(new Money(10000));
+        AlbumMerchandise albumMd2 = new AlbumMerchandise(new Long(200), new Money(10000), album2);
         em.persist(albumMd2);
 
         ApplicationUser user = new ApplicationUser();

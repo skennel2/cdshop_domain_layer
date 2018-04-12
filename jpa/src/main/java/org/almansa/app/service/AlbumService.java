@@ -34,25 +34,20 @@ public class AlbumService extends ServiceBase {
 
     @Transactional
     public void changeAlbumName(Long albumId, String newName) {
-        Optional<Album> album = albumRepo.findById(albumId);
-
-        if (album.isPresent()) {
-            album.get().changeName(newName);
-        }
+        Album album = albumRepo.getOne(albumId);
+        album.changeName(newName);
     }
 
     @Transactional
     public void addTagToAlbum(Long albumId, List<String> newTags) {
-        Optional<Album> album = albumRepo.findById(albumId);
+        Album album = albumRepo.getOne(albumId);
 
-        if (album.isPresent()) {
-            CategoryTag newTag = null;
-            for (String tag : newTags) {
-                newTag = new CategoryTag();
-                newTag.setName(tag);
+        CategoryTag newTag = null;
+        for (String tag : newTags) {
+            newTag = new CategoryTag();
+            newTag.setName(tag);
 
-                album.get().addCategory(newTag);
-            }
+            album.addCategory(newTag);
         }
     }
 

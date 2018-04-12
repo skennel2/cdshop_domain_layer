@@ -13,7 +13,7 @@ import org.almansa.app.repository.AlbumRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AlbumMerchaniseService {
+public class AlbumMerchaniseService extends ServiceBase{
 
     private AlbumRepository albumRepo;
     private AlbumMerchandiseRepository merchanRepo;
