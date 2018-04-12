@@ -6,21 +6,14 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class NamedEntityBase extends EntityBase implements INamed {
 
+    @Column(name = "name", length = 50, nullable = false)
+    private String name;
+
     public NamedEntityBase(String name) {
         super();
         this.name = name;
     }
-
-    /**
-     * for jpa
-     */
-    protected NamedEntityBase() {
-        super();
-    }
-
-    @Column(name = "name", length = 50, nullable = false)
-    private String name;
-
+    
     @Override
     public String getName() {
         return name;
@@ -34,5 +27,12 @@ public abstract class NamedEntityBase extends EntityBase implements INamed {
     @Override
     public String toString() {
         return "NamedEntitiyBase [name=" + name + "]";
+    }
+    
+    /**
+     * for jpa
+     */
+    protected NamedEntityBase() {
+        super();
     }
 }

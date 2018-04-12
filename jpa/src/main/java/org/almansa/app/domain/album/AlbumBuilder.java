@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AlbumBuilder {
+import org.almansa.app.domain.Builder;
+
+public class AlbumBuilder implements Builder<Album>{
 
     private String albumName;
 
@@ -77,6 +79,7 @@ public class AlbumBuilder {
         return this;
     }
 
+    @Override
     public Album Build() {
         Album album = new Album(albumName, albumArtist, releaseDate, songs, tags, albumType);
         return album;

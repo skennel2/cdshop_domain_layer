@@ -28,13 +28,6 @@ public class Money implements Immutable {
         this.amount = new BigDecimal(amount);
     }
 
-    /**
-     * for jpa
-     */
-    protected Money() {
-        super();
-    }
-
     public Money add(Money add) {
         return new Money(this.amount.add(add.amount));
     }
@@ -67,5 +60,13 @@ public class Money implements Immutable {
             return false;
         return true;
     }
+    
+    /**
+     * for jpa
+     */
+    protected Money() {
+        super();
+    }
+
 
 }

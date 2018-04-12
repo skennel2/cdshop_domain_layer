@@ -23,18 +23,13 @@ public class SongInAlbum {
     @Column(name = "is_single")
     private boolean isSingle;
 
-    public SongInAlbum() {
-        super();
-    }
-
     public SongInAlbum(Song song, int no, boolean isSingle) {
         super();
         this.song = song;
         this.no = no;
         this.isSingle = isSingle;
     }
-    
-    
+        
     public SongInAlbum(Album album, Song song, int no, boolean isSingle) {
         super();
         this.album = album;
@@ -78,5 +73,12 @@ public class SongInAlbum {
     @Override
     public String toString() {
         return "SongInAlbum [album=" + album + ", song=" + song + ", no=" + no + ", isSingle=" + isSingle + "]";
+    }
+    
+    /*
+     * for jpa
+     */
+    protected SongInAlbum() {
+        super();
     }
 }

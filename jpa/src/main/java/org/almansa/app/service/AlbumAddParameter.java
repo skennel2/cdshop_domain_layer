@@ -7,7 +7,7 @@ import java.util.List;
 import org.almansa.app.domain.album.AlbumType;
 import org.almansa.app.domain.dto.SongIdAndSongNo;
 
-public class AlbumAddParameterModel {
+public class AlbumAddParameter {
 
     private Long artistId;
 

@@ -27,7 +27,7 @@ public class AppConfig {
     public DataSource dataSource() throws ClassNotFoundException {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:~/test11");
+        dataSource.setUrl("jdbc:h2:~/test13");
         dataSource.setUsername("sa");
 
         return dataSource;

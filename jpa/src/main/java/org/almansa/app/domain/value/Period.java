@@ -27,13 +27,6 @@ public class Period implements Immutable {
         this.toDate = toDate;
     }
 
-    /**
-     * for jpa
-     */
-    protected Period() {
-        super();
-    }
-
     public Date getFromDate() {
         return fromDate;
     }
@@ -48,5 +41,12 @@ public class Period implements Immutable {
         }
 
         return false;
+    }
+    
+    /*
+     * for jpa
+     */
+    protected Period() {
+        super();
     }
 }

@@ -57,7 +57,7 @@ public class AlbumService {
     }
 
     @Transactional
-    public void AddAlbum(AlbumAddParameterModel addParameter) {
+    public void AddAlbum(AlbumAddParameter addParameter) {
         Optional<Artist> artist = this.artistRepo.findById(addParameter.getArtistId());
 
         Album newAlbum = new AlbumBuilder().albumType(addParameter.getAlbumType()).artist(artist.get())
@@ -76,6 +76,7 @@ public class AlbumService {
             categoryTag.setName(tag);
             newAlbum.addCategory(categoryTag);
         }
+        
         this.albumRepo.save(newAlbum);
     }
 }

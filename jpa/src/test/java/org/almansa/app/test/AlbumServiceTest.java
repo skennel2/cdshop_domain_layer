@@ -17,10 +17,11 @@ import org.almansa.app.domain.album.AlbumType;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.CategoryTag;
 import org.almansa.app.domain.album.Lable;
+import org.almansa.app.domain.album.ProducerRole;
 import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.dto.AlbumSimpleViewModel;
 import org.almansa.app.domain.dto.SongIdAndSongNo;
-import org.almansa.app.service.AlbumAddParameterModel;
+import org.almansa.app.service.AlbumAddParameter;
 import org.almansa.app.service.AlbumService;
 import org.almansa.app.util.DateUtil;
 import org.junit.Before;
@@ -53,10 +54,16 @@ public class AlbumServiceTest {
         theQ.changeLable(illionaire);
         theQ.setBornDate(1996, 1, 3);
         em.persist(theQ);
+        
+        Artist swings = new Artist();
+        swings.changeName("swings");
+        swings.setBornDate(1987, 11, 12);
+        em.persist(swings);
 
         Song song1 = new Song();
         song1.changeName("song1");
         song1.setOwnerArtist(theQ);
+        song1.addArtist(swings, ProducerRole.Featuring);
         em.persist(song1);
 
         Song song2 = new Song();
@@ -83,7 +90,7 @@ public class AlbumServiceTest {
     @Test
     public void addAlbumTest() {
         // save
-        AlbumAddParameterModel albumAddPamareters = new AlbumAddParameterModel();
+        AlbumAddParameter albumAddPamareters = new AlbumAddParameter();
         albumAddPamareters.setAlbumName("NEW AGE");
         albumAddPamareters.setAlbumType(AlbumType.LP);
         albumAddPamareters.setArtistId(getArtistByName("the quiett").getId());
@@ -99,7 +106,7 @@ public class AlbumServiceTest {
         Album album = getAlbumByName("NEW AGE");
         String song1Name = album.getSongs().get(0).getSong().getName();
         String song2Name = album.getSongs().get(1).getSong().getName();
-
+                
         // assert
         assertEquals("song1", song1Name);
         assertEquals("song2", song2Name);

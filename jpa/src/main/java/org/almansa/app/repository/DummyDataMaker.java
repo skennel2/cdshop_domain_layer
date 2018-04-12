@@ -17,6 +17,7 @@ import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.CategoryTag;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Producer;
+import org.almansa.app.domain.album.ProducerRole;
 import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
 import org.almansa.app.domain.order.PurchaseOrder;
@@ -101,10 +102,8 @@ public class DummyDataMaker {
         song2.changeName("shit is real");
         song2.setOwnerArtist(swings);
         song2.setMainProducer(chachamalon);
-        List<PersonBase> list = new ArrayList<PersonBase>();
-        list.add(theQ);
-        list.add(kidMilli);
-        song2.setArtists(list);
+        song2.addArtist(theQ, ProducerRole.Featuring);
+        song2.addArtist(kidMilli, ProducerRole.Featuring);
         em.persist(song2);
 
         Song song3 = new Song();

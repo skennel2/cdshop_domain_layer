@@ -19,6 +19,12 @@ public class PurchaseOrderLine {
 
     @Column(name = "product_quantity")
     private int quantity;
+        
+    public PurchaseOrderLine(MerchandiseBase merchandise, int quantity) {
+        super();
+        this.merchandise = merchandise;
+        this.quantity = quantity;
+    }
 
     public MerchandiseBase getMerchandise() {
         return merchandise;
@@ -30,20 +36,16 @@ public class PurchaseOrderLine {
         return new Money(amount);
     }
 
-    public void setMerchandise(MerchandiseBase merchandise) {
-        this.merchandise = merchandise;
-    }
-
     public int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     @Override
     public String toString() {
         return "PurchaseOrderLine [merchandise=" + merchandise + ", quantity=" + quantity + "]";
+    }
+    
+    protected PurchaseOrderLine() {
+        super();
     }
 }

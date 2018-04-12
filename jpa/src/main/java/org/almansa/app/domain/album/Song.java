@@ -1,10 +1,13 @@
 package org.almansa.app.domain.album;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -23,9 +26,9 @@ public class Song extends NamedEntityBase {
     @JoinColumn(name = "owner_artist_id")
     private Artist ownerArtist;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable
-    private List<PersonBase> artists;
+    @ElementCollection
+    @CollectionTable(name = "song_writers", joinColumns = @JoinColumn(name = "song_writer_id"))
+    private List<PersonAsSongWriter> artists = new ArrayList<PersonAsSongWriter>();
 
     @ManyToOne
     @JoinColumn(name = "main_producer_id")
@@ -33,11 +36,29 @@ public class Song extends NamedEntityBase {
     
     @Column(name="lylics")
     private String lylics;
+    
+    public String getDisplayName() {
+        String displayName= this.getName();
+        
+        for (PersonAsSongWriter person : artists) {
+            if(person.getRole().equals(ProducerRole.Featuring)) {
+                displayName += " ," + person.getPerson().getName();
+            }
+        }
+        
+        return displayName;
+    }
 
+    public void addArtist(PersonBase artist, ProducerRole role) {       
+        if(artist != null) {            
+            artists.add(new PersonAsSongWriter(artist, role));
+        }
+    }   
+    
     public Artist getOwnerArtist() {
         return ownerArtist;
     }
-
+    
     public void setOwnerArtist(Artist ownerArtist) {
         this.ownerArtist = ownerArtist;
     }
@@ -48,14 +69,6 @@ public class Song extends NamedEntityBase {
 
     public void setMainProducer(Producer producer) {
         this.mainProducer = producer;
-    }
-
-    public List<PersonBase> getArtists() {
-        return artists;
-    }
-
-    public void setArtists(List<PersonBase> artists) {
-        this.artists = artists;
     }
 
     public String getLylics() {

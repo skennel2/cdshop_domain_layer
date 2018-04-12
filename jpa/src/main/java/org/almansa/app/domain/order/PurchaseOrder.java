@@ -69,26 +69,24 @@ public class PurchaseOrder extends EntityBase {
     }
 
     public void addOrderLine(MerchandiseBase merchandise, int quantity) {
-        PurchaseOrderLine orderLine = new PurchaseOrderLine();
-        orderLine.setMerchandise(merchandise);
-        orderLine.setQuantity(quantity);
-
+        PurchaseOrderLine orderLine = new PurchaseOrderLine(merchandise, quantity);
         addOrderLine(orderLine);
     }
 
     public void addOrderLine(PurchaseOrderLine orderLine) {
         this.orderLines.add(orderLine);
     }
-
-    /**
+    
+    @Override
+    public String toString() {
+        return "PurchaseOrder [orderer=" + orderer + ", orderDate=" + orderDate + ", OrderLines=" + orderLines + "]";
+    }
+    
+    /*
      * for jpa
      */
     protected PurchaseOrder() {
         super();
     }
     
-    @Override
-    public String toString() {
-        return "PurchaseOrder [orderer=" + orderer + ", orderDate=" + orderDate + ", OrderLines=" + orderLines + "]";
-    }
 }

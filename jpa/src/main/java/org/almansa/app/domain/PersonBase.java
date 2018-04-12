@@ -25,13 +25,6 @@ public abstract class PersonBase extends NamedEntityBase {
         this.bornDate = bornDate;
     }
 
-    /**
-     * for jpa
-     */
-    protected PersonBase() {
-        super(null);
-    }
-
     @Temporal(TemporalType.DATE)
     @Column(name = "born_date")
     private Date bornDate;
@@ -54,5 +47,12 @@ public abstract class PersonBase extends NamedEntityBase {
     @Override
     public String toString() {
         return "PersonBase [bornDate=" + bornDate + "]";
+    }
+    
+    /**
+     * for jpa
+     */
+    protected PersonBase() {
+        super(null);
     }
 }
