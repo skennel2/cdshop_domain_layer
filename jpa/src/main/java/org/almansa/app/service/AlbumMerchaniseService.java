@@ -39,4 +39,7 @@ public class AlbumMerchaniseService extends ServiceBase{
         }
         merchandise.removeStock(amount);
     }
+    
+    public void service() {        
+    }
 }
