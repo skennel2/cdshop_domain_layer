@@ -10,6 +10,7 @@ import org.almansa.app.domain.merchandise.MerchandiseBase;
 import org.almansa.app.domain.value.Money;
 import org.almansa.app.repository.AlbumMerchandiseRepository;
 import org.almansa.app.repository.AlbumRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,6 +19,14 @@ public class AlbumMerchaniseService extends ServiceBase{
     private AlbumRepository albumRepo;
     private AlbumMerchandiseRepository merchanRepo;
 
+    @Autowired
+    public AlbumMerchaniseService(AlbumRepository albumRepo, AlbumMerchandiseRepository merchanRepo) {
+        super();
+        this.albumRepo = albumRepo;
+        this.merchanRepo = merchanRepo;
+    }
+
+    @Transactional
     public void addAlbumMerchandise(Long albumId, Money price, int remainingStock) {
         Optional<Album> album = albumRepo.findById(albumId);
 
@@ -35,11 +44,14 @@ public class AlbumMerchaniseService extends ServiceBase{
     public void removeStock(Long merchandiseId, Long amount) {
         MerchandiseBase merchandise = merchanRepo.getOne(merchandiseId);
         if(merchandise.getAmountOfStock() - amount < 0) {
-            throw new RuntimeException("lack of stock"); //TODO 
+            throw new IllegalArgumentException("lack of stock"); //TODO 
         }
         merchandise.removeStock(amount);
     }
     
-    public void service() {        
+    @Transactional
+    public void changeProductPrice(Long albumId, Money newPrice) { 
+        AlbumMerchandise merchandise = merchanRepo.getOne(albumId);
+        merchandise.setPrice(newPrice);
     }
 }
