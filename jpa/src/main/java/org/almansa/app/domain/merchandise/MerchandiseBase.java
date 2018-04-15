@@ -24,7 +24,7 @@ public abstract class MerchandiseBase extends EntityBase {
     @Embedded
     @AttributeOverride(name = "amount", column = @Column(name = "price"))
     private Money price;
-    
+
     public MerchandiseBase(Long amountOfStock, Money price) {
         super();
         this.amountOfStock = amountOfStock;
@@ -41,6 +41,10 @@ public abstract class MerchandiseBase extends EntityBase {
         }
 
         this.amountOfStock -= amount;
+    }
+
+    public boolean isAbailableOrderQuantity(long amount) {
+        return ((amountOfStock - amount) >= 0);
     }
 
     public boolean isSoldOut() {
