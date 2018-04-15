@@ -44,7 +44,7 @@ public class AlbumMerchaniseService extends ServiceBase{
     public void removeStock(Long merchandiseId, Long amount) {
         MerchandiseBase merchandise = merchanRepo.getOne(merchandiseId);
         if(merchandise.getAmountOfStock() - amount < 0) {
-            throw new IllegalArgumentException("lack of stock"); //TODO 
+            throw new IllegalArgumentException("lack of stock");
         }
         merchandise.removeStock(amount);
     }

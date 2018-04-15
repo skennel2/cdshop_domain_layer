@@ -17,23 +17,12 @@ public class Producer extends PersonBase {
     @JoinColumn(name = "agency_company_id")
     private Lable lable;
 
-    @Enumerated(EnumType.STRING)
-    public ProducerRole role;
-
     public Lable getLable() {
         return lable;
     }
 
     public void setLable(Lable lable) {
         this.lable = lable;
-    }
-
-    public ProducerRole getRole() {
-        return role;
-    }
-
-    public void setRole(ProducerRole role) {
-        this.role = role;
     }
 
     @Override

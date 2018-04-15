@@ -117,9 +117,7 @@ public class DummyDataMaker {
         AlbumMerchandise am2 = new AlbumMerchandise(new Long(500), new Money(new BigDecimal("17500")), album2);
         em.persist(am2);
 
-        ApplicationUser user = new ApplicationUser();
-        user.changeName("skennel");
-        em.persist(user);
+        ApplicationUser user = new ApplicationUser("skennel", "skennel", "1234");
 
         PurchaseOrder order = new PurchaseOrder(user, null, DateUtil.toDate(2018, 11, 2));
         order.addOrderLine(am1, 2);

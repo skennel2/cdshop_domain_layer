@@ -33,7 +33,7 @@ public class PurchaseOrderService extends ServiceBase {
     public void orderSingleMerchandise(Long userId, Long merchandiseId, int quantity) {
         ApplicationUser orderer = userRepo.getOne(userId);
         AlbumMerchandise merchandise = merchandiseRepo.getOne(merchandiseId);
-         
+
         PurchaseOrder order = new PurchaseOrder(orderer, null, new Date());
         order.addOrderLine(merchandise, 1);
 

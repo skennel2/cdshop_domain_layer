@@ -104,9 +104,7 @@ public class PersistenceTest {
         AlbumMerchandise albumMd2 = new AlbumMerchandise(new Long(200), new Money(10000), album2);
         em.persist(albumMd2);
 
-        ApplicationUser user = new ApplicationUser();
-        user.changeName("skennel");
-        em.persist(user);
+        ApplicationUser user = new ApplicationUser("skennel", "skennel", "1234");
 
         if (album != null) {
             PurchaseOrder newOrder = new PurchaseOrder(user, null, new Date());

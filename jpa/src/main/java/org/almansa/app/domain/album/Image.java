@@ -4,17 +4,23 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.almansa.app.domain.EntityBase;
+import org.almansa.app.domain.NamedEntityBase;
 
 @Entity
 @Table(name = "IMAGE")
-public class Image extends EntityBase {
+public class Image extends NamedEntityBase {
 
     @Column
     private String accessPath;
 
     @Column
     private String description;
+
+    public Image(String name, String accessPath, String description) {
+        super(name);
+        this.accessPath = accessPath;
+        this.description = description;
+    }
 
     public String getAccessPath() {
         return accessPath;
@@ -30,5 +36,12 @@ public class Image extends EntityBase {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    /*
+     * for jpa
+     */
+    protected Image() {
+        super(null);
     }
 }
