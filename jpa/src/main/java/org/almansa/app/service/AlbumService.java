@@ -14,6 +14,7 @@ import org.almansa.app.domain.dto.SongIdAndSongNo;
 import org.almansa.app.repository.AlbumRepository;
 import org.almansa.app.repository.ArtistRepository;
 import org.almansa.app.repository.SongRepository;
+import org.almansa.app.service.dto.AddAlbumRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +53,7 @@ public class AlbumService extends ServiceBase {
     }
 
     @Transactional
-    public void AddAlbum(AlbumAddParameter addParameter) {
+    public void AddAlbum(AddAlbumRequest addParameter) {
         Optional<Artist> artist = this.artistRepo.findById(addParameter.getArtistId());
 
         Album newAlbum = new AlbumBuilder().albumType(addParameter.getAlbumType()).artist(artist.get())

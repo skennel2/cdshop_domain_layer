@@ -22,8 +22,8 @@ import org.almansa.app.domain.album.ProducerRole;
 import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.dto.AlbumSimpleViewModel;
 import org.almansa.app.domain.dto.SongIdAndSongNo;
-import org.almansa.app.service.AlbumAddParameter;
 import org.almansa.app.service.AlbumService;
+import org.almansa.app.service.dto.AddAlbumRequest;
 import org.almansa.app.util.DateUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,7 +48,7 @@ public class AlbumServiceTest {
     public void makeDummies() {
         Genre hiphop = new Genre("hiphop");
         em.persist(hiphop);
-        
+
         Lable illionaire = new Lable();
         illionaire.changeName("Illionaire");
         em.persist(illionaire);
@@ -58,7 +58,7 @@ public class AlbumServiceTest {
         theQ.changeLable(illionaire);
         theQ.setBornDate(1996, 1, 3);
         em.persist(theQ);
-        
+
         Artist swings = new Artist();
         swings.changeName("swings");
         swings.setBornDate(1987, 11, 12);
@@ -71,14 +71,9 @@ public class AlbumServiceTest {
         Song song2 = new Song("song2", theQ, null, "");
         em.persist(song2);
 
-        Album album = new AlbumBuilder()
-                .artist(theQ)
-                .thisIsLPType()
-                .name("Q Train")
-                .addSong(song1, 1, false)
-                .addSong(song2, 2, false)
-                .releaseDate(DateUtil.toDate(2017, 1, 1)).Build();
-        
+        Album album = new AlbumBuilder().artist(theQ).thisIsLPType().name("Q Train").addSong(song1, 1, false)
+                .addSong(song2, 2, false).releaseDate(DateUtil.toDate(2017, 1, 1)).Build();
+
         em.persist(album);
 
         Album album2 = new AlbumBuilder().artist(theQ).thisIsLPType().name("Millionaire Poetry").Build();
@@ -90,7 +85,7 @@ public class AlbumServiceTest {
     @Test
     public void addAlbumTest() {
         // save
-        AlbumAddParameter albumAddPamareters = new AlbumAddParameter();
+        AddAlbumRequest albumAddPamareters = new AddAlbumRequest();
         albumAddPamareters.setAlbumName("NEW AGE");
         albumAddPamareters.setAlbumType(AlbumType.LP);
         albumAddPamareters.setArtistId(getArtistByName("the quiett").getId());
@@ -105,8 +100,8 @@ public class AlbumServiceTest {
         // get
         Album album = getAlbumByName("NEW AGE");
         String song1Name = album.getSongs().get(0).getSong().getName();
-        String song2Name = album.getSongs().get(1).getSong().getName();        
-        
+        String song2Name = album.getSongs().get(1).getSong().getName();
+
         // assert
         assertEquals("song1", song1Name);
         assertEquals("song2", song2Name);

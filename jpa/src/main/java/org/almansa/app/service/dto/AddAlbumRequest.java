@@ -1,4 +1,4 @@
-package org.almansa.app.service;
+package org.almansa.app.service.dto;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,7 +7,7 @@ import java.util.List;
 import org.almansa.app.domain.album.AlbumType;
 import org.almansa.app.domain.dto.SongIdAndSongNo;
 
-public class AlbumAddParameter {
+public class AddAlbumRequest {
 
     private Long artistId;
 

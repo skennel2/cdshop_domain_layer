@@ -37,7 +37,7 @@ public class Image extends NamedEntityBase {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     /*
      * for jpa
      */

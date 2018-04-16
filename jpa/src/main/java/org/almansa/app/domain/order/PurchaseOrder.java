@@ -40,8 +40,8 @@ public class PurchaseOrder extends EntityBase {
         this.orderer = orderer;
         this.orderDate = orderDate;
         this.orderLines = orderLines;
-        
-        if(orderLines == null) {
+
+        if (orderLines == null) {
             this.orderLines = new ArrayList<PurchaseOrderLine>();
         }
     }
@@ -76,17 +76,17 @@ public class PurchaseOrder extends EntityBase {
     public void addOrderLine(PurchaseOrderLine orderLine) {
         this.orderLines.add(orderLine);
     }
-    
+
     @Override
     public String toString() {
         return "PurchaseOrder [orderer=" + orderer + ", orderDate=" + orderDate + ", OrderLines=" + orderLines + "]";
     }
-    
+
     /*
      * for jpa
      */
     protected PurchaseOrder() {
         super();
     }
-    
+
 }

@@ -60,13 +60,12 @@ public class Money implements Immutable {
             return false;
         return true;
     }
-    
+
     /**
      * for jpa
      */
     protected Money() {
         super();
     }
-
 
 }

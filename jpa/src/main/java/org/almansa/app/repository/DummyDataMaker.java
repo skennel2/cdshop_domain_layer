@@ -36,7 +36,7 @@ public class DummyDataMaker {
         em.persist(hiphop);
         Genre trap = new Genre("trap");
         em.persist(trap);
-        
+
         CategoryTag tag1 = new CategoryTag();
         tag1.setName("HipHop");
 
@@ -97,7 +97,7 @@ public class DummyDataMaker {
 
         Song song = new Song("holy", swings, null, "");
         song.addPersonAsSongWriter(nochang, ProducerRole.MainProducer);
-        em.persist(song);         
+        em.persist(song);
 
         Song song2 = new Song("shit is real", swings, null, "");
         song2.addPersonAsSongWriter(theQ, ProducerRole.Featuring);

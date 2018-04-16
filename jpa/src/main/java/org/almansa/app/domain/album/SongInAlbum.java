@@ -29,7 +29,7 @@ public class SongInAlbum {
         this.no = no;
         this.isSingle = isSingle;
     }
-        
+
     public SongInAlbum(Album album, Song song, int no, boolean isSingle) {
         super();
         this.album = album;
@@ -74,7 +74,7 @@ public class SongInAlbum {
     public String toString() {
         return "SongInAlbum [album=" + album + ", song=" + song + ", no=" + no + ", isSingle=" + isSingle + "]";
     }
-    
+
     /*
      * for jpa
      */

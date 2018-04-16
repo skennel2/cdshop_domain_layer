@@ -4,7 +4,7 @@ import javax.persistence.Embeddable;
 
 import org.almansa.app.domain.NamedEntityBase;
 
-@Embeddable 
+@Embeddable
 public class Genre extends NamedEntityBase {
 
     /*

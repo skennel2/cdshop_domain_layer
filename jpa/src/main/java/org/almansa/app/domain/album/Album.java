@@ -23,7 +23,7 @@ import org.almansa.app.domain.NamedEntityBase;
 @AttributeOverride(column = @Column(name = "album_name"), name = "name")
 public class Album extends NamedEntityBase {
 
-    @ManyToOne(fetch = FetchType.LAZY) 
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "album_artist_id")
     private Artist albumArtist;
 
@@ -37,7 +37,7 @@ public class Album extends NamedEntityBase {
     @ElementCollection
     @CollectionTable(name = "album_tag", joinColumns = @JoinColumn(name = "album_tag_id"))
     private List<CategoryTag> tags;
-    
+
     @Enumerated(EnumType.STRING)
     private AlbumType albumType;
 
@@ -50,7 +50,7 @@ public class Album extends NamedEntityBase {
         this.songs = songs;
         this.tags = tags;
         this.albumType = albumType;
-        
+
         if (songs == null) {
             this.songs = new ArrayList<SongInAlbum>();
         }
@@ -59,7 +59,7 @@ public class Album extends NamedEntityBase {
             this.tags = new ArrayList<CategoryTag>();
         }
     }
-    
+
     public Artist getAlbumArtist() {
         return albumArtist;
     }
@@ -88,16 +88,16 @@ public class Album extends NamedEntityBase {
         SongInAlbum songInAlbum = new SongInAlbum(this, song, no, isSingle);
         addSong(songInAlbum);
     }
-    
+
     public void addSong(SongInAlbum songInAlbum) {
-        if(isExistsSongNumber(songInAlbum.getNo())) {
+        if (isExistsSongNumber(songInAlbum.getNo())) {
             throw new RuntimeException("Duplicated No"); // TODO Temp Exception,
         }
 
         songInAlbum.setAlbum(this);
         this.songs.add(songInAlbum);
-    }    
-    
+    }
+
     public int getNumberOfContainingSongs() {
         return songs.size();
     }
@@ -110,7 +110,7 @@ public class Album extends NamedEntityBase {
         }
         return false;
     }
-    
+
     /**
      * for jpa
      */

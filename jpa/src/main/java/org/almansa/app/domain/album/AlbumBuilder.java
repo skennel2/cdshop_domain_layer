@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.almansa.app.domain.Builder;
 
-public class AlbumBuilder implements Builder<Album>{
+public class AlbumBuilder implements Builder<Album> {
 
     private String albumName;
 
@@ -18,17 +18,17 @@ public class AlbumBuilder implements Builder<Album>{
 
     private List<SongInAlbum> songs = new ArrayList<SongInAlbum>();
 
-    private List<CategoryTag> tags = new ArrayList<CategoryTag>();   
+    private List<CategoryTag> tags = new ArrayList<CategoryTag>();
 
     public AlbumBuilder addSong(SongInAlbum song) {
         this.songs.add(song);
         return this;
     }
 
-    public AlbumBuilder addSong(Song song, int no, boolean isSingle) {      
+    public AlbumBuilder addSong(Song song, int no, boolean isSingle) {
         return addSong(new SongInAlbum(song, no, isSingle));
     }
-    
+
     public AlbumBuilder addTag(CategoryTag tag) {
         this.tags.add(tag);
         return this;

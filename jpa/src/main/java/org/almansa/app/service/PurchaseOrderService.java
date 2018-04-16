@@ -10,6 +10,7 @@ import org.almansa.app.domain.user.ApplicationUser;
 import org.almansa.app.repository.AlbumMerchandiseRepository;
 import org.almansa.app.repository.ApplicationUserRepository;
 import org.almansa.app.repository.PurchaseOrderRepository;
+import org.almansa.app.service.dto.SingleOrderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

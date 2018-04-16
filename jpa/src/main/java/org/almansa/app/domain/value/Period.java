@@ -42,7 +42,7 @@ public class Period implements Immutable {
 
         return false;
     }
-    
+
     /*
      * for jpa
      */

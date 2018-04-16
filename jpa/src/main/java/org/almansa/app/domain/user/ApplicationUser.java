@@ -21,7 +21,7 @@ public class ApplicationUser extends NamedEntityBase {
         this.loginId = loginId;
         this.password = password;
     }
-    
+
     public String getLoginId() {
         return loginId;
     }
@@ -37,12 +37,12 @@ public class ApplicationUser extends NamedEntityBase {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     /*
      * for jpa
      */
     protected ApplicationUser() {
         super(null);
     }
-      
+
 }

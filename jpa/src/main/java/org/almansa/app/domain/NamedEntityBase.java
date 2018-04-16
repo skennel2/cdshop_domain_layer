@@ -13,7 +13,7 @@ public abstract class NamedEntityBase extends EntityBase implements INamed {
         super();
         this.name = name;
     }
-    
+
     @Override
     public String getName() {
         return name;
@@ -28,7 +28,7 @@ public abstract class NamedEntityBase extends EntityBase implements INamed {
     public String toString() {
         return "NamedEntitiyBase [name=" + name + "]";
     }
-    
+
     /**
      * for jpa
      */

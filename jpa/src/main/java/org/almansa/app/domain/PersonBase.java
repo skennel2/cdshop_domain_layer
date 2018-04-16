@@ -48,7 +48,7 @@ public abstract class PersonBase extends NamedEntityBase {
     public String toString() {
         return "PersonBase [bornDate=" + bornDate + "]";
     }
-    
+
     /**
      * for jpa
      */

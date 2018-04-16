@@ -19,7 +19,7 @@ public class PurchaseOrderLine {
 
     @Column(name = "product_quantity")
     private int quantity;
-        
+
     public PurchaseOrderLine(MerchandiseBase merchandise, int quantity) {
         super();
         this.merchandise = merchandise;
@@ -44,7 +44,7 @@ public class PurchaseOrderLine {
     public String toString() {
         return "PurchaseOrderLine [merchandise=" + merchandise + ", quantity=" + quantity + "]";
     }
-    
+
     protected PurchaseOrderLine() {
         super();
     }

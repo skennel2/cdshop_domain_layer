@@ -1,4 +1,4 @@
-package org.almansa.app.service;
+package org.almansa.app.service.dto;
 
 public class SingleOrderRequest {
     private Long merchandiseId;

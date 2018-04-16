@@ -24,7 +24,7 @@ public class AlbumMerchandise extends MerchandiseBase {
     public Album getAlbum() {
         return album;
     }
-    
+
     /*
      * for jpa
      */

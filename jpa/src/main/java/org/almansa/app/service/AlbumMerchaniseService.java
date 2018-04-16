@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.almansa.app.domain.album.Album;
+import org.almansa.app.domain.dto.AlbumMerchandiseDetailViewModel;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
 import org.almansa.app.domain.merchandise.MerchandiseBase;
 import org.almansa.app.domain.value.Money;
@@ -14,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AlbumMerchaniseService extends ServiceBase{
+public class AlbumMerchaniseService extends ServiceBase {
 
     private AlbumRepository albumRepo;
     private AlbumMerchandiseRepository merchanRepo;
@@ -33,25 +34,31 @@ public class AlbumMerchaniseService extends ServiceBase{
         AlbumMerchandise newAlbumMerchandise = new AlbumMerchandise(new Long(remainingStock), price, album.get());
         merchanRepo.save(newAlbumMerchandise);
     }
-    
+
     @Transactional
     public void addStock(Long merchandiseId, Long amount) {
         MerchandiseBase merchandise = merchanRepo.getOne(merchandiseId);
         merchandise.addStock(amount);
     }
-    
+
     @Transactional
     public void removeStock(Long merchandiseId, Long amount) {
         MerchandiseBase merchandise = merchanRepo.getOne(merchandiseId);
-        if(merchandise.getAmountOfStock() - amount < 0) {
+        if (merchandise.getAmountOfStock() - amount < 0) {
             throw new IllegalArgumentException("lack of stock");
         }
         merchandise.removeStock(amount);
     }
-    
+
     @Transactional
-    public void changeProductPrice(Long albumId, Money newPrice) { 
+    public void changeProductPrice(Long albumId, Money newPrice) {
         AlbumMerchandise merchandise = merchanRepo.getOne(albumId);
         merchandise.setPrice(newPrice);
+    }
+
+    public AlbumMerchandiseDetailViewModel getDetailViewModelById(Long merchandiseId) {
+        AlbumMerchandise merchandise = merchanRepo.getOne(merchandiseId);
+
+        return new AlbumMerchandiseDetailViewModel(merchandise);
     }
 }

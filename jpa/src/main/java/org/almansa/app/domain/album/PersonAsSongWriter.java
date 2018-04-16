@@ -8,11 +8,11 @@ import javax.persistence.ManyToOne;
 import org.almansa.app.domain.PersonBase;
 
 @Embeddable
-public class PersonAsSongWriter{
-     
+public class PersonAsSongWriter {
+
     @ManyToOne
     private PersonBase person;
-    
+
     @Enumerated(EnumType.STRING)
     private ProducerRole role;
 
