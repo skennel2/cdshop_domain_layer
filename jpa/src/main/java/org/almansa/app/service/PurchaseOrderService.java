@@ -30,15 +30,17 @@ public class PurchaseOrderService extends ServiceBase {
     }
 
     @Transactional
-    public void orderSingleMerchandise(Long userId, Long merchandiseId, int quantity) {
+    public void orderSingleMerchandise(Long userId, SingleOrderRequest orderRequest) {
         ApplicationUser orderer = userRepo.getOne(userId);
-        AlbumMerchandise merchandise = merchandiseRepo.getOne(merchandiseId);
+        AlbumMerchandise merchandise = merchandiseRepo.getOne(orderRequest.getMerchandiseId());
 
-        PurchaseOrder order = new PurchaseOrder(orderer, null, new Date());
-        order.addOrderLine(merchandise, 1);
+        if (merchandise.isAbailableOrderQuantity(orderRequest.getQuantity())) {
+            PurchaseOrder order = new PurchaseOrder(orderer, null, new Date());
+            order.addOrderLine(merchandise, orderRequest.getQuantity());
 
-        merchandise.removeStock(quantity);
+            merchandise.removeStock(orderRequest.getQuantity());
 
-        orderRepo.save(order);
+            orderRepo.save(order);
+        }
     }
 }

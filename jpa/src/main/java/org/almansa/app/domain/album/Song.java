@@ -8,6 +8,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -23,13 +24,20 @@ public class Song extends NamedEntityBase {
     @JoinColumn(name = "owner_artist_id")
     private Artist ownerArtist;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "song_writers", joinColumns = @JoinColumn(name = "song_writer_id"))
     private List<PersonAsSongWriter> artists = new ArrayList<PersonAsSongWriter>();
 
     @Column(name = "lylics")
     @Lob
     private String lylics;
+
+    public Song(String name, Artist ownerArtist, String lylics) {
+        super(name);
+        this.ownerArtist = ownerArtist;
+        this.lylics = lylics;
+        this.artists = new ArrayList<PersonAsSongWriter>();
+    }
 
     public Song(String name, Artist ownerArtist, List<PersonAsSongWriter> artists, String lylics) {
         super(name);
@@ -41,7 +49,7 @@ public class Song extends NamedEntityBase {
             this.artists = new ArrayList<PersonAsSongWriter>();
         }
     }
-    
+
     public List<PersonBase> getProcedures() {
         List<PersonBase> result = new ArrayList<PersonBase>();
         for (PersonAsSongWriter personAsSongWriter : artists) {
@@ -59,7 +67,7 @@ public class Song extends NamedEntityBase {
 
         for (PersonAsSongWriter person : artists) {
             if (person.getRole().equals(ProducerRole.Featuring)) {
-                displayName += " ," + person.getPerson().getName(); //TODO string formatting
+                displayName += " ," + person.getPerson().getName(); // TODO string formatting
             }
         }
 
@@ -69,7 +77,7 @@ public class Song extends NamedEntityBase {
     public void addPersonAsSongWriter(PersonAsSongWriter personAsSongWriter) {
         this.artists.add(personAsSongWriter);
     }
-    
+
     public void addPersonAsSongWriter(PersonBase person, ProducerRole role) {
         this.artists.add(new PersonAsSongWriter(person, role));
     }

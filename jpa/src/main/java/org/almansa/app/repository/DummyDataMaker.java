@@ -12,6 +12,7 @@ import org.almansa.app.domain.album.AlbumBuilder;
 import org.almansa.app.domain.album.AlbumType;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.CategoryTag;
+import org.almansa.app.domain.album.Genre;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Producer;
 import org.almansa.app.domain.album.ProducerRole;
@@ -31,6 +32,11 @@ public class DummyDataMaker {
     private EntityManager em;
 
     public void makeDummies() {
+        Genre hiphop = new Genre("hiphop");
+        em.persist(hiphop);
+        Genre trap = new Genre("trap");
+        em.persist(trap);
+        
         CategoryTag tag1 = new CategoryTag();
         tag1.setName("HipHop");
 
@@ -91,7 +97,7 @@ public class DummyDataMaker {
 
         Song song = new Song("holy", swings, null, "");
         song.addPersonAsSongWriter(nochang, ProducerRole.MainProducer);
-        em.persist(song);
+        em.persist(song);         
 
         Song song2 = new Song("shit is real", swings, null, "");
         song2.addPersonAsSongWriter(theQ, ProducerRole.Featuring);
@@ -118,6 +124,7 @@ public class DummyDataMaker {
         em.persist(am2);
 
         ApplicationUser user = new ApplicationUser("skennel", "skennel", "1234");
+        em.persist(user);
 
         PurchaseOrder order = new PurchaseOrder(user, null, DateUtil.toDate(2018, 11, 2));
         order.addOrderLine(am1, 2);
@@ -125,9 +132,5 @@ public class DummyDataMaker {
 
         em.persist(order);
 
-    }
-
-    public Song getSong(Long id) {
-        return em.find(Song.class, id);
     }
 }

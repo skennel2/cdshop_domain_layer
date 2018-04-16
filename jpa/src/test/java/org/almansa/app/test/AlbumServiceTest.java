@@ -16,6 +16,7 @@ import org.almansa.app.domain.album.AlbumBuilder;
 import org.almansa.app.domain.album.AlbumType;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.CategoryTag;
+import org.almansa.app.domain.album.Genre;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.ProducerRole;
 import org.almansa.app.domain.album.Song;
@@ -45,6 +46,9 @@ public class AlbumServiceTest {
 
     @Before
     public void makeDummies() {
+        Genre hiphop = new Genre("hiphop");
+        em.persist(hiphop);
+        
         Lable illionaire = new Lable();
         illionaire.changeName("Illionaire");
         em.persist(illionaire);
@@ -101,8 +105,8 @@ public class AlbumServiceTest {
         // get
         Album album = getAlbumByName("NEW AGE");
         String song1Name = album.getSongs().get(0).getSong().getName();
-        String song2Name = album.getSongs().get(1).getSong().getName();
-                
+        String song2Name = album.getSongs().get(1).getSong().getName();        
+        
         // assert
         assertEquals("song1", song1Name);
         assertEquals("song2", song2Name);

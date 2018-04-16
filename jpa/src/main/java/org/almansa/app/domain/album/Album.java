@@ -37,10 +37,6 @@ public class Album extends NamedEntityBase {
     @ElementCollection
     @CollectionTable(name = "album_tag", joinColumns = @JoinColumn(name = "album_tag_id"))
     private List<CategoryTag> tags;
-
-    @ElementCollection
-    @CollectionTable(name="album_genre", joinColumns =@JoinColumn(name="album_genre_id"))
-    private List<Genre> genres;
     
     @Enumerated(EnumType.STRING)
     private AlbumType albumType;
