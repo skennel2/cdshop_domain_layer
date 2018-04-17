@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 
 import org.almansa.app.domain.value.Money;
+import org.almansa.app.test.mother.AlbumObjectMother;
 import org.junit.Test;
 
 public class ValueObjectTest {
@@ -29,6 +30,6 @@ public class ValueObjectTest {
         boolean isReferenceEqual = m1 == m2;
 
         assertEquals(true, isEqual);
-        assertEquals(false, isReferenceEqual);
+        assertEquals(false, isReferenceEqual);       
     }
 }
