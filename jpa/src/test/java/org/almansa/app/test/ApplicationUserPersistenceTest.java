@@ -3,6 +3,7 @@ package org.almansa.app.test;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.almansa.app.AppConfig;
@@ -22,7 +23,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 @Transactional
 public class ApplicationUserPersistenceTest {
 
-    @Autowired
+    @PersistenceContext
     private EntityManager em;
     
     @Test
