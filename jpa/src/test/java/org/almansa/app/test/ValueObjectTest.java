@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 
 import org.almansa.app.domain.value.Money;
-import org.almansa.app.test.mother.AlbumObjectMother;
 import org.junit.Test;
 
 public class ValueObjectTest {

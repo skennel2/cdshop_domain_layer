@@ -1,7 +1,10 @@
 package org.almansa.app.domain.user;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.almansa.app.domain.NamedEntityBase;
@@ -16,12 +19,22 @@ public class ApplicationUser extends NamedEntityBase {
     @Column(name = "password", nullable = false, length = 30)
     private String password;
 
+    @OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY) // mappedBy value -> field
+    private PersonalInfomation personalInfomation;
+    
     public ApplicationUser(String name, String loginId, String password) {
         super(name);
         this.loginId = loginId;
         this.password = password;
     }
 
+    public ApplicationUser(String name, String loginId, PersonalInfomation personalInfomation, String password) {
+        super(name);
+        this.loginId = loginId;
+        this.password = password;
+        
+    }
+    
     public String getLoginId() {
         return loginId;
     }
@@ -36,6 +49,14 @@ public class ApplicationUser extends NamedEntityBase {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public PersonalInfomation getPersonalInfomation() {
+        return personalInfomation;
+    }
+
+    public void setPersonalInfomation(PersonalInfomation personalInfomation) {
+        this.personalInfomation = personalInfomation;
     }
 
     /*

@@ -1,10 +1,10 @@
 package org.almansa.app.domain.album;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 
 import org.almansa.app.domain.NamedEntityBase;
 
-@Embeddable
+@Entity
 public class Genre extends NamedEntityBase {
 
     /*

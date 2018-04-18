@@ -1,4 +1,4 @@
-package org.almansa.app.test.mother;
+package org.almansa.app.test.objectmother;
 
 import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.album.AlbumBuilder;
@@ -6,6 +6,11 @@ import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Song;
 
+/*
+ * Object Mother
+ * 테스트코드에서 오브젝트 생성코드를 제거한다.
+ * 재사용을 통해 일관된 객체로 테스트할수 있게 해준다. 
+ */
 public final class AlbumObjectMother {
 
     public static Album createAlbum() {

@@ -86,7 +86,6 @@ public class PersistenceTest {
         Artist artist = query.getSingleResult();
 
         assertEquals("the quiett", artist.getName());
-        System.out.println(artist);
     }
 
     @Test

@@ -20,6 +20,8 @@ import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
 import org.almansa.app.domain.order.PurchaseOrder;
 import org.almansa.app.domain.user.ApplicationUser;
+import org.almansa.app.domain.user.PersonalInfomation;
+import org.almansa.app.domain.value.EmailAddress;
 import org.almansa.app.domain.value.Money;
 import org.almansa.app.util.DateUtil;
 import org.springframework.stereotype.Repository;
@@ -34,6 +36,7 @@ public class DummyDataMaker {
     public void makeDummies() {
         Genre hiphop = new Genre("hiphop");
         em.persist(hiphop);
+        
         Genre trap = new Genre("trap");
         em.persist(trap);
 
@@ -125,7 +128,20 @@ public class DummyDataMaker {
 
         ApplicationUser user = new ApplicationUser("skennel", "skennel", "1234");
         em.persist(user);
-
+        
+        PersonalInfomation userInfo = new PersonalInfomation(user, new EmailAddress("skennel@naver.com"), new Date(), "hi");
+        em.persist(userInfo);
+        
+        user.setPersonalInfomation(userInfo);
+        
+        ApplicationUser user2 = new ApplicationUser("gaeko14", "gaeko14", "3333");
+        em.persist(user2);
+        
+        PersonalInfomation userInfo2 = new PersonalInfomation(user, new EmailAddress("gaeko14@naver.com"), new Date(), "hi2");
+        em.persist(userInfo2);
+        
+        user2.setPersonalInfomation(userInfo2);
+        
         PurchaseOrder order = new PurchaseOrder(user, null, DateUtil.toDate(2018, 11, 2));
         order.addOrderLine(am1, 2);
         order.addOrderLine(am2, 1);

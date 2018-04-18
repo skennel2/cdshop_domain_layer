@@ -1,5 +1,6 @@
 package org.almansa.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.almansa.app.domain.album.AlbumBuilder;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.CategoryTag;
 import org.almansa.app.domain.album.Song;
+import org.almansa.app.domain.dto.AlbumSimpleViewModel;
 import org.almansa.app.domain.dto.SongIdAndSongNo;
 import org.almansa.app.repository.AlbumRepository;
 import org.almansa.app.repository.ArtistRepository;
@@ -74,5 +76,23 @@ public class AlbumService extends ServiceBase {
         }
 
         this.albumRepo.save(newAlbum);
+    }
+    
+    public AlbumSimpleViewModel getAlbumSimleViewModelById(Long id) {
+        Album album = albumRepo.getOne(id);
+        AlbumSimpleViewModel viewModel = new AlbumSimpleViewModel(album);
+        
+        return viewModel;
+    }
+    
+    public List<AlbumSimpleViewModel> getAlbumSimleViewModelByName(String name) {
+        List<Album> albums = albumRepo.findByName(name);
+        
+        List<AlbumSimpleViewModel> albumViewModels = new ArrayList<>();
+        for (Album item : albums) {
+            albumViewModels.add(new AlbumSimpleViewModel(item));
+        }
+        
+        return albumViewModels;
     }
 }
