@@ -19,7 +19,7 @@ public class ApplicationUser extends NamedEntityBase {
     @Column(name = "password", nullable = false, length = 30)
     private String password;
 
-    @OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY) // mappedBy value -> field
+    @OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY) // value of mappedBy -> field
     private PersonalInfomation personalInfomation;
     
     public ApplicationUser(String name, String loginId, String password) {
@@ -28,11 +28,11 @@ public class ApplicationUser extends NamedEntityBase {
         this.password = password;
     }
 
-    public ApplicationUser(String name, String loginId, PersonalInfomation personalInfomation, String password) {
+    public ApplicationUser(String name, String loginId, String password, PersonalInfomation personalInfomation) {
         super(name);
         this.loginId = loginId;
         this.password = password;
-        
+        this.personalInfomation = personalInfomation;
     }
     
     public String getLoginId() {
