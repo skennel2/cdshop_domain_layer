@@ -4,11 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.almansa.app.domain.IDescription;
 import org.almansa.app.domain.NamedEntityBase;
 
 @Entity
 @Table(name = "IMAGE")
-public class Image extends NamedEntityBase {
+public class Image extends NamedEntityBase implements IDescription{
 
     @Column
     private String accessPath;
@@ -34,10 +35,10 @@ public class Image extends NamedEntityBase {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void changeDescription(String description) {
         this.description = description;
-    }
-
+    }  
+    
     /*
      * for jpa
      */

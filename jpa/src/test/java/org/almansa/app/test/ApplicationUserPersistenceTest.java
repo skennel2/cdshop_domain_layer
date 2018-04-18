@@ -1,5 +1,7 @@
 package org.almansa.app.test;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Date;
 
 import javax.persistence.EntityManager;
@@ -10,10 +12,8 @@ import org.almansa.app.AppConfig;
 import org.almansa.app.domain.user.ApplicationUser;
 import org.almansa.app.domain.user.PersonalInfomation;
 import org.almansa.app.domain.value.EmailAddress;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -27,15 +27,24 @@ public class ApplicationUserPersistenceTest {
     private EntityManager em;
     
     @Test
-    public void getTest() {
+    public void persistTest() {
+        // persistence
         ApplicationUser user = new ApplicationUser("skennel", "skennel", "1234");
-        em.persist(em);
         
-        PersonalInfomation infomation = new PersonalInfomation(user, new EmailAddress("skennel2@gmail.com"), new Date(), "123");
-        em.persist(infomation);
-        
+        String persistedEmailAddress = "skennel2@gmail.com";
+        PersonalInfomation infomation = new PersonalInfomation(user, new EmailAddress(persistedEmailAddress), new Date(), "123");
         user.setPersonalInfomation(infomation);
+        em.persist(user);
+        em.flush();
         
-        //em.find(ApplicationUser.class, user.getId());
+        // assign
+        ApplicationUser userGet = em.find(ApplicationUser.class, user.getId());
+        
+        // action
+        PersonalInfomation infomationGet = userGet.getPersonalInfomation();
+        String emailAddress = infomationGet.getEmail().getEmailAddress();
+        
+        // assert
+        assertEquals(persistedEmailAddress, emailAddress);
     }
 }

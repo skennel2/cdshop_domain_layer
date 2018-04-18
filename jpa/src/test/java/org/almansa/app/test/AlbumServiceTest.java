@@ -84,7 +84,7 @@ public class AlbumServiceTest {
 
     @Test
     public void addAlbumTest() {
-        // save
+        // assign
         AddAlbumRequest albumAddPamareters = new AddAlbumRequest();
         albumAddPamareters.setAlbumName("NEW AGE");
         albumAddPamareters.setAlbumType(AlbumType.LP);
@@ -97,7 +97,7 @@ public class AlbumServiceTest {
 
         albumService.AddAlbum(albumAddPamareters);
 
-        // get
+        // act
         Album album = getAlbumByName("NEW AGE");
         String song1Name = album.getSongs().get(0).getSong().getName();
         String song2Name = album.getSongs().get(1).getSong().getName();
@@ -122,30 +122,38 @@ public class AlbumServiceTest {
 
     @Test
     public void albumNameChangeTest() {
+        // assign
         Album album = getAlbumByName("Q Train");
         albumService.changeAlbumName(album.getId(), "Q Train2");
 
         em.flush();
 
+        // act
         Album albumGet = getAlbumByName("Q Train2");
+        
+        // assert
         assertEquals("Q Train2", albumGet.getName());
     }
 
     @Test
     public void albumTagAddTest() {
+        // assign
         Album album = getAlbumByName("Q Train");
 
         List<String> newTags = new ArrayList<String>();
         newTags.add("c1");
         newTags.add("c2");
+        
+        // act
         albumService.addTagToAlbum(album.getId(), newTags);
 
         em.flush();
 
         Album albumGet = getAlbumByName("Q Train");
-        for (CategoryTag tag : albumGet.getTags()) {
-            System.out.println(tag);
-        }
+        
+        // assert
+        assertEquals("c1", albumGet.getTags().get(0).getName());
+        assertEquals("c2", albumGet.getTags().get(1).getName());
     }
 
     private Album getAlbumByName(String name) {
