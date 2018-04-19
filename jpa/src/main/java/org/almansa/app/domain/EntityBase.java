@@ -47,7 +47,7 @@ public abstract class EntityBase implements Entity<Long> {
     }
 
     @PrePersist
-    void onCreate() {
+    void onPersist() {
         this.setCreationDate(new Date());
     }
 

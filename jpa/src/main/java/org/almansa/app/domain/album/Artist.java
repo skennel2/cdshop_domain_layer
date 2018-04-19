@@ -1,5 +1,7 @@
 package org.almansa.app.domain.album;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -9,6 +11,7 @@ import org.almansa.app.domain.PersonBase;
 
 @Entity
 @DiscriminatorValue(value = "Artist")
+@AttributeOverride(name = "name", column = @Column(name = "artist_name"))
 public class Artist extends PersonBase {
 
     @ManyToOne

@@ -11,6 +11,7 @@ import org.almansa.app.domain.album.AlbumBuilder;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.CategoryTag;
 import org.almansa.app.domain.album.Song;
+import org.almansa.app.domain.dto.AlbumAssembler;
 import org.almansa.app.domain.dto.AlbumSimpleViewModel;
 import org.almansa.app.domain.dto.SongIdAndSongNo;
 import org.almansa.app.repository.AlbumRepository;
@@ -26,13 +27,15 @@ public class AlbumService extends ServiceBase {
     private AlbumRepository albumRepo;
     private ArtistRepository artistRepo;
     private SongRepository songRepo;
+    private AlbumAssembler albumAssembler;
 
     @Autowired
-    public AlbumService(AlbumRepository albumRepo, ArtistRepository artistRepo, SongRepository songRepo) {
+    public AlbumService(AlbumRepository albumRepo, ArtistRepository artistRepo, SongRepository songRepo, AlbumAssembler albumAssembler) {
         super();
         this.albumRepo = albumRepo;
         this.artistRepo = artistRepo;
         this.songRepo = songRepo;
+        this.albumAssembler = albumAssembler;
     }
 
     @Transactional
@@ -80,7 +83,7 @@ public class AlbumService extends ServiceBase {
     
     public AlbumSimpleViewModel getAlbumSimleViewModelById(Long id) {
         Album album = albumRepo.getOne(id);
-        AlbumSimpleViewModel viewModel = new AlbumSimpleViewModel(album);
+        AlbumSimpleViewModel viewModel = albumAssembler.albumSimpleViewModel(album);
         
         return viewModel;
     }
@@ -90,7 +93,7 @@ public class AlbumService extends ServiceBase {
         
         List<AlbumSimpleViewModel> albumViewModels = new ArrayList<>();
         for (Album item : albums) {
-            albumViewModels.add(new AlbumSimpleViewModel(item));
+            albumViewModels.add(albumAssembler.albumSimpleViewModel(item));
         }
         
         return albumViewModels;

@@ -20,6 +20,7 @@ import org.almansa.app.domain.album.Genre;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.ProducerRole;
 import org.almansa.app.domain.album.Song;
+import org.almansa.app.domain.dto.AlbumAssembler;
 import org.almansa.app.domain.dto.AlbumSimpleViewModel;
 import org.almansa.app.domain.dto.SongIdAndSongNo;
 import org.almansa.app.service.AlbumService;
@@ -40,6 +41,9 @@ public class AlbumServiceTest {
 
     @Autowired
     private AlbumService albumService;
+    
+    @Autowired 
+    private AlbumAssembler albumAssembler;
 
     @PersistenceContext
     private EntityManager em;
@@ -114,7 +118,7 @@ public class AlbumServiceTest {
     @Test
     public void viewModelTest() {
         Album album = getAlbumByName("Q Train");
-        AlbumSimpleViewModel vm = new AlbumSimpleViewModel(album);
+        AlbumSimpleViewModel vm = albumAssembler.albumSimpleViewModel(album);
 
         System.out.println(vm);
         assertEquals("Q Train", vm.getAlbumName());

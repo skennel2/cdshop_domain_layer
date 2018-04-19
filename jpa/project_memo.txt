@@ -1,1 +1,19 @@
 일대일 양방향 매핑
+
+
+--
+JPA getOne(ID), findOne(ID)
+
+getOne()  : 엔티티를 못찾으면 javax.persistence.EntityNotFoundException
+findOne() : 엔티티를 못찾으면 null 리턴  
+
+https://medium.com/@circlee7/jpa-getone-id-findone-id-aa9676dc666d
+
+
+--
+DTOAssember
+
+하나 혹은 여러개의 도메인 모델을 DTO로 변환하는 로직을 담당 
+
+https://buildplease.com/pages/repositories-dto/
+https://www.safaribooksonline.com/library/view/implementing-domain-driven-design/9780133039900/ch14lev2sec2.html

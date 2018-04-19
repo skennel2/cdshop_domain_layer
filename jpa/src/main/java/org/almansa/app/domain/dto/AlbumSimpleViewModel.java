@@ -19,33 +19,44 @@ public class AlbumSimpleViewModel {
 
     private int containingSongCount;
 
-    public AlbumSimpleViewModel(Album album) {
-        this.albumId = album.getId();
-        this.albumName = album.getName();
-        this.artistName = album.getAlbumArtist().getName();
-        this.releaseDate = album.getReleaseDate();
-        this.albumType = album.getAlbumType();
-        this.containingSongCount = album.getSongs().size();
-    }
-
     public Long getAlbumId() {
         return albumId;
+    }
+
+    public void setAlbumId(Long albumId) {
+        this.albumId = albumId;
     }
 
     public String getAlbumName() {
         return albumName;
     }
 
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
+    }
+
     public String getArtistName() {
         return artistName;
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
     }
 
     public Date getReleaseDate() {
         return releaseDate;
     }
 
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
     public AlbumType getAlbumType() {
         return albumType;
+    }
+
+    public void setAlbumType(AlbumType albumType) {
+        this.albumType = albumType;
     }
 
     public int getContainingSongCount() {
