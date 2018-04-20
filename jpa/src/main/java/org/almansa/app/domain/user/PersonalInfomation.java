@@ -22,7 +22,7 @@ import org.almansa.app.domain.value.EmailAddress;
 public class PersonalInfomation extends EntityBase {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="app_user_id")
+    @JoinColumn(name = "app_user_id")
     private ApplicationUser user;
 
     @Embedded
@@ -31,6 +31,10 @@ public class PersonalInfomation extends EntityBase {
     @Temporal(TemporalType.DATE)
     private Date bornDate;
 
+    @Lob
+    @Column(name = "desc")
+    private String description;
+
     public PersonalInfomation(ApplicationUser user, EmailAddress email, Date bornDate, String description) {
         super();
         this.user = user;
@@ -38,10 +42,6 @@ public class PersonalInfomation extends EntityBase {
         this.bornDate = bornDate;
         this.description = description;
     }
-
-    @Lob
-    @Column(name = "desc")
-    private String description;
 
     public EmailAddress getEmail() {
         return email;

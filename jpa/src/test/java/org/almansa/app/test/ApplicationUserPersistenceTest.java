@@ -47,4 +47,26 @@ public class ApplicationUserPersistenceTest {
         // assert
         assertEquals(persistedEmailAddress, emailAddress);
     }
+    
+    @Test
+    public void deleteTest() {
+        // persistence
+        ApplicationUser user = new ApplicationUser("skennel", "skennel", "1234");
+        
+        String persistedEmailAddress = "skennel2@gmail.com";
+        PersonalInfomation infomation = new PersonalInfomation(user, new EmailAddress(persistedEmailAddress), new Date(), "123");
+        user.setPersonalInfomation(infomation);
+        em.persist(user);
+        em.flush();
+        
+        // assign
+        ApplicationUser userGet = em.find(ApplicationUser.class, user.getId());
+        
+        // action
+        PersonalInfomation infomationGet = userGet.getPersonalInfomation();
+        String emailAddress = infomationGet.getEmail().getEmailAddress();
+        
+        // assert
+        assertEquals(persistedEmailAddress, emailAddress);
+    }
 }

@@ -19,7 +19,7 @@ public class ApplicationUser extends NamedEntityBase {
     @Column(name = "password", nullable = false, length = 30)
     private String password;
 
-    @OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY) // value of mappedBy -> field
+    @OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY) // value of mappedBy -> field of 
     private PersonalInfomation personalInfomation;
     
     public ApplicationUser(String name, String loginId, String password) {
