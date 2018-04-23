@@ -35,9 +35,6 @@ public class PersonalInfomation extends EntityBase {
     @JoinColumn(name = "app_user_id")
     private ApplicationUser user;
 
-    /*
-     * for jpa
-     */
     protected PersonalInfomation() {
         super();
     }
