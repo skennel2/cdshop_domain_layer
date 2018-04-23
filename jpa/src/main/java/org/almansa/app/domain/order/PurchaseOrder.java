@@ -23,17 +23,24 @@ import org.springframework.lang.NonNull;
 @Table(name = "PURCHASE_ORDER")
 public class PurchaseOrder extends EntityBase {
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date orderDate;
+
     @ManyToOne
     @NonNull
     @JoinColumn(name = "odered_user_id")
     private ApplicationUser orderer;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date orderDate;
-
     @ElementCollection
     @CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "order_id"))
     private List<PurchaseOrderLine> orderLines;
+
+    /*
+     * for jpa
+     */
+    protected PurchaseOrder() {
+        super();
+    }
 
     public PurchaseOrder(ApplicationUser orderer, List<PurchaseOrderLine> orderLines, Date orderDate) {
         super();
@@ -46,16 +53,13 @@ public class PurchaseOrder extends EntityBase {
         }
     }
 
-    public ApplicationUser getOrderer() {
-        return orderer;
+    public void addOrderLine(MerchandiseBase merchandise, int quantity) {
+        PurchaseOrderLine orderLine = new PurchaseOrderLine(merchandise, quantity);
+        addOrderLine(orderLine);
     }
 
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public List<PurchaseOrderLine> getOrderLines() {
-        return orderLines;
+    public void addOrderLine(PurchaseOrderLine orderLine) {
+        this.orderLines.add(orderLine);
     }
 
     public Money calculateTotalPrice() {
@@ -68,25 +72,21 @@ public class PurchaseOrder extends EntityBase {
         return money;
     }
 
-    public void addOrderLine(MerchandiseBase merchandise, int quantity) {
-        PurchaseOrderLine orderLine = new PurchaseOrderLine(merchandise, quantity);
-        addOrderLine(orderLine);
+    public Date getOrderDate() {
+        return orderDate;
     }
 
-    public void addOrderLine(PurchaseOrderLine orderLine) {
-        this.orderLines.add(orderLine);
+    public ApplicationUser getOrderer() {
+        return orderer;
+    }
+
+    public List<PurchaseOrderLine> getOrderLines() {
+        return orderLines;
     }
 
     @Override
     public String toString() {
         return "PurchaseOrder [orderer=" + orderer + ", orderDate=" + orderDate + ", OrderLines=" + orderLines + "]";
-    }
-
-    /*
-     * for jpa
-     */
-    protected PurchaseOrder() {
-        super();
     }
 
 }

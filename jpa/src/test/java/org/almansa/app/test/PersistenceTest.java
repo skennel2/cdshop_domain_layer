@@ -34,6 +34,17 @@ public class PersistenceTest {
     @PersistenceContext
     private EntityManager em;
 
+    @Test
+    public void joinQueryTest() {
+        TypedQuery<Artist> query = em.createQuery(
+                "SELECT B FROM Album A INNER JOIN A.albumArtist B WHERE B.name = :aritst_name", Artist.class);
+
+        query.setParameter("aritst_name", "the quiett");
+        Artist artist = query.getSingleResult();
+
+        assertEquals("the quiett", artist.getName());
+    }
+
     @Before
     public void makeDummies() {
         Lable illionaire = new Lable();
@@ -61,31 +72,6 @@ public class PersistenceTest {
         Album album2 = new AlbumBuilder().artist(theQ).thisIsLPType().name("Millionaire Poetry").Build();
         em.persist(album2);
         em.flush();
-    }
-
-    @Test
-    public void persistAndFindTest() {
-        Album album = new AlbumBuilder().name("illmatic").thisIsLPType().Build();
-
-        em.persist(album);
-        em.flush();
-
-        Album albumFind = em.find(Album.class, album.getId());
-
-        boolean isEquals = album.equals(albumFind);
-        assertEquals(true, isEquals);
-        assertEquals("illmatic", albumFind.getName());
-    }
-
-    @Test
-    public void joinQueryTest() {
-        TypedQuery<Artist> query = em.createQuery(
-                "SELECT B FROM Album A INNER JOIN A.albumArtist B WHERE B.name = :aritst_name", Artist.class);
-
-        query.setParameter("aritst_name", "the quiett");
-        Artist artist = query.getSingleResult();
-
-        assertEquals("the quiett", artist.getName());
     }
 
     @Test
@@ -118,5 +104,19 @@ public class PersistenceTest {
         } else {
             fail("album not found");
         }
+    }
+
+    @Test
+    public void persistAndFindTest() {
+        Album album = new AlbumBuilder().name("illmatic").thisIsLPType().Build();
+
+        em.persist(album);
+        em.flush();
+
+        Album albumFind = em.find(Album.class, album.getId());
+
+        boolean isEquals = album.equals(albumFind);
+        assertEquals(true, isEquals);
+        assertEquals("illmatic", albumFind.getName());
     }
 }

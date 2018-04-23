@@ -35,6 +35,68 @@ public class AlbumRepositoryTest {
     @PersistenceContext
     private EntityManager em;
 
+    @Test
+    public void findByAlbumNameNotExistTest() {
+        String albumName = "Not Exists";
+
+        List<Album> list = albumRepo.findByName(albumName);
+
+        for (Album album : list) {
+            assertEquals(albumName, album.getName());
+        }
+    }
+
+    @Test
+    public void findByAlbumNameNullTest() {
+        String albumName = null;
+
+        List<Album> list = albumRepo.findByName(albumName);
+
+        for (Album album : list) {
+            assertEquals(albumName, album.getName());
+        }
+    }
+
+    @Test
+    public void findByAlbumNameTest() {
+        String albumName = "Millionaire Poetry";
+
+        List<Album> list = albumRepo.findByName(albumName);
+
+        for (Album album : list) {
+            assertEquals(albumName, album.getName());
+        }
+    }
+
+    @Test
+    public void findByArtistNameNotExistTest() {
+        String artistName = "Not Exists";
+
+        List<Album> list = albumRepo.findByArtistName(artistName);
+
+        assertEquals(0, list.size());
+    }
+
+    @Test
+    public void findByArtistNameNullTest() {
+        String artistName = null;
+
+        List<Album> list = albumRepo.findByArtistName(artistName);
+
+        assertEquals(0, list.size());
+    }
+
+    @Test
+    public void findByArtistNameTest() {
+        String artistName = "the quiett";
+
+        List<Album> list = albumRepo.findByArtistName(artistName);
+
+        for (Album album : list) {
+            assertEquals(artistName, album.getAlbumArtist().getName());
+        }
+    }
+
     @Before
     public void makeDummies() {
         Lable illionaire = new Lable();
@@ -65,65 +127,16 @@ public class AlbumRepositoryTest {
     }
 
     @Test
-    public void findByArtistNameTest() {
-        String artistName = "the quiett";
+    public void saveTest() {
+        Album newAlbum = new AlbumBuilder().artist(null).name("newAlbum").releaseDate(DateUtil.toDate(2017, 12, 1))
+                .Build();
+        albumRepo.save(newAlbum);
 
-        List<Album> list = albumRepo.findByArtistName(artistName);
+        em.flush();
 
-        for (Album album : list) {
-            assertEquals(artistName, album.getAlbumArtist().getName());
-        }
-    }
-
-    @Test
-    public void findByArtistNameNotExistTest() {
-        String artistName = "Not Exists";
-
-        List<Album> list = albumRepo.findByArtistName(artistName);
-
-        assertEquals(0, list.size());
-    }
-
-    @Test
-    public void findByArtistNameNullTest() {
-        String artistName = null;
-
-        List<Album> list = albumRepo.findByArtistName(artistName);
-
-        assertEquals(0, list.size());
-    }
-
-    @Test
-    public void findByAlbumNameTest() {
-        String albumName = "Millionaire Poetry";
-
-        List<Album> list = albumRepo.findByName(albumName);
-
-        for (Album album : list) {
-            assertEquals(albumName, album.getName());
-        }
-    }
-
-    @Test
-    public void findByAlbumNameNotExistTest() {
-        String albumName = "Not Exists";
-
-        List<Album> list = albumRepo.findByName(albumName);
-
-        for (Album album : list) {
-            assertEquals(albumName, album.getName());
-        }
-    }
-
-    @Test
-    public void findByAlbumNameNullTest() {
-        String albumName = null;
-
-        List<Album> list = albumRepo.findByName(albumName);
-
-        for (Album album : list) {
-            assertEquals(albumName, album.getName());
-        }
+        List<Album> list = albumRepo.findByName("newAlbum");
+        System.out.println(list.get(0).getName());
+        assertEquals(1, list.size());
     }
 
     @Test
@@ -143,18 +156,5 @@ public class AlbumRepositoryTest {
         for (Album album : list) {
             assertEquals(albumName, album.getName());
         }
-    }
-
-    @Test
-    public void saveTest() {
-        Album newAlbum = new AlbumBuilder().artist(null).name("newAlbum").releaseDate(DateUtil.toDate(2017, 12, 1))
-                .Build();
-        albumRepo.save(newAlbum);
-
-        em.flush();
-
-        List<Album> list = albumRepo.findByName("newAlbum");
-        System.out.println(list.get(0).getName());
-        assertEquals(1, list.size());
     }
 }

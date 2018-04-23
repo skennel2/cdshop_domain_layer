@@ -9,12 +9,12 @@ public class SingleOrderRequest {
         return merchandiseId;
     }
 
-    public void setMerchandiseId(Long merchandiseId) {
-        this.merchandiseId = merchandiseId;
-    }
-
     public int getQuantity() {
         return quantity;
+    }
+
+    public void setMerchandiseId(Long merchandiseId) {
+        this.merchandiseId = merchandiseId;
     }
 
     public void setQuantity(int quantity) {

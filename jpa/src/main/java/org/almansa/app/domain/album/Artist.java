@@ -18,12 +18,12 @@ public class Artist extends PersonBase {
     @JoinColumn(name = "agency_company_id")
     private Lable lable;
 
-    public Lable getLable() {
-        return lable;
-    }
-
     public void changeLable(Lable lable) {
         this.lable = lable;
+    }
+
+    public Lable getLable() {
+        return lable;
     }
 
     @Override

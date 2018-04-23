@@ -25,6 +25,13 @@ public abstract class MerchandiseBase extends EntityBase {
     @AttributeOverride(name = "amount", column = @Column(name = "price"))
     private Money price;
 
+    /*
+     * for jpa
+     */
+    protected MerchandiseBase() {
+        super();
+    }
+
     public MerchandiseBase(Long amountOfStock, Money price) {
         super();
         this.amountOfStock = amountOfStock;
@@ -35,12 +42,12 @@ public abstract class MerchandiseBase extends EntityBase {
         this.amountOfStock += amount;
     }
 
-    public void removeStock(long amount) {
-        if ((amountOfStock - amount) < 0) {
-            throw new IllegalArgumentException("stock is lack");
-        }
+    public Long getAmountOfStock() {
+        return amountOfStock;
+    }
 
-        this.amountOfStock -= amount;
+    public Money getPrice() {
+        return price;
     }
 
     public boolean isAbailableOrderQuantity(long amount) {
@@ -51,26 +58,19 @@ public abstract class MerchandiseBase extends EntityBase {
         return amountOfStock.longValue() == 0;
     }
 
-    public Long getAmountOfStock() {
-        return amountOfStock;
+    public void removeStock(long amount) {
+        if ((amountOfStock - amount) < 0) {
+            throw new IllegalArgumentException("stock is lack");
+        }
+
+        this.amountOfStock -= amount;
     }
 
     public void setAmountOfStock(Long amountOfStock) {
         this.amountOfStock = amountOfStock;
     }
 
-    public Money getPrice() {
-        return price;
-    }
-
     public void setPrice(Money price) {
         this.price = price;
-    }
-
-    /*
-     * for jpa
-     */
-    protected MerchandiseBase() {
-        super();
     }
 }

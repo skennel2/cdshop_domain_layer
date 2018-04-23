@@ -13,21 +13,21 @@ public class SongInAlbum {
     @JoinColumn(name = "album_id")
     private Album album;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "song_id")
-    private Song song;
+    @Column(name = "is_single")
+    private boolean isSingle;
 
     @Column(name = "no", nullable = false)
     private int no;
 
-    @Column(name = "is_single")
-    private boolean isSingle;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "song_id")
+    private Song song;
 
-    public SongInAlbum(Song song, int no, boolean isSingle) {
+    /*
+     * for jpa
+     */
+    protected SongInAlbum() {
         super();
-        this.song = song;
-        this.no = no;
-        this.isSingle = isSingle;
     }
 
     public SongInAlbum(Album album, Song song, int no, boolean isSingle) {
@@ -38,47 +38,47 @@ public class SongInAlbum {
         this.isSingle = isSingle;
     }
 
+    public SongInAlbum(Song song, int no, boolean isSingle) {
+        super();
+        this.song = song;
+        this.no = no;
+        this.isSingle = isSingle;
+    }
+
     public Album getAlbum() {
         return album;
-    }
-
-    public void setAlbum(Album album) {
-        this.album = album;
-    }
-
-    public Song getSong() {
-        return song;
-    }
-
-    public void setSong(Song song) {
-        this.song = song;
     }
 
     public int getNo() {
         return no;
     }
 
-    public void setNo(int no) {
-        this.no = no;
+    public Song getSong() {
+        return song;
     }
 
     public boolean isSingle() {
         return isSingle;
     }
 
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
+
     public void setSingle(boolean isSingle) {
         this.isSingle = isSingle;
+    }
+
+    public void setSong(Song song) {
+        this.song = song;
     }
 
     @Override
     public String toString() {
         return "SongInAlbum [album=" + album + ", song=" + song + ", no=" + no + ", isSingle=" + isSingle + "]";
-    }
-
-    /*
-     * for jpa
-     */
-    protected SongInAlbum() {
-        super();
     }
 }

@@ -2,7 +2,6 @@ package org.almansa.app.domain.dto;
 
 import java.util.Date;
 
-import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.album.AlbumType;
 
 public class AlbumSimpleViewModel {
@@ -11,60 +10,60 @@ public class AlbumSimpleViewModel {
 
     private String albumName;
 
-    private String artistName;
-
-    private Date releaseDate;
-
     private AlbumType albumType;
+
+    private String artistName;
 
     private int containingSongCount;
 
+    private Date releaseDate;
+
     public Long getAlbumId() {
         return albumId;
-    }
-
-    public void setAlbumId(Long albumId) {
-        this.albumId = albumId;
     }
 
     public String getAlbumName() {
         return albumName;
     }
 
-    public void setAlbumName(String albumName) {
-        this.albumName = albumName;
+    public AlbumType getAlbumType() {
+        return albumType;
     }
 
     public String getArtistName() {
         return artistName;
     }
 
-    public void setArtistName(String artistName) {
-        this.artistName = artistName;
+    public int getContainingSongCount() {
+        return containingSongCount;
     }
 
     public Date getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setAlbumId(Long albumId) {
+        this.albumId = albumId;
     }
 
-    public AlbumType getAlbumType() {
-        return albumType;
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
     }
 
     public void setAlbumType(AlbumType albumType) {
         this.albumType = albumType;
     }
 
-    public int getContainingSongCount() {
-        return containingSongCount;
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
     }
 
     public void setContainingSongCount(int containingSongCount) {
         this.containingSongCount = containingSongCount;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     @Override

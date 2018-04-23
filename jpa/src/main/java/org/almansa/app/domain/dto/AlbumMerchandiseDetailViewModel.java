@@ -8,11 +8,11 @@ import org.almansa.app.domain.value.Money;
 
 public class AlbumMerchandiseDetailViewModel implements Immutable {
 
-    private Long merchandiseId;
+    private String albumArtistName;
 
     private String albumName;
 
-    private String albumArtistName;
+    private Long merchandiseId;
 
     private Money price;
 
@@ -28,16 +28,16 @@ public class AlbumMerchandiseDetailViewModel implements Immutable {
         this.releaseDate = merchandise.getAlbum().getReleaseDate();
     }
 
-    public Long getMerchandiseId() {
-        return merchandiseId;
+    public String getAlbumArtistName() {
+        return albumArtistName;
     }
 
     public String getAlbumName() {
         return albumName;
     }
 
-    public String getAlbumArtistName() {
-        return albumArtistName;
+    public Long getMerchandiseId() {
+        return merchandiseId;
     }
 
     public Money getPrice() {

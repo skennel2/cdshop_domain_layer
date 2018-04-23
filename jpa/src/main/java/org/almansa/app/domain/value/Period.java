@@ -17,6 +17,13 @@ public class Period implements Immutable {
     @Temporal(TemporalType.DATE)
     private Date toDate;
 
+    /*
+     * for jpa
+     */
+    protected Period() {
+        super();
+    }
+
     public Period(Date fromDate, Date toDate) {
         super();
 
@@ -41,12 +48,5 @@ public class Period implements Immutable {
         }
 
         return false;
-    }
-
-    /*
-     * for jpa
-     */
-    protected Period() {
-        super();
     }
 }

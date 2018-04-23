@@ -9,9 +9,11 @@ import org.almansa.app.domain.dto.SongIdAndSongNo;
 
 public class AddAlbumRequest {
 
-    private Long artistId;
-
     private String albumName;
+
+    private AlbumType albumType;
+
+    private Long artistId;
 
     private Date releaseDate;
 
@@ -19,53 +21,51 @@ public class AddAlbumRequest {
 
     private List<String> tag = new ArrayList<String>();
 
-    private AlbumType albumType;
-
-    public Long getArtistId() {
-        return artistId;
-    }
-
-    public void setArtistId(Long artistId) {
-        this.artistId = artistId;
-    }
-
     public String getAlbumName() {
         return albumName;
-    }
-
-    public void setAlbumName(String albumName) {
-        this.albumName = albumName;
-    }
-
-    public Date getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public List<SongIdAndSongNo> getSongIds() {
-        return songIds;
-    }
-
-    public void setSongIds(List<SongIdAndSongNo> songIds) {
-        this.songIds = songIds;
-    }
-
-    public List<String> getTag() {
-        return tag;
-    }
-
-    public void setTag(List<String> tag) {
-        this.tag = tag;
     }
 
     public AlbumType getAlbumType() {
         return albumType;
     }
 
+    public Long getArtistId() {
+        return artistId;
+    }
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    public List<SongIdAndSongNo> getSongIds() {
+        return songIds;
+    }
+
+    public List<String> getTag() {
+        return tag;
+    }
+
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
+    }
+
     public void setAlbumType(AlbumType albumType) {
         this.albumType = albumType;
+    }
+
+    public void setArtistId(Long artistId) {
+        this.artistId = artistId;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setSongIds(List<SongIdAndSongNo> songIds) {
+        this.songIds = songIds;
+    }
+
+    public void setTag(List<String> tag) {
+        this.tag = tag;
     }
 }

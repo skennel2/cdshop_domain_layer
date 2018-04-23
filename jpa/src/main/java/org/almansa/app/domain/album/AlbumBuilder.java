@@ -8,11 +8,11 @@ import org.almansa.app.domain.Builder;
 
 public class AlbumBuilder implements Builder<Album> {
 
+    private Artist albumArtist;
+
     private String albumName;
 
     private AlbumType albumType;
-
-    private Artist albumArtist;
 
     private Date releaseDate;
 
@@ -20,13 +20,13 @@ public class AlbumBuilder implements Builder<Album> {
 
     private List<CategoryTag> tags = new ArrayList<CategoryTag>();
 
+    public AlbumBuilder addSong(Song song, int no, boolean isSingle) {
+        return addSong(new SongInAlbum(song, no, isSingle));
+    }
+
     public AlbumBuilder addSong(SongInAlbum song) {
         this.songs.add(song);
         return this;
-    }
-
-    public AlbumBuilder addSong(Song song, int no, boolean isSingle) {
-        return addSong(new SongInAlbum(song, no, isSingle));
     }
 
     public AlbumBuilder addTag(CategoryTag tag) {
@@ -34,28 +34,8 @@ public class AlbumBuilder implements Builder<Album> {
         return this;
     }
 
-    public AlbumBuilder songs(List<SongInAlbum> songs) {
-        this.songs = songs;
-        return this;
-    }
-
-    public AlbumBuilder tags(List<CategoryTag> tags) {
-        this.tags = tags;
-        return this;
-    }
-
     public AlbumBuilder albumName(String name) {
         this.albumName = name;
-        return this;
-    }
-
-    public AlbumBuilder thisIsLPType() {
-        albumType = AlbumType.LP;
-        return this;
-    }
-
-    public AlbumBuilder thisIsEPType() {
-        albumType = AlbumType.EP;
         return this;
     }
 
@@ -69,9 +49,10 @@ public class AlbumBuilder implements Builder<Album> {
         return this;
     }
 
-    public AlbumBuilder releaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
-        return this;
+    @Override
+    public Album Build() {
+        Album album = new Album(albumName, albumArtist, releaseDate, songs, tags, albumType);
+        return album;
     }
 
     public AlbumBuilder name(String name) {
@@ -79,9 +60,28 @@ public class AlbumBuilder implements Builder<Album> {
         return this;
     }
 
-    @Override
-    public Album Build() {
-        Album album = new Album(albumName, albumArtist, releaseDate, songs, tags, albumType);
-        return album;
+    public AlbumBuilder releaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+        return this;
+    }
+
+    public AlbumBuilder songs(List<SongInAlbum> songs) {
+        this.songs = songs;
+        return this;
+    }
+
+    public AlbumBuilder tags(List<CategoryTag> tags) {
+        this.tags = tags;
+        return this;
+    }
+
+    public AlbumBuilder thisIsEPType() {
+        albumType = AlbumType.EP;
+        return this;
+    }
+
+    public AlbumBuilder thisIsLPType() {
+        albumType = AlbumType.LP;
+        return this;
     }
 }

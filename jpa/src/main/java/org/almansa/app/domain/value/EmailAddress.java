@@ -10,30 +10,25 @@ import org.almansa.app.domain.Immutable;
 @Embeddable
 public class EmailAddress implements Immutable {
 
-    @Column(name = "email_address")
-    private String emailAddress;
-
-    public EmailAddress(String emailAddress) {
-        super();
-        this.emailAddress = emailAddress;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
     public static boolean isFormatValid(String email) {
         Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
         return emailPattern.matcher(email).find();
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((emailAddress == null) ? 0 : emailAddress.hashCode());
-        return result;
+    @Column(name = "email_address")
+    private String emailAddress;
+
+    /*
+     * for jpa
+     */
+    protected EmailAddress() {
+        super();
+    }
+
+    public EmailAddress(String emailAddress) {
+        super();
+        this.emailAddress = emailAddress;
     }
 
     @Override
@@ -53,10 +48,15 @@ public class EmailAddress implements Immutable {
         return true;
     }
 
-    /*
-     * for jpa
-     */
-    protected EmailAddress() {
-        super();
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((emailAddress == null) ? 0 : emailAddress.hashCode());
+        return result;
     }
 }

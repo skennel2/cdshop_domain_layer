@@ -19,9 +19,16 @@ public class ApplicationUser extends NamedEntityBase {
     @Column(name = "password", nullable = false, length = 30)
     private String password;
 
-    @OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY) // value of mappedBy -> field of 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // value of mappedBy -> field of
     private PersonalInfomation personalInfomation;
-    
+
+    /*
+     * for jpa
+     */
+    protected ApplicationUser() {
+        super(null);
+    }
+
     public ApplicationUser(String name, String loginId, String password) {
         super(name);
         this.loginId = loginId;
@@ -34,36 +41,29 @@ public class ApplicationUser extends NamedEntityBase {
         this.password = password;
         this.personalInfomation = personalInfomation;
     }
-    
+
     public String getLoginId() {
         return loginId;
-    }
-
-    public void setLoginId(String loginId) {
-        this.loginId = loginId;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
     public PersonalInfomation getPersonalInfomation() {
         return personalInfomation;
     }
 
-    public void setPersonalInfomation(PersonalInfomation personalInfomation) {
-        this.personalInfomation = personalInfomation;
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
     }
 
-    /*
-     * for jpa
-     */
-    protected ApplicationUser() {
-        super(null);
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setPersonalInfomation(PersonalInfomation personalInfomation) {
+        this.personalInfomation = personalInfomation;
     }
 
 }

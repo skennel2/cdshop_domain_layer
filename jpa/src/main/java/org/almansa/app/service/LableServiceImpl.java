@@ -35,8 +35,9 @@ public class LableServiceImpl implements LableService {
     }
 
     @Override
-    public List<Lable> getByName(String name) {
-        return lableRepo.findByName(name);
+    public void delete(Long id) {
+        // TODO Auto-generated method stub
+
     }
 
     @Override
@@ -52,8 +53,7 @@ public class LableServiceImpl implements LableService {
     }
 
     @Override
-    public void delete(Long id) {
-        // TODO Auto-generated method stub
-
+    public List<Lable> getByName(String name) {
+        return lableRepo.findByName(name);
     }
 }

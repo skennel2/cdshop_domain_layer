@@ -16,6 +16,10 @@ public class PersonAsSongWriter {
     @Enumerated(EnumType.STRING)
     private ProducerRole role;
 
+    protected PersonAsSongWriter() {
+        super();
+    }
+
     public PersonAsSongWriter(PersonBase person, ProducerRole role) {
         super();
         this.person = person;
@@ -28,9 +32,5 @@ public class PersonAsSongWriter {
 
     public ProducerRole getRole() {
         return role;
-    }
-
-    protected PersonAsSongWriter() {
-        super();
     }
 }

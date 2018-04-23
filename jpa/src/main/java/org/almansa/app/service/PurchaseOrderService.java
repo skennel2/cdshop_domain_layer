@@ -1,6 +1,7 @@
 package org.almansa.app.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -17,9 +18,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PurchaseOrderService extends ServiceBase {
 
+    private AlbumMerchandiseRepository merchandiseRepo;
     private PurchaseOrderRepository orderRepo;
     private ApplicationUserRepository userRepo;
-    private AlbumMerchandiseRepository merchandiseRepo;
 
     @Autowired
     public PurchaseOrderService(PurchaseOrderRepository orderRepo, ApplicationUserRepository userRepo,
@@ -31,8 +32,27 @@ public class PurchaseOrderService extends ServiceBase {
     }
 
     @Transactional
-    public void orderSingleMerchandise(Long userId, SingleOrderRequest orderRequest) {
+    public void orderMerchandise(Long userId, List<SingleOrderRequest> requests) {
         ApplicationUser orderer = userRepo.getOne(userId);
+
+        PurchaseOrder order = new PurchaseOrder(orderer, null, new Date());
+
+        for (SingleOrderRequest singleOrderRequest : requests) {
+            AlbumMerchandise merchandise = merchandiseRepo.getOne(singleOrderRequest.getMerchandiseId());
+
+            if (merchandise.isAbailableOrderQuantity(singleOrderRequest.getQuantity())) {
+                order.addOrderLine(merchandise, singleOrderRequest.getQuantity());
+                merchandise.removeStock(singleOrderRequest.getQuantity());
+            } else {
+                throw new OrderException(merchandise.getId().toString() + " lack stock");
+            }
+        }
+
+        orderRepo.save(order);
+    }
+
+    @Transactional
+    private void orderSingleMerchandise(ApplicationUser orderer, SingleOrderRequest orderRequest) {
         AlbumMerchandise merchandise = merchandiseRepo.getOne(orderRequest.getMerchandiseId());
 
         if (merchandise.isAbailableOrderQuantity(orderRequest.getQuantity())) {
@@ -43,5 +63,11 @@ public class PurchaseOrderService extends ServiceBase {
 
             orderRepo.save(order);
         }
+    }
+
+    @Transactional
+    public void orderSingleMerchandise(Long userId, SingleOrderRequest orderRequest) {
+        ApplicationUser orderer = userRepo.getOne(userId);
+        orderSingleMerchandise(orderer, orderRequest);
     }
 }

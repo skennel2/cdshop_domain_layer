@@ -1,5 +1,5 @@
 package org.almansa.app.domain.album;
 
 public enum ProducerRole {
-    MainProducer, Producer, Featuring, LylicsWriter, Session, AdditionalVocal, SoundEngineer
+    AdditionalVocal, Featuring, LylicsWriter, MainProducer, Producer, Session, SoundEngineer
 }

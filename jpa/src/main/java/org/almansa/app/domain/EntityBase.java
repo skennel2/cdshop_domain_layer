@@ -16,53 +16,15 @@ import org.springframework.lang.NonNull;
 @MappedSuperclass
 public abstract class EntityBase implements Entity<Long> {
 
-    @Id
-    @GeneratedValue
-    @NonNull
-    private Long id;
-
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "creation_date")
     private Date creationDate;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public boolean isNew() {
-        return id == null;
-    }
-
-    @PrePersist
-    void onPersist() {
-        this.setCreationDate(new Date());
-    }
-
-    @Override
-    public String toString() {
-        return "EntityBase [id=" + id + "]";
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
+    @Id
+    @GeneratedValue
+    @NonNull
+    private Long id;
 
     @Override
     public boolean equals(Object obj) {
@@ -79,5 +41,45 @@ public abstract class EntityBase implements Entity<Long> {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    public boolean isNew() {
+        return id == null;
+    }
+
+    @PrePersist
+    void onPersist() {
+        this.setCreationDate(new Date());
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "EntityBase [id=" + id + "]";
     }
 }

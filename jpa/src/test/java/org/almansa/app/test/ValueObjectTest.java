@@ -29,6 +29,6 @@ public class ValueObjectTest {
         boolean isReferenceEqual = m1 == m2;
 
         assertEquals(true, isEqual);
-        assertEquals(false, isReferenceEqual);       
+        assertEquals(false, isReferenceEqual);
     }
 }

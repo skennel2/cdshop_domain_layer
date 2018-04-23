@@ -21,13 +21,6 @@ import org.almansa.app.domain.value.EmailAddress;
 @Table(name = "APP_USER_PERSONAL_INFO")
 public class PersonalInfomation extends EntityBase {
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "app_user_id")
-    private ApplicationUser user;
-
-    @Embedded
-    private EmailAddress email;
-
     @Temporal(TemporalType.DATE)
     private Date bornDate;
 
@@ -35,16 +28,26 @@ public class PersonalInfomation extends EntityBase {
     @Column(name = "desc")
     private String description;
 
+    @Embedded
+    private EmailAddress email;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "app_user_id")
+    private ApplicationUser user;
+
+    /*
+     * for jpa
+     */
+    protected PersonalInfomation() {
+        super();
+    }
+
     public PersonalInfomation(ApplicationUser user, EmailAddress email, Date bornDate, String description) {
         super();
         this.user = user;
         this.email = email;
         this.bornDate = bornDate;
         this.description = description;
-    }
-
-    public EmailAddress getEmail() {
-        return email;
     }
 
     public Date getBornDate() {
@@ -55,11 +58,8 @@ public class PersonalInfomation extends EntityBase {
         return description;
     }
 
-    /*
-     * for jpa
-     */
-    protected PersonalInfomation() {
-        super();
+    public EmailAddress getEmail() {
+        return email;
     }
 
 }

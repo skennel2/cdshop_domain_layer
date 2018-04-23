@@ -23,6 +23,16 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configurable
 public class AppConfig {
 
+    private Properties additionalProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.format_sql", "true");
+        properties.setProperty("hibernate.id.new_generator_mappings", "true");
+        return properties;
+    }
+
     @Bean
     public DataSource dataSource() throws ClassNotFoundException {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -31,19 +41,6 @@ public class AppConfig {
         dataSource.setUsername("sa");
 
         return dataSource;
-    }
-
-    @Bean
-    public JpaTransactionManager transactionManager(EntityManagerFactory emf) throws ClassNotFoundException {
-        JpaTransactionManager jtm = new JpaTransactionManager();
-        jtm.setEntityManagerFactory(entityManagerFactory().getObject());
-
-        return jtm;
-    }
-
-    @Bean
-    public PersistenceAnnotationBeanPostProcessor persistenceAnnotationBeanPostProcessor() {
-        return new PersistenceAnnotationBeanPostProcessor();
     }
 
     @Bean
@@ -59,13 +56,16 @@ public class AppConfig {
         return entityManager;
     }
 
-    private Properties additionalProperties() {
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-        properties.setProperty("hibernate.show_sql", "true");
-        properties.setProperty("hibernate.format_sql", "true");
-        properties.setProperty("hibernate.id.new_generator_mappings", "true");
-        return properties;
+    @Bean
+    public PersistenceAnnotationBeanPostProcessor persistenceAnnotationBeanPostProcessor() {
+        return new PersistenceAnnotationBeanPostProcessor();
+    }
+
+    @Bean
+    public JpaTransactionManager transactionManager(EntityManagerFactory emf) throws ClassNotFoundException {
+        JpaTransactionManager jtm = new JpaTransactionManager();
+        jtm.setEntityManagerFactory(entityManagerFactory().getObject());
+
+        return jtm;
     }
 }

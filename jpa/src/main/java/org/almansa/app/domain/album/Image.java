@@ -9,7 +9,7 @@ import org.almansa.app.domain.NamedEntityBase;
 
 @Entity
 @Table(name = "IMAGE")
-public class Image extends NamedEntityBase implements IDescription{
+public class Image extends NamedEntityBase implements IDescription {
 
     @Column
     private String accessPath;
@@ -17,9 +17,21 @@ public class Image extends NamedEntityBase implements IDescription{
     @Column
     private String description;
 
+    /*
+     * for jpa
+     */
+    protected Image() {
+        super(null);
+    }
+
     public Image(String name, String accessPath, String description) {
         super(name);
         this.accessPath = accessPath;
+        this.description = description;
+    }
+
+    @Override
+    public void changeDescription(String description) {
         this.description = description;
     }
 
@@ -27,22 +39,12 @@ public class Image extends NamedEntityBase implements IDescription{
         return accessPath;
     }
 
-    public void setAccessPath(String accessPath) {
-        this.accessPath = accessPath;
-    }
-
+    @Override
     public String getDescription() {
         return description;
     }
 
-    public void changeDescription(String description) {
-        this.description = description;
-    }  
-    
-    /*
-     * for jpa
-     */
-    protected Image() {
-        super(null);
+    public void setAccessPath(String accessPath) {
+        this.accessPath = accessPath;
     }
 }

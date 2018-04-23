@@ -10,11 +10,11 @@ public interface LableService {
 
     void addLable(String lableName);
 
-    List<Lable> getByName(String name);
+    void delete(Long id);
 
     List<Lable> getByCeoName(String ceoName);
 
     Lable getById(Long id);
 
-    void delete(Long id);
+    List<Lable> getByName(String name);
 }

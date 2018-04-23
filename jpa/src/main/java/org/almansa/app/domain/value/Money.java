@@ -13,14 +13,16 @@ public class Money implements Immutable {
     @Column(name = "amount_of_money")
     private BigDecimal amount;
 
+    /**
+     * for jpa
+     */
+    protected Money() {
+        super();
+    }
+
     public Money(BigDecimal amount) {
         super();
         this.amount = amount;
-    }
-
-    public Money(String amount) {
-        super();
-        this.amount = new BigDecimal(amount);
     }
 
     public Money(long amount) {
@@ -28,20 +30,13 @@ public class Money implements Immutable {
         this.amount = new BigDecimal(amount);
     }
 
+    public Money(String amount) {
+        super();
+        this.amount = new BigDecimal(amount);
+    }
+
     public Money add(Money add) {
         return new Money(this.amount.add(add.amount));
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((amount == null) ? 0 : amount.hashCode());
-        return result;
     }
 
     @Override
@@ -61,11 +56,16 @@ public class Money implements Immutable {
         return true;
     }
 
-    /**
-     * for jpa
-     */
-    protected Money() {
-        super();
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((amount == null) ? 0 : amount.hashCode());
+        return result;
     }
 
 }

@@ -20,14 +20,21 @@ import javax.persistence.TemporalType;
 @AttributeOverride(column = @Column(name = "artist_name"), name = "name")
 public abstract class PersonBase extends NamedEntityBase {
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "born_date")
+    private Date bornDate;
+
+    /**
+     * for jpa
+     */
+    protected PersonBase() {
+        super(null);
+    }
+
     public PersonBase(String name, Date bornDate) {
         super(name);
         this.bornDate = bornDate;
     }
-
-    @Temporal(TemporalType.DATE)
-    @Column(name = "born_date")
-    private Date bornDate;
 
     public Date getBornDate() {
         return bornDate;
@@ -47,12 +54,5 @@ public abstract class PersonBase extends NamedEntityBase {
     @Override
     public String toString() {
         return "PersonBase [bornDate=" + bornDate + "]";
-    }
-
-    /**
-     * for jpa
-     */
-    protected PersonBase() {
-        super(null);
     }
 }

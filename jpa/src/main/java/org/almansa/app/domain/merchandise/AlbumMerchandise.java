@@ -13,22 +13,22 @@ import org.almansa.app.domain.value.Money;
 @DiscriminatorValue(value = "Album")
 public class AlbumMerchandise extends MerchandiseBase {
 
-    public AlbumMerchandise(Long amountOfStock, Money price, Album album) {
-        super(amountOfStock, price);
-        this.album = album;
-    }
-
     @OneToOne
     private Album album;
-
-    public Album getAlbum() {
-        return album;
-    }
 
     /*
      * for jpa
      */
     protected AlbumMerchandise() {
         super();
+    }
+
+    public AlbumMerchandise(Long amountOfStock, Money price, Album album) {
+        super(amountOfStock, price);
+        this.album = album;
+    }
+
+    public Album getAlbum() {
+        return album;
     }
 }

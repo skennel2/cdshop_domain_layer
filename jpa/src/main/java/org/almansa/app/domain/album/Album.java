@@ -27,6 +27,9 @@ public class Album extends NamedEntityBase {
     @JoinColumn(name = "album_artist_id")
     private Artist albumArtist;
 
+    @Enumerated(EnumType.STRING)
+    private AlbumType albumType;
+
     @Temporal(TemporalType.DATE)
     private Date releaseDate;
 
@@ -38,8 +41,12 @@ public class Album extends NamedEntityBase {
     @CollectionTable(name = "album_tag", joinColumns = @JoinColumn(name = "album_tag_id"))
     private List<CategoryTag> tags;
 
-    @Enumerated(EnumType.STRING)
-    private AlbumType albumType;
+    /**
+     * for jpa
+     */
+    protected Album() {
+        super(null);
+    }
 
     public Album(String name, Artist albumArtist, Date releaseDate, List<SongInAlbum> songs, List<CategoryTag> tags,
             AlbumType albumType) {
@@ -60,26 +67,6 @@ public class Album extends NamedEntityBase {
         }
     }
 
-    public Artist getAlbumArtist() {
-        return albumArtist;
-    }
-
-    public Date getReleaseDate() {
-        return releaseDate;
-    }
-
-    public List<SongInAlbum> getSongs() {
-        return songs;
-    }
-
-    public AlbumType getAlbumType() {
-        return albumType;
-    }
-
-    public List<CategoryTag> getTags() {
-        return tags;
-    }
-
     public void addCategory(CategoryTag tag) {
         tags.add(tag);
     }
@@ -98,8 +85,28 @@ public class Album extends NamedEntityBase {
         this.songs.add(songInAlbum);
     }
 
+    public Artist getAlbumArtist() {
+        return albumArtist;
+    }
+
+    public AlbumType getAlbumType() {
+        return albumType;
+    }
+
     public int getNumberOfContainingSongs() {
         return songs.size();
+    }
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    public List<SongInAlbum> getSongs() {
+        return songs;
+    }
+
+    public List<CategoryTag> getTags() {
+        return tags;
     }
 
     public boolean isExistsSongNumber(int no) {
@@ -109,12 +116,5 @@ public class Album extends NamedEntityBase {
             }
         }
         return false;
-    }
-
-    /**
-     * for jpa
-     */
-    protected Album() {
-        super(null);
     }
 }
