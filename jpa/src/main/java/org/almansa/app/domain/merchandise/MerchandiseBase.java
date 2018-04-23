@@ -25,9 +25,6 @@ public abstract class MerchandiseBase extends EntityBase {
     @AttributeOverride(name = "amount", column = @Column(name = "price"))
     private Money price;
 
-    /*
-     * for jpa
-     */
     protected MerchandiseBase() {
         super();
     }
@@ -60,7 +57,7 @@ public abstract class MerchandiseBase extends EntityBase {
 
     public void removeStock(long amount) {
         if ((amountOfStock - amount) < 0) {
-            throw new IllegalArgumentException("stock is lack");
+            throw new IllegalArgumentException("lack stock");
         }
 
         this.amountOfStock -= amount;

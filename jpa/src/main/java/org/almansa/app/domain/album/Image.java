@@ -17,9 +17,6 @@ public class Image extends NamedEntityBase implements IDescription {
     @Column
     private String description;
 
-    /*
-     * for jpa
-     */
     protected Image() {
         super(null);
     }

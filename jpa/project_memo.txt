@@ -17,3 +17,8 @@ DTOAssember
 
 https://buildplease.com/pages/repositories-dto/
 https://www.safaribooksonline.com/library/view/implementing-domain-driven-design/9780133039900/ch14lev2sec2.html
+
+
+-
+커밋기록이 내 깃헙 계정에 포함안되는 문제가 있엇는데, Author가 skennel로 되있어서 생기는 문제였음 
+환경설정에 git 환경설정 쪽에 user.name, user.email 추가

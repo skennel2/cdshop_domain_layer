@@ -16,9 +16,6 @@ public class AlbumMerchandise extends MerchandiseBase {
     @OneToOne
     private Album album;
 
-    /*
-     * for jpa
-     */
     protected AlbumMerchandise() {
         super();
     }
