@@ -40,15 +40,6 @@ public class DummyDataMaker {
         Genre trap = new Genre("trap");
         em.persist(trap);
 
-        CategoryTag tag1 = new CategoryTag();
-        tag1.setName("HipHop");
-
-        CategoryTag tag2 = new CategoryTag();
-        tag2.setName("Show me the Money");
-
-        CategoryTag tag3 = new CategoryTag();
-        tag3.setName("album of the year");
-
         Lable jm = new Lable();
         jm.changeName("just musick");
         em.persist(jm);
@@ -112,7 +103,7 @@ public class DummyDataMaker {
         em.persist(song3);
 
         Album album = new AlbumBuilder().artist(swings).name("upgrade3").releaseDate(new Date()).thisIsLPType()
-                .addSong(song, 1, false).addTag(tag1).addTag(tag2).addSong(song2, 2, false).Build();
+                .addSong(song, 1, false).addSong(song2, 2, false).Build();
 
         em.persist(album);
 

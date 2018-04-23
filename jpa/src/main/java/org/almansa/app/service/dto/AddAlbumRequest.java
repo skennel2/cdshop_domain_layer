@@ -19,8 +19,6 @@ public class AddAlbumRequest {
 
     private List<SongIdAndSongNo> songIds = new ArrayList<SongIdAndSongNo>();
 
-    private List<String> tag = new ArrayList<String>();
-
     public String getAlbumName() {
         return albumName;
     }
@@ -40,11 +38,7 @@ public class AddAlbumRequest {
     public List<SongIdAndSongNo> getSongIds() {
         return songIds;
     }
-
-    public List<String> getTag() {
-        return tag;
-    }
-
+    
     public void setAlbumName(String albumName) {
         this.albumName = albumName;
     }
@@ -63,9 +57,5 @@ public class AddAlbumRequest {
 
     public void setSongIds(List<SongIdAndSongNo> songIds) {
         this.songIds = songIds;
-    }
-
-    public void setTag(List<String> tag) {
-        this.tag = tag;
     }
 }

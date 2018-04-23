@@ -57,8 +57,6 @@ public class AlbumServiceTest {
         albumAddPamareters.setReleaseDate(DateUtil.toDate(2017, 1, 12));
         albumAddPamareters.getSongIds().add(new SongIdAndSongNo(1, getSongByName("song1").getId()));
         albumAddPamareters.getSongIds().add(new SongIdAndSongNo(2, getSongByName("song2").getId()));
-        albumAddPamareters.getTag().add("category1");
-        albumAddPamareters.getTag().add("category2");
 
         albumService.AddAlbum(albumAddPamareters);
 
@@ -73,7 +71,6 @@ public class AlbumServiceTest {
         assertEquals("NEW AGE", album.getName());
         assertEquals(AlbumType.LP, album.getAlbumType());
         assertEquals("the quiett", album.getAlbumArtist().getName());
-        assertEquals("category1", album.getTags().get(0).getName());
     }
 
     @Test
@@ -89,27 +86,6 @@ public class AlbumServiceTest {
 
         // assert
         assertEquals("Q Train2", albumGet.getName());
-    }
-
-    @Test
-    public void albumTagAddTest() {
-        // assign
-        Album album = getAlbumByName("Q Train");
-
-        List<String> newTags = new ArrayList<String>();
-        newTags.add("c1");
-        newTags.add("c2");
-
-        // act
-        albumService.addTagToAlbum(album.getId(), newTags);
-
-        em.flush();
-
-        Album albumGet = getAlbumByName("Q Train");
-
-        // assert
-        assertEquals("c1", albumGet.getTags().get(0).getName());
-        assertEquals("c2", albumGet.getTags().get(1).getName());
     }
 
     private Album getAlbumByName(String name) {

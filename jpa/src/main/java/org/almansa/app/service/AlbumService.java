@@ -53,26 +53,7 @@ public class AlbumService extends ServiceBase {
             }
         }
 
-        for (String tag : addParameter.getTag()) {
-            CategoryTag categoryTag = new CategoryTag();
-            categoryTag.setName(tag);
-            newAlbum.addCategory(categoryTag);
-        }
-
         this.albumRepo.save(newAlbum);
-    }
-
-    @Transactional
-    public void addTagToAlbum(Long albumId, List<String> newTags) {
-        Album album = albumRepo.getOne(albumId);
-
-        CategoryTag newTag = null;
-        for (String tag : newTags) {
-            newTag = new CategoryTag();
-            newTag.setName(tag);
-
-            album.addCategory(newTag);
-        }
     }
 
     @Transactional

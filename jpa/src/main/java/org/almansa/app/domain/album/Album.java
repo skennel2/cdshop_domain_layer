@@ -37,38 +37,21 @@ public class Album extends NamedEntityBase {
     @CollectionTable(name = "song_in_album", joinColumns = @JoinColumn(name = "song_in_album_id"))
     private List<SongInAlbum> songs;
 
-    @ElementCollection
-    @CollectionTable(name = "album_tag", joinColumns = @JoinColumn(name = "album_tag_id"))
-    private List<CategoryTag> tags;
-
-    /**
-     * for jpa
-     */
     protected Album() {
         super(null);
     }
 
-    public Album(String name, Artist albumArtist, Date releaseDate, List<SongInAlbum> songs, List<CategoryTag> tags,
-            AlbumType albumType) {
+    public Album(String name, Artist albumArtist, Date releaseDate, List<SongInAlbum> songs, AlbumType albumType) {
         super(name);
 
         this.albumArtist = albumArtist;
         this.releaseDate = releaseDate;
         this.songs = songs;
-        this.tags = tags;
         this.albumType = albumType;
 
         if (songs == null) {
             this.songs = new ArrayList<SongInAlbum>();
         }
-
-        if (tags == null) {
-            this.tags = new ArrayList<CategoryTag>();
-        }
-    }
-
-    public void addCategory(CategoryTag tag) {
-        tags.add(tag);
     }
 
     public void addSong(Song song, int no, boolean isSingle) {
@@ -103,10 +86,6 @@ public class Album extends NamedEntityBase {
 
     public List<SongInAlbum> getSongs() {
         return songs;
-    }
-
-    public List<CategoryTag> getTags() {
-        return tags;
     }
 
     public boolean isExistsSongNumber(int no) {

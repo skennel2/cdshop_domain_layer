@@ -18,19 +18,12 @@ public class AlbumBuilder implements Builder<Album> {
 
     private List<SongInAlbum> songs = new ArrayList<SongInAlbum>();
 
-    private List<CategoryTag> tags = new ArrayList<CategoryTag>();
-
     public AlbumBuilder addSong(Song song, int no, boolean isSingle) {
         return addSong(new SongInAlbum(song, no, isSingle));
     }
 
     public AlbumBuilder addSong(SongInAlbum song) {
         this.songs.add(song);
-        return this;
-    }
-
-    public AlbumBuilder addTag(CategoryTag tag) {
-        this.tags.add(tag);
         return this;
     }
 
@@ -51,7 +44,7 @@ public class AlbumBuilder implements Builder<Album> {
 
     @Override
     public Album Build() {
-        Album album = new Album(albumName, albumArtist, releaseDate, songs, tags, albumType);
+        Album album = new Album(albumName, albumArtist, releaseDate, songs, albumType);
         return album;
     }
 
@@ -67,11 +60,6 @@ public class AlbumBuilder implements Builder<Album> {
 
     public AlbumBuilder songs(List<SongInAlbum> songs) {
         this.songs = songs;
-        return this;
-    }
-
-    public AlbumBuilder tags(List<CategoryTag> tags) {
-        this.tags = tags;
         return this;
     }
 
