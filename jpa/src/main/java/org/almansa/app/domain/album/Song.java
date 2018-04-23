@@ -32,9 +32,6 @@ public class Song extends NamedEntityBase {
     @JoinColumn(name = "owner_artist_id")
     private Artist ownerArtist;
 
-    /*
-     * for jpa
-     */
     protected Song() {
         super(null);
     }
