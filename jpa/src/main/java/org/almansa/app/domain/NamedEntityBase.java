@@ -9,9 +9,6 @@ public abstract class NamedEntityBase extends EntityBase implements INamed {
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
-    /**
-     * for jpa
-     */
     protected NamedEntityBase() {
         super();
     }

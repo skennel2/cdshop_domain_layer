@@ -24,9 +24,6 @@ public abstract class PersonBase extends NamedEntityBase {
     @Column(name = "born_date")
     private Date bornDate;
 
-    /**
-     * for jpa
-     */
     protected PersonBase() {
         super(null);
     }

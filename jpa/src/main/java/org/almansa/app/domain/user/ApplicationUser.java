@@ -22,9 +22,6 @@ public class ApplicationUser extends NamedEntityBase {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // value of mappedBy -> field of
     private PersonalInfomation personalInfomation;
 
-    /*
-     * for jpa
-     */
     protected ApplicationUser() {
         super(null);
     }

@@ -13,9 +13,6 @@ public class Money implements Immutable {
     @Column(name = "amount_of_money")
     private BigDecimal amount;
 
-    /**
-     * for jpa
-     */
     protected Money() {
         super();
     }

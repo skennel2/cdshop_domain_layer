@@ -35,9 +35,6 @@ public class PurchaseOrder extends EntityBase {
     @CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "order_id"))
     private List<PurchaseOrderLine> orderLines;
 
-    /*
-     * for jpa
-     */
     protected PurchaseOrder() {
         super();
     }

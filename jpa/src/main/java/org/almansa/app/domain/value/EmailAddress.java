@@ -19,9 +19,6 @@ public class EmailAddress implements Immutable {
     @Column(name = "email_address")
     private String emailAddress;
 
-    /*
-     * for jpa
-     */
     protected EmailAddress() {
         super();
     }
