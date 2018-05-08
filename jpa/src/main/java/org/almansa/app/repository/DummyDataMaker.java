@@ -103,7 +103,7 @@ public class DummyDataMaker {
         em.persist(song3);
 
         Album album = new AlbumBuilder().artist(swings).name("upgrade3").releaseDate(new Date()).thisIsLPType()
-                .addSong(song, 1, false).addSong(song2, 2, false).Build();
+                .addSong(song, 1, true).addSong(song2, 2, false).Build();
 
         em.persist(album);
 

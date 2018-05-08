@@ -63,11 +63,13 @@ public class AlbumServiceTest {
         // act
         Album album = getAlbumByName("NEW AGE");
         String song1Name = album.getSongs().get(0).getSong().getName();
-        String song2Name = album.getSongs().get(1).getSong().getName();
+        String song2Name = album.getSongs().get(1).getSong().getName();   
+        String albumName = album.getSongs().get(0).getAlbum().getName();
 
         // assert
         assertEquals("song1", song1Name);
         assertEquals("song2", song2Name);
+        assertEquals("NEW AGE", albumName);
         assertEquals("NEW AGE", album.getName());
         assertEquals(AlbumType.LP, album.getAlbumType());
         assertEquals("the quiett", album.getAlbumArtist().getName());

@@ -12,20 +12,17 @@ public class SongInAlbum {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "album_id")
     private Album album;
-
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "song_id")
+    private Song song;
+    
     @Column(name = "is_single")
     private boolean isSingle;
 
     @Column(name = "no", nullable = false)
     private int no;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "song_id")
-    private Song song;
-
-    /*
-     * for jpa
-     */
     protected SongInAlbum() {
         super();
     }

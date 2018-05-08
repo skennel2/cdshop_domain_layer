@@ -33,7 +33,7 @@ public class Album extends NamedEntityBase {
     @Temporal(TemporalType.DATE)
     private Date releaseDate;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "song_in_album", joinColumns = @JoinColumn(name = "song_in_album_id"))
     private List<SongInAlbum> songs;
 
