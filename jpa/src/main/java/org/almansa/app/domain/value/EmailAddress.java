@@ -10,12 +10,6 @@ import org.almansa.app.domain.Immutable;
 @Embeddable
 public class EmailAddress implements Immutable {
 
-    public static boolean isFormatValid(String email) {
-        Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-
-        return emailPattern.matcher(email).find();
-    }
-
     @Column(name = "email_address")
     private String emailAddress;
 
@@ -49,6 +43,12 @@ public class EmailAddress implements Immutable {
         return emailAddress;
     }
 
+    public static boolean isFormatValid(String email) {
+        Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+        return emailPattern.matcher(email).find();
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
