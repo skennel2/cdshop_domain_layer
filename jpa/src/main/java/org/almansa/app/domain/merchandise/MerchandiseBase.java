@@ -35,10 +35,6 @@ public abstract class MerchandiseBase extends EntityBase {
         this.price = price;
     }
 
-    public void addStock(long amount) {
-        this.amountOfStock += amount;
-    }
-
     public Long getAmountOfStock() {
         return amountOfStock;
     }
@@ -55,6 +51,10 @@ public abstract class MerchandiseBase extends EntityBase {
         return amountOfStock.longValue() == 0;
     }
 
+    public void addStock(long amount) {
+        this.amountOfStock += amount;
+    }
+
     public void removeStock(long amount) {
         if ((amountOfStock - amount) < 0) {
             throw new IllegalArgumentException("lack stock");
@@ -63,11 +63,11 @@ public abstract class MerchandiseBase extends EntityBase {
         this.amountOfStock -= amount;
     }
 
-    public void setAmountOfStock(Long amountOfStock) {
+    public void changeAmountOfStock(Long amountOfStock) {
         this.amountOfStock = amountOfStock;
     }
 
-    public void setPrice(Money price) {
+    public void changePrice(Money price) {
         this.price = price;
     }
 }

@@ -20,7 +20,7 @@ import org.almansa.app.domain.PersonBase;
 @AttributeOverride(name = "name", column = @Column(name = "song_name"))
 public class Song extends NamedEntityBase {
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "song_writers", joinColumns = @JoinColumn(name = "song_writer_id"))
     private List<PersonAsSongWriter> artists = new ArrayList<PersonAsSongWriter>();
 
@@ -54,24 +54,16 @@ public class Song extends NamedEntityBase {
         this.artists = new ArrayList<PersonAsSongWriter>();
     }
 
+    public void setMainProducer(PersonBase person) {
+        this.artists.add(new PersonAsSongWriter(person, ProducerRole.MainProducer));
+    }
+    
     public void addPersonAsSongWriter(PersonAsSongWriter personAsSongWriter) {
         this.artists.add(personAsSongWriter);
     }
 
     public void addPersonAsSongWriter(PersonBase person, ProducerRole role) {
         this.artists.add(new PersonAsSongWriter(person, role));
-    }
-
-    public String getDisplayName() {
-        String displayName = this.getName();
-
-        for (PersonAsSongWriter person : artists) {
-            if (person.getRole().equals(ProducerRole.Featuring)) {
-                displayName += " ," + person.getPerson().getName(); // TODO string formatting
-            }
-        }
-
-        return displayName;
     }
 
     public String getLylics() {
@@ -94,10 +86,10 @@ public class Song extends NamedEntityBase {
         return result;
     }
 
-    public void setOwnerArtist(Artist ownerArtist) {
+    public void changeOwnerArtist(Artist ownerArtist) {
         this.ownerArtist = ownerArtist;
     }
-
+    
     @Override
     public String toString() {
         return "Song [ownerArtist=" + ownerArtist + ", artists=" + artists + ", lylics=" + lylics + "]";

@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.album.AlbumBuilder;
 import org.almansa.app.domain.album.Artist;
-import org.almansa.app.domain.album.CategoryTag;
 import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.dto.AlbumSimpleViewModel;
 import org.almansa.app.domain.dto.SongIdAndSongNo;
@@ -42,8 +41,12 @@ public class AlbumService extends ServiceBase {
     public void AddAlbum(AddAlbumRequest addParameter) {
         Optional<Artist> artist = this.artistRepo.findById(addParameter.getArtistId());
 
-        Album newAlbum = new AlbumBuilder().albumType(addParameter.getAlbumType()).artist(artist.get())
-                .releaseDate(addParameter.getReleaseDate()).albumName(addParameter.getAlbumName()).Build();
+        Album newAlbum = new AlbumBuilder()
+                .albumType(addParameter.getAlbumType())
+                .artist(artist.get())
+                .releaseDate(addParameter.getReleaseDate())
+                .albumName(addParameter.getAlbumName())
+                .Build();
 
         for (SongIdAndSongNo songId : addParameter.getSongIds()) {
             Optional<Song> albumSong = this.songRepo.findById(songId.getSongId());

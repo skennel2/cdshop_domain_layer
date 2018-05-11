@@ -49,7 +49,7 @@ public class AlbumMerchaniseService extends ServiceBase {
     @Transactional
     public void changeProductPrice(Long albumId, Money newPrice) {
         AlbumMerchandise merchandise = merchanRepo.getOne(albumId);
-        merchandise.setPrice(newPrice);
+        merchandise.changePrice(newPrice);
     }
 
     public List<AlbumMerchandiseDetailViewModel> getByPageNumbers(int pageSize, int pageNumber) {
