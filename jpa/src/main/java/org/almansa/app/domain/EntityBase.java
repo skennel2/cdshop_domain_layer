@@ -27,6 +27,33 @@ public abstract class EntityBase implements Entity<Long> {
     private Long id;
 
     @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public boolean isNew() {
+        return id == null;
+    }
+
+    @PrePersist
+    void onPersist() {
+        this.setCreationDate(new Date());
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
@@ -43,15 +70,6 @@ public abstract class EntityBase implements Entity<Long> {
         return true;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -60,26 +78,9 @@ public abstract class EntityBase implements Entity<Long> {
         return result;
     }
 
-    public boolean isNew() {
-        return id == null;
-    }
-
-    @PrePersist
-    void onPersist() {
-        this.setCreationDate(new Date());
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "EntityBase [id=" + id + "]";
     }
+
 }

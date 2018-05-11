@@ -41,12 +41,8 @@ public class AlbumService extends ServiceBase {
     public void AddAlbum(AddAlbumRequest addParameter) {
         Optional<Artist> artist = this.artistRepo.findById(addParameter.getArtistId());
 
-        Album newAlbum = new AlbumBuilder()
-                .albumType(addParameter.getAlbumType())
-                .artist(artist.get())
-                .releaseDate(addParameter.getReleaseDate())
-                .albumName(addParameter.getAlbumName())
-                .Build();
+        Album newAlbum = new AlbumBuilder().albumType(addParameter.getAlbumType()).artist(artist.get())
+                .releaseDate(addParameter.getReleaseDate()).albumName(addParameter.getAlbumName()).Build();
 
         for (SongIdAndSongNo songId : addParameter.getSongIds()) {
             Optional<Song> albumSong = this.songRepo.findById(songId.getSongId());
@@ -74,6 +70,17 @@ public class AlbumService extends ServiceBase {
 
     public List<AlbumSimpleViewModel> getAlbumSimleViewModelByName(String name) {
         List<Album> albums = albumRepo.findByName(name);
+
+        List<AlbumSimpleViewModel> albumViewModels = new ArrayList<>();
+        for (Album item : albums) {
+            albumViewModels.add(albumAssembler.albumSimpleViewModel(item));
+        }
+
+        return albumViewModels;
+    }
+
+    public List<AlbumSimpleViewModel> getAlbumSimleViewModelByArtistId(Long artistId) {
+        List<Album> albums = albumRepo.findByArtistId(artistId);
 
         List<AlbumSimpleViewModel> albumViewModels = new ArrayList<>();
         for (Album item : albums) {

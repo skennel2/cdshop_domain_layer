@@ -9,6 +9,9 @@ import org.springframework.data.repository.query.Param;
 
 public interface AlbumRepository extends JpaRepository<Album, Long> {
 
+    @Query("SELECT A FROM Album A LEFT JOIN A.albumArtist B WHERE B.id = :id")
+    List<Album> findByArtistId(@Param("id") Long artistId);
+
     @Query("SELECT A FROM Album A LEFT JOIN A.albumArtist B WHERE B.name = :name")
     List<Album> findByArtistName(@Param("name") String artistName);
 
