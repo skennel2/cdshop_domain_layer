@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 public class SongInAlbum {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "album_id")
+    //@JoinColumn(name = "album_id")
     private Album album;
     
     @ManyToOne(fetch = FetchType.LAZY)

@@ -128,7 +128,7 @@ public class DummyDataMaker {
         ApplicationUser user2 = new ApplicationUser("gaeko14", "gaeko14", "3333");
         em.persist(user2);
 
-        PersonalInfomation userInfo2 = new PersonalInfomation(user, new EmailAddress("gaeko14@naver.com"), new Date(),
+        PersonalInfomation userInfo2 = new PersonalInfomation(user2, new EmailAddress("gaeko14@naver.com"), new Date(),
                 "hi2");
         em.persist(userInfo2);
 
