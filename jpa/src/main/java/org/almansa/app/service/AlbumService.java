@@ -41,15 +41,20 @@ public class AlbumService extends ServiceBase {
     public void AddAlbum(AddAlbumRequest addParameter) {
         Optional<Artist> artist = this.artistRepo.findById(addParameter.getArtistId());
 
-        Album newAlbum = new AlbumBuilder().albumType(addParameter.getAlbumType()).artist(artist.get())
-                .releaseDate(addParameter.getReleaseDate()).albumName(addParameter.getAlbumName()).Build();
+        Album newAlbum = new AlbumBuilder()
+                .albumType(addParameter.getAlbumType())
+                .artist(artist.get())
+                .releaseDate(addParameter.getReleaseDate())
+                .albumName(addParameter.getAlbumName())
+                .Build();
 
-        for (SongIdAndSongNo songId : addParameter.getSongIds()) {
-            Optional<Song> albumSong = this.songRepo.findById(songId.getSongId());
-
-            if (albumSong.isPresent()) {
-                newAlbum.addSong(albumSong.get(), songId.getNo(), false);
-            }
+        for (SongIdAndSongNo songIdAndSongNo : addParameter.getSongIds()) {
+            Long songId = songIdAndSongNo.getSongId();
+            int songNo = songIdAndSongNo.getNo();
+            
+            this.songRepo.findById(songId).ifPresent(song->{
+                newAlbum.addSong(song, songNo, false);
+            });
         }
 
         this.albumRepo.save(newAlbum);
