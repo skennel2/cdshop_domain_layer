@@ -24,10 +24,6 @@ public class PersonalInfomation extends EntityBase {
     @Temporal(TemporalType.DATE)
     private Date bornDate;
 
-    @Lob
-    @Column(name = "desc")
-    private String description;
-
     @Embedded
     private EmailAddress email;
 
@@ -39,20 +35,15 @@ public class PersonalInfomation extends EntityBase {
         super();
     }
 
-    public PersonalInfomation(ApplicationUser user, EmailAddress email, Date bornDate, String description) {
+    public PersonalInfomation(ApplicationUser user, EmailAddress email, Date bornDate) {
         super();
         this.user = user;
         this.email = email;
         this.bornDate = bornDate;
-        this.description = description;
     }
 
     public Date getBornDate() {
         return bornDate;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public EmailAddress getEmail() {
