@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.album.AlbumBuilder;
 import org.almansa.app.domain.album.Artist;
-import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.dto.AlbumSimpleViewModel;
 import org.almansa.app.domain.dto.SongIdAndSongNo;
 import org.almansa.app.repository.AlbumRepository;
@@ -54,7 +53,7 @@ public class AlbumService extends ServiceBase {
             
             this.songRepo.findById(songId).ifPresent(song->{
                 newAlbum.addSong(song, songNo, false);
-            });
+            });            
         }
 
         this.albumRepo.save(newAlbum);
@@ -65,31 +64,45 @@ public class AlbumService extends ServiceBase {
         Album album = albumRepo.getOne(albumId);
         album.changeName(newName);
     }
+    
+    @Transactional
+    public void deleteAlbum(Long albumId) {
+    	albumRepo.deleteById(albumId);
+    }
 
-    public AlbumSimpleViewModel getAlbumSimleViewModelById(Long id) {
+    public Album getById(Long id) {
         Album album = albumRepo.getOne(id);
-        AlbumSimpleViewModel viewModel = albumAssembler.albumSimpleViewModel(album);
+        
+        return album;
+    }
+
+    public List<Album> getByArtistId(Long artistId){
+    	return albumRepo.findByArtistId(artistId);
+    }
+    
+    public List<Album> getByName(String name){
+    	return albumRepo.findByName(name);
+    }
+    
+    public AlbumSimpleViewModel getAlbumSimleViewModelById(Long id) {
+        AlbumSimpleViewModel viewModel = albumAssembler.albumSimpleViewModel(getById(id));
 
         return viewModel;
     }
 
     public List<AlbumSimpleViewModel> getAlbumSimleViewModelByName(String name) {
-        List<Album> albums = albumRepo.findByName(name);
-
         List<AlbumSimpleViewModel> albumViewModels = new ArrayList<>();
-        for (Album item : albums) {
-            albumViewModels.add(albumAssembler.albumSimpleViewModel(item));
+        for (Album album : getByName(name)) {
+            albumViewModels.add(albumAssembler.albumSimpleViewModel(album));
         }
 
         return albumViewModels;
     }
 
     public List<AlbumSimpleViewModel> getAlbumSimleViewModelByArtistId(Long artistId) {
-        List<Album> albums = albumRepo.findByArtistId(artistId);
-
         List<AlbumSimpleViewModel> albumViewModels = new ArrayList<>();
-        for (Album item : albums) {
-            albumViewModels.add(albumAssembler.albumSimpleViewModel(item));
+        for (Album album : getByArtistId(artistId)) {
+            albumViewModels.add(albumAssembler.albumSimpleViewModel(album));
         }
 
         return albumViewModels;

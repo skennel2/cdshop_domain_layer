@@ -15,17 +15,23 @@ public class ApplicationUserService extends ServiceBase {
 	@Autowired
 	private ApplicationUserRepository userRepo;
 
+	@Autowired
+	ApplicationUserValidator userValidator;
+
 	public void joinUser(UserJoinRequest request) {
-		if(!EmailAddress.isFormatValid(request.getEmail())) {
-			throw new ApplicationUserJoinException("check email address");
-		}
-		
 		ApplicationUser applicationUser = new ApplicationUser(request.getName(), request.getLoginId(),
 				request.getPassword());
-		EmailAddress email = new EmailAddress(request.getEmail());		
-		PersonalInfomation personalInfomation = new PersonalInfomation(applicationUser, email, request.getBornDate());
 
+		PersonalInfomation personalInfomation = new PersonalInfomation(applicationUser,
+				new EmailAddress(request.getEmail()), request.getBornDate());				
 		applicationUser.setPersonalInfomation(personalInfomation);
+
+		userValidator.verifyValidation(applicationUser);
+
 		userRepo.save(applicationUser);
-	}	
+	}
+
+	public void deleteUser(long id) {
+		userRepo.deleteById(id);
+	}
 }

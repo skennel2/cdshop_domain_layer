@@ -8,7 +8,6 @@ public class UserJoinRequest {
 	private String password;
 	private String email;
 	private Date bornDate;
-	private String description;
 
 	public String getName() {
 		return name;
@@ -50,11 +49,4 @@ public class UserJoinRequest {
 		this.bornDate = bornDate;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 }
