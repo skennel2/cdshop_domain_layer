@@ -1,4 +1,4 @@
-package org.almansa.app.consoleapp;
+package org.almansa.app.console;
 
 public abstract class ConsoleViewBase {
     public abstract void handleRequest(String request);

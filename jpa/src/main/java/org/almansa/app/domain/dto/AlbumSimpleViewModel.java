@@ -7,15 +7,10 @@ import org.almansa.app.domain.album.AlbumType;
 public class AlbumSimpleViewModel {
 
     private Long albumId;
-
     private String albumName;
-
     private AlbumType albumType;
-
     private String artistName;
-
     private int containingSongCount;
-
     private Date releaseDate;
 
     public Long getAlbumId() {

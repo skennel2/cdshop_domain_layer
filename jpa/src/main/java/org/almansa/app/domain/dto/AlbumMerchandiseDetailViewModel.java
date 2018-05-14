@@ -9,13 +9,9 @@ import org.almansa.app.domain.value.Money;
 public class AlbumMerchandiseDetailViewModel implements Immutable {
 
     private String albumArtistName;
-
     private String albumName;
-
     private Long merchandiseId;
-
     private Money price;
-
     private Date releaseDate;
 
     public AlbumMerchandiseDetailViewModel(AlbumMerchandise merchandise) {

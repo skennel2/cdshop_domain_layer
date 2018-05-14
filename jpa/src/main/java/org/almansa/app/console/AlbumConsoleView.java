@@ -1,4 +1,4 @@
-package org.almansa.app.consoleapp;
+package org.almansa.app.console;
 
 import org.almansa.app.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
