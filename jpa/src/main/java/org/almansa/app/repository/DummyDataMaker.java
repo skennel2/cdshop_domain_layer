@@ -11,7 +11,6 @@ import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.album.AlbumBuilder;
 import org.almansa.app.domain.album.AlbumType;
 import org.almansa.app.domain.album.Artist;
-import org.almansa.app.domain.album.Genre;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Producer;
 import org.almansa.app.domain.album.ProducerRole;
