@@ -1,5 +1,6 @@
 package org.almansa.app.domain.album;
 
-// public class AlbumImage extends Image{
-// private ImageTypeForAlbum imageTypeForAlbum;
-// }
+public class AlbumImage extends Image{
+	
+	private ImageTypeForAlbum imageTypeForAlbum;
+}

@@ -3,12 +3,10 @@ package org.almansa.app.domain.user;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,10 +22,6 @@ public class PersonalInfomation extends EntityBase {
     @Temporal(TemporalType.DATE)
     private Date bornDate;
 
-    @Lob
-    @Column(name = "desc")
-    private String description;
-
     @Embedded
     private EmailAddress email;
 
@@ -39,20 +33,15 @@ public class PersonalInfomation extends EntityBase {
         super();
     }
 
-    public PersonalInfomation(ApplicationUser user, EmailAddress email, Date bornDate, String description) {
+    public PersonalInfomation(ApplicationUser user, EmailAddress email, Date bornDate) {
         super();
         this.user = user;
         this.email = email;
         this.bornDate = bornDate;
-        this.description = description;
     }
 
     public Date getBornDate() {
         return bornDate;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public EmailAddress getEmail() {

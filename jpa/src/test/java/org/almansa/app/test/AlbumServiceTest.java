@@ -56,11 +56,13 @@ public class AlbumServiceTest {
         albumAddPamareters.getSongIds().add(new SongIdAndSongNo(2, getSongByName("song2").getId()));
 
         albumService.AddAlbum(albumAddPamareters);
-        em.flush();
+
         // act
         Album album = getAlbumByName("NEW AGE");
         String song1Name = album.getSongs().get(0).getSong().getName();
         String song2Name = album.getSongs().get(1).getSong().getName();   
+        
+        // 데이터베이스의 SongInAlbum.Album 이 널로 들어가는것 때문에 추가함. 
         String albumName = album.getSongs().get(0).getAlbum().getName();
 
         // assert

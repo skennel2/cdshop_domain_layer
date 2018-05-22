@@ -1,4 +1,4 @@
-package org.almansa.app.service;
+package org.almansa.app.service.exception;
 
 public class OrderException extends RuntimeException {
 

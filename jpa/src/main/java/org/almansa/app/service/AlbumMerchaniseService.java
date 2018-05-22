@@ -2,11 +2,9 @@ package org.almansa.app.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.dto.AlbumMerchandiseDetailViewModel;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
 import org.almansa.app.domain.merchandise.MerchandiseBase;

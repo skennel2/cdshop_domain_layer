@@ -33,7 +33,7 @@ public class ApplicationUserPersistenceTest {
 
         String persistedEmailAddress = "skennel2@gmail.com";
         PersonalInfomation infomation = new PersonalInfomation(user, new EmailAddress(persistedEmailAddress),
-                new Date(), "123");
+                new Date());
         user.setPersonalInfomation(infomation);
         em.persist(user);
         em.flush();
@@ -56,7 +56,7 @@ public class ApplicationUserPersistenceTest {
 
         String persistedEmailAddress = "skennel2@gmail.com";
         PersonalInfomation infomation = new PersonalInfomation(user, new EmailAddress(persistedEmailAddress),
-                new Date(), "123");
+                new Date());
         user.setPersonalInfomation(infomation);
         em.persist(user);
         em.flush();

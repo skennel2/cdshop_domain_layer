@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.almansa.app.service.dto.SingleOrderRequest;
 
-public class OrderRequest {
+public class OrderRequests {
     private List<SingleOrderRequest> requests = new ArrayList<>();
 
     public void addRequest(SingleOrderRequest request) {
