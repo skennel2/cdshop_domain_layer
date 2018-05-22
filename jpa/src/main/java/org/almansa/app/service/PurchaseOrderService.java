@@ -37,12 +37,12 @@ public class PurchaseOrderService extends ServiceBase {
 
         PurchaseOrder order = new PurchaseOrder(orderer, null, new Date());
 
-        for (SingleOrderRequest singleOrderRequest : requests) {
-            AlbumMerchandise merchandise = merchandiseRepo.getOne(singleOrderRequest.getMerchandiseId());
+        for (SingleOrderRequest request : requests) {
+            AlbumMerchandise merchandise = merchandiseRepo.getOne(request.getMerchandiseId());
 
-            if (merchandise.isAbailableOrderQuantity(singleOrderRequest.getQuantity())) {
-                order.addOrderLine(merchandise, singleOrderRequest.getQuantity());
-                merchandise.removeStock(singleOrderRequest.getQuantity());
+            if (merchandise.isAbailableOrderQuantity(request.getQuantity())) {
+                order.addOrderLine(merchandise, request.getQuantity());
+                merchandise.removeStock(request.getQuantity());
             } else {
                 throw new OrderException(merchandise.getId().toString() + " lack stock");
             }
