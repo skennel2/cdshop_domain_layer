@@ -32,11 +32,6 @@ public class DummyDataMaker {
     private EntityManager em;
 
     public void makeDummies() {
-        Genre hiphop = new Genre("hiphop");
-        em.persist(hiphop);
-
-        Genre trap = new Genre("trap");
-        em.persist(trap);
 
         Lable jm = new Lable();
         jm.changeName("just musick");
