@@ -43,16 +43,4 @@ public class AppicationUserServiceTest {
 		service.joinUser(request2);		
 	}
 	
-	@Test
-	public void joinUserTest() {
-		UserJoinRequest request = new UserJoinRequest();
-		request.setName("skennel");
-		request.setLoginId("skennel2");
-		request.setBornDate(DateUtil.toDate(2000, 1, 2));
-		request.setPassword("1234");
-		request.setEmail("skennel@naver.com");
-		
-		service.joinUser(request);
-	}
-	
 }
