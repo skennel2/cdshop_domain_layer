@@ -37,7 +37,7 @@ public class AppConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws ClassNotFoundException {
         LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
         entityManager.setDataSource(dataSource());
-        entityManager.setPackagesToScan("org.almansa.*");
+        entityManager.setPackagesToScan("org.almansa");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         entityManager.setJpaVendorAdapter(vendorAdapter);
