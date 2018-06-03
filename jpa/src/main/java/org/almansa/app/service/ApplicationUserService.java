@@ -19,11 +19,14 @@ public class ApplicationUserService extends ServiceBase {
 	ApplicationUserValidator userValidator;
 
 	public void joinUser(UserJoinRequest request) {
-		ApplicationUser applicationUser = new ApplicationUser(request.getName(), request.getLoginId(),
-				request.getPassword());
+		ApplicationUser applicationUser 
+		    = new ApplicationUser(request.getName(), request.getLoginId(), request.getPassword());
 
-		PersonalInfomation personalInfomation = new PersonalInfomation(applicationUser,
-				new EmailAddress(request.getEmail()), request.getBornDate());				
+		PersonalInfomation personalInfomation 
+		    = new PersonalInfomation(applicationUser,
+				new EmailAddress(request.getEmail()), 
+				request.getBornDate());				
+		
 		applicationUser.setPersonalInfomation(personalInfomation);
 
 		userValidator.verifyValidation(applicationUser);
@@ -33,5 +36,22 @@ public class ApplicationUserService extends ServiceBase {
 
 	public void deleteUser(long id) {
 		userRepo.deleteById(id);
+	}
+	
+	public boolean isAbleToLogin(String loginId, String password) {
+	    ApplicationUser user = getUserByLoginId(loginId);
+	    if(user != null && user.getPassword().equals(password)) {
+	        return true;
+	    }
+	    
+	    return false;
+	}
+	
+	public ApplicationUser getUserById(Long id){
+	    return userRepo.getOne(id);
+	}
+	
+	public ApplicationUser getUserByLoginId(String loginId) {
+	    return userRepo.findByLoginId(loginId);
 	}
 }
