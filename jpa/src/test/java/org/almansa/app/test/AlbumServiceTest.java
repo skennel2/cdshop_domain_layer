@@ -123,15 +123,10 @@ public class AlbumServiceTest {
         illionaire.changeName("Illionaire");
         em.persist(illionaire);
 
-        Artist theQ = new Artist();
-        theQ.changeName("the quiett");
-        theQ.changeLable(illionaire);
-        theQ.setBornDate(1996, 1, 3);
+        Artist theQ = new Artist("the quiett", DateUtil.toDate(1996, 1, 3), illionaire);
         em.persist(theQ);
 
-        Artist swings = new Artist();
-        swings.changeName("swings");
-        swings.setBornDate(1987, 11, 12);
+        Artist swings = new Artist("swings", DateUtil.toDate(1987, 11, 12), null);
         em.persist(swings);
 
         Song song1 = new Song("song1", theQ, null, "");

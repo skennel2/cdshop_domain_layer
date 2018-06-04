@@ -5,6 +5,7 @@ import org.almansa.app.domain.album.AlbumBuilder;
 import org.almansa.app.domain.album.Artist;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.domain.album.Song;
+import org.almansa.app.util.DateUtil;
 
 public final class AlbumObjectMother {
 
@@ -12,10 +13,7 @@ public final class AlbumObjectMother {
 		Lable illionaire = new Lable();
 		illionaire.changeName("Illionaire");
 
-		Artist theQ = new Artist();
-		theQ.changeName("the quiett");
-		theQ.changeLable(illionaire);
-		theQ.setBornDate(1996, 1, 3);
+		Artist theQ = new Artist("the quiett", DateUtil.toDate(1996, 1, 3), illionaire);
 		Song song1 = new Song("song1", theQ, null, "");
 		Song song2 = new Song("song2", theQ, null, "");
 

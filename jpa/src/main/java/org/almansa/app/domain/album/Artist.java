@@ -1,5 +1,7 @@
 package org.almansa.app.domain.album;
 
+import java.util.Date;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -17,6 +19,11 @@ public class Artist extends PersonBase {
     @ManyToOne
     @JoinColumn(name = "agency_company_id")
     private Lable lable;
+
+    public Artist(String name, Date bornDate, Lable lable) {
+        super(name, bornDate);
+        this.lable = lable;
+    }
 
     public void changeLable(Lable lable) {
         this.lable = lable;

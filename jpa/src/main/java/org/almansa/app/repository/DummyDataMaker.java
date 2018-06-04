@@ -55,31 +55,19 @@ public class DummyDataMaker {
         chachamalon.setLable(aomg);
         em.persist(chachamalon);
 
-        Artist swings = new Artist();
-        swings.changeName("swings");
-        swings.changeLable(jm);
+        Artist swings = new Artist("swings", DateUtil.toDate(1987, 3, 3) ,jm);
         em.persist(swings);
 
-        Artist theQ = new Artist();
-        theQ.changeName("the quiett");
-        theQ.changeLable(illionaire);
-        theQ.setBornDate(1996, 1, 3);
+        Artist theQ = new Artist("the quiett", DateUtil.toDate(1996, 1, 3), illionaire);
         em.persist(theQ);
 
-        Artist jayPark = new Artist();
-        jayPark.changeName("jay park");
-        jayPark.changeLable(aomg);
-        jayPark.setBornDate(1988, 3, 4);
+        Artist jayPark = new Artist("jay park", DateUtil.toDate(1988, 3, 4), aomg);
         em.persist(jayPark);
 
-        Artist kidMilli = new Artist();
-        kidMilli.changeName("kid milli");
-        kidMilli.changeLable(null);
+        Artist kidMilli = new Artist("kid milli", null, null);
         em.persist(kidMilli);
 
-        Artist dok2 = new Artist();
-        dok2.changeName("dok2");
-        dok2.changeLable(illionaire);
+        Artist dok2 = new Artist("dok2", null, illionaire);
         em.persist(dok2);
 
         Song song = new Song("holy", swings, null, "");
