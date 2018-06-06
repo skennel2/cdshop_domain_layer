@@ -10,13 +10,9 @@ import org.almansa.app.domain.dto.SongIdAndSongNo;
 public class AddAlbumRequest {
 
     private String albumName;
-
     private AlbumType albumType;
-
     private Long artistId;
-
     private Date releaseDate;
-
     private List<SongIdAndSongNo> songIds = new ArrayList<SongIdAndSongNo>();
 
     public String getAlbumName() {
@@ -38,7 +34,7 @@ public class AddAlbumRequest {
     public List<SongIdAndSongNo> getSongIds() {
         return songIds;
     }
-    
+
     public void setAlbumName(String albumName) {
         this.albumName = albumName;
     }
