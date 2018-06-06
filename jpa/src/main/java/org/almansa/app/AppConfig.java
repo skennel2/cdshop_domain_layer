@@ -27,7 +27,7 @@ public class AppConfig {
     public DataSource dataSource() throws ClassNotFoundException {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:~/test3");
+        dataSource.setUrl("jdbc:h2:~/test6");
         dataSource.setUsername("sa");
 
         return dataSource;
@@ -61,7 +61,7 @@ public class AppConfig {
     
     private Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create"); // 
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         properties.setProperty("hibernate.show_sql", "true");
         properties.setProperty("hibernate.format_sql", "true");

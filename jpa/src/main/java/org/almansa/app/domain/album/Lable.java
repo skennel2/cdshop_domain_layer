@@ -19,6 +19,7 @@ public class Lable extends NamedEntityBase {
     @Column(name = "ceo_name")
     private String ceoName;    
     
+    @Column(name = "est_date")
     private Date establishDate;
     
     public Lable(String name) {
@@ -44,7 +45,7 @@ public class Lable extends NamedEntityBase {
         return ceoName;
     }
 
-    public void setCeoName(String ceoName) {
+    public void changeCeoName(String ceoName) {
         this.ceoName = ceoName;
     }
 
@@ -52,7 +53,7 @@ public class Lable extends NamedEntityBase {
         return establishDate;
     }
 
-    public void setEstablishDate(Date establishDate) {
+    public void changeEstablishDate(Date establishDate) {
         this.establishDate = establishDate;
     }
 

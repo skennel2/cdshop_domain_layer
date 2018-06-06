@@ -1,14 +1,17 @@
 package org.almansa.app.domain.album;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 
+import org.almansa.app.domain.EntityBase;
 import org.almansa.app.domain.PersonBase;
 
-@Embeddable
-public class PersonAsSongWriter {
+//@Embeddable
+@Entity
+public class PersonAsSongWriter extends EntityBase{
 
     @ManyToOne
     private PersonBase person;

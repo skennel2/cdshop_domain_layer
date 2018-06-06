@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -12,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.almansa.app.domain.NamedEntityBase;
 import org.almansa.app.domain.PersonBase;
@@ -20,7 +22,8 @@ import org.almansa.app.domain.PersonBase;
 @AttributeOverride(name = "name", column = @Column(name = "song_name"))
 public class Song extends NamedEntityBase {
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    //@ElementCollection(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @CollectionTable(name = "song_writers", joinColumns = @JoinColumn(name = "song_writer_id"))
     private List<PersonAsSongWriter> artists = new ArrayList<PersonAsSongWriter>();
 
