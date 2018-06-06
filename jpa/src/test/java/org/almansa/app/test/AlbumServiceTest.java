@@ -119,8 +119,7 @@ public class AlbumServiceTest {
         Genre hiphop = new Genre("hiphop");
         em.persist(hiphop);
 
-        Lable illionaire = new Lable();
-        illionaire.changeName("Illionaire");
+        Lable illionaire = new Lable("Illionaire");
         em.persist(illionaire);
 
         Artist theQ = new Artist("the quiett", DateUtil.toDate(1996, 1, 3), illionaire);

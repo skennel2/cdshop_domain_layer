@@ -1,5 +1,7 @@
 package org.almansa.app.domain.album;
 
+import java.util.Date;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +17,28 @@ import org.almansa.app.domain.NamedEntityBase;
 public class Lable extends NamedEntityBase {
 
     @Column(name = "ceo_name")
-    private String ceoName;
+    private String ceoName;    
+    
+    private Date establishDate;
+    
+    public Lable(String name) {
+        super(name);
+    }    
+    
+    public Lable(String name, String ceoName) {
+        super(name);
+        this.ceoName = ceoName;
+    }
+    
+    public Lable(String name, String ceoName, Date establishDate) {
+        super(name);
+        this.ceoName = ceoName;
+        this.establishDate = establishDate;
+    }
+    
+    protected Lable() {
+        
+    }
 
     public String getCeoName() {
         return ceoName;
@@ -25,8 +48,16 @@ public class Lable extends NamedEntityBase {
         this.ceoName = ceoName;
     }
 
+    public Date getEstablishDate() {
+        return establishDate;
+    }
+
+    public void setEstablishDate(Date establishDate) {
+        this.establishDate = establishDate;
+    }
+
     @Override
     public String toString() {
-        return "Lable [ceoName=" + ceoName + "]";
+        return "Lable [ceoName=" + ceoName + ", establishDate=" + establishDate + "]";
     }
 }

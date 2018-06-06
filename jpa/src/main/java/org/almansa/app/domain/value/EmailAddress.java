@@ -22,6 +22,16 @@ public class EmailAddress implements Immutable {
         this.emailAddress = emailAddress;
     }
 
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public static boolean isFormatValid(String email) {
+        Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+        return emailPattern.matcher(email).find();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -37,17 +47,7 @@ public class EmailAddress implements Immutable {
         } else if (!emailAddress.equals(other.emailAddress))
             return false;
         return true;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public static boolean isFormatValid(String email) {
-        Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-
-        return emailPattern.matcher(email).find();
-    }
+    }    
     
     @Override
     public int hashCode() {

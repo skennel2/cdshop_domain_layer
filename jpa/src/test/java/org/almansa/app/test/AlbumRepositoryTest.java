@@ -99,8 +99,7 @@ public class AlbumRepositoryTest {
 
     @Before
     public void makeDummies() {
-        Lable illionaire = new Lable();
-        illionaire.changeName("Illionaire");
+        Lable illionaire = new Lable("Illionaire");
         em.persist(illionaire);
 
         Artist theQ = new Artist("the quiett", DateUtil.toDate(1996, 1, 3), illionaire);

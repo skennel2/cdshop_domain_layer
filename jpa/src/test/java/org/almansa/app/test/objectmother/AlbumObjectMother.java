@@ -10,8 +10,7 @@ import org.almansa.app.util.DateUtil;
 public final class AlbumObjectMother {
 
 	public static Album createAlbum() {
-		Lable illionaire = new Lable();
-		illionaire.changeName("Illionaire");
+		Lable illionaire = new Lable("Illionaire");
 
 		Artist theQ = new Artist("the quiett", DateUtil.toDate(1996, 1, 3), illionaire);
 		Song song1 = new Song("song1", theQ, null, "");

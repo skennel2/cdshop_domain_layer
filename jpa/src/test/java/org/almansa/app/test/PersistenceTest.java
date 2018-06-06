@@ -40,16 +40,15 @@ public class PersistenceTest {
         TypedQuery<Artist> query = em.createQuery(
                 "SELECT B FROM Album A INNER JOIN A.albumArtist B WHERE B.name = :aritst_name", Artist.class);
 
-        query.setParameter("aritst_name", "the quiett");
+        query.setParameter("aritst_name", "the Quiett");
         Artist artist = query.getSingleResult();
 
-        assertEquals("the quiett", artist.getName());
+        assertEquals("the Quiett", artist.getName());
     }
 
     @Before
     public void makeDummies() {
-        Lable illionaire = new Lable();
-        illionaire.changeName("Illionaire");
+        Lable illionaire = new Lable("Illionaire");
         em.persist(illionaire);
 
         Artist theQ = new Artist("the Quiett", DateUtil.toDate(1996, 1, 3), illionaire);

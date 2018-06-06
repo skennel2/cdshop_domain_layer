@@ -33,16 +33,13 @@ public class DummyDataMaker {
 
     public void makeDummies() {
 
-        Lable jm = new Lable();
-        jm.changeName("just musick");
+        Lable jm = new Lable("just musick");
         em.persist(jm);
 
-        Lable illionaire = new Lable();
-        illionaire.changeName("Illionaire");
+        Lable illionaire = new Lable("Illionaire");
         em.persist(illionaire);
 
-        Lable aomg = new Lable();
-        aomg.changeName("AOMG");
+        Lable aomg = new Lable("AOMG");
         em.persist(aomg);
 
         Producer nochang = new Producer();

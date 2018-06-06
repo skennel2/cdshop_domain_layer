@@ -16,7 +16,7 @@ public class LableServiceImpl implements LableService {
     @Override
     public void addLable(Lable lable) {
         if (lable == null) {
-            throw new IllegalArgumentException("lable is null");
+            throw new IllegalArgumentException("lable can't be null");
         }
 
         lableRepo.save(lable);
@@ -25,12 +25,10 @@ public class LableServiceImpl implements LableService {
     @Override
     public void addLable(String lableName) {
         if (lableName == null) {
-            throw new IllegalArgumentException("lableName is null");
+            throw new IllegalArgumentException("lableName can't be null");
         }
 
-        Lable lable = new Lable();
-        lable.changeName(lableName);
-
+        Lable lable = new Lable(lableName);
         lableRepo.save(lable);
     }
 
