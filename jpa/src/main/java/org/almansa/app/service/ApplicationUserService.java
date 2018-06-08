@@ -5,7 +5,6 @@ import org.almansa.app.domain.user.PersonalInfomation;
 import org.almansa.app.domain.value.EmailAddress;
 import org.almansa.app.repository.ApplicationUserRepository;
 import org.almansa.app.service.dto.UserJoinRequest;
-import org.almansa.app.service.exception.ApplicationUserJoinException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -3,9 +3,9 @@ package org.almansa.app.test;
 import javax.transaction.Transactional;
 
 import org.almansa.app.AppConfig;
+import org.almansa.app.domain.exception.ApplicationUserJoinException;
 import org.almansa.app.service.ApplicationUserService;
 import org.almansa.app.service.dto.UserJoinRequest;
-import org.almansa.app.service.exception.ApplicationUserJoinException;
 import org.almansa.app.util.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;

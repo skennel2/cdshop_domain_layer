@@ -1,9 +1,9 @@
 package org.almansa.app.service;
 
+import org.almansa.app.domain.exception.ApplicationUserJoinException;
 import org.almansa.app.domain.user.ApplicationUser;
 import org.almansa.app.domain.value.EmailAddress;
 import org.almansa.app.repository.ApplicationUserRepository;
-import org.almansa.app.service.exception.ApplicationUserJoinException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +25,7 @@ public class ApplicationValidatorImpl implements ApplicationUserValidator{
 	}
 
 	@Override
-	public void verifyValidation(ApplicationUser user) {
+	public void verifyValidation(ApplicationUser user) throws ApplicationUserJoinException{
 	    if(user.getPassword() == null || user.getPassword().trim().equals("")) {
 	        throw new ApplicationUserJoinException("password can't be null or empty");
 	    }
