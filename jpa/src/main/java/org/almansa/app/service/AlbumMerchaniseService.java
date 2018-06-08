@@ -67,12 +67,8 @@ public class AlbumMerchaniseService extends ServiceBase {
         return new AlbumMerchandiseDetailViewModel(merchandise);
     }
 
-    @Transactional
     public void removeStock(Long merchandiseId, Long amount) {
         MerchandiseBase merchandise = merchanRepo.getOne(merchandiseId);
-        if (merchandise.getAmountOfStock() - amount < 0) {
-            throw new IllegalArgumentException("lack of stock");
-        }
         merchandise.removeStock(amount);
     }
 }
