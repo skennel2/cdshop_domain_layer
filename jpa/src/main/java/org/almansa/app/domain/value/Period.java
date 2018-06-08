@@ -21,11 +21,10 @@ public class Period implements Immutable {
         super();
     }
 
-    public Period(Date fromDate, Date toDate) {
-        super();
-
-        if (toDate.before(this.fromDate)) {
-            throw new IllegalArgumentException("toDate");
+    public Period(Date fromDate, Date toDate) throws IllegalArgumentException {
+        super();                
+        if (fromDate != null && toDate != null && toDate.before(this.fromDate)) {
+            throw new IllegalArgumentException("Error with dates");
         }
         this.fromDate = fromDate;
         this.toDate = toDate;

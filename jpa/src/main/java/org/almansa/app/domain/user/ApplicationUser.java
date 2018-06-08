@@ -30,7 +30,7 @@ public class ApplicationUser extends NamedEntityBase {
     }
 
     public ApplicationUser(String name, String loginId, String password) {
-        super(name);
+        super(name);        
         this.loginId = loginId;
         this.password = password;
     }

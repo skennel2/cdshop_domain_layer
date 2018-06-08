@@ -17,24 +17,38 @@ public class Money implements Immutable {
         super();
     }
 
-    public Money(BigDecimal amount) {
+    public Money(BigDecimal amount) throws IllegalArgumentException {
         super();
+        if(amount == null || amount.longValue() < 0) {
+        	throw new IllegalArgumentException("amount is smaller then zero");
+        }
+        
         this.amount = amount;
     }
 
-    public Money(long amount) {
+    public Money(long amount) throws IllegalArgumentException {
         super();
+        if(amount < 0) {
+        	throw new IllegalArgumentException("amount is smaller then zero");
+        }
         this.amount = new BigDecimal(amount);
     }
 
-    public Money(String amount) {
-        super();
-        this.amount = new BigDecimal(amount);
+    public Money add(Money value) throws IllegalArgumentException {
+    	if(value == null) {
+    		throw new IllegalArgumentException("value can't be null");
+    	}
+    	
+        return new Money(this.amount.add(value.amount));
     }
-
-    public Money add(Money add) {
-        return new Money(this.amount.add(add.amount));
+    
+    public BigDecimal getAmount() {
+        return amount;
     }
+    
+    public long getAmountLongValue() {
+        return amount.longValue();
+    }    
     
     @Override
 	public String toString() {
@@ -56,10 +70,6 @@ public class Money implements Immutable {
         } else if (!amount.equals(other.amount))
             return false;
         return true;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
     }
 
     @Override
