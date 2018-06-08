@@ -48,4 +48,8 @@ public class PersonalInfomation extends EntityBase {
         return email;
     }
 
+	@Override
+	public String toString() {
+		return "PersonalInfomation [bornDate=" + bornDate + ", email=" + email + ", user=" + user + "]";
+	}        
 }

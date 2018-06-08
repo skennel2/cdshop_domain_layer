@@ -35,8 +35,13 @@ public class Money implements Immutable {
     public Money add(Money add) {
         return new Money(this.amount.add(add.amount));
     }
-
+    
     @Override
+	public String toString() {
+		return "Money [amount=" + amount + "]";
+	}
+
+	@Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;

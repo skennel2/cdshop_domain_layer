@@ -35,4 +35,10 @@ public class PersonAsSongWriter extends EntityBase{
     public ProducerRole getRole() {
         return role;
     }
+
+	@Override
+	public String toString() {
+		return "PersonAsSongWriter [person=" + person + ", role=" + role + "]";
+	}
+        
 }

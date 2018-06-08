@@ -46,4 +46,41 @@ public class Period implements Immutable {
 
         return false;
     }
+    
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fromDate == null) ? 0 : fromDate.hashCode());
+		result = prime * result + ((toDate == null) ? 0 : toDate.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Period other = (Period) obj;
+		if (fromDate == null) {
+			if (other.fromDate != null)
+				return false;
+		} else if (!fromDate.equals(other.fromDate))
+			return false;
+		if (toDate == null) {
+			if (other.toDate != null)
+				return false;
+		} else if (!toDate.equals(other.toDate))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Period [fromDate=" + fromDate + ", toDate=" + toDate + "]";
+	}
+    
 }

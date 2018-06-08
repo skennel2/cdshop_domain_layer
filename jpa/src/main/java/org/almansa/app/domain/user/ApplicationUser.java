@@ -51,14 +51,6 @@ public class ApplicationUser extends NamedEntityBase {
         return personalInfomation;
     }
 
-    public void setLoginId(String loginId) {
-        this.loginId = loginId;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public void setPersonalInfomation(PersonalInfomation personalInfomation) {
         this.personalInfomation = personalInfomation;
     }

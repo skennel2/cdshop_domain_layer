@@ -31,8 +31,13 @@ public class EmailAddress implements Immutable {
 
         return emailPattern.matcher(email).find();
     }
-
+    
     @Override
+	public String toString() {
+		return "EmailAddress [emailAddress=" + emailAddress + "]";
+	}
+
+	@Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
