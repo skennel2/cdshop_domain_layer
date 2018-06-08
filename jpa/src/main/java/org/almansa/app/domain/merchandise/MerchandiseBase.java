@@ -30,8 +30,16 @@ public abstract class MerchandiseBase extends EntityBase {
 		super();
 	}
 
-	public MerchandiseBase(Long amountOfStock, Money price) {
+	public MerchandiseBase(Long amountOfStock, Money price) throws IllegalArgumentException{		
 		super();
+		if (amountOfStock == null || amountOfStock < 0) {
+			throw new IllegalArgumentException("amount argument is smaller then zero");
+		}
+		
+		if (price == null || price.getAmount().longValue() < 0) {
+			throw new IllegalArgumentException("price is smaller then zero");
+		}		
+		
 		this.amountOfStock = amountOfStock;
 		this.price = price;
 	}
