@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 
 import org.almansa.app.domain.value.Money;
+import org.almansa.app.domain.value.Period;
+import org.almansa.app.util.DateUtil;
 import org.junit.Test;
 
 public class ValueObjectTest {
@@ -31,4 +33,9 @@ public class ValueObjectTest {
         assertEquals(true, isEqual);
         assertEquals(false, isReferenceEqual);
     }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void StartDateBiggerThenEndDate() {
+        Period period = new Period(DateUtil.toDate(2018, 12, 1), DateUtil.toDate(2017, 12, 1));
+    }    
 }
