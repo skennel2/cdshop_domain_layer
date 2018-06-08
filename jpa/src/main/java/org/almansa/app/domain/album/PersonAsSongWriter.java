@@ -1,6 +1,5 @@
 package org.almansa.app.domain.album;
 
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;

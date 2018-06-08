@@ -1,9 +1,9 @@
 package org.almansa.app.service;
 
-import org.almansa.app.domain.exception.ApplicationUserJoinException;
 import org.almansa.app.domain.user.ApplicationUser;
 import org.almansa.app.domain.value.EmailAddress;
 import org.almansa.app.repository.ApplicationUserRepository;
+import org.almansa.app.service.exception.ApplicationUserJoinException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

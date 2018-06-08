@@ -9,13 +9,9 @@ import org.almansa.app.domain.Builder;
 public class AlbumBuilder implements Builder<Album> {
 
     private Artist albumArtist;
-
     private String albumName;
-
     private AlbumType albumType;
-
     private Date releaseDate;
-
     private List<SongInAlbum> songs = new ArrayList<SongInAlbum>();
 
     public AlbumBuilder addSong(Song song, int no, boolean isSingle) {
@@ -42,12 +38,6 @@ public class AlbumBuilder implements Builder<Album> {
         return this;
     }
 
-    @Override
-    public Album Build() {
-        Album album = new Album(albumName, albumArtist, releaseDate, songs, albumType);
-        return album;
-    }
-
     public AlbumBuilder name(String name) {
         this.albumName = name;
         return this;
@@ -72,4 +62,19 @@ public class AlbumBuilder implements Builder<Album> {
         albumType = AlbumType.LP;
         return this;
     }
+    
+    @Override
+    public Album Build() {
+        Album album = new Album(albumName, albumArtist, releaseDate, songs, albumType);
+        return album;
+    }
+
+	@Override
+	public String toString() {
+		return "AlbumBuilder [albumArtist=" + albumArtist + ", albumName=" + albumName + ", albumType=" + albumType
+				+ ", releaseDate=" + releaseDate + ", songs=" + songs + ", thisIsEPType()=" + thisIsEPType()
+				+ ", thisIsLPType()=" + thisIsLPType() + ", Build()=" + Build() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+    
 }
