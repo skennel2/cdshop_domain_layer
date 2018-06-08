@@ -20,7 +20,7 @@ public class Lable extends NamedEntityBase {
     private String ceoName;
 
     @Column(name = "est_date")
-    private Date establishDate;
+    private Date establishmentDate;
 
     public Lable(String name) {
         super(name);
@@ -31,10 +31,10 @@ public class Lable extends NamedEntityBase {
         this.ceoName = ceoName;
     }
 
-    public Lable(String name, String ceoName, Date establishDate) {
+    public Lable(String name, String ceoName, Date establishmentDate) {
         super(name);
         this.ceoName = ceoName;
-        this.establishDate = establishDate;
+        this.establishmentDate = establishmentDate;
     }
 
     protected Lable() {
@@ -49,16 +49,16 @@ public class Lable extends NamedEntityBase {
         this.ceoName = ceoName;
     }
 
-    public Date getEstablishDate() {
-        return establishDate;
+    public Date getEstablishmentDate() {
+        return establishmentDate;
     }
 
-    public void changeEstablishDate(Date establishDate) {
-        this.establishDate = establishDate;
+    public void changeEstablishmentDate(Date establishmentDate) {
+        this.establishmentDate = establishmentDate;
     }
 
     @Override
     public String toString() {
-        return "Lable [ceoName=" + ceoName + ", establishDate=" + establishDate + "]";
+        return "Lable [ceoName=" + ceoName + ", establishmentDate=" + establishmentDate + "]";
     }
 }
