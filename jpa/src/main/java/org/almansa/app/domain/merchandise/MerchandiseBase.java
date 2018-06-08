@@ -73,7 +73,7 @@ public abstract class MerchandiseBase extends EntityBase {
 	}
 
 	public void changeAmountOfStock(Long amountOfStock) throws IllegalArgumentException {
-		if (amountOfStock < 0) {
+		if (amountOfStock == null || amountOfStock < 0) {
 			throw new IllegalArgumentException();
 		}
 

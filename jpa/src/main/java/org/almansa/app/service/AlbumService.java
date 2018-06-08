@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.almansa.app.domain.album.Album;
@@ -59,18 +60,16 @@ public class AlbumService extends ServiceBase {
         this.albumRepo.save(newAlbum);
     }
 
-    @Transactional
     public void changeAlbumName(Long albumId, String newName) {
         Album album = albumRepo.getOne(albumId);
         album.changeName(newName);
     }
     
-    @Transactional
     public void deleteAlbum(Long albumId) {
     	albumRepo.deleteById(albumId);
     }
 
-    public Album getById(Long id) {
+    public Album getById(Long id) throws EntityNotFoundException {
         Album album = albumRepo.getOne(id);
         
         return album;
@@ -80,11 +79,11 @@ public class AlbumService extends ServiceBase {
     	return albumRepo.findByArtistId(artistId);
     }
     
-    public List<Album> getByName(String name){
+    public List<Album> getByName(String name) {
     	return albumRepo.findByName(name);
     }
     
-    public AlbumSimpleViewModel getAlbumSimleViewModelById(Long id) {
+    public AlbumSimpleViewModel getAlbumSimleViewModelById(Long id) throws EntityNotFoundException{
         AlbumSimpleViewModel viewModel = albumAssembler.albumSimpleViewModel(getById(id));
 
         return viewModel;

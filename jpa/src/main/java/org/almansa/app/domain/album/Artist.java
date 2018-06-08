@@ -24,6 +24,9 @@ public class Artist extends PersonBase {
         super(name, bornDate);
         this.lable = lable;
     }
+    
+    protected Artist() {
+    }
 
     public void changeLable(Lable lable) {
         this.lable = lable;
