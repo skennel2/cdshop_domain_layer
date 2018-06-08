@@ -19,8 +19,8 @@ public class EmailAddress implements Immutable {
 
     public EmailAddress(String emailAddress) throws IllegalArgumentException {
         super();
-        if(emailAddress == null) {
-        	throw new IllegalArgumentException("emailAddress can't be null"); 
+        if (emailAddress == null) {
+            throw new IllegalArgumentException("emailAddress can't be null");
         }
         this.emailAddress = emailAddress;
     }
@@ -34,8 +34,8 @@ public class EmailAddress implements Immutable {
 
         return emailPattern.matcher(email).find();
     }
-   
-	@Override
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
@@ -50,8 +50,8 @@ public class EmailAddress implements Immutable {
         } else if (!emailAddress.equals(other.emailAddress))
             return false;
         return true;
-    }    
-    
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -59,10 +59,10 @@ public class EmailAddress implements Immutable {
         result = prime * result + ((emailAddress == null) ? 0 : emailAddress.hashCode());
         return result;
     }
-    
+
     @Override
-	public String toString() {
-		return "EmailAddress [emailAddress=" + emailAddress + "]";
-	}
-    
+    public String toString() {
+        return "EmailAddress [emailAddress=" + emailAddress + "]";
+    }
+
 }

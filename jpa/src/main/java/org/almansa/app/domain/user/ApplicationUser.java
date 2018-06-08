@@ -30,7 +30,7 @@ public class ApplicationUser extends NamedEntityBase {
     }
 
     public ApplicationUser(String name, String loginId, String password) {
-        super(name);        
+        super(name);
         this.loginId = loginId;
         this.password = password;
     }
@@ -58,10 +58,10 @@ public class ApplicationUser extends NamedEntityBase {
         this.personalInfomation = personalInfomation;
     }
 
-	@Override
-	public String toString() {
-		return "ApplicationUser [loginId=" + loginId + ", password=" + password + ", personalInfomation="
-				+ personalInfomation + "]";
-	}        
+    @Override
+    public String toString() {
+        return "ApplicationUser [loginId=" + loginId + ", password=" + password + ", personalInfomation="
+                + personalInfomation + "]";
+    }
 
 }

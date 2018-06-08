@@ -32,9 +32,9 @@ public class AlbumMerchaniseService extends ServiceBase {
 
     @Transactional
     public void addAlbumMerchandise(Long albumId, Money price, int remainingStock) {
-        albumRepo.findById(albumId).ifPresent(a->{
+        albumRepo.findById(albumId).ifPresent(a -> {
             AlbumMerchandise newAlbumMerchandise = new AlbumMerchandise(new Long(remainingStock), price, a);
-            merchanRepo.save(newAlbumMerchandise);   
+            merchanRepo.save(newAlbumMerchandise);
         });
     }
 

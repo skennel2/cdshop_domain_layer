@@ -19,86 +19,86 @@ import org.almansa.app.domain.value.Money;
 @Table(name = "Merchandise")
 public abstract class MerchandiseBase extends EntityBase {
 
-	@Column(name = "amount_of_stock")
-	private Long amountOfStock = Long.valueOf(0);
+    @Column(name = "amount_of_stock")
+    private Long amountOfStock = Long.valueOf(0);
 
-	@Embedded
-	@AttributeOverride(name = "amount", column = @Column(name = "price"))
-	private Money price;
+    @Embedded
+    @AttributeOverride(name = "amount", column = @Column(name = "price"))
+    private Money price;
 
-	protected MerchandiseBase() {
-		super();
-	}
+    protected MerchandiseBase() {
+        super();
+    }
 
-	public MerchandiseBase(Long amountOfStock, Money price) throws IllegalArgumentException{		
-		super();
-		if (amountOfStock == null || amountOfStock < 0) {
-			throw new IllegalArgumentException("amount argument is smaller then zero");
-		}
-		
-		if (price == null || price.getAmount().longValue() < 0) {
-			throw new IllegalArgumentException("price is smaller then zero");
-		}		
-		
-		this.amountOfStock = amountOfStock;
-		this.price = price;
-	}
+    public MerchandiseBase(Long amountOfStock, Money price) throws IllegalArgumentException {
+        super();
+        if (amountOfStock == null || amountOfStock < 0) {
+            throw new IllegalArgumentException("amount argument is smaller then zero");
+        }
 
-	public Long getAmountOfStock() {
-		return amountOfStock;
-	}
+        if (price == null || price.getAmount().longValue() < 0) {
+            throw new IllegalArgumentException("price is smaller then zero");
+        }
 
-	public Money getPrice() {
-		return price;
-	}
+        this.amountOfStock = amountOfStock;
+        this.price = price;
+    }
 
-	public boolean isAbailableOrderQuantity(long amount) {
-		return ((amountOfStock - amount) >= 0);
-	}
+    public Long getAmountOfStock() {
+        return amountOfStock;
+    }
 
-	public boolean isSoldOut() {
-		return amountOfStock.longValue() == 0;
-	}
+    public Money getPrice() {
+        return price;
+    }
 
-	public void addStock(long amount) throws IllegalArgumentException {
-		if (amount < 0) {
-			throw new IllegalArgumentException("amount argument is smaller then zero");
-		}
+    public boolean isAbailableOrderQuantity(long amount) {
+        return ((amountOfStock - amount) >= 0);
+    }
 
-		this.amountOfStock += amount;
-	}
+    public boolean isSoldOut() {
+        return amountOfStock.longValue() == 0;
+    }
 
-	public void removeStock(long amount) throws RemainingStockException, IllegalArgumentException {
-		if (amount < 0) {
-			throw new IllegalArgumentException("amount argument is smaller then zero");
-		}
+    public void addStock(long amount) throws IllegalArgumentException {
+        if (amount < 0) {
+            throw new IllegalArgumentException("amount argument is smaller then zero");
+        }
 
-		if ((amountOfStock - amount) < 0) {
-			throw new RemainingStockException("out of stock");
-		}
+        this.amountOfStock += amount;
+    }
 
-		this.amountOfStock -= amount;
-	}
+    public void removeStock(long amount) throws RemainingStockException, IllegalArgumentException {
+        if (amount < 0) {
+            throw new IllegalArgumentException("amount argument is smaller then zero");
+        }
 
-	public void changeAmountOfStock(Long amountOfStock) throws IllegalArgumentException {
-		if (amountOfStock == null || amountOfStock < 0) {
-			throw new IllegalArgumentException("amountOfStock argument not allowd null and Zero");
-		}
+        if ((amountOfStock - amount) < 0) {
+            throw new RemainingStockException("out of stock");
+        }
 
-		this.amountOfStock = amountOfStock;
-	}
+        this.amountOfStock -= amount;
+    }
 
-	public void changePrice(Money price) throws IllegalArgumentException {
-		if (price == null || price.getAmount().longValue() < 0) {
-			throw new IllegalArgumentException("price argument not allowd null and Zero");
-		}
+    public void changeAmountOfStock(Long amountOfStock) throws IllegalArgumentException {
+        if (amountOfStock == null || amountOfStock < 0) {
+            throw new IllegalArgumentException("amountOfStock argument not allowd null and Zero");
+        }
 
-		this.price = price;
-	}
+        this.amountOfStock = amountOfStock;
+    }
 
-	@Override
-	public String toString() {
-		return "MerchandiseBase [amountOfStock=" + amountOfStock + ", price=" + price + "]";
-	}
+    public void changePrice(Money price) throws IllegalArgumentException {
+        if (price == null || price.getAmount().longValue() < 0) {
+            throw new IllegalArgumentException("price argument not allowd null and Zero");
+        }
+
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "MerchandiseBase [amountOfStock=" + amountOfStock + ", price=" + price + "]";
+    }
 
 }

@@ -10,7 +10,7 @@ import org.almansa.app.domain.PersonBase;
 
 //@Embeddable
 @Entity
-public class PersonAsSongWriter extends EntityBase{
+public class PersonAsSongWriter extends EntityBase {
 
     @ManyToOne
     private PersonBase person;
@@ -36,9 +36,9 @@ public class PersonAsSongWriter extends EntityBase{
         return role;
     }
 
-	@Override
-	public String toString() {
-		return "PersonAsSongWriter [person=" + person + ", role=" + role + "]";
-	}
-        
+    @Override
+    public String toString() {
+        return "PersonAsSongWriter [person=" + person + ", role=" + role + "]";
+    }
+
 }

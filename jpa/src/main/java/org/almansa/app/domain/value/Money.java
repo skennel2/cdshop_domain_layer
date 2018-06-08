@@ -19,43 +19,43 @@ public class Money implements Immutable {
 
     public Money(BigDecimal amount) throws IllegalArgumentException {
         super();
-        if(amount == null || amount.longValue() < 0) {
-        	throw new IllegalArgumentException("amount is smaller then zero");
+        if (amount == null || amount.longValue() < 0) {
+            throw new IllegalArgumentException("amount is smaller then zero");
         }
-        
+
         this.amount = amount;
     }
 
     public Money(long amount) throws IllegalArgumentException {
         super();
-        if(amount < 0) {
-        	throw new IllegalArgumentException("amount is smaller then zero");
+        if (amount < 0) {
+            throw new IllegalArgumentException("amount is smaller then zero");
         }
         this.amount = new BigDecimal(amount);
     }
 
     public Money add(Money value) throws IllegalArgumentException {
-    	if(value == null) {
-    		throw new IllegalArgumentException("value can't be null");
-    	}
-    	
+        if (value == null) {
+            throw new IllegalArgumentException("value can't be null");
+        }
+
         return new Money(this.amount.add(value.amount));
     }
-    
+
     public BigDecimal getAmount() {
         return amount;
     }
-    
+
     public long getAmountLongValue() {
         return amount.longValue();
-    }    
-    
-    @Override
-	public String toString() {
-		return "Money [amount=" + amount + "]";
-	}
+    }
 
-	@Override
+    @Override
+    public String toString() {
+        return "Money [amount=" + amount + "]";
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;

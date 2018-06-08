@@ -52,7 +52,7 @@ public class DummyDataMaker {
         chachamalon.setLable(aomg);
         em.persist(chachamalon);
 
-        Artist swings = new Artist("swings", DateUtil.toDate(1987, 3, 3) ,jm);
+        Artist swings = new Artist("swings", DateUtil.toDate(1987, 3, 3), jm);
         em.persist(swings);
 
         Artist theQ = new Artist("the quiett", DateUtil.toDate(1996, 1, 3), illionaire);

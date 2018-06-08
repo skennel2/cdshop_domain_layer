@@ -17,28 +17,28 @@ import org.almansa.app.domain.NamedEntityBase;
 public class Lable extends NamedEntityBase {
 
     @Column(name = "ceo_name")
-    private String ceoName;    
-    
+    private String ceoName;
+
     @Column(name = "est_date")
     private Date establishDate;
-    
+
     public Lable(String name) {
         super(name);
-    }    
-    
+    }
+
     public Lable(String name, String ceoName) {
         super(name);
         this.ceoName = ceoName;
     }
-    
+
     public Lable(String name, String ceoName, Date establishDate) {
         super(name);
         this.ceoName = ceoName;
         this.establishDate = establishDate;
     }
-    
+
     protected Lable() {
-        
+
     }
 
     public String getCeoName() {

@@ -1,14 +1,14 @@
 package org.almansa.app.domain.exception;
 
-public class RemainingStockException extends RuntimeException{
+public class RemainingStockException extends RuntimeException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
-	public RemainingStockException(String message) {
-		super(message);
-	}
-	
+    public RemainingStockException(String message) {
+        super(message);
+    }
+
 }

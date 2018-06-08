@@ -24,7 +24,7 @@ public class Artist extends PersonBase {
         super(name, bornDate);
         this.lable = lable;
     }
-    
+
     protected Artist() {
     }
 

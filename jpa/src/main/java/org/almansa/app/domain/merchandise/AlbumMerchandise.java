@@ -29,11 +29,11 @@ public class AlbumMerchandise extends MerchandiseBase {
         return album;
     }
 
-	@Override
-	public String toString() {
-		return "AlbumMerchandise [album=" + album + ", getAmountOfStock()=" + getAmountOfStock() + ", getPrice()="
-				+ getPrice() + ", isSoldOut()=" + isSoldOut() + ", getId()=" + getId() + ", getCreationDate()="
-				+ getCreationDate() + ", isNew()=" + isNew() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + ", getClass()=" + getClass() + "]";
-	}        
+    @Override
+    public String toString() {
+        return "AlbumMerchandise [album=" + album + ", getAmountOfStock()=" + getAmountOfStock() + ", getPrice()="
+                + getPrice() + ", isSoldOut()=" + isSoldOut() + ", getId()=" + getId() + ", getCreationDate()="
+                + getCreationDate() + ", isNew()=" + isNew() + ", hashCode()=" + hashCode() + ", toString()="
+                + super.toString() + ", getClass()=" + getClass() + "]";
+    }
 }

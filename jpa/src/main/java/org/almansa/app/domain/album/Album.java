@@ -97,10 +97,10 @@ public class Album extends NamedEntityBase {
         return false;
     }
 
-	@Override
-	public String toString() {
-		return "Album [albumArtist=" + albumArtist + ", albumType=" + albumType + ", releaseDate=" + releaseDate
-				+ ", songs=" + songs + "]";
-	}
-        
+    @Override
+    public String toString() {
+        return "Album [albumArtist=" + albumArtist + ", albumType=" + albumType + ", releaseDate=" + releaseDate
+                + ", songs=" + songs + "]";
+    }
+
 }

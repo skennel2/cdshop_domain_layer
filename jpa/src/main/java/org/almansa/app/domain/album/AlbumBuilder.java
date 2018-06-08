@@ -62,19 +62,19 @@ public class AlbumBuilder implements Builder<Album> {
         albumType = AlbumType.LP;
         return this;
     }
-    
+
     @Override
     public Album Build() {
         Album album = new Album(albumName, albumArtist, releaseDate, songs, albumType);
         return album;
     }
 
-	@Override
-	public String toString() {
-		return "AlbumBuilder [albumArtist=" + albumArtist + ", albumName=" + albumName + ", albumType=" + albumType
-				+ ", releaseDate=" + releaseDate + ", songs=" + songs + ", thisIsEPType()=" + thisIsEPType()
-				+ ", thisIsLPType()=" + thisIsLPType() + ", Build()=" + Build() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-	}
-    
+    @Override
+    public String toString() {
+        return "AlbumBuilder [albumArtist=" + albumArtist + ", albumName=" + albumName + ", albumType=" + albumType
+                + ", releaseDate=" + releaseDate + ", songs=" + songs + ", thisIsEPType()=" + thisIsEPType()
+                + ", thisIsLPType()=" + thisIsLPType() + ", Build()=" + Build() + ", getClass()=" + getClass()
+                + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+    }
+
 }

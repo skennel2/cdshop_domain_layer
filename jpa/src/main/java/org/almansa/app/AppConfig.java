@@ -58,14 +58,14 @@ public class AppConfig {
 
         return jtm;
     }
-    
+
     private Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create"); // 
+        properties.setProperty("hibernate.hbm2ddl.auto", "create"); //
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         properties.setProperty("hibernate.show_sql", "true");
         properties.setProperty("hibernate.format_sql", "true");
         properties.setProperty("hibernate.id.new_generator_mappings", "true");
         return properties;
-    }    
+    }
 }

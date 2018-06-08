@@ -22,7 +22,7 @@ import org.almansa.app.domain.PersonBase;
 @AttributeOverride(name = "name", column = @Column(name = "song_name"))
 public class Song extends NamedEntityBase {
 
-    //@ElementCollection(fetch = FetchType.LAZY)
+    // @ElementCollection(fetch = FetchType.LAZY)
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @CollectionTable(name = "song_writers", joinColumns = @JoinColumn(name = "song_writer_id"))
     private List<PersonAsSongWriter> artists = new ArrayList<PersonAsSongWriter>();
@@ -38,7 +38,7 @@ public class Song extends NamedEntityBase {
     protected Song() {
         super(null);
     }
- 
+
     public Song(String name, Artist ownerArtist, List<PersonAsSongWriter> artists, String lylics) {
         super(name);
         this.ownerArtist = ownerArtist;
@@ -60,7 +60,7 @@ public class Song extends NamedEntityBase {
     public void setMainProducer(PersonBase person) {
         this.artists.add(new PersonAsSongWriter(person, ProducerRole.MainProducer));
     }
-    
+
     public void addPersonAsSongWriter(PersonAsSongWriter personAsSongWriter) {
         this.artists.add(personAsSongWriter);
     }
@@ -92,7 +92,7 @@ public class Song extends NamedEntityBase {
     public void changeOwnerArtist(Artist ownerArtist) {
         this.ownerArtist = ownerArtist;
     }
-    
+
     @Override
     public String toString() {
         return "Song [ownerArtist=" + ownerArtist + ", artists=" + artists + ", lylics=" + lylics + "]";

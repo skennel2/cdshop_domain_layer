@@ -41,20 +41,16 @@ public class AlbumService extends ServiceBase {
     public void AddAlbum(AddAlbumRequest addParameter) {
         Optional<Artist> artist = this.artistRepo.findById(addParameter.getArtistId());
 
-        Album newAlbum = new AlbumBuilder()
-                .albumType(addParameter.getAlbumType())
-                .artist(artist.get())
-                .releaseDate(addParameter.getReleaseDate())
-                .albumName(addParameter.getAlbumName())
-                .Build();
+        Album newAlbum = new AlbumBuilder().albumType(addParameter.getAlbumType()).artist(artist.get())
+                .releaseDate(addParameter.getReleaseDate()).albumName(addParameter.getAlbumName()).Build();
 
         for (SongIdAndSongNo songIdAndSongNo : addParameter.getSongIds()) {
             Long songId = songIdAndSongNo.getSongId();
             int songNo = songIdAndSongNo.getNo();
-            
-            this.songRepo.findById(songId).ifPresent(song->{
+
+            this.songRepo.findById(songId).ifPresent(song -> {
                 newAlbum.addSong(song, songNo, false);
-            });            
+            });
         }
 
         this.albumRepo.save(newAlbum);
@@ -64,26 +60,26 @@ public class AlbumService extends ServiceBase {
         Album album = albumRepo.getOne(albumId);
         album.changeName(newName);
     }
-    
+
     public void deleteAlbum(Long albumId) {
-    	albumRepo.deleteById(albumId);
+        albumRepo.deleteById(albumId);
     }
 
     public Album getById(Long id) throws EntityNotFoundException {
         Album album = albumRepo.getOne(id);
-        
+
         return album;
     }
 
-    public List<Album> getByArtistId(Long artistId){
-    	return albumRepo.findByArtistId(artistId);
+    public List<Album> getByArtistId(Long artistId) {
+        return albumRepo.findByArtistId(artistId);
     }
-    
+
     public List<Album> getByName(String name) {
-    	return albumRepo.findByName(name);
+        return albumRepo.findByName(name);
     }
-    
-    public AlbumSimpleViewModel getAlbumSimleViewModelById(Long id) throws EntityNotFoundException{
+
+    public AlbumSimpleViewModel getAlbumSimleViewModelById(Long id) throws EntityNotFoundException {
         AlbumSimpleViewModel viewModel = albumAssembler.albumSimpleViewModel(getById(id));
 
         return viewModel;

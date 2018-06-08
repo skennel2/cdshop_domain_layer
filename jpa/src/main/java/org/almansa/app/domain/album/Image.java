@@ -45,11 +45,9 @@ public class Image extends NamedEntityBase implements IDescription {
         this.accessPath = accessPath;
     }
 
-    
-    
-	@Override
-	public String toString() {
-		return "Image [accessPath=" + accessPath + ", description=" + description + "]";
-	}
-        
+    @Override
+    public String toString() {
+        return "Image [accessPath=" + accessPath + ", description=" + description + "]";
+    }
+
 }

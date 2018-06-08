@@ -15,22 +15,22 @@ import org.springframework.stereotype.Service;
 public class ArtistService {
     @Autowired
     private ArtistRepository artistRepo;
-    
+
     @Autowired
     private LableRepository lableRepo;
-    
+
     public void addArtist(Long lableId, String name, Date bornDate) {
         Optional<Lable> lable = lableRepo.findById(lableId);
-        
+
         Artist artist = new Artist(name, bornDate, lable.get());
         artistRepo.save(artist);
     }
-    
+
     public Artist findById(Long artistId) {
         return artistRepo.findById(artistId).get();
     }
-    
+
     public List<Artist> getAll() {
         return artistRepo.findAll();
-    }    
+    }
 }
