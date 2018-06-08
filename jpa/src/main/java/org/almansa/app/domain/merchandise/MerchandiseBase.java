@@ -54,7 +54,7 @@ public abstract class MerchandiseBase extends EntityBase {
 
 	public void addStock(long amount) throws IllegalArgumentException {
 		if (amount < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("amount argument is smaller then zero");
 		}
 
 		this.amountOfStock += amount;
@@ -62,7 +62,7 @@ public abstract class MerchandiseBase extends EntityBase {
 
 	public void removeStock(long amount) throws RemainingStockException, IllegalArgumentException {
 		if (amount < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("amount argument is smaller then zero");
 		}
 
 		if ((amountOfStock - amount) < 0) {
@@ -74,7 +74,7 @@ public abstract class MerchandiseBase extends EntityBase {
 
 	public void changeAmountOfStock(Long amountOfStock) throws IllegalArgumentException {
 		if (amountOfStock == null || amountOfStock < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("amountOfStock argument not allowd null and Zero");
 		}
 
 		this.amountOfStock = amountOfStock;
@@ -82,7 +82,7 @@ public abstract class MerchandiseBase extends EntityBase {
 
 	public void changePrice(Money price) throws IllegalArgumentException {
 		if (price == null || price.getAmount().longValue() < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("price argument not allowd null and Zero");
 		}
 
 		this.price = price;
