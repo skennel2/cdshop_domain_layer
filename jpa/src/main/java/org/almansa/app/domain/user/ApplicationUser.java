@@ -63,4 +63,10 @@ public class ApplicationUser extends NamedEntityBase {
         this.personalInfomation = personalInfomation;
     }
 
+	@Override
+	public String toString() {
+		return "ApplicationUser [loginId=" + loginId + ", password=" + password + ", personalInfomation="
+				+ personalInfomation + "]";
+	}        
+
 }

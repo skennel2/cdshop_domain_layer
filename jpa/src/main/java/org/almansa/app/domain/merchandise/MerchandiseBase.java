@@ -10,6 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import org.almansa.app.domain.EntityBase;
+import org.almansa.app.domain.exception.RemainingStockException;
 import org.almansa.app.domain.value.Money;
 
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -18,56 +19,78 @@ import org.almansa.app.domain.value.Money;
 @Table(name = "Merchandise")
 public abstract class MerchandiseBase extends EntityBase {
 
-    @Column(name = "amount_of_stock")
-    private Long amountOfStock = Long.valueOf(0);
+	@Column(name = "amount_of_stock")
+	private Long amountOfStock = Long.valueOf(0);
 
-    @Embedded
-    @AttributeOverride(name = "amount", column = @Column(name = "price"))
-    private Money price;
+	@Embedded
+	@AttributeOverride(name = "amount", column = @Column(name = "price"))
+	private Money price;
 
-    protected MerchandiseBase() {
-        super();
-    }
+	protected MerchandiseBase() {
+		super();
+	}
 
-    public MerchandiseBase(Long amountOfStock, Money price) {
-        super();
-        this.amountOfStock = amountOfStock;
-        this.price = price;
-    }
+	public MerchandiseBase(Long amountOfStock, Money price) {
+		super();
+		this.amountOfStock = amountOfStock;
+		this.price = price;
+	}
 
-    public Long getAmountOfStock() {
-        return amountOfStock;
-    }
+	public Long getAmountOfStock() {
+		return amountOfStock;
+	}
 
-    public Money getPrice() {
-        return price;
-    }
+	public Money getPrice() {
+		return price;
+	}
 
-    public boolean isAbailableOrderQuantity(long amount) {
-        return ((amountOfStock - amount) >= 0);
-    }
+	public boolean isAbailableOrderQuantity(long amount) {
+		return ((amountOfStock - amount) >= 0);
+	}
 
-    public boolean isSoldOut() {
-        return amountOfStock.longValue() == 0;
-    }
+	public boolean isSoldOut() {
+		return amountOfStock.longValue() == 0;
+	}
 
-    public void addStock(long amount) {
-        this.amountOfStock += amount;
-    }
+	public void addStock(long amount) throws IllegalArgumentException {
+		if (amount < 0) {
+			throw new IllegalArgumentException();
+		}
 
-    public void removeStock(long amount) {
-        if ((amountOfStock - amount) < 0) {
-            throw new IllegalArgumentException("lack stock");
-        }
+		this.amountOfStock += amount;
+	}
 
-        this.amountOfStock -= amount;
-    }
+	public void removeStock(long amount) throws RemainingStockException, IllegalArgumentException {
+		if (amount < 0) {
+			throw new IllegalArgumentException();
+		}
 
-    public void changeAmountOfStock(Long amountOfStock) {
-        this.amountOfStock = amountOfStock;
-    }
+		if ((amountOfStock - amount) < 0) {
+			throw new RemainingStockException("out of stock");
+		}
 
-    public void changePrice(Money price) {
-        this.price = price;
-    }
+		this.amountOfStock -= amount;
+	}
+
+	public void changeAmountOfStock(Long amountOfStock) throws IllegalArgumentException {
+		if (amountOfStock < 0) {
+			throw new IllegalArgumentException();
+		}
+
+		this.amountOfStock = amountOfStock;
+	}
+
+	public void changePrice(Money price) throws IllegalArgumentException {
+		if (price == null || price.getAmount().longValue() < 0) {
+			throw new IllegalArgumentException();
+		}
+
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "MerchandiseBase [amountOfStock=" + amountOfStock + ", price=" + price + "]";
+	}
+
 }
