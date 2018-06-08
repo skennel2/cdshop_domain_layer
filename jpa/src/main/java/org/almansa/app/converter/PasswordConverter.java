@@ -16,8 +16,10 @@ import javax.persistence.Converter;
 @Converter
 public class PasswordConverter implements AttributeConverter<String, String>{
 
-	private static final String ALGORITHM = "AES/ECB/PKCS5Padding"; 
-	private static final byte[] KEY = "q!7b1r8#g#e#".getBytes();
+	private static final String ALGORITHM = "AES/ECB/PKCS5Padding";
+	
+	// AES only supports key sizes of 16, 24 or 32 bytes
+	private static final byte[] KEY = "q!7bq!7bq!7bq!7b".getBytes(); 
 	
 	@Override
 	public String convertToDatabaseColumn(String password) {

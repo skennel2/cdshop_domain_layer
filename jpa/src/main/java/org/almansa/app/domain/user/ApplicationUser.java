@@ -2,11 +2,13 @@ package org.almansa.app.domain.user;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.almansa.app.converter.PasswordConverter;
 import org.almansa.app.domain.NamedEntityBase;
 
 @Entity
@@ -17,6 +19,7 @@ public class ApplicationUser extends NamedEntityBase {
     private String loginId;
 
     @Column(name = "password", nullable = false, length = 30)
+    @Convert(converter = PasswordConverter.class)
     private String password;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // value of mappedBy -> field of
