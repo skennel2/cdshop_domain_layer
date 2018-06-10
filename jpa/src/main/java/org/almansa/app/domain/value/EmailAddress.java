@@ -13,10 +13,6 @@ public class EmailAddress implements Immutable {
     @Column(name = "email_address")
     private String emailAddress;
 
-    protected EmailAddress() {
-        super();
-    }
-
     public EmailAddress(String emailAddress) throws IllegalArgumentException {
         super();
         if (emailAddress == null) {
@@ -24,6 +20,9 @@ public class EmailAddress implements Immutable {
         }
         this.emailAddress = emailAddress;
     }
+    
+    protected EmailAddress() {
+    }    
 
     public String getEmailAddress() {
         return emailAddress;

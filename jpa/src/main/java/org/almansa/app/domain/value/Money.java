@@ -13,10 +13,6 @@ public class Money implements Immutable {
     @Column(name = "amount_of_money")
     private BigDecimal amount;
 
-    protected Money() {
-        super();
-    }
-
     public Money(BigDecimal amount) throws IllegalArgumentException {
         super();
         if (amount == null || amount.longValue() < 0) {
@@ -34,6 +30,9 @@ public class Money implements Immutable {
         this.amount = new BigDecimal(amount);
     }
 
+    protected Money() {
+    }
+    
     public Money add(Money value) throws IllegalArgumentException {
         if (value == null) {
             throw new IllegalArgumentException("value can't be null");

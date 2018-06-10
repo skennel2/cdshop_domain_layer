@@ -26,10 +26,6 @@ public abstract class MerchandiseBase extends EntityBase {
     @AttributeOverride(name = "amount", column = @Column(name = "price"))
     private Money price;
 
-    protected MerchandiseBase() {
-        super();
-    }
-
     public MerchandiseBase(Long amountOfStock, Money price) throws IllegalArgumentException {
         super();
         if (amountOfStock == null || amountOfStock < 0) {
@@ -42,6 +38,9 @@ public abstract class MerchandiseBase extends EntityBase {
 
         this.amountOfStock = amountOfStock;
         this.price = price;
+    }
+    
+    protected MerchandiseBase() {
     }
 
     public Long getAmountOfStock() {

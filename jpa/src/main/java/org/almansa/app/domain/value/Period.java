@@ -17,10 +17,6 @@ public class Period implements Immutable {
     @Temporal(TemporalType.DATE)
     private Date toDate;
 
-    protected Period() {
-        super();
-    }
-
     public Period(Date fromDate, Date toDate) throws IllegalArgumentException {
         super();
         if (fromDate != null && toDate != null && toDate.before(fromDate)) {
@@ -29,6 +25,9 @@ public class Period implements Immutable {
         this.fromDate = fromDate;
         this.toDate = toDate;
     }
+    
+    protected Period() {
+    }    
 
     public Date getFromDate() {
         return fromDate;

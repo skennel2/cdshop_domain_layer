@@ -35,10 +35,6 @@ public class PurchaseOrder extends EntityBase {
     @CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "order_id"))
     private List<PurchaseOrderLine> orderLines;
 
-    protected PurchaseOrder() {
-        super();
-    }
-
     public PurchaseOrder(ApplicationUser orderer, List<PurchaseOrderLine> orderLines, Date orderDate) {
         super();
         this.orderer = orderer;
@@ -50,6 +46,9 @@ public class PurchaseOrder extends EntityBase {
         }
     }
 
+    protected PurchaseOrder() {
+    }
+    
     public void addOrderLine(MerchandiseBase merchandise, int quantity) {
         PurchaseOrderLine orderLine = new PurchaseOrderLine(merchandise, quantity);
         addOrderLine(orderLine);

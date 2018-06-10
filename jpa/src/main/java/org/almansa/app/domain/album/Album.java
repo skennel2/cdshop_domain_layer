@@ -37,10 +37,6 @@ public class Album extends NamedEntityBase {
     @CollectionTable(name = "song_in_album", joinColumns = @JoinColumn(name = "song_in_album_id"))
     private List<SongInAlbum> songs;
 
-    protected Album() {
-        super(null);
-    }
-
     public Album(String name, Artist albumArtist, Date releaseDate, List<SongInAlbum> songs, AlbumType albumType) {
         super(name);
 
@@ -54,6 +50,9 @@ public class Album extends NamedEntityBase {
         }
     }
 
+    protected Album() {
+    }
+    
     public void addSong(Song song, int no, boolean isSingle) {
         SongInAlbum songInAlbum = new SongInAlbum(this, song, no, isSingle);
         addSong(songInAlbum);

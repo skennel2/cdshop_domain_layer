@@ -38,7 +38,6 @@ public class Lable extends NamedEntityBase {
     }
 
     protected Lable() {
-
     }
 
     public String getCeoName() {

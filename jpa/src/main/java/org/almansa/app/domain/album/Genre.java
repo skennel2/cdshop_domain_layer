@@ -7,11 +7,10 @@ import org.almansa.app.domain.NamedEntityBase;
 @Entity
 public class Genre extends NamedEntityBase {
 
-    protected Genre() {
-        super(null);
-    }
-
     public Genre(String name) {
         super(name);
     }
+    
+    protected Genre() {
+    }    
 }

@@ -16,15 +16,14 @@ public class AlbumMerchandise extends MerchandiseBase {
     @OneToOne
     private Album album;
 
-    protected AlbumMerchandise() {
-        super();
-    }
-
     public AlbumMerchandise(Long amountOfStock, Money price, Album album) {
         super(amountOfStock, price);
         this.album = album;
     }
 
+    protected AlbumMerchandise() {
+    }
+    
     public Album getAlbum() {
         return album;
     }

@@ -29,16 +29,15 @@ public class PersonalInfomation extends EntityBase {
     @JoinColumn(name = "app_user_id")
     private ApplicationUser user;
 
-    protected PersonalInfomation() {
-        super();
-    }
-
     public PersonalInfomation(ApplicationUser user, EmailAddress email, Date bornDate) {
         super();
         this.user = user;
         this.email = email;
         this.bornDate = bornDate;
     }
+    
+    protected PersonalInfomation() {
+    }    
 
     public Date getBornDate() {
         return bornDate;

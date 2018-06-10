@@ -18,14 +18,13 @@ public class PersonAsSongWriter extends EntityBase {
     @Enumerated(EnumType.STRING)
     private ProducerRole role;
 
-    protected PersonAsSongWriter() {
-        super();
-    }
-
     public PersonAsSongWriter(PersonBase person, ProducerRole role) {
         super();
         this.person = person;
         this.role = role;
+    }
+    
+    protected PersonAsSongWriter() {
     }
 
     public PersonBase getPerson() {

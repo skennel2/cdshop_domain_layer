@@ -36,7 +36,6 @@ public class Song extends NamedEntityBase {
     private Artist ownerArtist;
 
     protected Song() {
-        super(null);
     }
 
     public Song(String name, Artist ownerArtist, List<PersonAsSongWriter> artists, String lylics) {

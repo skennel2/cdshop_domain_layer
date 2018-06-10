@@ -20,15 +20,14 @@ public class PurchaseOrderLine {
     @Column(name = "product_quantity")
     private int quantity;
 
-    protected PurchaseOrderLine() {
-        super();
-    }
-
     public PurchaseOrderLine(MerchandiseBase merchandise, int quantity) {
         super();
         this.merchandise = merchandise;
         this.quantity = quantity;
     }
+    
+    protected PurchaseOrderLine() {
+    } 
 
     public Money calculateTotalPrice() {
         Long amount = merchandise.getPrice().getAmount().longValue() * quantity;

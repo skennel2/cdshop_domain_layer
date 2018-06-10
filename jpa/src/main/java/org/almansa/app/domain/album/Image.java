@@ -17,16 +17,15 @@ public class Image extends NamedEntityBase implements IDescription {
     @Column
     private String description;
 
-    protected Image() {
-        super(null);
-    }
-
     public Image(String name, String accessPath, String description) {
         super(name);
         this.accessPath = accessPath;
         this.description = description;
     }
 
+    protected Image() {
+    }
+    
     @Override
     public void changeDescription(String description) {
         this.description = description;

@@ -25,10 +25,6 @@ public class ApplicationUser extends NamedEntityBase {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // value of mappedBy -> field of
     private PersonalInfomation personalInfomation;
 
-    protected ApplicationUser() {
-        super(null);
-    }
-
     public ApplicationUser(String name, String loginId, String password) {
         super(name);
         this.loginId = loginId;
@@ -42,6 +38,9 @@ public class ApplicationUser extends NamedEntityBase {
         this.personalInfomation = personalInfomation;
     }
 
+    protected ApplicationUser() {
+    }
+    
     public String getLoginId() {
         return loginId;
     }

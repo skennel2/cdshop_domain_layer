@@ -10,6 +10,9 @@ import org.almansa.app.domain.PersonBase;
 @Entity
 @DiscriminatorValue(value = "Producer")
 public class Producer extends PersonBase {
+        
+    public Producer() {
+    }
 
     @ManyToOne()
     @JoinColumn(name = "agency_company_id")

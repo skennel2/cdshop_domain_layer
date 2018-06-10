@@ -23,7 +23,6 @@ public class SongInAlbum {
     private int no;
 
     protected SongInAlbum() {
-        super();
     }
 
     public SongInAlbum(Album album, Song song, int no, boolean isSingle) {
