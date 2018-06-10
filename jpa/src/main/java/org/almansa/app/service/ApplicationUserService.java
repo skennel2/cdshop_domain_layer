@@ -2,6 +2,8 @@ package org.almansa.app.service;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.almansa.app.domain.user.ApplicationUser;
 import org.almansa.app.domain.user.PersonalInfomation;
 import org.almansa.app.domain.value.EmailAddress;
@@ -50,7 +52,7 @@ public class ApplicationUserService extends ServiceBase {
         return userRepo.findAll();
     }
 
-    public ApplicationUser getUserById(Long id) {
+    public ApplicationUser getUserById(Long id) throws EntityNotFoundException{
         return userRepo.getOne(id);
     }
 

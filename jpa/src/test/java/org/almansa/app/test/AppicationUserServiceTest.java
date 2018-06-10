@@ -1,8 +1,11 @@
 package org.almansa.app.test;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.transaction.Transactional;
 
 import org.almansa.app.AppConfig;
+import org.almansa.app.domain.user.ApplicationUser;
 import org.almansa.app.service.ApplicationUserService;
 import org.almansa.app.service.dto.UserJoinRequest;
 import org.almansa.app.service.exception.ApplicationUserJoinException;
@@ -43,4 +46,40 @@ public class AppicationUserServiceTest {
 		service.joinUser(request2);		
 	}
 	
+	@Test
+	public void joinTest() {   
+	    UserJoinRequest request = new UserJoinRequest();
+	    request.setName("skennel");
+	    request.setLoginId("skennel2");
+	    request.setBornDate(DateUtil.toDate(2000, 1, 2));
+	    request.setPassword("1234");
+	    request.setEmail("skennel@naver.com");
+	        
+	    service.joinUser(request);
+	    
+	    ApplicationUser user = service.getUserByLoginId("skennel2");
+	    
+	    assertEquals("skennel2", user.getLoginId());
+	}
+	
+	@Test
+	public void findByIdNotExistIdTest() {
+	    ApplicationUser user =service.getUserByLoginId("Not Exist Id");
+	    
+	    assertEquals(null, user);
+	}
+	
+	@Test
+    public void findByIdNullArgumentTest() {
+        ApplicationUser user =service.getUserByLoginId(null);
+        
+        assertEquals(null, user);
+    }	
+	
+	@Test
+	public void isAbleToLoginNullArgumentTest() {
+	    boolean result = service.isAbleToLogin(null, null);
+	    
+	    assertEquals(false, result);
+	}
 }
