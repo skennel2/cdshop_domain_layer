@@ -45,7 +45,7 @@ public class PurchaseOrderService extends ServiceBase {
                 order.addOrderLine(merchandise, request.getQuantity());
                 merchandise.removeStock(request.getQuantity());
             } else {
-                throw new OrderException(merchandise.getId().toString() + " lack stock");
+                throw new OrderException(merchandise.getId().toString() + " is out of stock");
             }
         }
 
