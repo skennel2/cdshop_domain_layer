@@ -49,4 +49,8 @@ public class LableService extends ServiceBase{
         return lableRepo.findByName(name);
     }
     
+    public List<Lable> getAll() {
+        return lableRepo.findAll();
+    }
+    
 }
