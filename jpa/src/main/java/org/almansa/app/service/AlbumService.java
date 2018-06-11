@@ -39,7 +39,7 @@ public class AlbumService extends ServiceBase {
     }
 
     @Transactional
-    public void add(AddAlbumRequest addParameter) {
+    public void add(AddAlbumRequest addParameter) throws EntityNotFoundException {
         Optional<Artist> artist = this.artistRepo.findById(addParameter.getArtistId());
 
         Album newAlbum = new AlbumBuilder()
