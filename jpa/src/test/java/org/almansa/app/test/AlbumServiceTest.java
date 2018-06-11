@@ -55,7 +55,7 @@ public class AlbumServiceTest {
         albumAddPamareters.getSongIds().add(new SongIdAndSongNo(1, getSongByName("song1").getId()));
         albumAddPamareters.getSongIds().add(new SongIdAndSongNo(2, getSongByName("song2").getId()));
 
-        albumService.AddAlbum(albumAddPamareters);
+        albumService.add(albumAddPamareters);
 
         // act
         Album album = getAlbumByName("NEW AGE");

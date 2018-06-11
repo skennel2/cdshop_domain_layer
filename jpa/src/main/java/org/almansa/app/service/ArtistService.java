@@ -27,7 +27,7 @@ public class ArtistService {
     }
 
     public Artist findById(Long artistId) {
-        return artistRepo.findById(artistId).get();
+        return artistRepo.findById(artistId).orElse(null);
     }
 
     public List<Artist> getAll() {

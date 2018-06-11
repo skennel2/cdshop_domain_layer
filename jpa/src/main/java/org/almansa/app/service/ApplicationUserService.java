@@ -3,6 +3,7 @@ package org.almansa.app.service;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 import org.almansa.app.domain.user.ApplicationUser;
 import org.almansa.app.domain.user.PersonalInfomation;
@@ -22,6 +23,7 @@ public class ApplicationUserService extends ServiceBase {
     @Autowired
     ApplicationUserValidator userValidator;
 
+    @Transactional
     public void joinUser(UserJoinRequest request) throws ApplicationUserJoinException {
         ApplicationUser applicationUser = new ApplicationUser(request.getName(), request.getLoginId(),
                 request.getPassword());
@@ -40,7 +42,7 @@ public class ApplicationUserService extends ServiceBase {
     }
 
     public boolean isAbleToLogin(String loginId, String password) {
-        ApplicationUser user = getUserByLoginId(loginId);
+        ApplicationUser user = findUserByLoginId(loginId);
         if (user != null && user.getPassword().equals(password)) {
             return true;
         }
@@ -52,11 +54,11 @@ public class ApplicationUserService extends ServiceBase {
         return userRepo.findAll();
     }
 
-    public ApplicationUser getUserById(Long id) throws EntityNotFoundException{
-        return userRepo.getOne(id);
+    public ApplicationUser findUserById(Long id) {
+        return userRepo.findById(id).orElse(null);
     }
 
-    public ApplicationUser getUserByLoginId(String loginId) {
+    public ApplicationUser findUserByLoginId(String loginId) {
         return userRepo.findByLoginId(loginId);
     }
 }

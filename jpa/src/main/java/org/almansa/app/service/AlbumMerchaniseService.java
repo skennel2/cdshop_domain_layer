@@ -34,14 +34,14 @@ public class AlbumMerchaniseService extends MerchandiseService {
         this.albumMerchandiseRepo = albumMerchandiseRepo;
     }
 
-    public void addAlbumMerchandise(Long albumId, Money price, int remainingStock) throws EntityNotFoundException  {            
+    public void add(Long albumId, Money price, int remainingStock) throws EntityNotFoundException  {            
         Album album = albumRepo.findById(albumId).orElseThrow(()-> new EntityNotFoundException());
         
         AlbumMerchandise newAlbumMerchandise = new AlbumMerchandise(new Long(remainingStock), price, album);
         albumMerchandiseRepo.save(newAlbumMerchandise);
     }
 
-    public List<AlbumMerchandiseDetailViewModel> getByPageNumbers(int pageSize, int pageNumber) {
+    public List<AlbumMerchandiseDetailViewModel> findByPageNumbers(int pageSize, int pageNumber) {
         PageRequest request = PageRequest.of(pageNumber, pageSize, new Sort(Direction.DESC, "id"));
 
         List<AlbumMerchandiseDetailViewModel> resultList = new ArrayList<>();
@@ -52,7 +52,7 @@ public class AlbumMerchaniseService extends MerchandiseService {
         return resultList;
     }
 
-    public AlbumMerchandiseDetailViewModel getDetailViewModelById(Long merchandiseId) {
+    public AlbumMerchandiseDetailViewModel findDetailViewModelById(Long merchandiseId) {
         AlbumMerchandise merchandise = albumMerchandiseRepo.getOne(merchandiseId);
 
         return new AlbumMerchandiseDetailViewModel(merchandise);

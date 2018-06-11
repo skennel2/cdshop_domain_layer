@@ -35,9 +35,9 @@ public class MerchandiseService extends ServiceBase {
         merchandise.addStock(amount);
     }
 
-    public void changeProductPrice(Long albumId, Money newPrice) throws EntityNotFoundException {
+    public void changeProductPrice(Long productId, Money newPrice) throws EntityNotFoundException {
         MerchandiseBase merchandise = merchanRepo
-                .findById(albumId)
+                .findById(productId)
                 .orElseThrow(()-> new EntityNotFoundException());
         
         merchandise.changePrice(newPrice);

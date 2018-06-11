@@ -16,7 +16,7 @@ public class LableService extends ServiceBase{
     @Autowired
     private LableRepository lableRepo;
 
-    public void addLable(Lable lable) {
+    public void add(Lable lable) {
         if (lable == null) {
             throw new IllegalArgumentException("lable can't be null");
         }
@@ -24,7 +24,7 @@ public class LableService extends ServiceBase{
         lableRepo.save(lable);
     }
 
-    public void addLable(String lableName, String ceoName, Date establishmentDate) {
+    public void add(String lableName, String ceoName, Date establishmentDate) {
         if (lableName == null) {
             throw new IllegalArgumentException("lableName can't be null");
         }
@@ -37,19 +37,19 @@ public class LableService extends ServiceBase{
         lableRepo.deleteById(id);
     }
 
-    public List<Lable> getByCeoName(String ceoName) {
+    public List<Lable> findByCeoName(String ceoName) {
         return lableRepo.findByCeoName(ceoName);
     }
     
-    public Lable getById(Long id) {
+    public Lable findById(Long id) {
         return lableRepo.findById(id).orElse(null);
     }
 
-    public List<Lable> getByName(String name) {
+    public List<Lable> findByName(String name) {
         return lableRepo.findByName(name);
     }
     
-    public List<Lable> getAll() {
+    public List<Lable> findAll() {
         return lableRepo.findAll();
     }
     

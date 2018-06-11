@@ -29,31 +29,31 @@ public class LableServiceTest {
     
     @Test
     public void lableServiceAddTest() {
-       lableService.addLable("YG", "yang h.s", DateUtil.toDate(1999, 1, 12));
-       Lable lable =  lableService.getByName("YG").get(0);
+       lableService.add("YG", "yang h.s", DateUtil.toDate(1999, 1, 12));
+       Lable lable =  lableService.findByName("YG").get(0);
        assertEquals("yang h.s", lable.getCeoName());
        
        Lable lable2 = new Lable("SM", "lee s.m", null);
-       lableService.addLable(lable2);
-       lable2 = lableService.getByCeoName("lee s.m").get(0);
+       lableService.add(lable2);
+       lable2 = lableService.findByCeoName("lee s.m").get(0);
        assertEquals("SM", lable2.getName());  
     }
     
     @Test
     public void lableGetByIdTest() {
-        lableService.addLable("YG", "yang h.s", DateUtil.toDate(1999, 1, 12));
-        Lable lable =  lableService.getByName("YG").get(0);
+        lableService.add("YG", "yang h.s", DateUtil.toDate(1999, 1, 12));
+        Lable lable =  lableService.findByName("YG").get(0);
         
         em.flush();
         
-        Lable lableGetById =  lableService.getById(lable.getId());
+        Lable lableGetById =  lableService.findById(lable.getId());
         
         assertEquals(lable.getId(), lableGetById.getId());
     }
     
     @Test
     public void lableGetByIdNotExistsTest() {
-        Lable lableGetById =  lableService.getById(Long.valueOf(123123));
+        Lable lableGetById =  lableService.findById(Long.valueOf(123123));
         
         assertEquals(null, lableGetById);
     }    

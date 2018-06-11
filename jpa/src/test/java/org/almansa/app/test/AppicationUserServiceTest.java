@@ -57,21 +57,21 @@ public class AppicationUserServiceTest {
 	        
 	    service.joinUser(request);
 	    
-	    ApplicationUser user = service.getUserByLoginId("skennel2");
+	    ApplicationUser user = service.findUserByLoginId("skennel2");
 	    
 	    assertEquals("skennel2", user.getLoginId());
 	}
 	
 	@Test
 	public void findByIdNotExistIdTest() {
-	    ApplicationUser user =service.getUserByLoginId("Not Exist Id");
+	    ApplicationUser user =service.findUserByLoginId("Not Exist Id");
 	    
 	    assertEquals(null, user);
 	}
 	
 	@Test
     public void findByIdNullArgumentTest() {
-        ApplicationUser user =service.getUserByLoginId(null);
+        ApplicationUser user =service.findUserByLoginId(null);
         
         assertEquals(null, user);
     }	
