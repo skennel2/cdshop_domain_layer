@@ -6,6 +6,7 @@ import java.util.List;
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.repository.LableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,7 +23,7 @@ public class LableService extends ServiceBase{
         lableRepo.save(lable);
     }
 
-    public void add(String lableName, String ceoName, Date establishmentDate) {
+    public void add(String lableName, String ceoName, Date establishmentDate) throws IllegalArgumentException {
         if (lableName == null) {
             throw new IllegalArgumentException("lableName can't be null");
         }
@@ -31,8 +32,12 @@ public class LableService extends ServiceBase{
         lableRepo.save(lable);
     }
 
-    public void delete(Long id) {
-        lableRepo.deleteById(id);
+    public void delete(Long id) throws EmptyResultDataAccessException {
+        try {
+            lableRepo.deleteById(id);
+        }catch(EmptyResultDataAccessException e) {
+            throw e;
+        }
     }
 
     public List<Lable> findByCeoName(String ceoName) {

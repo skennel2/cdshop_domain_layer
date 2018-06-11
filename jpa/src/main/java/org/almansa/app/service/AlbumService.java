@@ -40,30 +40,26 @@ public class AlbumService extends ServiceBase {
 
     @Transactional
     public void add(AddAlbumRequest addParameter) throws EntityNotFoundException {
-        Optional<Artist> artist = this.artistRepo.findById(addParameter.getArtistId());
+        Artist artist = this.artistRepo.getOne(addParameter.getArtistId());
 
         Album newAlbum = new AlbumBuilder()
                 .albumType(addParameter.getAlbumType())
-                .artist(artist.get())
+                .artist(artist)
                 .releaseDate(addParameter.getReleaseDate())
                 .albumName(addParameter.getAlbumName())
                 .Build();        
 
         for (SongIdAndSongNo songIdAndSongNo : addParameter.getSongIds()) {
-            Long songId = songIdAndSongNo.getSongId();
-            int songNo = songIdAndSongNo.getNo();
-
-            Song song = this.songRepo
-                    .findById(songId)
-                    .orElseThrow(()-> new EntityNotFoundException(Song.class.getName()));
+            Song song = this.songRepo.getOne(songIdAndSongNo.getSongId());
+                   
             
-            newAlbum.addSong(song, songNo, false);
+            newAlbum.addSong(song, songIdAndSongNo.getNo(), false);
         }
 
         this.albumRepo.save(newAlbum);
     }
 
-    public void changeAlbumName(Long albumId, String newName) {
+    public void changeAlbumName(Long albumId, String newName) throws EntityNotFoundException {
         Album album = albumRepo.getOne(albumId);
         album.changeName(newName);
     }

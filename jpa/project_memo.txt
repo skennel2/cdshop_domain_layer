@@ -22,3 +22,18 @@ https://www.safaribooksonline.com/library/view/implementing-domain-driven-design
 -
 커밋기록이 내 깃헙 계정에 포함안되는 문제가 있엇는데, Author가 skennel로 되있어서 생기는 문제였음 
 환경설정에 git 환경설정 쪽에 user.name, user.email 추가
+
+
+--
+Soft Delete
+https://stackoverflow.com/questions/19323557/handling-soft-deletes-with-spring-jpa
+
+
+--
+Column Encryption
+https://www.thoughts-on-java.org/how-to-use-jpa-type-converter-to/
+
+--
+Exception Handling
+http://www.baeldung.com/exception-handling-for-rest-with-spring
+http://jsonobject.tistory.com/387

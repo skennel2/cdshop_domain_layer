@@ -19,7 +19,7 @@ public class ArtistService {
     @Autowired
     private LableRepository lableRepo;
 
-    public void addArtist(Long lableId, String name, Date bornDate) {
+    public void add(Long lableId, String name, Date bornDate) {
         Optional<Lable> lable = lableRepo.findById(lableId);
 
         Artist artist = new Artist(name, bornDate, lable.get());

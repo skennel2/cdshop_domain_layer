@@ -8,12 +8,6 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-/**
- * https://www.thoughts-on-java.org/how-to-use-jpa-type-converter-to/
- * 
- * @author skennel
- *
- */
 @Converter
 public class PasswordConverter implements AttributeConverter<String, String> {
 
