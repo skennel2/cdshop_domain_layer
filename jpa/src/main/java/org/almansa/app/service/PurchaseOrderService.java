@@ -3,8 +3,10 @@ package org.almansa.app.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
+import org.almansa.app.domain.exception.RemainingStockException;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
 import org.almansa.app.domain.order.PurchaseOrder;
 import org.almansa.app.domain.user.ApplicationUser;
@@ -33,19 +35,17 @@ public class PurchaseOrderService extends ServiceBase {
     }
 
     @Transactional
-    public void orderMerchandise(Long userId, List<SingleOrderRequest> requests) {
+    public void orderMerchandise(Long userId, List<SingleOrderRequest> requests) throws EntityNotFoundException, OrderException {
         ApplicationUser orderer = userRepo.getOne(userId);
-
         PurchaseOrder order = new PurchaseOrder(orderer, null, new Date());
 
         for (SingleOrderRequest request : requests) {
             AlbumMerchandise merchandise = merchandiseRepo.getOne(request.getMerchandiseId());
-
-            if (merchandise.isAbailableOrderQuantity(request.getQuantity())) {
-                order.addOrderLine(merchandise, request.getQuantity());
+            try {
+                order.addOrderLine(merchandise, request.getQuantity());                       
                 merchandise.removeStock(request.getQuantity());
-            } else {
-                throw new OrderException(merchandise.getId().toString() + " is out of stock");
+            }catch(RemainingStockException e) {
+                throw new OrderException(e);
             }
         }
 
@@ -53,21 +53,21 @@ public class PurchaseOrderService extends ServiceBase {
     }
 
     @Transactional
-    private void orderSingleMerchandise(ApplicationUser orderer, SingleOrderRequest orderRequest) {
+    private void orderSingleMerchandise(ApplicationUser orderer, SingleOrderRequest orderRequest) throws EntityNotFoundException, OrderException {
         AlbumMerchandise merchandise = merchandiseRepo.getOne(orderRequest.getMerchandiseId());
 
-        if (merchandise.isAbailableOrderQuantity(orderRequest.getQuantity())) {
-            PurchaseOrder order = new PurchaseOrder(orderer, null, new Date());
+        PurchaseOrder order = new PurchaseOrder(orderer, null, new Date());
+        try {
             order.addOrderLine(merchandise, orderRequest.getQuantity());
-
             merchandise.removeStock(orderRequest.getQuantity());
-
-            orderRepo.save(order);
+        }catch(RemainingStockException e) {
+            throw new OrderException(e);
         }
+        orderRepo.save(order);
     }
 
     @Transactional
-    public void orderSingleMerchandise(Long userId, SingleOrderRequest orderRequest) {
+    public void orderSingleMerchandise(Long userId, SingleOrderRequest orderRequest) throws EntityNotFoundException, OrderException {
         ApplicationUser orderer = userRepo.getOne(userId);
         orderSingleMerchandise(orderer, orderRequest);
     }
