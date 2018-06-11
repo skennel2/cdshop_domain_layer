@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AlbumService extends ServiceBase {
+public final class AlbumService extends ServiceBase {
 
     private AlbumAssembler albumAssembler;
     private AlbumRepository albumRepo;

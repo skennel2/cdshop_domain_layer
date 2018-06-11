@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ApplicationUserService extends ServiceBase {
+public final class ApplicationUserService extends ServiceBase {
 
     @Autowired
     private ApplicationUserRepository userRepo;

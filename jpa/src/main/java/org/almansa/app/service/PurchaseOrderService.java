@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PurchaseOrderService extends ServiceBase {
+public final class PurchaseOrderService extends ServiceBase {
 
     private AlbumMerchandiseRepository merchandiseRepo;
     private PurchaseOrderRepository orderRepo;
