@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.album.AlbumBuilder;
 import org.almansa.app.domain.album.Artist;
+import org.almansa.app.domain.album.Song;
 import org.almansa.app.domain.dto.AlbumSimpleViewModel;
 import org.almansa.app.domain.dto.SongIdAndSongNo;
 import org.almansa.app.repository.AlbumRepository;
@@ -20,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class AlbumService extends ServiceBase {
+public class AlbumService extends ServiceBase {
 
     private AlbumAssembler albumAssembler;
     private AlbumRepository albumRepo;
@@ -41,16 +42,22 @@ public final class AlbumService extends ServiceBase {
     public void AddAlbum(AddAlbumRequest addParameter) {
         Optional<Artist> artist = this.artistRepo.findById(addParameter.getArtistId());
 
-        Album newAlbum = new AlbumBuilder().albumType(addParameter.getAlbumType()).artist(artist.get())
-                .releaseDate(addParameter.getReleaseDate()).albumName(addParameter.getAlbumName()).Build();
+        Album newAlbum = new AlbumBuilder()
+                .albumType(addParameter.getAlbumType())
+                .artist(artist.get())
+                .releaseDate(addParameter.getReleaseDate())
+                .albumName(addParameter.getAlbumName())
+                .Build();        
 
         for (SongIdAndSongNo songIdAndSongNo : addParameter.getSongIds()) {
             Long songId = songIdAndSongNo.getSongId();
             int songNo = songIdAndSongNo.getNo();
 
-            this.songRepo.findById(songId).ifPresent(song -> {
-                newAlbum.addSong(song, songNo, false);
-            });
+            Song song = this.songRepo
+                    .findById(songId)
+                    .orElseThrow(()-> new EntityNotFoundException(Song.class.getName()));
+            
+            newAlbum.addSong(song, songNo, false);
         }
 
         this.albumRepo.save(newAlbum);
@@ -66,7 +73,9 @@ public final class AlbumService extends ServiceBase {
     }
 
     public Album getById(Long id) throws EntityNotFoundException {
-        Album album = albumRepo.getOne(id);
+        Album album = albumRepo
+                .findById(id)
+                .orElseThrow(()-> new EntityNotFoundException(Album.class.getName()));
 
         return album;
     }

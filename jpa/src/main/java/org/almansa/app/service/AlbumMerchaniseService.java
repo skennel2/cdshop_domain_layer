@@ -21,7 +21,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class AlbumMerchaniseService extends MerchandiseService {
+public class AlbumMerchaniseService extends MerchandiseService {
 
     private AlbumRepository albumRepo;
     private AlbumMerchandiseRepository albumMerchandiseRepo;
