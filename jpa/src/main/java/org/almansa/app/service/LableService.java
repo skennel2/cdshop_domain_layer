@@ -41,8 +41,8 @@ public class LableService extends ServiceBase{
         return lableRepo.findByCeoName(ceoName);
     }
     
-    public Lable getById(Long id) throws EntityNotFoundException {
-        return lableRepo.getOne(id);
+    public Lable getById(Long id) {
+        return lableRepo.findById(id).orElse(null);
     }
 
     public List<Lable> getByName(String name) {

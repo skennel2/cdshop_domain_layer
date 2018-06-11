@@ -2,6 +2,8 @@ package org.almansa.app.test;
 
 import static org.junit.Assert.assertEquals;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.almansa.app.AppConfig;
@@ -22,6 +24,9 @@ public class LableServiceTest {
     @Autowired
     private LableService lableService;
     
+    @PersistenceContext
+    private EntityManager em;
+    
     @Test
     public void lableServiceAddTest() {
        lableService.addLable("YG", "yang h.s", DateUtil.toDate(1999, 1, 12));
@@ -33,4 +38,23 @@ public class LableServiceTest {
        lable2 = lableService.getByCeoName("lee s.m").get(0);
        assertEquals("SM", lable2.getName());  
     }
+    
+    @Test
+    public void lableGetByIdTest() {
+        lableService.addLable("YG", "yang h.s", DateUtil.toDate(1999, 1, 12));
+        Lable lable =  lableService.getByName("YG").get(0);
+        
+        em.flush();
+        
+        Lable lableGetById =  lableService.getById(lable.getId());
+        
+        assertEquals(lable.getId(), lableGetById.getId());
+    }
+    
+    @Test
+    public void lableGetByIdNotExistsTest() {
+        Lable lableGetById =  lableService.getById(Long.valueOf(123123));
+        
+        assertEquals(null, lableGetById);
+    }    
 }
