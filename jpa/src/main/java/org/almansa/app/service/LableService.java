@@ -3,8 +3,6 @@ package org.almansa.app.service;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.repository.LableRepository;
 import org.springframework.beans.factory.annotation.Autowired;

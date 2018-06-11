@@ -2,7 +2,6 @@ package org.almansa.app.service;
 
 import java.util.List;
 
-import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.almansa.app.domain.user.ApplicationUser;

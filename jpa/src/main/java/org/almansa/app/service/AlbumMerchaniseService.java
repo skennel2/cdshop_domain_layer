@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 
 import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.dto.AlbumMerchandiseDetailViewModel;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
-import org.almansa.app.domain.merchandise.MerchandiseBase;
 import org.almansa.app.domain.value.Money;
 import org.almansa.app.repository.AlbumMerchandiseRepository;
 import org.almansa.app.repository.AlbumRepository;
