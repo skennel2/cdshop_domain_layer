@@ -72,40 +72,36 @@ public class AlbumService extends ServiceBase {
         albumRepo.deleteById(albumId);
     }
 
-    public Album getById(Long id) throws EntityNotFoundException {
-        Album album = albumRepo
-                .findById(id)
-                .orElseThrow(()-> new EntityNotFoundException(Album.class.getName()));
-
-        return album;
+    public Album findById(Long id) {
+        return albumRepo.findById(id).orElse(null);
     }
 
-    public List<Album> getByArtistId(Long artistId) {
+    public List<Album> findByArtistId(Long artistId) {
         return albumRepo.findByArtistId(artistId);
     }
 
-    public List<Album> getByName(String name) {
+    public List<Album> findByName(String name) {
         return albumRepo.findByName(name);
     }
 
     public AlbumSimpleViewModel getAlbumSimleViewModelById(Long id) throws EntityNotFoundException {
-        AlbumSimpleViewModel viewModel = albumAssembler.albumSimpleViewModel(getById(id));
+        AlbumSimpleViewModel viewModel = albumAssembler.albumSimpleViewModel(findById(id));
 
         return viewModel;
     }
 
-    public List<AlbumSimpleViewModel> getAlbumSimleViewModelByName(String name) {
+    public List<AlbumSimpleViewModel> findAlbumSimleViewModelByName(String name) {
         List<AlbumSimpleViewModel> albumViewModels = new ArrayList<>();
-        for (Album album : getByName(name)) {
+        for (Album album : findByName(name)) {
             albumViewModels.add(albumAssembler.albumSimpleViewModel(album));
         }
 
         return albumViewModels;
     }
 
-    public List<AlbumSimpleViewModel> getAlbumSimleViewModelByArtistId(Long artistId) {
+    public List<AlbumSimpleViewModel> findAlbumSimleViewModelByArtistId(Long artistId) {
         List<AlbumSimpleViewModel> albumViewModels = new ArrayList<>();
-        for (Album album : getByArtistId(artistId)) {
+        for (Album album : findByArtistId(artistId)) {
             albumViewModels.add(albumAssembler.albumSimpleViewModel(album));
         }
 
