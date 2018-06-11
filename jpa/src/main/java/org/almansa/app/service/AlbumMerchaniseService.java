@@ -3,8 +3,10 @@ package org.almansa.app.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
+import org.almansa.app.domain.album.Album;
 import org.almansa.app.domain.dto.AlbumMerchandiseDetailViewModel;
 import org.almansa.app.domain.merchandise.AlbumMerchandise;
 import org.almansa.app.domain.merchandise.MerchandiseBase;
@@ -30,23 +32,26 @@ public class AlbumMerchaniseService extends ServiceBase {
         this.merchanRepo = merchanRepo;
     }
 
-    @Transactional
-    public void addAlbumMerchandise(Long albumId, Money price, int remainingStock) {
-        albumRepo.findById(albumId).ifPresent(a -> {
-            AlbumMerchandise newAlbumMerchandise = new AlbumMerchandise(new Long(remainingStock), price, a);
-            merchanRepo.save(newAlbumMerchandise);
-        });
+    public void addAlbumMerchandise(Long albumId, Money price, int remainingStock) throws EntityNotFoundException  {            
+        Album album = albumRepo.findById(albumId).orElseThrow(()-> new EntityNotFoundException());
+        
+        AlbumMerchandise newAlbumMerchandise = new AlbumMerchandise(new Long(remainingStock), price, album);
+        merchanRepo.save(newAlbumMerchandise);
     }
 
-    @Transactional
-    public void addStock(Long merchandiseId, Long amount) {
-        MerchandiseBase merchandise = merchanRepo.getOne(merchandiseId);
+    public void addStock(Long merchandiseId, Long amount) throws EntityNotFoundException {
+        MerchandiseBase merchandise = merchanRepo
+                .findById(merchandiseId)
+                .orElseThrow(()-> new EntityNotFoundException());
+        
         merchandise.addStock(amount);
     }
 
-    @Transactional
-    public void changeProductPrice(Long albumId, Money newPrice) {
-        AlbumMerchandise merchandise = merchanRepo.getOne(albumId);
+    public void changeProductPrice(Long albumId, Money newPrice) throws EntityNotFoundException {
+        MerchandiseBase merchandise = merchanRepo
+                .findById(albumId)
+                .orElseThrow(()-> new EntityNotFoundException());
+        
         merchandise.changePrice(newPrice);
     }
 
@@ -67,8 +72,11 @@ public class AlbumMerchaniseService extends ServiceBase {
         return new AlbumMerchandiseDetailViewModel(merchandise);
     }
 
-    public void removeStock(Long merchandiseId, Long amount) {
-        MerchandiseBase merchandise = merchanRepo.getOne(merchandiseId);
+    public void removeStock(Long merchandiseId, Long amount) throws EntityNotFoundException {
+        MerchandiseBase merchandise = merchanRepo
+                .findById(merchandiseId)
+                .orElseThrow(()-> new EntityNotFoundException());
+        
         merchandise.removeStock(amount);
     }
 }
