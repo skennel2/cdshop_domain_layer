@@ -19,10 +19,13 @@ public class ArtistService {
     @Autowired
     private LableRepository lableRepo;
 
-    public void add(Long lableId, String name, Date bornDate) {
-        Optional<Lable> lable = lableRepo.findById(lableId);
+    public void add(Long lableId, String name, Date bornDate) throws IllegalArgumentException{
+        if(name == null) {
+            throw new IllegalArgumentException("name can't be null");
+        }
+        Lable lable = lableRepo.findById(lableId).orElse(null);
 
-        Artist artist = new Artist(name, bornDate, lable.get());
+        Artist artist = new Artist(name, bornDate, lable);
         artistRepo.save(artist);
     }
 

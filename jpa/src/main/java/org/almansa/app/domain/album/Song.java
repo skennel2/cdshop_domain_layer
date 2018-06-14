@@ -86,7 +86,7 @@ public class Song extends NamedEntityBase {
         }
         
         List<PersonBase> immutableResult = Collections.unmodifiableList(result);
-
+        
         return immutableResult;
     }
 
