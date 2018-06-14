@@ -1,6 +1,7 @@
 package org.almansa.app.domain.order;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -77,7 +78,7 @@ public class PurchaseOrder extends EntityBase {
     }
 
     public List<PurchaseOrderLine> getOrderLines() {
-        return orderLines;
+        return Collections.unmodifiableList(orderLines);
     }
 
     @Override

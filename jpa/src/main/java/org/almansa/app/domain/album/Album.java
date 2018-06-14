@@ -1,6 +1,7 @@
 package org.almansa.app.domain.album;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -84,7 +85,7 @@ public class Album extends NamedEntityBase {
     }
 
     public List<SongInAlbum> getSongs() {
-        return songs;
+        return Collections.unmodifiableList(songs);
     }
 
     public boolean isExistsSongNumber(int no) {

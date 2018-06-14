@@ -1,6 +1,7 @@
 package org.almansa.app.domain.album;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
@@ -83,8 +84,10 @@ public class Song extends NamedEntityBase {
                 result.add(personAsSongWriter.getPerson());
             }
         }
+        
+        List<PersonBase> immutableResult = Collections.unmodifiableList(result);
 
-        return result;
+        return immutableResult;
     }
 
     public void changeOwnerArtist(Artist ownerArtist) {
