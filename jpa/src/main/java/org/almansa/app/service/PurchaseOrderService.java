@@ -35,6 +35,12 @@ public class PurchaseOrderService extends ServiceBase {
     }
 
     @Transactional
+    public void cancelOrder(Long orderId) throws EntityNotFoundException {
+        PurchaseOrder order = orderRepo.getOne(orderId);
+        order.cancelOrder();
+    }
+    
+    @Transactional
     public void orderMerchandise(Long userId, List<SingleOrderRequest> requests) throws EntityNotFoundException, OrderException {
         ApplicationUser orderer = userRepo.getOne(userId);
         PurchaseOrder order = new PurchaseOrder(orderer, null, new Date());
