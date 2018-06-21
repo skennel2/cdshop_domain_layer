@@ -6,6 +6,7 @@ import org.almansa.app.repository.ApplicationUserRepository;
 import org.almansa.app.service.exception.ApplicationUserJoinException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 @Component
 public class ApplicationValidatorImpl implements ApplicationUserValidator {
@@ -26,7 +27,7 @@ public class ApplicationValidatorImpl implements ApplicationUserValidator {
 
     @Override
     public void verifyValidation(ApplicationUser user) throws ApplicationUserJoinException {
-        if (user.getPassword() == null || user.getPassword().trim().equals("")) {
+        if (StringUtils.hasText(user.getPassword())) {
             throw new ApplicationUserJoinException("password can't be null or empty");
         }
 

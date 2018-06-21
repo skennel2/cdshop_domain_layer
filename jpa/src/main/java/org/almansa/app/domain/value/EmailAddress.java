@@ -13,10 +13,10 @@ public class EmailAddress implements Immutable {
     @Column(name = "email_address")
     private String emailAddress;
 
-    public EmailAddress(String emailAddress) throws IllegalArgumentException {
+    public EmailAddress(String emailAddress) throws NullPointerException {
         super();
         if (emailAddress == null) {
-            throw new IllegalArgumentException("emailAddress can't be null");
+            throw new NullPointerException("emailAddress can't be null");
         }
         this.emailAddress = emailAddress;
     }

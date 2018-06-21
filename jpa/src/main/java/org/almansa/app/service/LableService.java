@@ -41,7 +41,9 @@ public class LableService extends ServiceBase{
         return lableRepo.findByCeoName(ceoName);
     }
     
-    public Lable findById(Long id) {
+    public Lable findById(Long id) throws NullPointerException{
+        Objects.requireNonNull(id, "id can't be null");
+        
         return lableRepo.findById(id).orElse(null);
     }
 

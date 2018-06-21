@@ -24,16 +24,22 @@ public class ApplicationUserService extends ServiceBase {
 
     @Transactional
     public void joinUser(UserJoinRequest request) throws ApplicationUserJoinException {
-        ApplicationUser applicationUser = new ApplicationUser(request.getName(), request.getLoginId(),
-                request.getPassword());
-
-        PersonalInfomation personalInfomation = new PersonalInfomation(applicationUser,
-                new EmailAddress(request.getEmail()), request.getBornDate());
-
-        applicationUser.setPersonalInfomation(personalInfomation);
-        userValidator.verifyValidation(applicationUser);
-
-        userRepo.save(applicationUser);
+        try{
+            ApplicationUser applicationUser = new ApplicationUser(request.getName(), request.getLoginId(),
+                    request.getPassword());
+    
+            PersonalInfomation personalInfomation = new PersonalInfomation(applicationUser,
+                    new EmailAddress(request.getEmail()), request.getBornDate());
+    
+            applicationUser.setPersonalInfomation(personalInfomation);
+            userValidator.verifyValidation(applicationUser);
+    
+            userRepo.save(applicationUser);
+        }catch(NullPointerException e) {
+            throw new ApplicationUserJoinException("required value is null", e);
+        }catch(IllegalArgumentException e) {
+            throw new ApplicationUserJoinException("required value is illegal", e);
+        }
     }
 
     public void deleteUser(long id) {

@@ -35,6 +35,31 @@ public class AlbumRepositoryTest {
     @PersistenceContext
     private EntityManager em;
 
+    @Before
+    public void makeDummies() {
+        Lable illionaire = new Lable("Illionaire");
+        em.persist(illionaire);
+
+        Artist theQ = new Artist("the quiett", DateUtil.toDate(1996, 1, 3), illionaire);
+        em.persist(theQ);
+
+        Song song1 = new Song("song1", theQ, null, "");
+        em.persist(song1);
+
+        Song song2 = new Song("song2", theQ, null, "");
+        em.persist(song2);
+
+        Album album = new AlbumBuilder().artist(theQ).thisIsLPType().name("Q Train").Build();
+        album.addSong(song1, 1, false);
+        album.addSong(song2, 2, false);
+        em.persist(album);
+
+        Album album2 = new AlbumBuilder().artist(theQ).thisIsLPType().name("Millionaire Poetry").Build();
+        em.persist(album2);
+
+        em.flush();
+    }
+    
     @Test
     public void findByAlbumNameNotExistTest() {
         String albumName = "Not Exists";
@@ -52,9 +77,8 @@ public class AlbumRepositoryTest {
 
         List<Album> list = albumRepo.findByName(albumName);
 
-        for (Album album : list) {
-            assertEquals(albumName, album.getName());
-        }
+        assertEquals(list != null, true);
+        assertEquals(0, list.size());
     }
 
     @Test
@@ -97,34 +121,12 @@ public class AlbumRepositoryTest {
         }
     }
 
-    @Before
-    public void makeDummies() {
-        Lable illionaire = new Lable("Illionaire");
-        em.persist(illionaire);
-
-        Artist theQ = new Artist("the quiett", DateUtil.toDate(1996, 1, 3), illionaire);
-        em.persist(theQ);
-
-        Song song1 = new Song("song1", theQ, null, "");
-        em.persist(song1);
-
-        Song song2 = new Song("song2", theQ, null, "");
-        em.persist(song2);
-
-        Album album = new AlbumBuilder().artist(theQ).thisIsLPType().name("Q Train").Build();
-        album.addSong(song1, 1, false);
-        album.addSong(song2, 2, false);
-        em.persist(album);
-
-        Album album2 = new AlbumBuilder().artist(theQ).thisIsLPType().name("Millionaire Poetry").Build();
-        em.persist(album2);
-
-        em.flush();
-    }
-
     @Test
     public void saveTest() {
-        Album newAlbum = new AlbumBuilder().artist(null).name("newAlbum").releaseDate(DateUtil.toDate(2017, 12, 1))
+        Album newAlbum = new AlbumBuilder()
+                .artist(null)
+                .name("newAlbum")
+                .releaseDate(DateUtil.toDate(2017, 12, 1))
                 .Build();
         albumRepo.save(newAlbum);
 
@@ -149,8 +151,6 @@ public class AlbumRepositoryTest {
         albumName = "Millionaire Poetry2";
         list = albumRepo.findByName(albumName);
 
-        for (Album album : list) {
-            assertEquals(albumName, album.getName());
-        }
+        assertEquals(albumName, list.get(0).getName());
     }
 }

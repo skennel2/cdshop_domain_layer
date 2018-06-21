@@ -62,9 +62,19 @@ public class AppicationUserServiceTest {
 	    assertEquals("skennel2", user.getLoginId());
 	}
 	
+	   
+	@Test(expected = ApplicationUserJoinException.class)
+    public void joinNullValueTest() {   
+        UserJoinRequest request = new UserJoinRequest();
+        request.setName(null);
+        request.setLoginId(null);
+            
+        service.joinUser(request);
+    }
+	
 	@Test
 	public void findByIdNotExistIdTest() {
-	    ApplicationUser user =service.findUserByLoginId("Not Exist Id");
+	    ApplicationUser user =service.findUserByLoginId("Not Exist Id!@!@");
 	    
 	    assertEquals(null, user);
 	}
