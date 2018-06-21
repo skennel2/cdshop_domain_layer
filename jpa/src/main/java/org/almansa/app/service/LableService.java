@@ -2,6 +2,7 @@ package org.almansa.app.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.almansa.app.domain.album.Lable;
 import org.almansa.app.repository.LableRepository;
@@ -15,18 +16,14 @@ public class LableService extends ServiceBase{
     @Autowired
     private LableRepository lableRepo;
 
-    public void add(Lable lable) {
-        if (lable == null) {
-            throw new IllegalArgumentException("lable can't be null");
-        }
-
+    public void add(Lable lable) throws NullPointerException {
+        Objects.requireNonNull(lable, "lable can't be null");
+        
         lableRepo.save(lable);
     }
 
-    public void add(String lableName, String ceoName, Date establishmentDate) throws IllegalArgumentException {
-        if (lableName == null) {
-            throw new IllegalArgumentException("lableName can't be null");
-        }
+    public void add(String lableName, String ceoName, Date establishmentDate) throws NullPointerException {
+        Objects.requireNonNull(lableName, "lableName can't be null");
 
         Lable lable = new Lable(lableName, ceoName, establishmentDate);
         lableRepo.save(lable);

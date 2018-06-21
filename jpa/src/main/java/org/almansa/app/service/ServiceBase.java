@@ -1,9 +1,9 @@
 package org.almansa.app.service;
 
 public abstract class ServiceBase {
-    public void verifyNull(Object obj) {
+    public void verifyNull(Object obj) throws NullPointerException{
         if (obj == null) {
-            throw new RuntimeException("null");
+            throw new NullPointerException("null");
         }
     }
 }

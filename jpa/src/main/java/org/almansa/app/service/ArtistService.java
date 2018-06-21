@@ -2,6 +2,7 @@ package org.almansa.app.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.almansa.app.domain.album.Artist;
@@ -19,10 +20,10 @@ public class ArtistService {
     @Autowired
     private LableRepository lableRepo;
 
-    public void add(Long lableId, String name, Date bornDate) throws IllegalArgumentException{
-        if(name == null) {
-            throw new IllegalArgumentException("name can't be null");
-        }
+    public void add(Long lableId, String name, Date bornDate) throws NullPointerException{
+        Objects.requireNonNull(lableId, "lableId can't be null");
+        Objects.requireNonNull(name, "name can't be null");
+
         Lable lable = lableRepo.findById(lableId).orElse(null);
 
         Artist artist = new Artist(name, bornDate, lable);
