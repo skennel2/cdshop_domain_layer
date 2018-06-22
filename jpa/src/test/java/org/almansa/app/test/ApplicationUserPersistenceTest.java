@@ -32,8 +32,9 @@ public class ApplicationUserPersistenceTest {
         ApplicationUser user = new ApplicationUser("skennel", "skennel", "1234");
 
         String persistedEmailAddress = "skennel2@gmail.com";
-        PersonalInfomation infomation = new PersonalInfomation(user, new EmailAddress(persistedEmailAddress),
-                new Date());
+        PersonalInfomation infomation 
+            = new PersonalInfomation(user, new EmailAddress(persistedEmailAddress), new Date());
+        
         user.setPersonalInfomation(infomation);
         em.persist(user);
         em.flush();

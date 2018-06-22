@@ -1,6 +1,7 @@
 package org.almansa.app.domain.value;
 
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
@@ -17,9 +18,12 @@ public class Period implements Immutable {
     @Temporal(TemporalType.DATE)
     private Date toDate;
 
-    public Period(Date fromDate, Date toDate) throws IllegalArgumentException {
+    public Period(Date fromDate, Date toDate) throws NullPointerException, IllegalArgumentException {
         super();
-        if (fromDate != null && toDate != null && toDate.before(fromDate)) {
+        Objects.requireNonNull(fromDate, "fromDate can't be null");
+        Objects.requireNonNull(toDate, "toDate can't be null");
+        
+        if (toDate.before(fromDate)) {
             throw new IllegalArgumentException("Error with dates");
         }
         this.fromDate = fromDate;

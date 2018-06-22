@@ -7,7 +7,7 @@ public class OrderException extends RuntimeException {
         super(e);
     }
     
-    public OrderException(Exception e, String message) {
+    public OrderException(String message, Exception e) {
         super(message, e);
     }
 }

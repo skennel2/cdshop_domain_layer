@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.almansa.app.AppConfig;
 import org.almansa.app.service.PurchaseOrderService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class PuchaseOrderTest {
 
     @Autowired
     private PurchaseOrderService service;
+    
+    @Before
+    public void setup() {
+    }
     
     @Test
     public void PagingTest() {

@@ -34,8 +34,18 @@ public class ValueObjectTest {
         assertEquals(false, isReferenceEqual);
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void StartDateBiggerThenEndDate() {
         Period period = new Period(DateUtil.toDate(2018, 12, 1), DateUtil.toDate(2017, 12, 1));
     }    
+    
+    @Test()
+    public void SameDate() {
+        Period period = new Period(DateUtil.toDate(2018, 12, 1), DateUtil.toDate(2018, 12, 1));
+    }  
+    
+    @Test(expected = NullPointerException.class)
+    public void nullArgument() {
+        Period period = new Period(null, DateUtil.toDate(2018, 12, 1));       
+    }  
 }
