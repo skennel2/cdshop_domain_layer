@@ -2,6 +2,8 @@ package org.almansa.app.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
 import org.almansa.app.AppConfig;
@@ -62,7 +64,25 @@ public class AppicationUserServiceTest {
 	    assertEquals("skennel2", user.getLoginId());
 	}
 	
-	   
+   @Test
+    public void perPersistTest() {   
+        UserJoinRequest request = new UserJoinRequest();
+        request.setName("skennel2");
+        request.setLoginId("skennel2");
+        request.setBornDate(DateUtil.toDate(2000, 1, 2));
+        request.setPassword("1234");
+        request.setEmail("skennel2@naver.com");
+            
+        service.joinUser(request);
+        
+        ApplicationUser user = service.findUserByLoginId("skennel2");
+        
+        Date nameFieldlastModifiedDate = user.getNameFieldlastModifiedDate();
+        assertEquals(nameFieldlastModifiedDate == null, false);
+        
+        service.changeNameForce(user.getId(), "gaeko151");
+    }
+		   
 	@Test(expected = ApplicationUserValidationException.class)
     public void joinNullValueTest() {   
         UserJoinRequest request = new UserJoinRequest();

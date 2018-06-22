@@ -46,7 +46,7 @@ public class ApplicationUserService extends ServiceBase {
         }
     }
 
-    public void changeName(long id, String newName) throws EntityNotFoundException, ApplicationUserValidationException {
+    public void changeNameForce(long id, String newName) throws EntityNotFoundException, ApplicationUserValidationException {
         ApplicationUser user = findUserById(id);
 
         if (Objects.isNull(user)) {
@@ -88,7 +88,7 @@ public class ApplicationUserService extends ServiceBase {
 
     public boolean isAbleToLogin(String loginId, String password) {
         ApplicationUser user = findUserByLoginId(loginId);
-        if (!Objects.nonNull(user) && user.getPassword().equals(password)) {
+        if (Objects.nonNull(user) && user.getPassword().equals(password)) {
             return true;
         }
 
