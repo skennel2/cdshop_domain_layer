@@ -1,7 +1,9 @@
 package org.almansa.app.service;
 
 import java.util.List;
+import java.util.Objects;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.almansa.app.domain.user.ApplicationUser;
@@ -9,7 +11,7 @@ import org.almansa.app.domain.user.PersonalInfomation;
 import org.almansa.app.domain.value.EmailAddress;
 import org.almansa.app.repository.ApplicationUserRepository;
 import org.almansa.app.service.dto.UserJoinRequest;
-import org.almansa.app.service.exception.ApplicationUserJoinException;
+import org.almansa.app.service.exception.ApplicationUserValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,22 +25,60 @@ public class ApplicationUserService extends ServiceBase {
     ApplicationUserValidator userValidator;
 
     @Transactional
-    public void joinUser(UserJoinRequest request) throws ApplicationUserJoinException {
-        try{
-            ApplicationUser applicationUser = new ApplicationUser(request.getName(), request.getLoginId(),
-                    request.getPassword());
-    
-            PersonalInfomation personalInfomation = new PersonalInfomation(applicationUser,
-                    new EmailAddress(request.getEmail()), request.getBornDate());
-    
+    public void joinUser(UserJoinRequest request) throws ApplicationUserValidationException {
+        try {
+            ApplicationUser applicationUser = 
+                    new ApplicationUser(request.getName(), request.getLoginId(), request.getPassword());
+            EmailAddress email = new EmailAddress(request.getEmail());
+            PersonalInfomation personalInfomation = 
+                    new PersonalInfomation(applicationUser, email, request.getBornDate());
+
             applicationUser.setPersonalInfomation(personalInfomation);
             userValidator.verifyValidation(applicationUser);
-    
+
             userRepo.save(applicationUser);
-        }catch(NullPointerException e) {
-            throw new ApplicationUserJoinException("required value is null", e);
-        }catch(IllegalArgumentException e) {
-            throw new ApplicationUserJoinException("required value is illegal", e);
+        } catch (ApplicationUserValidationException e) {
+            throw e;
+        } catch (NullPointerException e) {
+            throw new ApplicationUserValidationException("required value is null", e);
+        } catch (IllegalArgumentException e) {
+            throw new ApplicationUserValidationException("required value is illegal", e);
+        }
+    }
+
+    public void changeName(long id, String newName) throws EntityNotFoundException, ApplicationUserValidationException {
+        ApplicationUser user = findUserById(id);
+
+        if (Objects.isNull(user)) {
+            throw new EntityNotFoundException("can't found user");
+        }
+        
+        String oldName = user.getName();        
+        user.changeName(newName);
+        
+        try {
+            userValidator.verifyValidation(user);
+        }catch(ApplicationUserValidationException e) {
+            user.changeName(oldName);            
+            throw e;
+        }
+    }
+    
+    public void changePassword(long id, String newName) throws EntityNotFoundException, ApplicationUserValidationException {
+        ApplicationUser user = findUserById(id);
+
+        if (Objects.isNull(user)) {
+            throw new EntityNotFoundException("can't found user");
+        }
+        
+        String oldName = user.getName();        
+        user.changeName(newName);
+        
+        try {
+            userValidator.verifyValidation(user);
+        }catch(ApplicationUserValidationException e) {
+            user.changeName(oldName);            
+            throw e;
         }
     }
 
@@ -48,7 +88,7 @@ public class ApplicationUserService extends ServiceBase {
 
     public boolean isAbleToLogin(String loginId, String password) {
         ApplicationUser user = findUserByLoginId(loginId);
-        if (user != null && user.getPassword().equals(password)) {
+        if (!Objects.nonNull(user) && user.getPassword().equals(password)) {
             return true;
         }
 
@@ -59,7 +99,7 @@ public class ApplicationUserService extends ServiceBase {
         return userRepo.findAll();
     }
 
-    public ApplicationUser findUserById(Long id) {
+    public ApplicationUser findUserById(long id) {
         return userRepo.findById(id).orElse(null);
     }
 

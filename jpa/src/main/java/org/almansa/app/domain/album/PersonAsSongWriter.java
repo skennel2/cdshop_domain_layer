@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne;
 import org.almansa.app.domain.EntityBase;
 import org.almansa.app.domain.PersonBase;
 
-//@Embeddable
 @Entity
 public class PersonAsSongWriter extends EntityBase {
 

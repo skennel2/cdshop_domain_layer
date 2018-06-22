@@ -8,7 +8,7 @@ import org.almansa.app.AppConfig;
 import org.almansa.app.domain.user.ApplicationUser;
 import org.almansa.app.service.ApplicationUserService;
 import org.almansa.app.service.dto.UserJoinRequest;
-import org.almansa.app.service.exception.ApplicationUserJoinException;
+import org.almansa.app.service.exception.ApplicationUserValidationException;
 import org.almansa.app.util.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +25,7 @@ public class AppicationUserServiceTest {
 	@Autowired
 	private ApplicationUserService service;
 	
-	@Test(expected = ApplicationUserJoinException.class)
+	@Test(expected = ApplicationUserValidationException.class)
 	public void duplicatedLoginIdTest() {
 		UserJoinRequest request = new UserJoinRequest();
 		request.setName("skennel");
@@ -63,7 +63,7 @@ public class AppicationUserServiceTest {
 	}
 	
 	   
-	@Test(expected = ApplicationUserJoinException.class)
+	@Test(expected = ApplicationUserValidationException.class)
     public void joinNullValueTest() {   
         UserJoinRequest request = new UserJoinRequest();
         request.setName(null);
@@ -81,12 +81,12 @@ public class AppicationUserServiceTest {
 	
 	@Test
     public void findByIdNullArgumentTest() {
-        ApplicationUser user =service.findUserByLoginId(null);
+        ApplicationUser user = service.findUserByLoginId(null);
         
         assertEquals(null, user);
     }	
 	
-	@Test
+	@Test()
 	public void isAbleToLoginNullArgumentTest() {
 	    boolean result = service.isAbleToLogin(null, null);
 	    

@@ -3,7 +3,7 @@ package org.almansa.app.service;
 import org.almansa.app.domain.user.ApplicationUser;
 import org.almansa.app.domain.value.EmailAddress;
 import org.almansa.app.repository.ApplicationUserRepository;
-import org.almansa.app.service.exception.ApplicationUserJoinException;
+import org.almansa.app.service.exception.ApplicationUserValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -18,7 +18,7 @@ public class ApplicationValidatorImpl implements ApplicationUserValidator {
     public boolean isValid(ApplicationUser user) {
         try {
             verifyValidation(user);
-        } catch (ApplicationUserJoinException e) {
+        } catch (ApplicationUserValidationException e) {
             return false;
         }
 
@@ -26,18 +26,17 @@ public class ApplicationValidatorImpl implements ApplicationUserValidator {
     }
 
     @Override
-    public void verifyValidation(ApplicationUser user) throws ApplicationUserJoinException {
-        if (StringUtils.hasText(user.getPassword())) {
-            throw new ApplicationUserJoinException("password can't be null or empty");
+    public void verifyValidation(ApplicationUser user) throws ApplicationUserValidationException {
+        if (!StringUtils.hasText(user.getPassword())) {
+            throw new ApplicationUserValidationException("password can't be null or empty");
         }
 
         if (!EmailAddress.isFormatValid(user.getPersonalInfomation().getEmail().getEmailAddress())) {
-            throw new ApplicationUserJoinException("check email address");
+            throw new ApplicationUserValidationException("check email address");
         }
 
         if (userRepo.findByLoginId(user.getLoginId()) != null) {
-            throw new ApplicationUserJoinException("duplicated id");
+            throw new ApplicationUserValidationException("duplicated id");
         }
     }
-
 }
