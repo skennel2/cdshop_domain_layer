@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 @Component
-public class ApplicationValidatorImpl implements ApplicationUserValidator {
+public class ApplicationUserValidatorImpl implements ApplicationUserValidator {
 
     @Autowired
     private ApplicationUserRepository userRepo;
