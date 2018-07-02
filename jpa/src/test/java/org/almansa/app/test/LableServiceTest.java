@@ -55,16 +55,16 @@ public class LableServiceTest {
 
     @Test
     public void lableGetByIdNotExistsTest() {
-        Lable lableGetById = lableService.findById(Long.valueOf(123123));
+        Lable lableFindById= lableService.findById(Long.valueOf(123123));
 
-        assertEquals(null, lableGetById);
+        assertEquals(null, lableFindById);
     }
 
     @Test
     public void lablFindByCeoNameNullTest() {
-        List<Lable> lableGetById = lableService.findByCeoName(null);
+        List<Lable> lableFindByCeoName = lableService.findByCeoName(null);
 
-        assertEquals(null, lableGetById);
+        assertEquals(0, lableFindByCeoName.size());
     }
 
     @Test(expected = NullPointerException.class)

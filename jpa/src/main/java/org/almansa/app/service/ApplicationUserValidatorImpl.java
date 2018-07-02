@@ -34,9 +34,14 @@ public class ApplicationUserValidatorImpl implements ApplicationUserValidator {
         if (!EmailAddress.isFormatValid(user.getPersonalInfomation().getEmail().getEmailAddress())) {
             throw new ApplicationUserValidationException("check email address");
         }
-
-        if (userRepo.findByLoginId(user.getLoginId()) != null) {
-            throw new ApplicationUserValidationException("duplicated id");
+    }
+    
+    @Override
+    public boolean isNotDuplicatedId(String id) {
+        if (userRepo.findByLoginId(id) != null) {
+            return false;
         }
+        
+        return true;
     }
 }

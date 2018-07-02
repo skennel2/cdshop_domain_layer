@@ -7,4 +7,6 @@ public interface ApplicationUserValidator {
     boolean isValid(ApplicationUser user);
 
     void verifyValidation(ApplicationUser user) throws ApplicationUserValidationException;
+    
+    boolean isNotDuplicatedId(String id);
 }

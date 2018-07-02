@@ -22,11 +22,15 @@ public class ApplicationUserService extends ServiceBase {
     private ApplicationUserRepository userRepo;
 
     @Autowired
-    ApplicationUserValidator userValidator;
+    private ApplicationUserValidator userValidator;
 
     @Transactional
     public void joinUser(UserJoinRequest request) throws ApplicationUserValidationException {
         try {
+            if(!userValidator.isNotDuplicatedId(request.getLoginId())) {
+                throw new ApplicationUserValidationException("duplicated id");
+            }
+            
             ApplicationUser applicationUser = 
                     new ApplicationUser(request.getName(), request.getLoginId(), request.getPassword());
             EmailAddress email = new EmailAddress(request.getEmail());
@@ -34,13 +38,13 @@ public class ApplicationUserService extends ServiceBase {
                     new PersonalInfomation(applicationUser, email, request.getBornDate());
 
             applicationUser.setPersonalInfomation(personalInfomation);
+            
             userValidator.verifyValidation(applicationUser);
-
             userRepo.save(applicationUser);
         } catch (ApplicationUserValidationException e) {
             throw e;
         } catch (NullPointerException e) {
-            throw new ApplicationUserValidationException("required value is null", e);
+            throw new ApplicationUserValidationException("required value is null", e); //TODO 
         } catch (IllegalArgumentException e) {
             throw new ApplicationUserValidationException("required value is illegal", e);
         }

@@ -65,7 +65,7 @@ public class AppicationUserServiceTest {
 	}
 	
    @Test
-    public void perPersistTest() {   
+    public void prePersistTest() {   
         UserJoinRequest request = new UserJoinRequest();
         request.setName("skennel2");
         request.setLoginId("skennel2");

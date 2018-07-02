@@ -12,6 +12,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import org.almansa.app.converter.PasswordConverter;
 import org.almansa.app.domain.NamedEntityBase;
@@ -20,7 +21,7 @@ import org.almansa.app.domain.NamedEntityBase;
 @Table(name = "APP_USER")
 public class ApplicationUser extends NamedEntityBase {
 
-    @Column(name = "login_id", nullable = false, length = 30)
+    @Column(name = "login_id", nullable = false, length = 30, unique = true)
     private String loginId;
 
     @Column(name = "password", nullable = false, length = 30)
