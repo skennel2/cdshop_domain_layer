@@ -34,6 +34,14 @@ public class ArtistService {
         return artistRepo.findById(artistId).orElse(null);
     }
 
+    public List<Artist> findByName(String name) {
+        return artistRepo.findByName(name);
+    }
+
+    public void delete(Long id) {
+        artistRepo.deleteById(id);
+    }
+    
     public List<Artist> getAll() {
         return artistRepo.findAll();
     }

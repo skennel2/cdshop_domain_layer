@@ -2,6 +2,8 @@ package org.almansa.app.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -20,6 +22,7 @@ import org.almansa.app.domain.dto.AlbumSimpleViewModel;
 import org.almansa.app.domain.dto.SongIdAndSongNo;
 import org.almansa.app.service.AlbumAssembler;
 import org.almansa.app.service.AlbumService;
+import org.almansa.app.service.ArtistService;
 import org.almansa.app.service.dto.AddAlbumRequest;
 import org.almansa.app.util.DateUtil;
 import org.junit.Before;
@@ -40,13 +43,16 @@ public class AlbumServiceTest {
 
     @Autowired
     private AlbumService albumService;
+    
+    @Autowired
+    private ArtistService artistService;
 
     @PersistenceContext
     private EntityManager em;
 
     @Test
     public void addAlbumTest() {
-        // assign
+        // 앨범추가
         AddAlbumRequest albumAddPamareters = new AddAlbumRequest();
         albumAddPamareters.setAlbumName("NEW AGE");
         albumAddPamareters.setAlbumType(AlbumType.LP);
@@ -57,15 +63,13 @@ public class AlbumServiceTest {
 
         albumService.add(albumAddPamareters);
 
-        // act
+        // 추가된 앨범 가져오기
         Album album = getAlbumByName("NEW AGE");
         String song1Name = album.getSongs().get(0).getSong().getName();
-        String song2Name = album.getSongs().get(1).getSong().getName();   
-        
-        // 데이터베이스의 SongInAlbum.Album 이 널로 들어가는것 때문에 추가함. 
+        String song2Name = album.getSongs().get(1).getSong().getName();    
         String albumName = album.getSongs().get(0).getAlbum().getName();
 
-        // assert
+        // 추가된 앨범 검증
         assertEquals("song1", song1Name);
         assertEquals("song2", song2Name);
         assertEquals("NEW AGE", albumName);
@@ -76,17 +80,47 @@ public class AlbumServiceTest {
 
     @Test
     public void albumNameChangeTest() {
-        // assign
-        Album album = getAlbumByName("Q Train");
+        // 이름으로 앫범가져와서 이름변경
+        Album album = albumService.findByName("Q Train").get(0);
         albumService.changeAlbumName(album.getId(), "Q Train2");
 
         em.flush();
 
-        // act
-        Album albumGet = getAlbumByName("Q Train2");
+        // 변경된 앨범이름으로 앨범검색
+        List<Album> albumGet = albumService.findByName("Q Train2");
 
-        // assert
-        assertEquals("Q Train2", albumGet.getName());
+        // 검색된 앨범 검증
+        assertEquals("Q Train2", albumGet.get(0).getName());
+    }
+    
+    @Test
+    public void findByNameNullParameterTest() {
+        List<Album> albums = albumService.findByName(null);
+        
+        assertEquals(albums.size(), 0);
+    }
+    
+    @Test(expected=NullPointerException.class)
+    public void addAlbumNullParameterTest() {
+        albumService.add(null);
+    }
+    
+    @Test
+    public void findByArtistIdTest() {
+        Artist quiett = artistService.findByName("the quiett").get(0);
+        
+        Album album = albumService.findByArtistId(quiett.getId()).get(0);
+        
+        assertEquals(album.getAlbumArtist().getName(), "the quiett");
+    }
+    
+    @Test
+    public void viewModelTest() {
+        Album album = getAlbumByName("Q Train");
+        AlbumSimpleViewModel vm = albumAssembler.albumSimpleViewModel(album);
+
+        System.out.println(vm);
+        assertEquals("Q Train", vm.getAlbumName());
     }
 
     private Album getAlbumByName(String name) {
@@ -144,14 +178,5 @@ public class AlbumServiceTest {
         em.persist(album2);
 
         em.flush();
-    }
-
-    @Test
-    public void viewModelTest() {
-        Album album = getAlbumByName("Q Train");
-        AlbumSimpleViewModel vm = albumAssembler.albumSimpleViewModel(album);
-
-        System.out.println(vm);
-        assertEquals("Q Train", vm.getAlbumName());
     }
 }
