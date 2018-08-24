@@ -1,7 +1,7 @@
 package org.almansa.app.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -42,10 +42,13 @@ public class AlbumMerchaniseService extends MerchandiseService {
     public List<AlbumMerchandiseDetailViewModel> findByPageNumbers(int pageSize, int pageNumber) {
         PageRequest request = PageRequest.of(pageNumber, pageSize, new Sort(Direction.DESC, "id"));
 
-        List<AlbumMerchandiseDetailViewModel> resultList = new ArrayList<>();
-        for (AlbumMerchandise merchandise : albumMerchandiseRepo.findAll(request).getContent()) {
-            resultList.add(new AlbumMerchandiseDetailViewModel(merchandise));
-        }
+        List<AlbumMerchandiseDetailViewModel> resultList = albumMerchandiseRepo
+                .findAll(request)
+                .stream()
+                .map((m)->{
+                    return new AlbumMerchandiseDetailViewModel(m);
+                 })
+                .collect(Collectors.toList());
 
         return resultList;
     }
