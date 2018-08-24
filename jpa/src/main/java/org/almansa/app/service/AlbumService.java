@@ -1,8 +1,7 @@
 package org.almansa.app.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -51,8 +50,6 @@ public class AlbumService extends ServiceBase {
 
         for (SongIdAndSongNo songIdAndSongNo : addParameter.getSongIds()) {
             Song song = this.songRepo.getOne(songIdAndSongNo.getSongId());
-                   
-            
             newAlbum.addSong(song, songIdAndSongNo.getNo(), false);
         }
 
@@ -87,20 +84,19 @@ public class AlbumService extends ServiceBase {
     }
 
     public List<AlbumSimpleViewModel> findAlbumSimleViewModelByName(String name) {
-        List<AlbumSimpleViewModel> albumViewModels = new ArrayList<>();
-        for (Album album : findByName(name)) {
-            albumViewModels.add(albumAssembler.albumSimpleViewModel(album));
-        }
-
+        
+        List<AlbumSimpleViewModel> albumViewModels = findByName(name).stream().map((a)->{
+            return albumAssembler.albumSimpleViewModel(a);
+        }).collect(Collectors.toList());
+        
         return albumViewModels;
     }
 
     public List<AlbumSimpleViewModel> findAlbumSimleViewModelByArtistId(Long artistId) {
-        List<AlbumSimpleViewModel> albumViewModels = new ArrayList<>();
-        for (Album album : findByArtistId(artistId)) {
-            albumViewModels.add(albumAssembler.albumSimpleViewModel(album));
-        }
-
+        List<AlbumSimpleViewModel> albumViewModels = findByArtistId(artistId).stream().map((a)->{
+            return albumAssembler.albumSimpleViewModel(a);
+        }).collect(Collectors.toList());
+        
         return albumViewModels;
     }
 }
